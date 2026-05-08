@@ -22,6 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${GeistSans.variable} h-full`}>
+      <head>
+        {/* figma-capture-script */}
+        <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+      </head>
       <body className="min-h-full flex flex-col bg-background text-body antialiased">
         {children}
       </body>

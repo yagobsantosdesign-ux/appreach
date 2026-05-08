@@ -7,7 +7,6 @@ import Cases from "@/components/sections/Cases";
 import Timeline from "@/components/sections/Timeline";
 import Stats from "@/components/sections/Stats";
 import ContactCTA from "@/components/sections/ContactCTA";
-import LogoTicker from "@/components/sections/LogoTicker";
 
 export default function Home() {
   return (
@@ -15,8 +14,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <LogoTicker />
-        <Strategies />
+<Strategies />
         <FunnelGuide />
         <Cases />
         <Timeline />
