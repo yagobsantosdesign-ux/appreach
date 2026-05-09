@@ -5,7 +5,7 @@ const avatars = ["/avatar-3.jpg", "/avatar-2.jpg", "/avatar-1.jpg"];
 
 export default function Hero() {
   return (
-    <section className="bg-white overflow-hidden" style={{ minHeight: "100vh", paddingTop: "114px", paddingBottom: "64px" }}>
+    <section className="bg-white overflow-hidden" style={{ minHeight: "100vh", paddingTop: "138px", paddingBottom: "64px" }}>
       <div className="max-w-[1200px] mx-auto px-4 lg:px-0 flex flex-col gap-[72px]">
 
         {/* ── Row 1: Título (esquerda) + Descrição + CTA (direita) ── */}
