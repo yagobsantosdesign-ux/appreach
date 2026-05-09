@@ -1,6 +1,7 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
+import LogoTicker from "@/components/sections/LogoTicker";
 import Strategies from "@/components/sections/Strategies";
 import FunnelGuide from "@/components/sections/FunnelGuide";
 import Cases from "@/components/sections/Cases";
@@ -14,7 +15,8 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-<Strategies />
+        <LogoTicker />
+        <Strategies />
         <FunnelGuide />
         <Cases />
         <Timeline />
