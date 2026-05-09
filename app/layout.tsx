@@ -1,14 +1,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
-import { Poppins } from "next/font/google";
 import "./globals.css";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Appreach — Estratégia completa para apps",
@@ -29,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${GeistSans.variable} ${poppins.variable} h-full`}>
+    <html lang="pt-BR" className={`${GeistSans.variable} h-full`}>
       <head>
         {/* figma-capture-script */}
         <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>

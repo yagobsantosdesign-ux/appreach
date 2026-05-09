@@ -13,7 +13,7 @@
   --color-success: #22C55E;
 
   /* Font */
-  --font-sans: var(--font-poppins), var(--font-geist-sans);
+  --font-sans: var(--font-geist-sans);
 
   /* Font sizes — design system */
   --text-h1: 60px;

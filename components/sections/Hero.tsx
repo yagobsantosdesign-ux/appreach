@@ -15,7 +15,7 @@ export default function Hero() {
               className="font-medium leading-[1.05] text-dark"
               style={{ fontSize: "clamp(40px, 5vw, 64px)", letterSpacing: "-2.56px" }}
             >
-              Do primeiro install à receita
+              Do primeiro<br />install à receita
             </h1>
             {/* Store icons flutuantes — posicionados inline com o título conforme Figma */}
             {/* Google (atrás) */}
@@ -28,8 +28,8 @@ export default function Hero() {
                 position: "absolute",
                 width: "41px",
                 height: "41px",
-                top: "20px",
-                left: "389px",
+                top: "12px",
+                left: "367px",
                 transform: "rotate(-27.37deg)",
                 pointerEvents: "none",
                 objectFit: "contain",
@@ -47,8 +47,8 @@ export default function Hero() {
                 position: "absolute",
                 width: "43px",
                 height: "43px",
-                top: "14px",
-                left: "362px",
+                top: "6px",
+                left: "344px",
                 transform: "rotate(-19.6deg)",
                 pointerEvents: "none",
                 objectFit: "contain",
@@ -58,9 +58,9 @@ export default function Hero() {
             />
           </div>
 
-          <div className="flex flex-col gap-6 items-end shrink-0 hero-fade-up hero-fade-up-2" style={{ maxWidth: "400px" }}>
-            <p className="text-right leading-relaxed" style={{ fontSize: "18px", color: "#7a7a7a" }}>
-              Cobrimos cada etapa do funil, da aquisição de usuários até eventos de compra e escala de receita.
+          <div className="flex flex-col gap-6 items-end shrink-0 hero-fade-up hero-fade-up-2" style={{ maxWidth: "500px" }}>
+            <p className="text-right leading-relaxed" style={{ fontSize: "18px", color: "#7a7a7a", maxWidth: "500px" }}>
+              Cobrimos cada etapa do funil, da aquisição de<br />usuários até eventos de compra e escala de receita.
             </p>
             <a
               href="#contato"
