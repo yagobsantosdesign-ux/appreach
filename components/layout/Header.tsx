@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 const solutions = [
   { label: "User Acquisition", href: "/useracquisition-app" },
@@ -9,11 +9,14 @@ const solutions = [
   { label: "CTV", href: "/ctv-connected-tv" },
   { label: "Apple Search Ads", href: "/apple-search-ads" },
   { label: "IA & Dados — Reach Lab", href: "/#estrategias" },
+  { label: "Junte-se a nós", href: "/#junte-se" },
 ];
 
 const navLinks = [
-  { label: "Quem somos", href: "/quem-somos" },
-  { label: "Blog", href: "/blog" },
+  { label: "Cobertura", href: "/#cobertura" },
+  { label: "Estratégia", href: "/#estrategias" },
+  { label: "Cases", href: "/#cases" },
+  { label: "Como funciona?", href: "/#como-funciona" },
 ];
 
 export default function Header() {
@@ -22,22 +25,34 @@ export default function Header() {
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white">
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16 flex items-center justify-between h-[64px]">
+    <>
+    <style>{`
+      @keyframes nav-enter {
+        from { opacity: 0; transform: translateY(-100%); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .header-anim {
+        animation: nav-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+    `}</style>
+    <header className="header-anim fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md" style={{ borderBottom: "1px solid rgba(232,232,240,0.6)" }}>
+      <div className="max-w-[1300px] mx-auto px-4 lg:px-16 flex items-center justify-between h-[68px]">
 
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2.5 shrink-0">
+        <a href="/" className="flex items-center gap-2 shrink-0">
           <div
-            className="flex items-center justify-center rounded-lg"
+            className="logo-mark flex items-center justify-center rounded-lg overflow-hidden shrink-0"
             style={{
-              width: "32px", height: "32px",
+              width: "32px",
+              height: "32px",
               background: "linear-gradient(135deg, #8B7FFF 0%, #5449D6 100%)",
-              boxShadow: "0 4px 12px rgba(101,87,234,0.4)",
             }}
           >
-            <span className="font-bold text-white leading-none" style={{ fontSize: "14px" }}>A</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-mark.svg" alt="" width={32} height={32} className="object-contain" aria-hidden="true" />
           </div>
-          <span className="font-semibold text-dark" style={{ fontSize: "16px" }}>Appreach</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-text.svg" alt="Appreach" width={94} height={24} className="logo-text object-contain" style={{ width: "94px", height: "24px", flexShrink: 0 }} />
         </a>
 
         {/* Nav — desktop */}
@@ -49,8 +64,8 @@ export default function Header() {
             onMouseLeave={() => setSolutionsOpen(false)}
           >
             <button
-              className="inline-flex items-center gap-1 px-4 h-[36px] rounded-lg text-body hover:text-dark hover:bg-surface transition-colors font-medium"
-              style={{ fontSize: "15px" }}
+              className="inline-flex items-center gap-1 px-3 h-[38px] rounded-lg text-dark hover:bg-surface transition-colors font-medium"
+              style={{ fontSize: "16px" }}
             >
               Soluções
               <ChevronDown size={13} className={`transition-transform duration-200 ${solutionsOpen ? "rotate-180" : ""}`} />
@@ -78,29 +93,13 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="inline-flex items-center px-4 h-[36px] rounded-lg text-body hover:text-dark hover:bg-surface transition-colors font-medium"
-              style={{ fontSize: "15px" }}
+              className="inline-flex items-center px-3 h-[38px] rounded-lg text-dark hover:bg-surface transition-colors font-medium"
+              style={{ fontSize: "16px" }}
             >
               {link.label}
             </a>
           ))}
         </nav>
-
-        {/* CTAs — desktop */}
-        <div className="hidden md:flex items-center gap-2">
-          <a
-            href="#contato"
-            className="inline-flex items-center gap-1.5 px-5 h-[38px] rounded-full text-white font-semibold hover:opacity-90 transition-opacity"
-            style={{
-              fontSize: "14px",
-              background: "linear-gradient(135deg, #8B7FFF 0%, #5449D6 100%)",
-              boxShadow: "0 6px 20px rgba(101,87,234,0.38)",
-            }}
-          >
-            Fale com especialista
-            <ArrowRight size={13} />
-          </a>
-        </div>
 
         {/* Mobile toggle */}
         <button
@@ -165,5 +164,6 @@ export default function Header() {
         </div>
       )}
     </header>
+    </>
   );
 }
