@@ -1,3 +1,5 @@
+import SectionBadge from "@/components/ui/SectionBadge";
+
 const steps = [
   {
     number: "01",
@@ -39,9 +41,7 @@ export default function Timeline() {
     >
       <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="font-semibold uppercase tracking-widest text-primary mb-4" style={{ fontSize: "14px" }}>
-            Como funciona
-          </p>
+          <SectionBadge>Como funciona</SectionBadge>
           <h2 className="font-medium text-dark leading-tight mb-4" style={{ fontSize: "48px" }}>
             Da briefing ao resultado em 5 etapas
           </h2>
@@ -58,8 +58,8 @@ export default function Timeline() {
             {steps.map((step) => (
               <div key={step.number} className="flex flex-col gap-4 relative">
                 <div className="flex lg:flex-col items-start lg:items-center gap-4 lg:gap-4">
-                  <div className="relative z-10 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white border-2 border-primary flex items-center justify-center shrink-0 shadow-sm">
-                    <span className="text-xs font-medium text-primary">
+                  <div className="relative z-10 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white border-2 border-border flex items-center justify-center shrink-0">
+                    <span className="text-xs font-medium text-muted" style={{ fontFamily: "var(--font-geist-mono)" }}>
                       {step.number}
                     </span>
                   </div>

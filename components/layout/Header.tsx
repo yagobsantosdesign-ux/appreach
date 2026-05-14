@@ -9,14 +9,11 @@ const solutions = [
   { label: "CTV", href: "/ctv-connected-tv" },
   { label: "Apple Search Ads", href: "/apple-search-ads" },
   { label: "IA & Dados — Reach Lab", href: "/#estrategias" },
-  { label: "Junte-se a nós", href: "/#junte-se" },
 ];
 
 const navLinks = [
-  { label: "Cobertura", href: "/#cobertura" },
-  { label: "Estratégia", href: "/#estrategias" },
+  { label: "Quem somos", href: "/quem-somos" },
   { label: "Cases", href: "/#cases" },
-  { label: "Como funciona?", href: "/#como-funciona" },
 ];
 
 export default function Header() {
@@ -45,7 +42,7 @@ export default function Header() {
             style={{
               width: "32px",
               height: "32px",
-              background: "linear-gradient(135deg, #8B7FFF 0%, #5449D6 100%)",
+              background: "#141414",
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -73,7 +70,7 @@ export default function Header() {
 
             {solutionsOpen && (
               <div className="absolute top-full left-0 pt-2 z-50">
-                <div className="bg-white rounded-2xl py-1.5 shadow-xl border border-border" style={{ minWidth: "220px" }}>
+                <div className="bg-white rounded-2xl py-1.5 border border-border" style={{ minWidth: "220px" }}>
                   {solutions.map((s) => (
                     <a
                       key={s.href}
@@ -99,6 +96,14 @@ export default function Header() {
               {link.label}
             </a>
           ))}
+
+          <a
+            href="/carreiras"
+            className="inline-flex items-center px-3 h-[38px] rounded-lg text-dark hover:bg-surface transition-colors font-medium"
+            style={{ fontSize: "16px" }}
+          >
+            Junte-se a nós
+          </a>
         </nav>
 
         {/* Mobile toggle */}

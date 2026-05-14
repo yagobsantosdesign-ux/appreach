@@ -13,49 +13,10 @@ export default function Hero() {
           <div className="relative shrink-0 hero-fade-up hero-fade-up-1" style={{ maxWidth: "500px" }}>
             <h1
               className="font-medium leading-[1.05] text-dark"
-              style={{ fontSize: "clamp(40px, 5vw, 64px)", letterSpacing: "-2.56px" }}
+              style={{ fontSize: "60px", letterSpacing: "-2.4px" }}
             >
               Do primeiro<br />install à receita
             </h1>
-            {/* Store icons flutuantes — posicionados inline com o título conforme Figma */}
-            {/* Google (atrás) */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/store-icon-2.png"
-              alt=""
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                width: "41px",
-                height: "41px",
-                top: "12px",
-                left: "367px",
-                transform: "rotate(-27.37deg)",
-                pointerEvents: "none",
-                objectFit: "contain",
-                zIndex: 1,
-                filter: "drop-shadow(0 8px 16px rgba(0,122,255,0.18)) drop-shadow(0 2px 6px rgba(0,122,255,0.10))",
-              }}
-            />
-            {/* Apple (na frente) */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/store-icon-1.png"
-              alt=""
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                width: "43px",
-                height: "43px",
-                top: "6px",
-                left: "344px",
-                transform: "rotate(-19.6deg)",
-                pointerEvents: "none",
-                objectFit: "contain",
-                zIndex: 2,
-                filter: "drop-shadow(0 8px 16px rgba(0,122,255,0.18)) drop-shadow(0 2px 6px rgba(0,122,255,0.10))",
-              }}
-            />
           </div>
 
           <div className="flex flex-col gap-6 items-end shrink-0 hero-fade-up hero-fade-up-2" style={{ maxWidth: "500px" }}>
@@ -64,16 +25,16 @@ export default function Hero() {
             </p>
             <a
               href="#contato"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-white font-semibold hover:opacity-90 transition-opacity shrink-0"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-white font-semibold hover:opacity-90 transition-opacity shrink-0"
               style={{
-                fontSize: "16px",
-                letterSpacing: "-0.32px",
+                fontSize: "14px",
+                letterSpacing: "-0.28px",
                 background: "linear-gradient(167deg, #8B7FFF 0%, #5449D6 100%)",
                 boxShadow: "0 8px 14px rgba(101,87,234,0.4)",
               }}
             >
-              Falar com especialista
-              <ArrowRight size={15} />
+              Fale conosco
+              <ArrowRight size={13} />
             </a>
           </div>
         </div>
@@ -93,18 +54,9 @@ export default function Hero() {
           <div
             className="absolute inset-0 rounded-[18px]"
             style={{
-              background: "#f7f7fa",
-              boxShadow: "0 32px 80px rgba(101,87,234,0.08), 0 4px 16px rgba(0,0,0,0.03)",
+              background: "#F7F7F7",
             }}
-          >
-            <div
-              className="absolute inset-0 pointer-events-none rounded-[18px]"
-              style={{
-                background: "radial-gradient(ellipse at 65% 30%, rgba(101,87,234,0.07) 0%, transparent 65%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
+          />
 
           {/* Phone — irmão do gray box, bottom:0 do wrapper.
               Imagem com width:100% height:auto → mais alta que 560px → vaza pelo topo. */}
@@ -186,7 +138,7 @@ export default function Hero() {
               padding: "9px 15px",
             }}
           >
-            <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#6557ea", flexShrink: 0 }} />
+            <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "rgba(255,255,255,0.5)", flexShrink: 0 }} />
             <span style={{ fontSize: "13px", fontWeight: 500, color: "#ffffff", whiteSpace: "nowrap" }}>Aquisição inteligente</span>
           </div>
 
@@ -211,7 +163,7 @@ export default function Hero() {
             className="absolute bottom-0 left-0 right-0 pointer-events-none rounded-b-[18px]"
             style={{
               height: "220px",
-              background: "linear-gradient(to top, #f7f7fa 20%, transparent 100%)",
+              background: "linear-gradient(to top, #F7F7F7 20%, transparent 100%)",
               zIndex: 5,
             }}
             aria-hidden="true"

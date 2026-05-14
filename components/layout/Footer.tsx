@@ -7,7 +7,7 @@ const footerLinks = {
     "Preload",
     "Mídia Programática",
   ],
-  Empresa: ["Sobre nós", "Cases", "Blog", "Carreiras"],
+  Empresa: ["Sobre nós", "Cases", "Carreiras"],
   Contato: ["fale@appreach.com.br", "WhatsApp", "LinkedIn"],
 };
 
@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="grid lg:grid-cols-5 gap-10 mb-12">
           <div className="lg:col-span-2 space-y-4">
             <span className="text-xl font-medium text-white tracking-tight">
-              App<span className="text-primary">reach</span>
+              Appreach
             </span>
             <p className="text-sm leading-relaxed max-w-xs">
               Estratégia 360° para aplicativos — do primeiro install à receita.

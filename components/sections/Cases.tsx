@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 const cases = [
   {
@@ -87,19 +88,17 @@ const accentMap: Record<string, { big: string; bar: string; bg: string }> = {
   pink:   { big: "text-pink-600",   bar: "bg-pink-400",   bg: "bg-pink-50" },
   blue:   { big: "text-blue-600",   bar: "bg-blue-400",   bg: "bg-blue-50" },
   orange: { big: "text-orange-500", bar: "bg-orange-400", bg: "bg-orange-50" },
-  purple: { big: "text-primary",    bar: "bg-primary",    bg: "bg-primary-light" },
+  purple: { big: "text-dark",        bar: "bg-dark",       bg: "bg-surface" },
 };
 
 export default function Cases() {
   return (
-    <section id="cases" className="py-24 lg:py-32 bg-surface">
+    <section id="cases" className="py-24 lg:py-32 bg-white">
       <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
 
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="font-semibold uppercase tracking-widest text-primary mb-4" style={{ fontSize: "14px" }}>
-            Cases de Sucesso
-          </p>
+          <SectionBadge>Cases de Sucesso</SectionBadge>
           <h2 className="font-medium text-dark leading-tight mb-4" style={{ fontSize: "48px" }}>
             Resultados reais,<br />estratégia comprovada
           </h2>
@@ -115,7 +114,7 @@ export default function Cases() {
             return (
               <div
                 key={c.tag}
-                className="bg-white rounded-3xl border border-border p-8 lg:p-10 hover:shadow-lg hover:border-primary/20 transition-all duration-300"
+                className="bg-white rounded-3xl border border-border p-8 lg:p-10 hover:border-primary/20 transition-colors"
               >
                 <div className="grid lg:grid-cols-[1fr_280px] gap-10 items-start">
 
@@ -125,22 +124,22 @@ export default function Cases() {
                       {c.tag}
                     </span>
 
-                    <h3 className="font-medium text-dark leading-snug" style={{ fontSize: "22px" }}>
+                    <h3 className="font-medium text-dark leading-snug" style={{ fontSize: "26px", letterSpacing: "-0.5px" }}>
                       {c.title}
                     </h3>
 
                     <div className="space-y-2">
-                      <p className="text-xs font-semibold uppercase tracking-widest text-muted">Desafio</p>
-                      <p className="text-body leading-relaxed" style={{ fontSize: "15px" }}>
+                      <p className="text-xs font-semibold uppercase tracking-widest text-muted" style={{ fontFamily: "var(--font-geist-mono)" }}>Desafio</p>
+                      <p className="text-body leading-relaxed" style={{ fontSize: "16px" }}>
                         {c.challenge}
                       </p>
                     </div>
 
                     <div className="space-y-2">
-                      <p className="text-xs font-semibold uppercase tracking-widest text-muted">Estratégia</p>
+                      <p className="text-xs font-semibold uppercase tracking-widest text-muted" style={{ fontFamily: "var(--font-geist-mono)" }}>Estratégia</p>
                       <ul className="space-y-1.5">
                         {c.strategy.map((s) => (
-                          <li key={s} className="flex items-start gap-2.5 text-body" style={{ fontSize: "15px" }}>
+                          <li key={s} className="flex items-start gap-2.5 text-body" style={{ fontSize: "16px" }}>
                             <div className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${accent.bar}`} />
                             {s}
                           </li>
@@ -149,8 +148,8 @@ export default function Cases() {
                     </div>
 
                     <div className={`rounded-2xl px-5 py-4 ${accent.bg} space-y-1`}>
-                      <p className="text-xs font-semibold uppercase tracking-widest text-muted">Por que funcionou</p>
-                      <p className="text-dark leading-relaxed font-medium" style={{ fontSize: "15px" }}>
+                      <p className="text-xs font-semibold uppercase tracking-widest text-muted" style={{ fontFamily: "var(--font-geist-mono)" }}>Por que funcionou</p>
+                      <p className="text-dark leading-relaxed font-medium" style={{ fontSize: "16px" }}>
                         {c.why}
                       </p>
                     </div>

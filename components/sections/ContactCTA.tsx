@@ -21,11 +21,11 @@ export default function ContactCTA() {
   };
 
   return (
-    <section id="contato" className="py-24 lg:py-32 bg-surface">
+    <section id="contato" className="py-24 lg:py-32 bg-white">
       <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
-            <p className="font-semibold uppercase tracking-widest text-primary" style={{ fontSize: "14px" }}>
+            <p className="font-semibold uppercase tracking-widest text-muted" style={{ fontSize: "12px", fontFamily: "var(--font-geist-mono)" }}>
               Fale com a gente
             </p>
             <h2 className="font-medium text-dark leading-tight" style={{ fontSize: "48px" }}>
@@ -44,8 +44,8 @@ export default function ContactCTA() {
                 "Relatórios transparentes com dados reais",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3 text-sm text-body">
-                  <div className="w-5 h-5 rounded-full bg-primary-light flex items-center justify-center shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
+                  <div className="w-5 h-5 rounded-full bg-surface flex items-center justify-center shrink-0">
+                    <div className="w-2 h-2 rounded-full bg-muted" />
                   </div>
                   {item}
                 </div>
@@ -53,7 +53,7 @@ export default function ContactCTA() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-border p-8 shadow-sm">
+          <div className="bg-white rounded-2xl border border-border p-8">
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-10 gap-4 text-center">
                 <CheckCircle size={48} className="text-success" />

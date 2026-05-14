@@ -4,16 +4,17 @@
   /* Colors */
   --color-primary: #6557ea;
   --color-primary-light: #F0EEFF;
-  --color-background: #ffffff;
-  --color-surface: #F7F7FA;
-  --color-dark: #0F0F14;
-  --color-body: #6d6d6d;
-  --color-muted: #9B9BB0;
-  --color-border: #E8E8F0;
+  --color-background: #F7F7F7;
+  --color-surface: #FFFFFF;
+  --color-dark: #141414;
+  --color-body: #3D3D4A;
+  --color-muted: #909090;
+  --color-border: #EBEBEB;
   --color-success: #22C55E;
 
   /* Font */
   --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 
   /* Font sizes — design system */
   --text-h1: 60px;
@@ -39,8 +40,8 @@ html {
 }
 
 body {
-  background: #ffffff;
-  color: #3D3D4E;
+  background: var(--color-background);
+  color: var(--color-body);
   font-family: var(--font-poppins), var(--font-geist-sans), system-ui, sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
