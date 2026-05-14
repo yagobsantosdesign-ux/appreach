@@ -6,7 +6,7 @@
   --color-primary-light: #F0EEFF;
   --color-background: #F7F7F7;
   --color-surface: #FFFFFF;
-  --color-dark: #141414;
+  --color-dark: #1A0052;
   --color-body: #3D3D4A;
   --color-muted: #909090;
   --color-border: #EBEBEB;
@@ -25,6 +25,18 @@
   --text-body: 16px;
   --text-label: 14px;
   --text-btn: 16px;
+
+  /* Section tint */
+  --color-section-tint: #F5F4FF;
+}
+
+/* Card shadow utility */
+.card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s ease;
+}
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10), 0 8px 32px rgba(0,0,0,0.06);
 }
 
 h1, h2, h3, h4 {
@@ -118,6 +130,14 @@ a:hover .logo-text {
 .hero-fade-up-3 { animation-delay: 0.32s; }
 .hero-fade-up-4 { animation-delay: 0.48s; }
 .hero-fade-up-5 { animation-delay: 0.60s; }
+
+/* Button hover — glow + lift */
+.shadow-hover {
+  transition: box-shadow 0.2s ease, filter 0.2s ease;
+}
+.shadow-hover:hover {
+  box-shadow: 0 14px 32px rgba(101, 87, 234, 0.5) !important;
+}
 
 /* Widget float + entrance — animações combinadas (fade-up primeiro, float em seguida) */
 @keyframes float {

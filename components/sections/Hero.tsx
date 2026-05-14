@@ -1,5 +1,5 @@
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Button from "@/components/ui/Button";
 
 const avatars = ["/avatar-3.jpg", "/avatar-2.jpg", "/avatar-1.jpg"];
 
@@ -23,19 +23,9 @@ export default function Hero() {
             <p className="text-right leading-relaxed" style={{ fontSize: "18px", color: "#7a7a7a", maxWidth: "500px" }}>
               Cobrimos cada etapa do funil, da aquisição de<br />usuários até eventos de compra e escala de receita.
             </p>
-            <a
-              href="#contato"
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-white font-semibold hover:opacity-90 transition-opacity shrink-0"
-              style={{
-                fontSize: "14px",
-                letterSpacing: "-0.28px",
-                background: "linear-gradient(167deg, #8B7FFF 0%, #5449D6 100%)",
-                boxShadow: "0 8px 14px rgba(101,87,234,0.4)",
-              }}
-            >
+            <Button href="#contato" variant="gradient" arrow size="md">
               Fale conosco
-              <ArrowRight size={13} />
-            </a>
+            </Button>
           </div>
         </div>
 
@@ -54,7 +44,7 @@ export default function Hero() {
           <div
             className="absolute inset-0 rounded-[18px]"
             style={{
-              background: "#F7F7F7",
+              background: "#F7F4F9",
             }}
           />
 
@@ -163,7 +153,7 @@ export default function Hero() {
             className="absolute bottom-0 left-0 right-0 pointer-events-none rounded-b-[18px]"
             style={{
               height: "220px",
-              background: "linear-gradient(to top, #F7F7F7 20%, transparent 100%)",
+              background: "linear-gradient(to top, #F7F4F9 20%, transparent 100%)",
               zIndex: 5,
             }}
             aria-hidden="true"

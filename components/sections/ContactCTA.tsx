@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Send, CheckCircle } from "lucide-react";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 export default function ContactCTA() {
   const [submitted, setSubmitted] = useState(false);
@@ -21,17 +22,26 @@ export default function ContactCTA() {
   };
 
   return (
-    <section id="contato" className="py-24 lg:py-32 bg-white">
+    <section
+      id="contato"
+      className="py-24 lg:py-32"
+      style={{ background: "#ffffff" }}
+    >
       <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+          {/* Left — white copy */}
           <div className="space-y-6">
-            <p className="font-semibold uppercase tracking-widest text-muted" style={{ fontSize: "12px", fontFamily: "var(--font-geist-mono)" }}>
-              Fale com a gente
-            </p>
-            <h2 className="font-medium text-dark leading-tight" style={{ fontSize: "48px" }}>
+            <SectionBadge>Vamos Conversar</SectionBadge>
+
+            <h2
+              className="font-medium leading-tight text-dark"
+              style={{ fontSize: "48px", letterSpacing: "-1.92px" }}
+            >
               Pronto para escalar o seu app?
             </h2>
-            <p className="text-body leading-relaxed" style={{ fontSize: "16px" }}>
+
+            <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: 1.7 }}>
               Conte sobre o seu app e seus objetivos. Nossa equipe vai analisar
               o seu momento e indicar as estratégias mais indicadas — sem custo
               e sem compromisso.
@@ -43,17 +53,33 @@ export default function ContactCTA() {
                 "Estratégia personalizada por vertical",
                 "Relatórios transparentes com dados reais",
               ].map((item) => (
-                <div key={item} className="flex items-center gap-3 text-sm text-body">
-                  <div className="w-5 h-5 rounded-full bg-surface flex items-center justify-center shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-muted" />
-                  </div>
-                  {item}
+                <div key={item} className="flex items-center gap-3">
+                  <CheckCircle size={18} style={{ color: "var(--color-primary)", flexShrink: 0 }} />
+                  <span style={{ fontSize: "15px", color: "var(--color-body)" }}>{item}</span>
                 </div>
               ))}
             </div>
+
+            <div
+              className="flex gap-8 pt-4"
+              style={{ borderTop: "1px solid var(--color-border)" }}
+            >
+              <div>
+                <p className="font-semibold text-dark" style={{ fontSize: "24px" }}>100+</p>
+                <p className="text-muted" style={{ fontSize: "13px" }}>Apps escalados</p>
+              </div>
+              <div style={{ borderLeft: "1px solid var(--color-border)", paddingLeft: "32px" }}>
+                <p className="font-semibold text-dark" style={{ fontSize: "24px" }}>R$500M+</p>
+                <p className="text-muted" style={{ fontSize: "13px" }}>Em mídia gerenciada</p>
+              </div>
+            </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-border p-8">
+          {/* Right — floating white form card */}
+          <div
+            className="bg-white rounded-[24px] p-8"
+            style={{ boxShadow: "0 2px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04)", border: "1px solid var(--color-border)" }}
+          >
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-10 gap-4 text-center">
                 <CheckCircle size={48} className="text-success" />
@@ -143,14 +169,23 @@ export default function ContactCTA() {
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:opacity-90 transition-opacity"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-white font-semibold text-sm shadow-hover hover:brightness-110 transition-all duration-200"
+                  style={{ boxShadow: "0 8px 14px rgba(101,87,234,0.3)" }}
                 >
                   Enviar mensagem
                   <Send size={15} />
                 </button>
+
+                <p
+                  className="text-center"
+                  style={{ fontSize: "12px", color: "var(--color-muted)" }}
+                >
+                  Resposta em até 24h · Sem compromisso
+                </p>
               </form>
             )}
           </div>
+
         </div>
       </div>
     </section>

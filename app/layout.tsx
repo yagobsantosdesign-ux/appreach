@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import CursorDot from "@/components/ui/CursorDot";
 
 export const metadata: Metadata = {
   title: "Appreach — Estratégia completa para apps",
@@ -30,6 +31,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-background text-body antialiased">
         <SmoothScroll />
+        <CursorDot />
         {children}
       </body>
     </html>

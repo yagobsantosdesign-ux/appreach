@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
-import { ArrowRight, Tv2, UserPlus, MessageCircle, TrendingUp } from "lucide-react";
+import { Tv2, UserPlus, MessageCircle, TrendingUp } from "lucide-react";
+import Button from "@/components/ui/Button";
 import SectionBadge from "@/components/ui/SectionBadge";
 
 /* ── Widgets ─────────────────────────────────────────────── */
@@ -274,14 +275,9 @@ export default function FunnelGuide() {
               Não existe fórmula única. Identificamos onde seu app está na jornada
               e aplicamos as estratégias que entregam os melhores resultados naquele estágio.
             </p>
-            <a
-              href="#contato"
-              className="inline-flex items-center gap-2 mt-8 px-6 py-2.5 rounded-full text-white font-semibold hover:opacity-90 transition-opacity"
-              style={{ fontSize: "15px", background: "var(--color-primary)" }}
-            >
+            <Button href="#contato" variant="gradient" arrow size="md" className="mt-8">
               Diagnóstico gratuito
-              <ArrowRight size={14} />
-            </a>
+            </Button>
           </div>
 
           {/* RIGHT — cards com sticky stacking */}
@@ -299,7 +295,8 @@ export default function FunnelGuide() {
                     position: "sticky",
                     top: i === stages.length - 1 ? `${lastCardTop}px` : `${STICKY_BASE}px`,
                     zIndex: i + 1,
-                    background: "#F7F7F7",
+                    background: "linear-gradient(to bottom, #F5F4FF 0%, #ffffff 100%)",
+                    border: "1px solid #E8E4F0",
                     borderRadius: "20px",
                     padding: "40px",
                     marginBottom: i < stages.length - 1 ? "16px" : "0",

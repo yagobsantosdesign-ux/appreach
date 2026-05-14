@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
+import Button from "@/components/ui/Button";
 
 const solutions = [
   { label: "User Acquisition", href: "/useracquisition-app" },
@@ -42,7 +43,7 @@ export default function Header() {
             style={{
               width: "32px",
               height: "32px",
-              background: "#141414",
+              background: "#6557ea",
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -158,14 +159,15 @@ export default function Header() {
             </a>
           ))}
 
-          <a
+          <Button
             href="#contato"
             onClick={() => setOpen(false)}
-            className="mt-2 px-4 py-3 rounded-full bg-primary text-white font-semibold text-center hover:opacity-90 transition-opacity"
-            style={{ fontSize: "15px" }}
+            variant="gradient"
+            size="md"
+            fullWidth
           >
             Fale com especialista
-          </a>
+          </Button>
         </div>
       )}
     </header>
