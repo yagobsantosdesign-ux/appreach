@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
 
@@ -21,6 +21,19 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
+  const [bgOpacity, setBgOpacity] = useState(0);
+
+  useEffect(() => {
+    const FADE_START = 70;   // badge chega no header
+    const FADE_END   = 160;  // título chega no header → opacidade total
+    const check = () => {
+      const t = Math.min(1, Math.max(0, (window.scrollY - FADE_START) / (FADE_END - FADE_START)));
+      setBgOpacity(t);
+    };
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    return () => window.removeEventListener("scroll", check);
+  }, []);
 
   return (
     <>
@@ -33,28 +46,30 @@ export default function Header() {
         animation: nav-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       }
     `}</style>
-    <header className="header-anim fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md" style={{ borderBottom: "1px solid rgba(232,232,240,0.6)" }}>
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16 flex items-center justify-between h-[68px]">
+    <header
+      className="header-anim fixed top-0 left-0 right-0 z-50"
+      style={{
+        background: `rgba(88,74,218,${bgOpacity * 0.97})`,
+        backdropFilter: bgOpacity > 0 ? `blur(${bgOpacity * 14}px)` : "none",
+      }}
+    >
+      <div className="max-w-[1300px] mx-auto px-4 lg:px-16 grid items-center h-[92px]" style={{ gridTemplateColumns: "auto 1fr auto" }}>
 
         {/* Logo */}
         <a href="/" className="flex items-center gap-2 shrink-0">
           <div
             className="logo-mark flex items-center justify-center rounded-lg overflow-hidden shrink-0"
-            style={{
-              width: "32px",
-              height: "32px",
-              background: "#6557ea",
-            }}
+            style={{ width: "32px", height: "32px", background: "rgba(255,255,255,0.2)" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo-mark.svg" alt="" width={32} height={32} className="object-contain" aria-hidden="true" />
+            <img src="/logo-mark.svg" alt="" width={32} height={32} className="object-contain" aria-hidden="true" style={{ filter: "brightness(0) invert(1)" }} />
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-text.svg" alt="Appreach" width={94} height={24} className="logo-text object-contain" style={{ width: "94px", height: "24px", flexShrink: 0 }} />
+          <img src="/logo-text.svg" alt="Appreach" width={94} height={24} className="logo-text object-contain" style={{ width: "94px", height: "24px", flexShrink: 0, filter: "brightness(0) invert(1)" }} />
         </a>
 
-        {/* Nav — desktop */}
-        <nav className="hidden md:flex items-center gap-1">
+        {/* Nav — desktop (centralizado) */}
+        <nav className="hidden md:flex items-center justify-center gap-1">
           {/* Soluções dropdown */}
           <div
             className="relative"
@@ -62,8 +77,10 @@ export default function Header() {
             onMouseLeave={() => setSolutionsOpen(false)}
           >
             <button
-              className="inline-flex items-center gap-1 px-3 h-[38px] rounded-lg text-dark hover:bg-surface transition-colors font-medium"
-              style={{ fontSize: "16px" }}
+              className="inline-flex items-center gap-1 px-3 h-[44px] rounded-lg font-medium transition-colors"
+              style={{ fontSize: "15px", color: "rgba(255,255,255,0.88)" }}
+              onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
+              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
             >
               Soluções
               <ChevronDown size={13} className={`transition-transform duration-200 ${solutionsOpen ? "rotate-180" : ""}`} />
@@ -91,8 +108,10 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="inline-flex items-center px-3 h-[38px] rounded-lg text-dark hover:bg-surface transition-colors font-medium"
-              style={{ fontSize: "16px" }}
+              className="inline-flex items-center px-3 h-[44px] rounded-lg font-medium transition-colors"
+              style={{ fontSize: "15px", color: "rgba(255,255,255,0.88)" }}
+              onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
+              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
             >
               {link.label}
             </a>
@@ -100,21 +119,33 @@ export default function Header() {
 
           <a
             href="/carreiras"
-            className="inline-flex items-center px-3 h-[38px] rounded-lg text-dark hover:bg-surface transition-colors font-medium"
-            style={{ fontSize: "16px" }}
+            className="inline-flex items-center px-3 h-[44px] rounded-lg font-medium transition-colors"
+            style={{ fontSize: "15px", color: "rgba(255,255,255,0.88)" }}
+            onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
+            onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
           >
             Junte-se a nós
           </a>
         </nav>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden p-1.5 text-dark"
-          onClick={() => setOpen(!open)}
-          aria-label="Menu"
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        {/* CTA + mobile toggle */}
+        <div className="flex items-center justify-end gap-3">
+          <a
+            href="#contato"
+            className="hidden md:inline-flex items-center rounded-full font-semibold transition-all duration-200 hover:opacity-90"
+            style={{ background: "#141414", color: "white", fontSize: "14px", padding: "0 20px", height: "44px", letterSpacing: "-0.2px" }}
+          >
+            Fale conosco
+          </a>
+          <button
+            className="md:hidden p-1.5"
+            style={{ color: "white" }}
+            onClick={() => setOpen(!open)}
+            aria-label="Menu"
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}

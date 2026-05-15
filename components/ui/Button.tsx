@@ -73,10 +73,12 @@ export default function Button({
 
   const arrowBadge = arrow ? (
     <span
-      className="inline-flex items-center justify-center rounded-full shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
+      className="inline-flex items-center justify-center rounded-full shrink-0"
       style={{ width: s.badge, height: s.badge, background: badgeBg, color: badgeColor }}
     >
-      <ArrowRight size={s.arrow} strokeWidth={2.5} />
+      <span className="transition-transform duration-200 group-hover:-rotate-45 inline-flex">
+        <ArrowRight size={s.arrow} strokeWidth={2.5} />
+      </span>
     </span>
   ) : null;
 

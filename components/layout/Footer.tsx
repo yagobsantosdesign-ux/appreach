@@ -46,6 +46,7 @@ export default function Footer() {
   return (
     <div className="px-4 pb-4" style={{ background: "var(--color-background)" }}>
       <footer className="rounded-[28px] overflow-hidden" style={{ background: "#0D0D0D" }}>
+        <div className="max-w-[1300px] mx-auto">
 
         {/* Top section */}
         <div className="px-10 lg:px-14 pt-14 grid grid-cols-1 lg:grid-cols-[1fr_auto_auto_auto] gap-12 lg:gap-20">
@@ -132,6 +133,7 @@ export default function Footer() {
           appreach
         </div>
 
+        </div>{/* /max-w-[1300px] */}
       </footer>
     </div>
   );

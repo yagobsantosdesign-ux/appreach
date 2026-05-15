@@ -13,14 +13,15 @@
   --color-success: #22C55E;
 
   /* Font */
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
+  --font-heading: 'Satoshi', system-ui, sans-serif;
 
   /* Font sizes — design system */
-  --text-h1: 60px;
-  --text-h2: 48px;
-  --text-h3: 26px;
-  --text-h4: 22px;
+  --text-h1: 64px;
+  --text-h2: 44px;
+  --text-h3: 24px;
+  --text-h4: 20px;
   --text-hero-sub: 18px;
   --text-body: 16px;
   --text-label: 14px;
@@ -41,10 +42,16 @@
 
 h1, h2, h3, h4 {
   letter-spacing: -1.4px;
+  font-family: 'Satoshi', system-ui, sans-serif;
+  font-weight: 500;
 }
 
 * {
   box-sizing: border-box;
+}
+
+button, a, [role="button"] {
+  cursor: pointer;
 }
 
 html {
@@ -54,7 +61,7 @@ html {
 body {
   background: var(--color-background);
   color: var(--color-body);
-  font-family: var(--font-poppins), var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

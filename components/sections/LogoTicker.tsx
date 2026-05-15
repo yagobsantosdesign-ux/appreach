@@ -10,24 +10,35 @@ export default function LogoTicker() {
   const doubled = [...tickerLogos, ...tickerLogos];
 
   return (
-    <section className="bg-white py-12">
-      <div className="max-w-[1200px] mx-auto px-4 lg:px-0 flex flex-col gap-6 items-center">
-        <p
-          className="font-medium text-center"
-          style={{ fontSize: "14px", color: "#a1a1ae", letterSpacing: "0.28px" }}
-        >
-          +200 CLIENTES ATENDIDOS
-        </p>
-        <div className="relative overflow-hidden w-full" style={{ maxWidth: "500px" }}>
+    <section className="bg-white py-14">
+      <div className="max-w-[1300px] mx-auto px-4 lg:px-16 flex flex-col gap-8 items-center">
+
+        {/* Texto */}
+        <div className="flex flex-col items-center gap-2 text-center">
+          <p
+            className="font-medium text-dark"
+            style={{ fontSize: "22px", letterSpacing: "-0.5px" }}
+          >
+            +200 apps escalados com a Appreach
+          </p>
+          <p
+            style={{ fontSize: "15px", color: "var(--color-muted)" }}
+          >
+            De startups a grandes publishers — marcas que confiam no nosso trabalho
+          </p>
+        </div>
+
+        {/* Ticker */}
+        <div className="relative overflow-hidden w-full">
           <div
             className="pointer-events-none absolute inset-y-0 left-0 z-10"
-            style={{ width: "60px", background: "linear-gradient(to right, #fff, transparent)" }}
+            style={{ width: "80px", background: "linear-gradient(to right, #fff, transparent)" }}
           />
           <div
             className="pointer-events-none absolute inset-y-0 right-0 z-10"
-            style={{ width: "60px", background: "linear-gradient(to left, #fff, transparent)" }}
+            style={{ width: "80px", background: "linear-gradient(to left, #fff, transparent)" }}
           />
-          <div className="ticker-track items-center" style={{ gap: "48px" }}>
+          <div className="ticker-track items-center" style={{ gap: "72px" }}>
             {doubled.map((logo, i) => (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -41,6 +52,7 @@ export default function LogoTicker() {
             ))}
           </div>
         </div>
+
       </div>
     </section>
   );

@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CursorDot from "@/components/ui/CursorDot";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Appreach — Estratégia completa para apps",
@@ -24,8 +30,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${GeistSans.variable} ${GeistMono.variable} h-full`}>
+    <html lang="pt-BR" className={`${GeistMono.variable} ${inter.variable} h-full`}>
       <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500&display=swap" rel="stylesheet" />
         {/* figma-capture-script */}
         <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
       </head>

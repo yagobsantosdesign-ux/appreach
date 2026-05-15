@@ -1,167 +1,251 @@
-import Image from "next/image";
-import Button from "@/components/ui/Button";
+"use client";
 
-const avatars = ["/avatar-3.jpg", "/avatar-2.jpg", "/avatar-1.jpg"];
+const bars = [
+  { h: 38 }, { h: 54 }, { h: 46 }, { h: 76 }, { h: 61 }, { h: 55 },
+];
+
+const months = ["Fev", "Mar", "Abr", "Mai", "Jun", "Jul"];
 
 export default function Hero() {
   return (
-    <section className="bg-white overflow-hidden" style={{ minHeight: "100vh", paddingTop: "138px", paddingBottom: "64px" }}>
-      <div className="max-w-[1200px] mx-auto px-4 lg:px-0 flex flex-col gap-[72px]">
+    <section
+      className="relative overflow-hidden"
+      style={{
+        background: "radial-gradient(ellipse 140% 90% at 50% 0%, #9B91FF 0%, #6557EA 45%, #3D28A8 100%)",
+        paddingTop: "138px",
+        paddingBottom: "80px",
+      }}
+    >
 
-        {/* ── Row 1: Título (esquerda) + Descrição + CTA (direita) ── */}
-        <div className="flex items-end justify-between gap-8">
-          <div className="relative shrink-0 hero-fade-up hero-fade-up-1" style={{ maxWidth: "500px" }}>
-            <h1
-              className="font-medium leading-[1.05] text-dark"
-              style={{ fontSize: "60px", letterSpacing: "-2.4px" }}
-            >
-              Do primeiro<br />install à receita
-            </h1>
-          </div>
+      <div
+        className="relative flex flex-col items-center text-center"
+        style={{ zIndex: 1, maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}
+      >
 
-          <div className="flex flex-col gap-6 items-end shrink-0 hero-fade-up hero-fade-up-2" style={{ maxWidth: "500px" }}>
-            <p className="text-right leading-relaxed" style={{ fontSize: "18px", color: "#7a7a7a", maxWidth: "500px" }}>
-              Cobrimos cada etapa do funil, da aquisição de<br />usuários até eventos de compra e escala de receita.
-            </p>
-            <Button href="#contato" variant="gradient" arrow size="md">
-              Fale conosco
-            </Button>
-          </div>
+        {/* Badge */}
+        <div
+          className="inline-flex items-center gap-2 hero-fade-up hero-fade-up-1"
+          style={{
+            background: "rgba(255,255,255,0.14)",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.22)",
+            borderRadius: "100px",
+            padding: "5px 16px 5px 6px",
+            marginBottom: "28px",
+          }}
+        >
+          <span
+            style={{
+              background: "white",
+              color: "#6557ea",
+              fontSize: "10px",
+              fontWeight: 700,
+              letterSpacing: "0.6px",
+              padding: "3px 10px",
+              borderRadius: "100px",
+            }}
+          >
+            NOVO
+          </span>
+          <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.88)" }}>
+            Estratégia completa para apps
+          </span>
         </div>
 
-        {/* ── Row 2: Container do celular ── */}
-        {/*
-          Estrutura:
-          - Wrapper externo: 560px, overflow: visible (permite o phone vazar pelo topo)
-          - Gray box: absolute inset-0, SEM overflow:hidden (só o fundo visual)
-          - Phone: absolute bottom:0 — irmão do gray box, ancorado na base do wrapper.
-            Como é mais alto que 560px, vaza naturalmente para cima.
-            O bottom do wrapper (560px) serve como "corte" visual inferior.
-        */}
-        <div className="relative hero-fade-up hero-fade-up-3" style={{ height: "560px", overflow: "visible", clipPath: "inset(-9999px -9999px 0px -9999px)" }}>
+        {/* H1 */}
+        <h1
+          className="font-medium hero-fade-up hero-fade-up-2"
+          style={{
+            fontSize: "80px",
+            color: "white",
+            letterSpacing: "-3px",
+            lineHeight: 1.02,
+            maxWidth: "720px",
+            marginBottom: "20px",
+          }}
+        >
+          <span style={{ display: "block" }}>Do primeiro</span>
+          install à receita
+        </h1>
 
-          {/* Gray box — fundo visual, SEM overflow:hidden */}
-          <div
-            className="absolute inset-0 rounded-[18px]"
-            style={{
-              background: "#F7F4F9",
-            }}
-          />
+        {/* Subtitle */}
+        <p
+          className="hero-fade-up hero-fade-up-3"
+          style={{
+            fontSize: "18px",
+            color: "rgba(255,255,255,0.68)",
+            maxWidth: "490px",
+            lineHeight: 1.65,
+            marginBottom: "36px",
+          }}
+        >
+          Cobrimos cada etapa do funil, da aquisição de usuários até eventos de compra e escala de receita.
+        </p>
 
-          {/* Phone — irmão do gray box, bottom:0 do wrapper.
-              Imagem com width:100% height:auto → mais alta que 560px → vaza pelo topo. */}
-          <div
-            className="absolute"
+        {/* CTAs */}
+        <div className="flex items-center gap-3 hero-fade-up hero-fade-up-4" style={{ marginBottom: "60px" }}>
+          <a
+            href="#contato"
+            className="inline-flex items-center rounded-full font-semibold transition-all duration-200 hover:opacity-90"
+            style={{ background: "#141414", color: "white", fontSize: "14px", padding: "12px 26px", letterSpacing: "-0.2px" }}
+          >
+            Fale conosco
+          </a>
+          <a
+            href="#como-funciona"
+            className="inline-flex items-center rounded-full font-semibold transition-all duration-200 hover:bg-white/20"
             style={{
-              bottom: 0,
-              left: "50%",
-              transform: "translateX(-50%) translateY(185px)",
-              width: "86%",
-              pointerEvents: "none",
+              background: "rgba(255,255,255,0.13)",
+              border: "1px solid rgba(255,255,255,0.22)",
+              backdropFilter: "blur(10px)",
+              color: "white",
+              fontSize: "14px",
+              padding: "12px 26px",
+              letterSpacing: "-0.2px",
             }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/hero-phone.png"
-              alt="App mobile demonstrando a plataforma Appreach"
-              style={{ display: "block", width: "100%", height: "auto" }}
-            />
-          </div>
-
-          {/* Widget claro 1 — Installs (esquerda) */}
-          <div
-            className="absolute flex flex-col gap-1.5 pointer-events-none widget-float"
-            style={{
-              left: "40px",
-              top: "148px",
-              zIndex: 15,
-              background: "#ffffff",
-              borderRadius: "16px",
-              padding: "16px 20px",
-              minWidth: "186px",
-              boxShadow: "0 24px 64px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04)",
-            }}
-          >
-            <p style={{ fontSize: "11px", color: "#a1a1ae", letterSpacing: "0.22px" }}>Installs esta semana</p>
-            <p style={{ fontSize: "28px", fontWeight: 600, color: "#0F0F14", letterSpacing: "-1px", lineHeight: 1 }}>12.450</p>
-            <div className="flex items-center gap-1.5">
-              <span style={{ fontSize: "12px", color: "#22C55E", fontWeight: 600 }}>↑ +24%</span>
-              <span style={{ fontSize: "12px", color: "#a1a1ae" }}>vs semana passada</span>
-            </div>
-          </div>
-
-          {/* Widget claro 2 — ROAS (direita) */}
-          <div
-            className="absolute flex items-center gap-3 pointer-events-none widget-float-2"
-            style={{
-              right: "40px",
-              top: "268px",
-              zIndex: 15,
-              background: "#ffffff",
-              borderRadius: "16px",
-              padding: "14px 18px",
-              boxShadow: "0 24px 64px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04)",
-            }}
-          >
-            <div style={{
-              width: "42px", height: "42px", borderRadius: "50%", flexShrink: 0,
-              background: "linear-gradient(135deg, #8B7FFF 0%, #5449D6 100%)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}>
-              <span style={{ color: "white", fontSize: "20px", lineHeight: 1 }}>↗</span>
-            </div>
-            <div>
-              <p style={{ fontSize: "20px", fontWeight: 700, color: "#0F0F14", letterSpacing: "-0.6px", lineHeight: 1 }}>2.4x ROAS</p>
-              <p style={{ fontSize: "11px", color: "#a1a1ae", marginTop: "3px" }}>Média dos clientes</p>
-            </div>
-          </div>
-
-          {/* Widget escuro 1 — pill topo direito */}
-          <div
-            className="absolute inline-flex items-center gap-2 pointer-events-none widget-float-3"
-            style={{
-              right: "172px",
-              top: "48px",
-              zIndex: 15,
-              background: "#0F0F14",
-              borderRadius: "100px",
-              padding: "9px 15px",
-            }}
-          >
-            <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "rgba(255,255,255,0.5)", flexShrink: 0 }} />
-            <span style={{ fontSize: "13px", fontWeight: 500, color: "#ffffff", whiteSpace: "nowrap" }}>Aquisição inteligente</span>
-          </div>
-
-          {/* Widget escuro 2 — pill meio esquerdo */}
-          <div
-            className="absolute inline-flex items-center gap-2 pointer-events-none widget-float-4"
-            style={{
-              left: "172px",
-              top: "356px",
-              zIndex: 15,
-              background: "#0F0F14",
-              borderRadius: "100px",
-              padding: "9px 15px",
-            }}
-          >
-            <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#22C55E", flexShrink: 0 }} />
-            <span style={{ fontSize: "13px", fontWeight: 500, color: "#ffffff", whiteSpace: "nowrap" }}>Escala de receita</span>
-          </div>
-
-          {/* Overlay gradient — sobre o celular, ancorado na base do container cinza */}
-          <div
-            className="absolute bottom-0 left-0 right-0 pointer-events-none rounded-b-[18px]"
-            style={{
-              height: "220px",
-              background: "linear-gradient(to top, #F7F4F9 20%, transparent 100%)",
-              zIndex: 5,
-            }}
-            aria-hidden="true"
-          />
-
+            Como funciona
+          </a>
         </div>
 
+        {/* Dashboard cards */}
+        <div
+          className="hero-fade-up hero-fade-up-5"
+          style={{ display: "flex", gap: "20px", width: "100%", maxWidth: "1000px" }}
+        >
 
+          {/* Card 1 — Installs */}
+          <div style={{ flex: 1, background: "white", borderRadius: "24px", padding: "32px", textAlign: "left" }}>
+
+            {/* Header */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
+              <span style={{ fontSize: "15px", fontWeight: 500, color: "#141414" }}>Installs esta semana</span>
+              <span style={{ fontSize: "11px", color: "#909090", background: "#F7F7F7", border: "1px solid #EBEBEB", borderRadius: "8px", padding: "4px 10px", display: "flex", alignItems: "center", gap: "4px" }}>
+                Últimas 6 sem <span style={{ fontSize: "9px" }}>▾</span>
+              </span>
+            </div>
+
+            {/* Metric */}
+            <div style={{ marginBottom: "4px" }}>
+              <span style={{ fontSize: "52px", fontWeight: 600, color: "#141414", letterSpacing: "-2px", lineHeight: 1 }}>
+                12.450
+              </span>
+            </div>
+
+            {/* Trend badge + label */}
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "28px" }}>
+              <span style={{
+                fontSize: "11px", fontWeight: 600, color: "#16a34a",
+                background: "#f0fdf4", border: "1px solid #bbf7d0",
+                borderRadius: "6px", padding: "2px 8px",
+              }}>
+                ↑ 24%
+              </span>
+              <span style={{ fontSize: "12px", color: "#909090" }}>vs semana passada</span>
+            </div>
+
+            {/* Bar chart — lados arredondados, topo e base retos */}
+            <div style={{ display: "flex", alignItems: "flex-end", gap: "7px", height: "110px" }}>
+              {bars.map((bar, i) => (
+                <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", height: "100%", justifyContent: "flex-end" }}>
+                  <div style={{
+                    width: "100%",
+                    height: `${bar.h * 1.3}px`,
+                    borderRadius: "50% / 0",
+                    background: i === 3
+                      ? "linear-gradient(to top, #4338ca, #7c6ff7)"
+                      : i === 4 ? "#D4D0F8"
+                      : "#EBEBEB",
+                  }} />
+                </div>
+              ))}
+            </div>
+
+            {/* Month labels */}
+            <div style={{ display: "flex", gap: "7px", marginTop: "10px" }}>
+              {months.map((m, i) => (
+                <div key={i} style={{ flex: 1, textAlign: "center", fontSize: "10px", color: i === 3 ? "#6557ea" : "#c0c0c8", fontWeight: i === 3 ? 600 : 400 }}>
+                  {m}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Card 2 — Revenue Snapshot */}
+          <div
+            style={{
+              flex: 1,
+              background: "white",
+              borderRadius: "24px",
+              padding: "32px",
+              textAlign: "left",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {/* Header */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+              <span style={{ fontSize: "15px", fontWeight: 500, color: "#141414" }}>Revenue Snapshot</span>
+              <span style={{ fontSize: "18px", color: "#c0c0c8", lineHeight: 1, letterSpacing: "2px", marginTop: "-4px" }}>···</span>
+            </div>
+
+            {/* Fan gauge SVG */}
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-end", flex: 1, position: "relative", minHeight: "150px" }}>
+              <svg width="260" height="148" viewBox="0 0 260 148" fill="none" style={{ display: "block" }}>
+                {Array.from({ length: 12 }, (_, i) => {
+                  const filled = 9;
+                  const arcDeg = 168;
+                  const startAngle = 180 + (180 - arcDeg) / 2;
+                  const step = arcDeg / 11;
+                  const angleDeg = startAngle + i * step;
+                  const angleRad = (angleDeg * Math.PI) / 180;
+                  const cx = 130, cy = 148;
+                  const r = 98;
+                  const w = 14, h = 46;
+                  const pivotX = cx + r * Math.cos(angleRad);
+                  const pivotY = cy + r * Math.sin(angleRad);
+                  const isFilled = i < filled;
+                  return (
+                    <rect
+                      key={i}
+                      x={pivotX - w / 2}
+                      y={pivotY - h}
+                      width={w}
+                      height={h}
+                      rx="7"
+                      fill={isFilled ? "#6557EA" : "#EDE9FE"}
+                      transform={`rotate(${angleDeg + 90}, ${pivotX}, ${pivotY})`}
+                    />
+                  );
+                })}
+              </svg>
+
+              {/* Metric overlay */}
+              <div style={{
+                position: "absolute",
+                bottom: "8px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                textAlign: "center",
+                pointerEvents: "none",
+                whiteSpace: "nowrap",
+              }}>
+                <div style={{ fontSize: "32px", fontWeight: 700, color: "#6557EA", letterSpacing: "-1.5px", lineHeight: 1 }}>
+                  +78.9%
+                </div>
+                <div style={{ fontSize: "12px", color: "#909090", marginTop: "4px" }}>Success rate</div>
+              </div>
+            </div>
+
+            {/* Footer text */}
+            <div style={{ marginTop: "20px", paddingTop: "16px", borderTop: "1px solid #F0F0F0", fontSize: "13px", color: "#3D3D4A", lineHeight: 1.55 }}>
+              Você conquistou{" "}
+              <strong style={{ color: "#6557ea" }}>R$ 3,2K</strong>{" "}
+              em receita hoje, superando o total de ontem.
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   );

@@ -72,7 +72,7 @@ export default function Strategies() {
                 style={{ background: gradient, border: "1px solid #E8E4F0", minHeight: `calc(${s.widgetHeight} + 120px)` }}
               >
                 <h3
-                  className="font-semibold text-dark"
+                  className="font-medium text-dark"
                   style={{ fontSize: "26px", letterSpacing: "-0.5px" }}
                 >
                   {s.title}
