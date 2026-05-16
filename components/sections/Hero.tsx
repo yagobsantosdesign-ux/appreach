@@ -1,22 +1,195 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 
-const bars = [
-  { h: 38 }, { h: 54 }, { h: 46 }, { h: 76 }, { h: 61 }, { h: 55 },
+const barPatterns = [
+  [38, 56, 50, 30, 58, 80, 24, 46, 72, 28, 52, 40],
+  [65, 30, 72, 45, 20, 55, 68, 35, 48, 75, 25, 60],
+  [22, 68, 40, 62, 35, 48, 78, 28, 55, 42, 65, 32],
 ];
 
-const months = ["Fev", "Mar", "Abr", "Mai", "Jun", "Jul"];
+const GAUGE_BARS = 12;
+const FILLED_MAX = 9;
+const PCT_MAX = 78.9;
+const CYCLE_MS = 9000;
+
+// #EDE9FE → #6557EA
+const C_EMPTY: [number, number, number] = [237, 233, 254];
+const C_FILLED: [number, number, number] = [101, 87, 234];
+
+function easeInOut(t: number) {
+  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+}
+
+function lerpRGB(a: [number, number, number], b: [number, number, number], t: number) {
+  return `rgb(${Math.round(a[0] + (b[0] - a[0]) * t)},${Math.round(a[1] + (b[1] - a[1]) * t)},${Math.round(a[2] + (b[2] - a[2]) * t)})`;
+}
+
+// Gauge geometry
+const arcDeg = 162;
+const startAngle = 180 + (180 - arcDeg) / 2;
+const step = arcDeg / (GAUGE_BARS - 1);
+const cx = 140, cy = 152;
+const r = 96;
+const barW = 13, barH = 44;
+
+function buildBars() {
+  return Array.from({ length: GAUGE_BARS }, (_, i) => {
+    const angleDeg = startAngle + i * step;
+    const angleRad = (angleDeg * Math.PI) / 180;
+    const pivotX = cx + r * Math.cos(angleRad);
+    const pivotY = cy + r * Math.sin(angleRad);
+    return { i, angleDeg, pivotX, pivotY };
+  });
+}
+
+const gaugeBarDefs = buildBars();
+
+
+const GRID = 70;
+const DASH = 11;
+const HOVER_R = 90;
+const SPEED = 0.09;
+const TOP_SKIP = 80;
 
 export default function Hero() {
+  const rectRefs = useRef<(SVGRectElement | null)[]>([]);
+  const numRef = useRef<HTMLDivElement | null>(null);
+  const rafRef = useRef<number>(0);
+  const startRef = useRef<number | null>(null);
+  const [patternIdx, setPatternIdx] = useState(0);
+
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const mouseRef = useRef<{ x: number; y: number } | null>(null);
+  const cellsRef = useRef<number[]>([]);
+  const dashRafRef = useRef<number>(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let cols = 0, rows = 0;
+
+    const resize = () => {
+      const w = canvas.parentElement?.clientWidth ?? window.innerWidth;
+      const h = canvas.parentElement?.clientHeight ?? window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+      cols = Math.ceil(w / GRID) + 1;
+      rows = Math.ceil(h / GRID) + 1;
+      cellsRef.current = Array.from({ length: cols * rows }, () => 0);
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const mouse = mouseRef.current;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const idx = r * cols + c;
+          const cx = c * GRID + GRID / 2;
+          const cy = r * GRID + GRID / 2;
+
+          if (cy < TOP_SKIP) continue;
+
+          let prog = cellsRef.current[idx] ?? 0;
+          if (mouse) {
+            const dx = cx - mouse.x, dy = cy - mouse.y;
+            const near = Math.sqrt(dx * dx + dy * dy) < HOVER_R;
+            prog = near ? Math.min(1, prog + SPEED) : Math.max(0, prog - SPEED * 0.5);
+          } else {
+            prog = Math.max(0, prog - SPEED * 0.5);
+          }
+          cellsRef.current[idx] = prog;
+
+          // -45deg (/) default → +45deg (\) on hover
+          const angle = (-45 + prog * 90) * (Math.PI / 180);
+          const hx = Math.cos(angle) * DASH / 2;
+          const hy = Math.sin(angle) * DASH / 2;
+
+          ctx.strokeStyle = `rgba(10,0,40,${0.22 + prog * 0.18})`;
+          ctx.lineWidth = 1.5;
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          ctx.moveTo(cx - hx, cy - hy);
+          ctx.lineTo(cx + hx, cy + hy);
+          ctx.stroke();
+        }
+      }
+
+      dashRafRef.current = requestAnimationFrame(draw);
+    };
+
+    dashRafRef.current = requestAnimationFrame(draw);
+    return () => {
+      cancelAnimationFrame(dashRafRef.current);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => setPatternIdx(i => (i + 1) % barPatterns.length), 2200);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const startTime = Date.now();
+
+    const tick = () => {
+      const t = ((Date.now() - startTime) % CYCLE_MS) / CYCLE_MS;
+
+      // 0–38%: fill | 38–52%: hold full | 52–90%: unfill | 90–100%: hold empty
+      let p: number;
+      if (t < 0.38) {
+        p = easeInOut(t / 0.38);
+      } else if (t < 0.52) {
+        p = 1;
+      } else if (t < 0.90) {
+        p = 1 - easeInOut((t - 0.52) / 0.38);
+      } else {
+        p = 0;
+      }
+
+      const filledLevel = p * FILLED_MAX;
+
+      for (let i = 0; i < GAUGE_BARS; i++) {
+        const el = rectRefs.current[i];
+        if (el) {
+          const barT = Math.min(1, Math.max(0, filledLevel - i));
+          el.setAttribute("fill", lerpRGB(C_EMPTY, C_FILLED, barT));
+        }
+      }
+
+      if (numRef.current) {
+        numRef.current.textContent = `+${(p * PCT_MAX).toFixed(1)}%`;
+      }
+    };
+
+    const id = setInterval(tick, 16);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <section
       className="relative overflow-hidden"
+      onMouseMove={(e) => {
+        const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+        mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      }}
+      onMouseLeave={() => { mouseRef.current = null; }}
       style={{
         background: "radial-gradient(ellipse 140% 90% at 50% 0%, #9B91FF 0%, #6557EA 45%, #3D28A8 100%)",
         paddingTop: "138px",
         paddingBottom: "80px",
       }}
     >
-
+      <canvas
+        ref={canvasRef}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0 }}
+      />
       <div
         className="relative flex flex-col items-center text-center"
         style={{ zIndex: 1, maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}
@@ -34,17 +207,7 @@ export default function Hero() {
             marginBottom: "28px",
           }}
         >
-          <span
-            style={{
-              background: "white",
-              color: "#6557ea",
-              fontSize: "10px",
-              fontWeight: 700,
-              letterSpacing: "0.6px",
-              padding: "3px 10px",
-              borderRadius: "100px",
-            }}
-          >
+          <span style={{ background: "white", color: "#6557ea", fontSize: "10px", fontWeight: 700, letterSpacing: "0.6px", padding: "3px 10px", borderRadius: "100px" }}>
             NOVO
           </span>
           <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.88)" }}>
@@ -55,14 +218,7 @@ export default function Hero() {
         {/* H1 */}
         <h1
           className="font-medium hero-fade-up hero-fade-up-2"
-          style={{
-            fontSize: "80px",
-            color: "white",
-            letterSpacing: "-3px",
-            lineHeight: 1.02,
-            maxWidth: "720px",
-            marginBottom: "20px",
-          }}
+          style={{ fontSize: "80px", color: "white", letterSpacing: "-3px", lineHeight: 1.02, maxWidth: "720px", marginBottom: "20px" }}
         >
           <span style={{ display: "block" }}>Do primeiro</span>
           install à receita
@@ -71,13 +227,7 @@ export default function Hero() {
         {/* Subtitle */}
         <p
           className="hero-fade-up hero-fade-up-3"
-          style={{
-            fontSize: "18px",
-            color: "rgba(255,255,255,0.68)",
-            maxWidth: "490px",
-            lineHeight: 1.65,
-            marginBottom: "36px",
-          }}
+          style={{ fontSize: "18px", color: "rgba(255,255,255,0.68)", maxWidth: "490px", lineHeight: 1.65, marginBottom: "36px" }}
         >
           Cobrimos cada etapa do funil, da aquisição de usuários até eventos de compra e escala de receita.
         </p>
@@ -89,7 +239,7 @@ export default function Hero() {
             className="inline-flex items-center rounded-full font-semibold transition-all duration-200 hover:opacity-90"
             style={{ background: "#141414", color: "white", fontSize: "14px", padding: "12px 26px", letterSpacing: "-0.2px" }}
           >
-            Fale conosco
+            Começar agora
           </a>
           <a
             href="#como-funciona"
@@ -114,134 +264,99 @@ export default function Hero() {
           style={{ display: "flex", gap: "20px", width: "100%", maxWidth: "1000px" }}
         >
 
-          {/* Card 1 — Installs */}
-          <div style={{ flex: 1, background: "white", borderRadius: "24px", padding: "32px", textAlign: "left" }}>
+          {/* Card 1 — Total de vendas */}
+          <div style={{ flex: 1, background: "white", borderRadius: "24px", padding: "28px 28px 24px", textAlign: "left", boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)", display: "flex", flexDirection: "column" }}>
 
             {/* Header */}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
-              <span style={{ fontSize: "15px", fontWeight: 500, color: "#141414" }}>Installs esta semana</span>
-              <span style={{ fontSize: "11px", color: "#909090", background: "#F7F7F7", border: "1px solid #EBEBEB", borderRadius: "8px", padding: "4px 10px", display: "flex", alignItems: "center", gap: "4px" }}>
-                Últimas 6 sem <span style={{ fontSize: "9px" }}>▾</span>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+              <span style={{ fontSize: "20px", fontWeight: 600, color: "#141414", letterSpacing: "-0.4px" }}>Total de vendas</span>
+              <button style={{ fontSize: "13px", color: "#141414", background: "white", border: "1px solid #E4E4E7", borderRadius: "12px", padding: "0 16px", height: "44px", display: "flex", alignItems: "center", gap: "7px", cursor: "pointer", fontWeight: 500, boxShadow: "none" }}>
+                Último trimestre
+                <svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="#6557EA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </button>
+            </div>
+
+            {/* Metric — centralizado */}
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", paddingBottom: "12px" }}>
+<span style={{ fontSize: "52px", fontWeight: 700, letterSpacing: "-2.5px", lineHeight: 1 }}>
+                <span style={{ color: "#0D0D0D" }}>R$</span>
+                <span style={{ color: "#0D0D0D" }}> 28.500</span>
+              </span>
+              <span style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 600, color: "#6557EA", marginTop: "10px" }}>
+                <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#6557EA", display: "inline-block", flexShrink: 0 }} />
+                10,2% vs mês anterior
               </span>
             </div>
 
-            {/* Metric */}
-            <div style={{ marginBottom: "4px" }}>
-              <span style={{ fontSize: "52px", fontWeight: 600, color: "#141414", letterSpacing: "-2px", lineHeight: 1 }}>
-                12.450
-              </span>
-            </div>
-
-            {/* Trend badge + label */}
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "28px" }}>
-              <span style={{
-                fontSize: "11px", fontWeight: 600, color: "#16a34a",
-                background: "#f0fdf4", border: "1px solid #bbf7d0",
-                borderRadius: "6px", padding: "2px 8px",
-              }}>
-                ↑ 24%
-              </span>
-              <span style={{ fontSize: "12px", color: "#909090" }}>vs semana passada</span>
-            </div>
-
-            {/* Bar chart — lados arredondados, topo e base retos */}
-            <div style={{ display: "flex", alignItems: "flex-end", gap: "7px", height: "110px" }}>
-              {bars.map((bar, i) => (
-                <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", height: "100%", justifyContent: "flex-end" }}>
-                  <div style={{
-                    width: "100%",
-                    height: `${bar.h * 1.3}px`,
-                    borderRadius: "50% / 0",
-                    background: i === 3
-                      ? "linear-gradient(to top, #4338ca, #7c6ff7)"
-                      : i === 4 ? "#D4D0F8"
-                      : "#EBEBEB",
-                  }} />
-                </div>
-              ))}
-            </div>
-
-            {/* Month labels */}
-            <div style={{ display: "flex", gap: "7px", marginTop: "10px" }}>
-              {months.map((m, i) => (
-                <div key={i} style={{ flex: 1, textAlign: "center", fontSize: "10px", color: i === 3 ? "#6557ea" : "#c0c0c8", fontWeight: i === 3 ? 600 : 400 }}>
-                  {m}
-                </div>
-              ))}
+            {/* Bar chart */}
+            <div style={{ marginTop: "auto", padding: "0 4px 4px" }}>
+              <div style={{ display: "flex", alignItems: "flex-end", gap: "5px", height: "80px" }}>
+                {barPatterns[patternIdx].map((h, i) => (
+                  <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", height: "100%", justifyContent: "flex-end" }}>
+                    <div style={{
+                      width: "100%",
+                      height: `${h}px`,
+                      borderRadius: "6px 6px 4px 4px",
+                      background: h >= 50 ? "#6557EA" : "#D6D1FB",
+                      transition: "height 0.6s cubic-bezier(0.4, 0, 0.2, 1), background 0.6s ease",
+                    }} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Card 2 — Revenue Snapshot */}
-          <div
-            style={{
-              flex: 1,
-              background: "white",
-              borderRadius: "24px",
-              padding: "32px",
-              textAlign: "left",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
+          <div style={{ flex: 1, background: "white", borderRadius: "24px", padding: "28px 28px 24px", textAlign: "left", display: "flex", flexDirection: "column", boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)" }}>
+
             {/* Header */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-              <span style={{ fontSize: "15px", fontWeight: 500, color: "#141414" }}>Revenue Snapshot</span>
-              <span style={{ fontSize: "18px", color: "#c0c0c8", lineHeight: 1, letterSpacing: "2px", marginTop: "-4px" }}>···</span>
+              <span style={{ fontSize: "20px", fontWeight: 600, color: "#141414", letterSpacing: "-0.4px" }}>Revenue Snapshot</span>
+              <button style={{ background: "none", border: "none", cursor: "pointer", color: "#888", fontSize: "22px", letterSpacing: "3px", padding: "0", lineHeight: 1 }}>···</button>
             </div>
 
-            {/* Fan gauge SVG */}
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-end", flex: 1, position: "relative", minHeight: "150px" }}>
-              <svg width="260" height="148" viewBox="0 0 260 148" fill="none" style={{ display: "block" }}>
-                {Array.from({ length: 12 }, (_, i) => {
-                  const filled = 9;
-                  const arcDeg = 168;
-                  const startAngle = 180 + (180 - arcDeg) / 2;
-                  const step = arcDeg / 11;
-                  const angleDeg = startAngle + i * step;
-                  const angleRad = (angleDeg * Math.PI) / 180;
-                  const cx = 130, cy = 148;
-                  const r = 98;
-                  const w = 14, h = 46;
-                  const pivotX = cx + r * Math.cos(angleRad);
-                  const pivotY = cy + r * Math.sin(angleRad);
-                  const isFilled = i < filled;
-                  return (
-                    <rect
-                      key={i}
-                      x={pivotX - w / 2}
-                      y={pivotY - h}
-                      width={w}
-                      height={h}
-                      rx="7"
-                      fill={isFilled ? "#6557EA" : "#EDE9FE"}
-                      transform={`rotate(${angleDeg + 90}, ${pivotX}, ${pivotY})`}
-                    />
-                  );
-                })}
+            {/* Fan gauge — overflow:visible fixes edge-bar clipping */}
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-end", flex: 1, position: "relative", minHeight: "180px", margin: "0 -8px" }}>
+              <svg
+                width="280"
+                height="160"
+                viewBox="0 0 280 160"
+                fill="none"
+                style={{ display: "block", overflow: "visible" }}
+              >
+                {gaugeBarDefs.map(({ i, angleDeg, pivotX, pivotY }) => (
+                  <rect
+                    key={i}
+                    ref={(el) => { rectRefs.current[i] = el; }}
+                    x={pivotX - barW / 2}
+                    y={pivotY - barH}
+                    width={barW}
+                    height={barH}
+                    rx="6"
+                    fill={`rgb(${C_EMPTY[0]},${C_EMPTY[1]},${C_EMPTY[2]})`}
+                    transform={`rotate(${angleDeg + 90}, ${pivotX}, ${pivotY})`}
+                  />
+                ))}
               </svg>
 
-              {/* Metric overlay */}
-              <div style={{
-                position: "absolute",
-                bottom: "8px",
-                left: "50%",
-                transform: "translateX(-50%)",
-                textAlign: "center",
-                pointerEvents: "none",
-                whiteSpace: "nowrap",
-              }}>
-                <div style={{ fontSize: "32px", fontWeight: 700, color: "#6557EA", letterSpacing: "-1.5px", lineHeight: 1 }}>
-                  +78.9%
+              {/* Animated metric — updated via DOM ref, no React re-render */}
+              <div style={{ position: "absolute", bottom: "12px", left: "50%", transform: "translateX(-50%)", textAlign: "center", pointerEvents: "none", whiteSpace: "nowrap" }}>
+                <div
+                  ref={numRef}
+                  style={{ fontSize: "34px", fontWeight: 700, color: "#6557EA", letterSpacing: "-1.5px", lineHeight: 1 }}
+                >
+                  +0.0%
                 </div>
                 <div style={{ fontSize: "12px", color: "#909090", marginTop: "4px" }}>Success rate</div>
               </div>
             </div>
 
             {/* Footer text */}
-            <div style={{ marginTop: "20px", paddingTop: "16px", borderTop: "1px solid #F0F0F0", fontSize: "13px", color: "#3D3D4A", lineHeight: 1.55 }}>
+            <div style={{ marginTop: "20px", paddingTop: "16px", borderTop: "1px solid #F0F0F0", fontSize: "13px", color: "#3D3D4A", lineHeight: 1.55, textAlign: "center" }}>
               Você conquistou{" "}
               <strong style={{ color: "#6557ea" }}>R$ 3,2K</strong>{" "}
-              em receita hoje, superando o total de ontem.
+              em receita hoje,<br />
+              superando o total de ontem.
             </div>
           </div>
 
