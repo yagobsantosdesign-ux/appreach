@@ -253,7 +253,7 @@ export default function FunnelGuide() {
   }, []);
 
   return (
-    <section className="bg-white" style={{ paddingBottom: "128px" }}>
+    <section style={{ paddingBottom: "128px", background: "linear-gradient(160deg, #F2EFFF 0%, #F8F6FF 30%, #EEF0FF 65%, #F5F2FF 100%)" }}>
       <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
 
         <div className="lg:flex lg:items-start lg:gap-20" style={{ paddingTop: "200px" }}>
@@ -295,9 +295,12 @@ export default function FunnelGuide() {
                     position: "sticky",
                     top: i === stages.length - 1 ? `${lastCardTop}px` : `${STICKY_BASE}px`,
                     zIndex: i + 1,
-                    background: "linear-gradient(to bottom, #F5F4FF 0%, #ffffff 100%)",
-                    border: "1px solid #E8E4F0",
-                    borderRadius: "20px",
+                    background: "rgba(255, 255, 255, 0.55)",
+                    backdropFilter: "blur(18px)",
+                    WebkitBackdropFilter: "blur(18px)",
+                    border: "1px solid rgba(255, 255, 255, 0.80)",
+                    borderRadius: "24px",
+                    boxShadow: "0 4px 32px rgba(101, 87, 234, 0.06), 0 1px 0 rgba(255,255,255,0.9) inset",
                     padding: "40px",
                     marginBottom: i < stages.length - 1 ? "16px" : "0",
                     transition: "none",

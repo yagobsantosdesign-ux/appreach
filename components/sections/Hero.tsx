@@ -261,11 +261,11 @@ export default function Hero() {
         {/* Dashboard cards */}
         <div
           className="hero-fade-up hero-fade-up-5"
-          style={{ display: "flex", gap: "20px", width: "100%", maxWidth: "1000px" }}
+          style={{ display: "flex", gap: "20px", width: "100%", maxWidth: "1100px" }}
         >
 
           {/* Card 1 — Total de vendas */}
-          <div style={{ flex: 1, background: "white", borderRadius: "24px", padding: "28px 28px 24px", textAlign: "left", boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)", display: "flex", flexDirection: "column" }}>
+          <div style={{ flex: 1, background: "white", borderRadius: "32px", padding: "36px 36px 28px", textAlign: "left", boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)", display: "flex", flexDirection: "column" }}>
 
             {/* Header */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
@@ -278,7 +278,7 @@ export default function Hero() {
 
             {/* Metric — centralizado */}
             <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", paddingBottom: "12px" }}>
-<span style={{ fontSize: "52px", fontWeight: 700, letterSpacing: "-2.5px", lineHeight: 1 }}>
+<span style={{ fontSize: "68px", fontWeight: 700, letterSpacing: "-3px", lineHeight: 1 }}>
                 <span style={{ color: "#0D0D0D" }}>R$</span>
                 <span style={{ color: "#0D0D0D" }}> 28.500</span>
               </span>
@@ -290,7 +290,7 @@ export default function Hero() {
 
             {/* Bar chart */}
             <div style={{ marginTop: "auto", padding: "0 4px 4px" }}>
-              <div style={{ display: "flex", alignItems: "flex-end", gap: "5px", height: "80px" }}>
+              <div style={{ display: "flex", alignItems: "flex-end", gap: "5px", height: "110px" }}>
                 {barPatterns[patternIdx].map((h, i) => (
                   <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", height: "100%", justifyContent: "flex-end" }}>
                     <div style={{
@@ -307,7 +307,7 @@ export default function Hero() {
           </div>
 
           {/* Card 2 — Revenue Snapshot */}
-          <div style={{ flex: 1, background: "white", borderRadius: "24px", padding: "28px 28px 24px", textAlign: "left", display: "flex", flexDirection: "column", boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)" }}>
+          <div style={{ flex: 1, background: "white", borderRadius: "32px", padding: "36px 36px 28px", textAlign: "left", display: "flex", flexDirection: "column", boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)" }}>
 
             {/* Header */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
@@ -316,10 +316,10 @@ export default function Hero() {
             </div>
 
             {/* Fan gauge — overflow:visible fixes edge-bar clipping */}
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-end", flex: 1, position: "relative", minHeight: "180px", margin: "0 -8px" }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-end", flex: 1, position: "relative", minHeight: "220px", margin: "0 -8px" }}>
               <svg
-                width="280"
-                height="160"
+                width="340"
+                height="200"
                 viewBox="0 0 280 160"
                 fill="none"
                 style={{ display: "block", overflow: "visible" }}
@@ -343,7 +343,7 @@ export default function Hero() {
               <div style={{ position: "absolute", bottom: "12px", left: "50%", transform: "translateX(-50%)", textAlign: "center", pointerEvents: "none", whiteSpace: "nowrap" }}>
                 <div
                   ref={numRef}
-                  style={{ fontSize: "34px", fontWeight: 700, color: "#6557EA", letterSpacing: "-1.5px", lineHeight: 1 }}
+                  style={{ fontSize: "42px", fontWeight: 700, color: "#6557EA", letterSpacing: "-2px", lineHeight: 1 }}
                 >
                   +0.0%
                 </div>

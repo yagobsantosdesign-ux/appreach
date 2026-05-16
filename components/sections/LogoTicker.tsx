@@ -1,32 +1,25 @@
 const tickerLogos = [
-  { src: "/ticker-logo-1.svg", alt: "Cliente Appreach", width: 124, height: 22 },
-  { src: "/ticker-logo-2.svg", alt: "Cliente Appreach", width: 61, height: 25 },
-  { src: "/ticker-logo-3.svg", alt: "Cliente Appreach", width: 77, height: 35 },
-  { src: "/ticker-logo-4.svg", alt: "Cliente Appreach", width: 54, height: 21 },
-  { src: "/ticker-logo-5.svg", alt: "Cliente Appreach", width: 129, height: 23 },
+  { src: "/ticker-logo-1.svg", alt: "Cliente Appreach", width: 174, height: 31 },
+  { src: "/ticker-logo-2.svg", alt: "Cliente Appreach", width: 86, height: 35 },
+  { src: "/ticker-logo-3.svg", alt: "Cliente Appreach", width: 108, height: 49 },
+  { src: "/ticker-logo-4.svg", alt: "Cliente Appreach", width: 76, height: 29 },
+  { src: "/ticker-logo-5.svg", alt: "Cliente Appreach", width: 181, height: 32 },
 ];
 
 export default function LogoTicker() {
   const doubled = [...tickerLogos, ...tickerLogos];
 
   return (
-    <section className="bg-white py-14">
+    <section className="bg-white pt-24 pb-14">
       <div className="max-w-[1300px] mx-auto px-4 lg:px-16 flex flex-col gap-8 items-center">
 
         {/* Texto */}
-        <div className="flex flex-col items-center gap-2 text-center">
-          <p
-            className="font-medium text-dark"
-            style={{ fontSize: "22px", letterSpacing: "-0.5px" }}
-          >
-            +200 apps escalados com a Appreach
-          </p>
-          <p
-            style={{ fontSize: "15px", color: "var(--color-muted)" }}
-          >
-            De startups a grandes publishers — marcas que confiam no nosso trabalho
-          </p>
-        </div>
+        <p
+          className="font-medium text-dark"
+          style={{ fontSize: "22px", letterSpacing: "-0.5px" }}
+        >
+          +200 apps escalados com a Appreach
+        </p>
 
         {/* Ticker */}
         <div className="relative overflow-hidden w-full">
@@ -47,7 +40,8 @@ export default function LogoTicker() {
                 alt={logo.alt}
                 width={logo.width}
                 height={logo.height}
-                className="shrink-0 object-contain opacity-60"
+                className="shrink-0 object-contain"
+                style={{ filter: "brightness(0)" }}
               />
             ))}
           </div>
