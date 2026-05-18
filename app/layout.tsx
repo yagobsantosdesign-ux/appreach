@@ -3,7 +3,6 @@ import { GeistMono } from "geist/font/mono";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
-import CursorDot from "@/components/ui/CursorDot";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,7 +38,6 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-background text-body antialiased">
         <SmoothScroll />
-        <CursorDot />
         {children}
       </body>
     </html>

@@ -256,54 +256,13 @@ function AquisicaoWidget() {
 
 // ─── Re-engagement (Retargeting) ─────────────────────────────────────────────
 function ReengagementWidget() {
-  const ringRef = useRef<SVGCircleElement>(null);
-  const numRef = useRef<SVGTextElement>(null);
-  const R = 50, CX = 70, CY = 70;
-  const circumference = 2 * Math.PI * R;
-
-  useEffect(() => {
-    let raf: number;
-    let cancelled = false;
-    const t0 = performance.now();
-    const DURATION = 1800;
-    const step = (now: number) => {
-      if (cancelled) return;
-      const t = Math.min(1, (now - t0) / DURATION);
-      const p = easeInOut(t);
-      const fill = circumference * 0.78 * p;
-      if (ringRef.current) ringRef.current.setAttribute("stroke-dasharray", `${fill} ${circumference - fill}`);
-      if (numRef.current) numRef.current.textContent = `${Math.round(78 * p)}%`;
-      if (t < 1) raf = requestAnimationFrame(step);
-    };
-    raf = requestAnimationFrame(step);
-    return () => { cancelled = true; cancelAnimationFrame(raf); };
-  }, []);
-
   return (
-    <div style={{ height: "240px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "18px", padding: "8px 20px" }}>
-      <svg width="140" height="140" viewBox="0 0 140 140">
-        <defs>
-          <linearGradient id="reGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#9B8FF5" />
-            <stop offset="100%" stopColor="#6557EA" />
-          </linearGradient>
-        </defs>
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="rgba(101,87,234,0.12)" strokeWidth="10"
-          strokeDasharray={`${circumference} 0`} transform={`rotate(-90 ${CX} ${CY})`} />
-        <circle ref={ringRef} cx={CX} cy={CY} r={R} fill="none" stroke="url(#reGrad)" strokeWidth="10"
-          strokeLinecap="round" strokeDasharray={`0 ${circumference}`}
-          transform={`rotate(-90 ${CX} ${CY})`} />
-        <text ref={numRef} x={CX} y={CY - 5} textAnchor="middle" fill="#0F0F14" fontSize="26" fontWeight="700" letterSpacing="-1">0%</text>
-        <text x={CX} y={CY + 13} textAnchor="middle" fill="#9B9BB0" fontSize="10">reativados</text>
-      </svg>
-      <div style={{ display: "flex", gap: "24px", justifyContent: "center" }}>
-        {[{ value: "2.8K", label: "inativos" }, { value: "891", label: "convertidos" }].map((s, i) => (
-          <div key={i} style={{ textAlign: "center" }}>
-            <div style={{ fontSize: "18px", fontWeight: 700, color: "#6557EA", letterSpacing: "-0.5px" }}>{s.value}</div>
-            <div style={{ fontSize: "10px", color: "#9B9BB0", marginTop: "2px" }}>{s.label}</div>
-          </div>
-        ))}
-      </div>
+    <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+      <img
+        src="/retargeting-widget.png"
+        alt="Retargeting"
+        style={{ width: "100%", height: "100%", objectFit: "contain" }}
+      />
     </div>
   );
 }
@@ -339,158 +298,39 @@ const pushIcons = [
 ];
 
 function ChatBubbleWidget() {
-  const [visibleMsgs, setVisibleMsgs] = useState<number[]>([]);
-  const [visiblePush, setVisiblePush] = useState<number[]>([]);
-  const [typing, setTyping] = useState(false);
-  const [dotCount, setDotCount] = useState(1);
-  // "idle-chat" | "chat" | "idle-push" | "push"
-  const [phase, setPhase] = useState<"idle-chat" | "chat" | "idle-push" | "push">("idle-chat");
-
-  useEffect(() => {
-    const timers: ReturnType<typeof setTimeout>[] = [];
-
-    const runChat = () => {
-      setVisibleMsgs([]); setTyping(false);
-      setPhase("chat");
-      chatMsgs.forEach((msg, i) => {
-        if (i > 0) {
-          timers.push(setTimeout(() => setTyping(true),  msg.delay - 550));
-          timers.push(setTimeout(() => { setTyping(false); setVisibleMsgs(p => [...p, i]); }, msg.delay));
-        } else {
-          timers.push(setTimeout(() => setVisibleMsgs(p => [...p, i]), msg.delay));
-        }
-      });
-      // dismiss chat, then show push
-      timers.push(setTimeout(() => {
-        setPhase("idle-chat");
-        timers.push(setTimeout(() => runPush(), 520));
-      }, 4000));
-    };
-
-    const runPush = () => {
-      setVisiblePush([]);
-      setPhase("push");
-      pushItems.forEach((item, i) =>
-        timers.push(setTimeout(() => setVisiblePush(p => [...p, i]), 400 + i * 700))
-      );
-      // dismiss push, then show chat
-      timers.push(setTimeout(() => {
-        setPhase("idle-push");
-        timers.push(setTimeout(() => runChat(), 520));
-      }, 3800));
-    };
-
-    // small initial delay so the slide-up is visible on mount
-    timers.push(setTimeout(() => runChat(), 300));
-    return () => timers.forEach(clearTimeout);
-  }, []);
-
-  useEffect(() => {
-    if (!typing) { setDotCount(1); return; }
-    const id = setInterval(() => setDotCount(c => c === 3 ? 1 : c + 1), 380);
-    return () => clearInterval(id);
-  }, [typing]);
-
-  useEffect(() => {
-    if (document.getElementById("chat-kf")) return;
-    const s = document.createElement("style");
-    s.id = "chat-kf";
-    s.textContent = `@keyframes chatIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}`;
-    document.head.appendChild(s);
-  }, []);
-
-  const chatVisible = phase === "chat";
-  const pushVisible = phase === "push";
-
-  const modalStyle = (visible: boolean): React.CSSProperties => ({
-    position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
-    display: "flex", alignItems: "center", justifyContent: "center",
-    transform: visible ? "translateY(0)" : "translateY(56px)",
-    opacity: visible ? 1 : 0,
-    pointerEvents: visible ? "auto" : "none",
-    transition: "transform 0.44s cubic-bezier(0.22,1,0.36,1), opacity 0.3s ease",
-    zIndex: visible ? 2 : 1,
-  });
+  const [hoverOfertas, setHoverOfertas] = React.useState(false);
+  const [hoverNotif, setHoverNotif] = React.useState(false);
+  const transition = "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)";
 
   return (
-    <div style={{ height: "240px", position: "relative", overflow: "hidden" }}>
-      {/* Chat modal */}
-      <div style={modalStyle(chatVisible)}>
-        <div style={{
-          width: "260px", background: "#fff", borderRadius: "18px", overflow: "hidden",
-          boxShadow: "0 8px 32px rgba(101,87,234,0.13), 0 2px 8px rgba(0,0,0,0.06)",
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 14px", borderBottom: "1px solid #F0EFF8" }}>
-            <div style={{ width: "22px", height: "22px", borderRadius: "7px", background: "linear-gradient(135deg, #6557EA, #9B8FF5)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-              <img src="/appreach-icon.png" alt="" style={{ width: "14px", height: "14px", borderRadius: "3px" }} />
-            </div>
-            <span style={{ fontSize: "11px", fontWeight: 600, color: "#0F0F14", flex: 1 }}>Ofertas App</span>
-            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#22C55E" }} />
-          </div>
-          <div style={{ padding: "10px 12px", display: "flex", flexDirection: "column", gap: "6px", minHeight: "108px", justifyContent: "flex-end", background: "#FAFAFE" }}>
-            {chatMsgs.map((msg, i) => (
-              visibleMsgs.includes(i) && (
-                <div key={i} style={{ display: "flex", animation: "chatIn 0.3s ease forwards" }}>
-                  <div style={{
-                    background: "#fff", color: "#0F0F14",
-                    borderRadius: "12px 12px 12px 2px",
-                    padding: "6px 10px", fontSize: "10.5px", maxWidth: "82%", lineHeight: 1.4,
-                    boxShadow: "0 1px 4px rgba(0,0,0,0.08)",
-                  }}>{msg.text}</div>
-                </div>
-              )
-            ))}
-            {typing && (
-              <div style={{ display: "flex" }}>
-                <div style={{ background: "#fff", borderRadius: "12px 12px 12px 2px", padding: "8px 12px",
-                  boxShadow: "0 1px 4px rgba(0,0,0,0.08)", display: "flex", gap: "4px", alignItems: "center" }}>
-                  {[1, 2, 3].map(d => (
-                    <div key={d} style={{ width: "4px", height: "4px", borderRadius: "50%",
-                      background: d <= dotCount ? "#6557EA" : "rgba(101,87,234,0.18)", transition: "background 0.1s" }} />
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Push modal */}
-      <div style={modalStyle(pushVisible)}>
-        <div style={{
-          width: "260px", background: "#fff", borderRadius: "18px", overflow: "hidden",
-          boxShadow: "0 8px 32px rgba(101,87,234,0.13), 0 2px 8px rgba(0,0,0,0.06)",
-        }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 14px", borderBottom: "1px solid #F0EFF8" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>
-              <img src="/appreach-icon.png" alt="" style={{ width: "18px", height: "18px", borderRadius: "5px" }} />
-              <span style={{ fontSize: "11px", fontWeight: 600, color: "#0F0F14" }}>Notificações</span>
-            </div>
-            <span style={{ fontSize: "8px", background: "#0F0F14", color: "white", padding: "2px 6px", borderRadius: "4px", fontWeight: 700, letterSpacing: "0.3px" }}>PUSH</span>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "#F0EFF8" }}>
-            {pushItems.map((item, i) => (
-              <div key={i} style={{
-                display: "flex", gap: "10px", alignItems: "center",
-                background: "#fff", padding: "10px 14px",
-                opacity: visiblePush.includes(i) ? 1 : 0,
-                transform: visiblePush.includes(i) ? "translateY(0)" : "translateY(10px)",
-                transition: "opacity 0.38s ease, transform 0.38s ease",
-              }}>
-                <div style={{ width: "30px", height: "30px", borderRadius: "9px",
-                  background: "linear-gradient(135deg, #EDE9FE, #DDD6FE)",
-                  display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  {pushIcons[i]}
-                </div>
-                <div style={{ minWidth: 0, flex: 1 }}>
-                  <div style={{ fontSize: "11px", fontWeight: 600, color: "#0F0F14" }}>{item.title}</div>
-                  <div style={{ fontSize: "9.5px", color: "#9B9BB0", marginTop: "1px" }}>{item.body}</div>
-                </div>
-                <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#6557EA", flexShrink: 0 }} />
-              </div>
-            ))}
-          </div>
-        </div>
+    <div style={{ position: "relative", height: "280px", overflow: "hidden" }}>
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "72px", background: "linear-gradient(to bottom, transparent, #fcfcfe)", zIndex: 10, pointerEvents: "none" }} />
+      <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", height: "100%", overflow: "hidden" }}>
+        <img
+          src="/widget-ofertas.png"
+          alt="Ofertas App"
+          onMouseEnter={() => setHoverOfertas(true)}
+          onMouseLeave={() => setHoverOfertas(false)}
+          style={{
+            height: "calc(100% + 60px)", width: "auto", flexShrink: 0, position: "relative", zIndex: 1,
+            transform: hoverOfertas ? "translateY(60px) scale(1.05)" : "translateY(60px)",
+            transition,
+            cursor: "pointer",
+          }}
+        />
+        <img
+          src="/widget-notifications.png"
+          alt="Notificações"
+          onMouseEnter={() => setHoverNotif(true)}
+          onMouseLeave={() => setHoverNotif(false)}
+          style={{
+            height: "calc(90% + 60px)", width: "auto", flexShrink: 0, position: "relative", zIndex: 2,
+            marginLeft: "-130px",
+            transform: hoverNotif ? "translateY(60px) scale(1.05)" : "translateY(60px)",
+            transition,
+            cursor: "pointer",
+          }}
+        />
       </div>
     </div>
   );
@@ -608,27 +448,27 @@ function CTVWidget() {
   return (
     <div style={{ height: "240px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "22px" }}>
       <svg width="108" height="90" viewBox="0 0 108 90" fill="none">
-        <rect x="1" y="1" width="106" height="66" rx="10" stroke="rgba(255,255,255,0.18)" strokeWidth="2" />
-        <rect x="7" y="7" width="94" height="54" rx="7" fill="rgba(101,87,234,0.22)" />
-        <ellipse cx="54" cy="34" rx="20" ry="16" fill="rgba(101,87,234,0.3)" />
-        <polygon points="45,24 45,44 67,34" fill="rgba(155,143,245,0.95)" />
+        <rect x="1" y="1" width="106" height="66" rx="10" stroke="rgba(101,87,234,0.2)" strokeWidth="2" />
+        <rect x="7" y="7" width="94" height="54" rx="7" fill="rgba(101,87,234,0.1)" />
+        <ellipse cx="54" cy="34" rx="20" ry="16" fill="rgba(101,87,234,0.18)" />
+        <polygon points="45,24 45,44 67,34" fill="rgba(101,87,234,0.85)" />
         <circle cx="90" cy="16" r="2.5" fill="rgba(34,197,94,0.9)" />
         <circle cx="97" cy="16" r="2.5" fill="rgba(34,197,94,0.55)" />
         <circle cx="104" cy="16" r="2.5" fill="rgba(34,197,94,0.25)" />
-        <line x1="54" y1="67" x2="54" y2="78" stroke="rgba(255,255,255,0.18)" strokeWidth="2" />
-        <rect x="36" y="78" width="36" height="5" rx="2.5" fill="rgba(255,255,255,0.12)" />
+        <line x1="54" y1="67" x2="54" y2="78" stroke="rgba(0,0,0,0.1)" strokeWidth="2" />
+        <rect x="36" y="78" width="36" height="5" rx="2.5" fill="rgba(0,0,0,0.07)" />
       </svg>
       <div style={{ textAlign: "center" }}>
-        <div style={{ fontSize: "44px", fontWeight: 700, color: "rgba(255,255,255,0.92)", letterSpacing: "-2px", lineHeight: 1 }}>
-          {count}<span style={{ fontSize: "22px", color: "rgba(155,143,245,0.85)", fontWeight: 600 }}>M</span>
+        <div style={{ fontSize: "44px", fontWeight: 700, color: "#0F0F14", letterSpacing: "-2px", lineHeight: 1 }}>
+          {count}<span style={{ fontSize: "22px", color: "#6557EA", fontWeight: 600 }}>M</span>
         </div>
-        <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", marginTop: "6px" }}>households alcançados</div>
+        <div style={{ fontSize: "11px", color: "#9B9BB0", marginTop: "6px" }}>households alcançados</div>
       </div>
       <div style={{ display: "flex", gap: "28px" }}>
         {[{ value: "150+", label: "plataformas" }, { value: "98%", label: "viewability" }].map((s, i) => (
           <div key={i} style={{ textAlign: "center" }}>
-            <div style={{ fontSize: "14px", fontWeight: 700, color: "rgba(155,143,245,0.85)", letterSpacing: "-0.3px" }}>{s.value}</div>
-            <div style={{ fontSize: "9.5px", color: "rgba(255,255,255,0.3)", marginTop: "2px" }}>{s.label}</div>
+            <div style={{ fontSize: "14px", fontWeight: 700, color: "#6557EA", letterSpacing: "-0.3px" }}>{s.value}</div>
+            <div style={{ fontSize: "9.5px", color: "#9B9BB0", marginTop: "2px" }}>{s.label}</div>
           </div>
         ))}
       </div>
@@ -638,111 +478,22 @@ function CTVWidget() {
 
 // ─── Preload ──────────────────────────────────────────────────────────────────
 function PreloadWidget() {
-  const [activeStep, setActiveStep] = useState(-1);
-  const [iconVisible, setIconVisible] = useState(false);
-  const [iconScale, setIconScale] = useState(0);
-
-  useEffect(() => {
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    const run = () => {
-      setActiveStep(-1); setIconVisible(false); setIconScale(0);
-      timers.push(setTimeout(() => setActiveStep(0), 500));
-      timers.push(setTimeout(() => setActiveStep(1), 1300));
-      timers.push(setTimeout(() => setActiveStep(2), 2100));
-      timers.push(setTimeout(() => {
-        setIconVisible(true);
-        setTimeout(() => setIconScale(1), 40);
-      }, 2300));
-      timers.push(setTimeout(() => run(), 5200));
-    };
-    run();
-    return () => timers.forEach(clearTimeout);
-  }, []);
-
-  const steps = [
-    { label: "Fábrica",      sublabel: "Dispositivo criado"   },
-    { label: "Distribuição", sublabel: "App pré-instalado"    },
-    { label: "Usuário",      sublabel: "Primeiro acesso"       },
-  ];
-  const APP_POS = 5;
-
   return (
-    <div style={{ height: "240px", display: "flex", gap: "24px", alignItems: "center", padding: "12px 28px" }}>
-      {/* Timeline */}
-      <div style={{ display: "flex", flexDirection: "column", flex: "0 0 auto" }}>
-        {steps.map((s, i) => (
-          <div key={i}>
-            <div style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "20px" }}>
-                <div style={{
-                  width: "16px", height: "16px", borderRadius: "50%", flexShrink: 0,
-                  background: activeStep >= i ? "rgba(101,87,234,0.7)" : "rgba(255,255,255,0.08)",
-                  border: activeStep >= i ? "2px solid rgba(155,143,245,0.8)" : "2px solid rgba(255,255,255,0.14)",
-                  boxShadow: activeStep >= i ? "0 0 10px rgba(101,87,234,0.45)" : "none",
-                  transition: "all 0.45s ease",
-                }} />
-                {i < steps.length - 1 && (
-                  <div style={{
-                    width: "2px", height: "30px", margin: "3px 0",
-                    background: activeStep > i ? "rgba(101,87,234,0.5)" : "rgba(255,255,255,0.1)",
-                    transition: "background 0.45s ease",
-                  }} />
-                )}
-              </div>
-              <div style={{ paddingBottom: i < steps.length - 1 ? "30px" : 0 }}>
-                <div style={{ fontSize: "12px", fontWeight: 600, lineHeight: 1.2,
-                  color: activeStep >= i ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.22)",
-                  transition: "color 0.45s ease" }}>{s.label}</div>
-                <div style={{ fontSize: "10px", marginTop: "2px",
-                  color: activeStep >= i ? "rgba(255,255,255,0.38)" : "rgba(255,255,255,0.13)",
-                  transition: "color 0.45s ease" }}>{s.sublabel}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Phone */}
-      <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
-        <div style={{
-          width: "136px", height: "200px",
-          border: "2px solid rgba(255,255,255,0.14)", borderRadius: "24px",
-          background: "rgba(255,255,255,0.04)",
-          display: "flex", flexDirection: "column", overflow: "hidden",
-          boxShadow: "0 8px 32px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.07)",
-        }}>
-          {/* Status bar */}
-          <div style={{ height: "18px", borderBottom: "1px solid rgba(255,255,255,0.06)",
-            display: "flex", alignItems: "center", justifyContent: "flex-end", padding: "0 10px", gap: "4px" }}>
-            {[0.18, 0.18, activeStep >= 2 ? 0.85 : 0.18].map((op, idx) => (
-              <div key={idx} style={{ width: "4px", height: "4px", borderRadius: "50%",
-                background: idx === 2 && activeStep >= 2 ? "rgba(34,197,94,0.85)" : `rgba(255,255,255,${op})`,
-                transition: "background 0.4s ease" }} />
-            ))}
-          </div>
-          {/* App grid */}
-          <div style={{ flex: 1, display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "8px", padding: "12px 10px" }}>
-            {Array.from({ length: 12 }).map((_, idx) => (
-              <div key={idx} style={{ aspectRatio: "1", borderRadius: "8px",
-                background: idx === APP_POS ? "transparent" : "rgba(255,255,255,0.07)" }}>
-                {idx === APP_POS && (
-                  <img src="/appreach-icon.png" alt="" style={{
-                    width: "100%", height: "100%", borderRadius: "8px", objectFit: "cover",
-                    opacity: iconVisible ? 1 : 0,
-                    transform: `scale(${iconScale})`,
-                    transition: "opacity 0.45s ease, transform 0.45s cubic-bezier(0.34,1.56,0.64,1)",
-                    boxShadow: iconVisible ? "0 0 14px rgba(101,87,234,0.55)" : "none",
-                  }} />
-                )}
-              </div>
-            ))}
-          </div>
-          {/* Home indicator */}
-          <div style={{ height: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ width: "32px", height: "3px", borderRadius: "99px", background: "rgba(255,255,255,0.14)" }} />
-          </div>
-        </div>
-      </div>
+    <div style={{ height: "100%", position: "relative", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+      <img
+        src="/preload-widget.png"
+        alt="Preload"
+        style={{ width: "100%", height: "100%", objectFit: "contain" }}
+      />
+      <div style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: "40%",
+        background: "linear-gradient(to bottom, transparent, rgba(255,255,255,1))",
+        pointerEvents: "none",
+      }} />
     </div>
   );
 }
@@ -755,6 +506,7 @@ const strategies: {
   widgetHeight: string;
   dark?: boolean;
   solid?: boolean;
+  noPadding?: boolean;
   titleSize?: string;
   descSize?: string;
   descMaxWidth?: string;
@@ -776,6 +528,9 @@ const strategies: {
     description: <>Reengaje usuários que já instalaram seu app<br />e converta intenções em compras<br />e eventos de receita.</>,
     span: "lg:col-span-1",
     widgetHeight: "240px",
+    solid: true,
+    textMarginTop: "16px",
+    noPadding: true,
     widget: <ReengagementWidget />,
   },
   {
@@ -783,14 +538,15 @@ const strategies: {
     description: <>Anuncie em TVs conectadas e streaming<br />para construir brand awareness e escalar<br />o alcance do seu app.</>,
     span: "lg:col-span-1",
     widgetHeight: "240px",
-    dark: true,
+    solid: true,
+    textMarginTop: "16px",
     widget: <CTVWidget />,
   },
   {
     title: "App Chat & Push",
     description: <>Comunicação direta dentro e fora do app com mensagens<br />personalizadas para aumentar retenção e LTV.</>,
     span: "lg:col-span-2",
-    widgetHeight: "240px",
+    widgetHeight: "280px",
     solid: true,
     descMaxWidth: "460px",
     textMarginTop: "16px",
@@ -801,7 +557,9 @@ const strategies: {
     description: <>Seu app pré-instalado em dispositivos novos, garantindo<br />presença desde o primeiro acesso do usuário.</>,
     span: "lg:col-span-2",
     widgetHeight: "240px",
-    dark: true,
+    solid: true,
+    noPadding: true,
+    textMarginTop: "16px",
     widget: <PreloadWidget />,
   },
   {
@@ -809,6 +567,8 @@ const strategies: {
     description: <>Compra de mídia em escala com dados de<br />primeira parte para atingir o usuário certo,<br />no momento certo.</>,
     span: "lg:col-span-1",
     widgetHeight: "240px",
+    solid: true,
+    textMarginTop: "16px",
     widget: <MidiaProgramaticaWidget />,
   },
 ];
@@ -817,8 +577,9 @@ import React from "react";
 
 export default function Strategies() {
   return (
-    <section id="estrategias" className="py-24 lg:py-32 bg-white">
-      <div className="max-w-[1200px] mx-auto px-4 lg:px-0">
+    <section id="estrategias" className="relative overflow-hidden py-24 lg:py-32" style={{ backgroundImage: "url('/bg-estrategias.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+
+      <div className="relative max-w-[1200px] mx-auto px-4 lg:px-0" style={{ zIndex: 1 }}>
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <SectionBadge>Estratégias</SectionBadge>
@@ -835,17 +596,12 @@ export default function Strategies() {
         </div>
 
         {/* Bento grid */}
-        <div className="relative rounded-[32px] p-4" style={{ background: "linear-gradient(160deg, #F2EFFF 0%, #F8F6FF 30%, #EEF0FF 65%, #F5F2FF 100%)" }}>
-          {/* Blobs */}
-          <div style={{ position: "absolute", top: "0px", left: "0px", width: "400px", height: "400px", borderRadius: "50%", background: "radial-gradient(circle, rgba(101,87,234,0.10) 0%, transparent 70%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", top: "40%", right: "0px", width: "340px", height: "340px", borderRadius: "50%", background: "radial-gradient(circle, rgba(155,145,255,0.09) 0%, transparent 70%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", bottom: "0px", left: "35%", width: "300px", height: "300px", borderRadius: "50%", background: "radial-gradient(circle, rgba(180,140,255,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
-
+        <div className="relative">
           <div className="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-3" style={{ zIndex: 1 }}>
             {strategies.map((s) => (
               <div
                 key={s.title}
-                className={`flex flex-col p-7 ${s.span}`}
+                className={`flex flex-col ${s.noPadding ? "" : "p-7"} ${s.span}`}
                 style={{
                   background: s.dark
                     ? "linear-gradient(145deg, #1E1640 0%, #2D1F5E 100%)"
@@ -866,12 +622,16 @@ export default function Strategies() {
                       ? "0px 4px 20px 0px rgba(16,16,25,0.06)"
                       : "0 4px 32px rgba(101, 87, 234, 0.06), 0 1px 0 rgba(255,255,255,0.9) inset",
                   minHeight: `calc(${s.widgetHeight} + 120px)`,
+                  overflow: s.noPadding ? "hidden" : undefined,
                 }}
               >
                 {s.widget && (
                   <div style={{ flex: 1 }}>{s.widget}</div>
                 )}
-                <div style={{ marginTop: s.textMarginTop ?? "auto" }}>
+                <div style={{
+                  marginTop: s.textMarginTop ?? "auto",
+                  ...(s.noPadding ? { padding: "0 28px 28px 28px" } : {}),
+                }}>
                   <h3
                     className="font-medium"
                     style={{ fontSize: s.titleSize ?? "24px", letterSpacing: "-0.4px", color: s.dark ? "rgba(255,255,255,0.92)" : "#0F0F14" }}

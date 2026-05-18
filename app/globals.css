@@ -156,3 +156,46 @@ a:hover .logo-text {
 .widget-float-2 { opacity: 0; animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.48s forwards, float 5s   ease-in-out 1.35s infinite; }
 .widget-float-3 { opacity: 0; animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.60s forwards, float 4.5s ease-in-out 1.4s  infinite; }
 .widget-float-4 { opacity: 0; animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.60s forwards, float 3.8s ease-in-out 1.2s  infinite; }
+
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+/* Reengagement — users pulled into center logo */
+@keyframes pull-user-1 {
+  0%   { transform: translate(-185px, -105px) scale(1);   opacity: 0; }
+  10%  { opacity: 1; }
+  78%  { opacity: 0.8; }
+  100% { transform: translate(0px, 0px)       scale(0.3); opacity: 0; }
+}
+@keyframes pull-user-2 {
+  0%   { transform: translate(-95px, -115px)  scale(1);   opacity: 0; }
+  10%  { opacity: 1; }
+  78%  { opacity: 0.8; }
+  100% { transform: translate(0px, 0px)       scale(0.3); opacity: 0; }
+}
+@keyframes pull-user-3 {
+  0%   { transform: translate(20px, -118px)   scale(1);   opacity: 0; }
+  10%  { opacity: 1; }
+  78%  { opacity: 0.8; }
+  100% { transform: translate(0px, 0px)       scale(0.3); opacity: 0; }
+}
+@keyframes pull-user-4 {
+  0%   { transform: translate(140px, -95px)   scale(1);   opacity: 0; }
+  10%  { opacity: 1; }
+  78%  { opacity: 0.8; }
+  100% { transform: translate(0px, 0px)       scale(0.3); opacity: 0; }
+}
+@keyframes pull-user-5 {
+  0%   { transform: translate(170px, -40px)   scale(1);   opacity: 0; }
+  10%  { opacity: 1; }
+  78%  { opacity: 0.8; }
+  100% { transform: translate(0px, 0px)       scale(0.3); opacity: 0; }
+}
+@keyframes pull-user-6 {
+  0%   { transform: translate(-175px, -55px)  scale(1);   opacity: 0; }
+  10%  { opacity: 1; }
+  78%  { opacity: 0.8; }
+  100% { transform: translate(0px, 0px)       scale(0.3); opacity: 0; }
+}
