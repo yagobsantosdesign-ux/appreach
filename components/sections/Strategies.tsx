@@ -600,6 +600,7 @@ function CTVWidget() {
 // ─── Preload ──────────────────────────────────────────────────────────────────
 function PreloadWidget() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const { ref: widgetRef, visible: widgetVisible } = useInView();
 
   const icons = [
     { src: "/icons/apple-photos.svg",   alt: "Photos" },
@@ -612,18 +613,21 @@ function PreloadWidget() {
   ];
 
   return (
-    <div style={{
-      height: "240px",
-      position: "relative",
-      overflow: "hidden",
-      background: "#F4F2FE",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      paddingTop: "48px",
-      maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
-      WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
-    }}>
+    <div
+      ref={widgetRef as React.RefObject<HTMLDivElement>}
+      style={{
+        height: "240px",
+        position: "relative",
+        overflow: "hidden",
+        background: "#F4F2FE",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingTop: "48px",
+        maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+      }}
+    >
       <div style={{
         background: "rgba(255, 255, 255, 0.52)",
         backdropFilter: "blur(24px)",
@@ -650,9 +654,12 @@ function PreloadWidget() {
                 width: size,
                 height: size,
                 borderRadius: radius,
+                opacity: widgetVisible ? undefined : 0,
                 transform: hoveredIdx === i ? "scale(1.18)" : "scale(1)",
                 transition: "transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                animation: `iconEntry 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${i * 0.06}s both`,
+                animation: widgetVisible
+                  ? `iconEntry 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) ${i * 0.12}s both`
+                  : "none",
                 cursor: "default",
               }}
               onMouseEnter={() => setHoveredIdx(i)}
