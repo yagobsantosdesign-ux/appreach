@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Button from "@/components/ui/Button";
 
 const barPatterns = [
   [38, 56, 50, 30, 58, 80, 24, 46, 72, 28, 52, 40],
@@ -218,7 +219,7 @@ export default function Hero() {
         {/* H1 */}
         <h1
           className="font-medium hero-fade-up hero-fade-up-2"
-          style={{ fontSize: "80px", color: "white", letterSpacing: "-3px", lineHeight: 1.02, maxWidth: "720px", marginBottom: "20px", textWrap: "balance" }}
+          style={{ fontSize: "60px", color: "white", letterSpacing: "-1.4px", lineHeight: 1.08, maxWidth: "720px", marginBottom: "20px", textWrap: "balance" }}
         >
           <span style={{ display: "block" }}>Do primeiro</span>
           install à receita
@@ -234,16 +235,12 @@ export default function Hero() {
 
         {/* CTAs */}
         <div className="flex items-center gap-3 hero-fade-up hero-fade-up-4" style={{ marginBottom: "60px" }}>
-          <a
-            href="#contato"
-            className="inline-flex items-center rounded-full font-semibold transition-all duration-200 hover:opacity-90"
-            style={{ background: "#141414", color: "white", fontSize: "14px", padding: "12px 26px", letterSpacing: "-0.2px" }}
-          >
+          <Button href="#contato" variant="dark" size="md">
             Começar agora
-          </a>
+          </Button>
           <a
             href="#como-funciona"
-            className="inline-flex items-center rounded-full font-semibold transition-all duration-200 hover:bg-white/20"
+            className="inline-flex items-center rounded-full font-semibold transition-all duration-200 hover:bg-white/20 hover:-translate-y-0.5"
             style={{
               background: "rgba(255,255,255,0.13)",
               border: "1px solid rgba(255,255,255,0.22)",

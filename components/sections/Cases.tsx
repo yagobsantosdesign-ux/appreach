@@ -20,6 +20,8 @@ const cases: {
   logoW: number;
   logoH: number;
   gradient: string;
+  image?: string;
+  overlay?: boolean;
 }[] = [
   {
     id: "roi",
@@ -41,6 +43,7 @@ const cases: {
     logoW: 124,
     logoH: 22,
     gradient: "linear-gradient(200deg, #9B8FFB 0%, #6557EA 55%, #4338CA 100%)",
+    image: "/case-beleza.png",
   },
   {
     id: "food",
@@ -62,6 +65,7 @@ const cases: {
     logoW: 61,
     logoH: 25,
     gradient: "linear-gradient(160deg, #7C6FF7 0%, #5B4ED8 55%, #3730A3 100%)",
+    image: "/case-food.png",
   },
   {
     id: "eletronicos",
@@ -83,6 +87,7 @@ const cases: {
     logoW: 77,
     logoH: 35,
     gradient: "linear-gradient(220deg, #A78BFA 0%, #7C6FF7 50%, #5B4ED8 100%)",
+    image: "/case-eletronicos.png",
   },
   {
     id: "banco",
@@ -104,6 +109,8 @@ const cases: {
     logoW: 54,
     logoH: 21,
     gradient: "linear-gradient(180deg, #6557EA 0%, #4338CA 55%, #312E81 100%)",
+    image: "/case-fintech.png",
+    overlay: true,
   },
 ];
 
@@ -117,7 +124,7 @@ const LABEL: React.CSSProperties = {
 };
 
 const BODY: React.CSSProperties = {
-  fontSize: "14px",
+  fontSize: "16px",
   color: "#3D3D4A",
   lineHeight: 1.7,
   textWrap: "pretty" as never,
@@ -223,7 +230,7 @@ export default function Cases() {
         }
         .case-image-col {
           flex-shrink: 0;
-          width: 300px;
+          width: 220px;
           align-self: stretch;
           border-radius: 12px;
           animation: imgFadeIn 0.5s cubic-bezier(0.22,1,0.36,1);
@@ -279,7 +286,7 @@ export default function Cases() {
               className="font-medium leading-tight"
               style={{
                 fontSize: "48px",
-                letterSpacing: "-1.92px",
+                letterSpacing: "-1.4px",
                 color: "#141414",
                 marginTop: "12px",
                 maxWidth: "560px",
@@ -313,7 +320,14 @@ export default function Cases() {
           <div key={`card-${c.id}`} className="case-card" style={{ position: "relative", zIndex: 1 }}>
 
           {/* Image */}
-          <div key={`img-${c.id}`} className="case-image-col" style={{ background: c.gradient }} />
+          <div key={`img-${c.id}`} className="case-image-col" style={{ background: "#ffffff", overflow: "hidden", position: "relative" }}>
+            {c.image && (
+              <>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={c.image} alt={`Case ${c.category}`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </>
+            )}
+          </div>
 
           {/* Content */}
           <div className="case-content-col">

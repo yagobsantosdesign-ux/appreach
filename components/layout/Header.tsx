@@ -15,7 +15,6 @@ const solutions = [
 const navLinks = [
   { label: "Quem somos", href: "/quem-somos" },
   { label: "Cases", href: "/#cases" },
-  { label: "Blog", href: "/blog" },
 ];
 
 export default function Header() {
@@ -131,13 +130,9 @@ export default function Header() {
 
         {/* CTA + mobile toggle */}
         <div className="flex items-center justify-end gap-3">
-          <a
-            href="#contato"
-            className="hidden md:inline-flex items-center rounded-full font-semibold transition-all duration-200 hover:opacity-90"
-            style={{ background: "#141414", color: "white", fontSize: "14px", padding: "0 20px", height: "44px", letterSpacing: "-0.2px" }}
-          >
+          <Button href="#contato" variant="dark" size="md" className="hidden md:inline-flex">
             Fale com um especialista
-          </a>
+          </Button>
           <button
             className="md:hidden p-1.5"
             style={{ color: "white" }}

@@ -48,7 +48,7 @@ export default function Timeline() {
           <SectionBadge>Processo</SectionBadge>
           <h2
             className="font-medium text-dark leading-tight mt-3"
-            style={{ fontSize: "48px", letterSpacing: "-1.92px", textWrap: "balance" }}
+            style={{ fontSize: "48px", letterSpacing: "-1.4px", textWrap: "balance" }}
           >
             Processo claro, resultados mensuráveis.
           </h2>
@@ -121,7 +121,7 @@ export default function Timeline() {
                 {/* Descrição */}
                 <p
                   className="leading-relaxed pt-[3px]"
-                  style={{ fontSize: "14px", color: "var(--color-muted)" }}
+                  style={{ fontSize: "16px", color: "var(--color-muted)" }}
                 >
                   {step.description}
                 </p>
@@ -163,7 +163,7 @@ export default function Timeline() {
                 </h3>
                 <p
                   className="leading-relaxed"
-                  style={{ fontSize: "14px", color: "var(--color-muted)" }}
+                  style={{ fontSize: "16px", color: "var(--color-muted)" }}
                 >
                   {step.description}
                 </p>

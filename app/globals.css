@@ -6,7 +6,7 @@
   --color-primary-light: #F0EEFF;
   --color-background: #F7F7F7;
   --color-surface: #FFFFFF;
-  --color-dark: #1A0052;
+  --color-dark: #141414;
   --color-body: #3D3D4A;
   --color-muted: #909090;
   --color-border: #EBEBEB;
@@ -18,9 +18,9 @@
   --font-heading: 'Satoshi', system-ui, sans-serif;
 
   /* Font sizes — design system */
-  --text-h1: 64px;
-  --text-h2: 44px;
-  --text-h3: 24px;
+  --text-h1: 60px;
+  --text-h2: 48px;
+  --text-h3: 26px;
   --text-h4: 20px;
   --text-hero-sub: 18px;
   --text-body: 16px;
@@ -145,10 +145,16 @@ a:hover .logo-text {
 
 /* Button hover — glow + lift */
 .shadow-hover {
-  transition: box-shadow 0.2s ease, filter 0.2s ease;
+  transition: box-shadow 0.22s ease, transform 0.22s ease;
 }
 .shadow-hover:hover {
-  box-shadow: 0 14px 32px rgba(101, 87, 234, 0.5) !important;
+  box-shadow: 0 16px 36px rgba(101, 87, 234, 0.48) !important;
+}
+.shadow-hover-white:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25) !important;
+}
+.shadow-hover-dark:hover {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45) !important;
 }
 
 /* Widget float + entrance — animações combinadas (fade-up primeiro, float em seguida) */
@@ -203,4 +209,15 @@ a:hover .logo-text {
   10%  { opacity: 1; }
   78%  { opacity: 0.8; }
   100% { transform: translate(0px, 0px)       scale(0.3); opacity: 0; }
+}
+
+@keyframes iconEntry {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.78);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

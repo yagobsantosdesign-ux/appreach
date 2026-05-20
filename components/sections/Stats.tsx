@@ -34,7 +34,7 @@ export default function Stats() {
             <SectionBadge>Resultados</SectionBadge>
             <h2
               className="font-medium text-dark leading-tight mb-4"
-              style={{ fontSize: "40px", letterSpacing: "-1.6px", textWrap: "balance" }}
+              style={{ fontSize: "48px", letterSpacing: "-1.4px", textWrap: "balance" }}
             >
               Números que provam o resultado
             </h2>
@@ -68,7 +68,7 @@ export default function Stats() {
                 >
                   {s.value}
                 </p>
-                <p className="font-medium text-dark mb-1" style={{ fontSize: "15px" }}>
+                <p className="font-medium text-dark mb-1" style={{ fontSize: "16px" }}>
                   {s.label}
                 </p>
                 <p style={{ fontSize: "14px", color: "#909090", lineHeight: 1.6 }}>

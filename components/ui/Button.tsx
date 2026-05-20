@@ -3,7 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { ReactNode, CSSProperties } from "react";
 
-type Variant = "gradient" | "primary" | "ghost";
+type Variant = "gradient" | "primary" | "ghost" | "white" | "dark";
 type Size = "sm" | "md" | "lg";
 
 interface ButtonProps {
@@ -38,9 +38,11 @@ export default function Button({
   const s = sizes[size];
 
   const variantClasses: Record<Variant, string> = {
-    gradient: "text-white hover:brightness-110",
-    primary:  "bg-primary text-white hover:brightness-110",
+    gradient: "text-white",
+    primary:  "bg-primary text-white",
     ghost:    "border text-primary hover:bg-primary/5",
+    white:    "bg-white text-[#141414]",
+    dark:     "text-white",
   };
 
   const variantStyle: CSSProperties =
@@ -51,25 +53,35 @@ export default function Button({
         }
       : variant === "primary"
       ? { boxShadow: "0 8px 14px rgba(101,87,234,0.3)" }
+      : variant === "white"
+      ? { boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }
+      : variant === "dark"
+      ? { background: "#141414", boxShadow: "0 4px 16px rgba(0,0,0,0.30)" }
       : { borderColor: "var(--color-primary)" };
 
   const padding = arrow
     ? `${s.pl} ${s.pr} ${s.py} ${s.py}`
     : `${s.px} ${s.pyNoArrow}`;
 
+  const hoverClass = variant === "white" ? "shadow-hover-white"
+                  : variant === "dark"  ? "shadow-hover-dark"
+                  : "shadow-hover";
+
   const classes = [
     "group inline-flex items-center rounded-full font-semibold",
-    "transition-all duration-200",
+    "transition-all duration-200 hover:-translate-y-0.5",
     s.gap,
     padding,
     variantClasses[variant],
-    "shadow-hover",
+    hoverClass,
     fullWidth ? "w-full justify-center" : "",
     className,
   ].filter(Boolean).join(" ");
 
-  const badgeBg    = variant === "ghost" ? "var(--color-primary-light)" : "rgba(255,255,255,0.28)";
-  const badgeColor = variant === "ghost" ? "var(--color-primary)"       : "white";
+  const badgeBg    = variant === "ghost" ? "var(--color-primary-light)"
+                  : variant === "white" ? "rgba(100,87,234,0.12)"
+                  : "rgba(255,255,255,0.18)";
+  const badgeColor = variant === "ghost" || variant === "white" ? "var(--color-primary)" : "white";
 
   const arrowBadge = arrow ? (
     <span

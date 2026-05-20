@@ -1,3 +1,5 @@
+import Button from "@/components/ui/Button";
+
 const IconInstagram = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -43,17 +45,18 @@ export default function Footer() {
       <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
 
         {/* Main grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr_1fr_1.6fr] gap-12 lg:gap-16 py-16">
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-16 py-16">
 
           {/* Col 1 — Logo + descrição + sociais */}
           <div className="flex flex-col gap-6">
             <div>
-              <span
-                className="font-medium text-dark"
-                style={{ fontSize: "20px", letterSpacing: "-0.5px", fontFamily: "var(--font-heading)" }}
-              >
-                appreach
-              </span>
+              <img
+                src="/logo-appreach.svg"
+                alt="Appreach"
+                width={140}
+                height={25}
+                style={{ display: "block" }}
+              />
               <p
                 className="mt-3 leading-relaxed"
                 style={{ fontSize: "14px", color: "var(--color-muted)", maxWidth: "260px" }}
@@ -92,70 +95,39 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2 — Soluções */}
-          <nav className="flex flex-col gap-4">
-            <span className="text-xs font-semibold text-dark uppercase tracking-widest" style={{ letterSpacing: "0.08em" }}>
-              Soluções
-            </span>
-            <ul className="flex flex-col gap-3">
-              {solutions.map((s) => (
-                <li key={s.href}>
-                  <a href={s.href} className={linkClass} style={{ color: "var(--color-muted)" }}>
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {/* Cols direita — Soluções + Empresa */}
+          <div className="flex gap-16 lg:gap-20">
+            <nav className="flex flex-col gap-4">
+              <span className="text-xs font-semibold text-dark uppercase tracking-widest" style={{ letterSpacing: "0.08em" }}>
+                Soluções
+              </span>
+              <ul className="flex flex-col gap-3">
+                {solutions.map((s) => (
+                  <li key={s.href}>
+                    <a href={s.href} className={linkClass} style={{ color: "var(--color-muted)" }}>
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          {/* Col 3 — Empresa */}
-          <nav className="flex flex-col gap-4">
-            <span className="text-xs font-semibold text-dark uppercase tracking-widest" style={{ letterSpacing: "0.08em" }}>
-              Empresa
-            </span>
-            <ul className="flex flex-col gap-3">
-              {company.map((s) => (
-                <li key={s.href}>
-                  <a href={s.href} className={linkClass} style={{ color: "var(--color-muted)" }}>
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Col 4 — Newsletter */}
-          <div className="flex flex-col gap-4">
-            <span className="text-xs font-semibold text-dark uppercase tracking-widest" style={{ letterSpacing: "0.08em" }}>
-              Newsletter
-            </span>
-            <p style={{ fontSize: "14px", color: "var(--color-muted)", lineHeight: 1.6 }}>
-              Insights de growth para apps direto na sua caixa de entrada.
-            </p>
-            <div className="flex gap-2 mt-1">
-              <input
-                type="email"
-                placeholder="Seu e-mail"
-                className="flex-1 px-4 py-2.5 rounded-full text-sm focus:outline-none focus:border-[var(--color-primary)] transition-colors"
-                style={{
-                  border: "1px solid var(--color-border)",
-                  background: "var(--color-surface)",
-                  color: "var(--color-dark)",
-                  fontSize: "13px",
-                }}
-              />
-              <button
-                className="px-5 py-2.5 rounded-full text-white text-sm font-semibold shrink-0 transition-all duration-200 hover:brightness-110"
-                style={{
-                  background: "var(--color-primary)",
-                  fontSize: "13px",
-                  boxShadow: "0 4px 14px rgba(101,87,234,0.3)",
-                }}
-              >
-                Assinar
-              </button>
-            </div>
+            <nav className="flex flex-col gap-4">
+              <span className="text-xs font-semibold text-dark uppercase tracking-widest" style={{ letterSpacing: "0.08em" }}>
+                Empresa
+              </span>
+              <ul className="flex flex-col gap-3">
+                {company.map((s) => (
+                  <li key={s.href}>
+                    <a href={s.href} className={linkClass} style={{ color: "var(--color-muted)" }}>
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
+
 
         </div>
 
