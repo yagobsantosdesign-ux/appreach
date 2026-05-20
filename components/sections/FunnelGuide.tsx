@@ -1,8 +1,9 @@
 "use client";
-import { useRef, useEffect, useState, type ReactNode } from "react";
+import React, { useRef, useEffect, useState, type ReactNode } from "react";
 import { Tv2, UserPlus, MessageCircle, TrendingUp } from "lucide-react";
 import Button from "@/components/ui/Button";
 import SectionBadge from "@/components/ui/SectionBadge";
+import { useInView } from "@/hooks/useInView";
 
 /* ── iPhone Mockup ────────────────────────────────────────── */
 
@@ -153,6 +154,7 @@ const STICKY_BASE = 220;
 
 export default function FunnelGuide() {
   const leftRef = useRef<HTMLDivElement>(null);
+  const { ref: headerRef, visible: headerVisible } = useInView();
   const lastCardRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -231,6 +233,7 @@ export default function FunnelGuide() {
 
           {/* LEFT — sticky; containing block = flex container (altura da col direita) */}
           <div ref={leftRef} className="lg:sticky lg:top-[220px] pb-12 lg:w-1/2 shrink-0">
+            <div ref={headerRef as React.RefObject<HTMLDivElement>} className={`reveal${headerVisible ? " visible" : ""}`}>
             <SectionBadge>Funil</SectionBadge>
             <h2
               ref={headlineRef}
@@ -248,6 +251,7 @@ export default function FunnelGuide() {
             <Button href="#contato" variant="gradient" size="md" className="mt-8">
               Diagnóstico gratuito
             </Button>
+            </div>
           </div>
 
           {/* RIGHT — cards com sticky stacking */}

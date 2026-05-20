@@ -1,4 +1,7 @@
+"use client";
+import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
+import { useInView } from "@/hooks/useInView";
 
 const tickerLogos = [
   { src: "/ticker-logo-picpay.svg",        alt: "PicPay",        width: 108, height: 35 },
@@ -53,6 +56,7 @@ function LogoCard({ src, alt, width, height }: { src: string; alt: string; width
 }
 
 export default function LogoTicker() {
+  const { ref: leftRef, visible: leftVisible } = useInView();
   return (
     <section className="pb-24 lg:pb-32 pt-36 lg:pt-48 relative" style={{ background: "#ffffff" }}>
       {/* Bloom roxo — posicionado na área dos tickers (lado direito) */}
@@ -72,7 +76,7 @@ export default function LogoTicker() {
         <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-40">
 
           {/* Left — copy */}
-          <div className="lg:w-[440px] lg:flex-shrink-0">
+          <div ref={leftRef as React.RefObject<HTMLDivElement>} className={`lg:w-[440px] lg:flex-shrink-0 reveal${leftVisible ? " visible" : ""}`}>
             <SectionBadge>Clientes</SectionBadge>
             <h2
               className="font-medium text-dark leading-tight mt-3"
