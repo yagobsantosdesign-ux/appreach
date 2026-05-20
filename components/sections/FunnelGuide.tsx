@@ -257,6 +257,7 @@ export default function FunnelGuide() {
               return (
                 <div
                   key={stage.number}
+                  className="funnel-card"
                   ref={(el) => {
                     cardRefs.current[i] = el;
                     if (i === stages.length - 1) lastCardRef.current = el;

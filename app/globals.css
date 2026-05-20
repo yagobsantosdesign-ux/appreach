@@ -249,6 +249,9 @@ a:hover .logo-text {
   .footer-contact-card { padding: 36px 24px !important; gap: 36px !important; }
   .footer-form-grid { grid-template-columns: 1fr !important; }
 
+  /* FunnelGuide — scroll normal no mobile */
+  .funnel-card { position: relative !important; top: auto !important; }
+
   /* FAQ scroll container */
   .faq-scroll-container { height: auto !important; max-height: 75vh !important; }
 }

@@ -38,7 +38,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-background text-body antialiased">
         <SmoothScroll />
-        <div style={{ overflowX: "hidden", width: "100%" }}>
+        <div style={{ overflowX: "clip", width: "100%" }}>
           {children}
         </div>
       </body>
