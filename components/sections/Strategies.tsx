@@ -1,7 +1,8 @@
 "use client";
 
 import SectionBadge from "@/components/ui/SectionBadge";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, ElementType } from "react";
+import { ArrowRight } from "lucide-react";
 
 function easeInOut(t: number) {
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
@@ -261,7 +262,7 @@ function ReengagementWidget() {
       <img
         src="/retargeting-widget.png"
         alt="Retargeting"
-        style={{ width: "100%", height: "100%", objectFit: "contain" }}
+        style={{ width: "100%", height: "100%", objectFit: "contain", maskImage: "linear-gradient(to bottom, black 82%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 82%, transparent 100%)" }}
       />
     </div>
   );
@@ -340,18 +341,10 @@ function ChatBubbleWidget() {
 function MidiaProgramaticaWidget() {
   const arcRef = useRef<SVGPathElement>(null);
   const numRef = useRef<SVGTextElement>(null);
-  const segBarRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const segNumRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   const r = 82, cx = 100, cy = 106;
   const circumference = Math.PI * r;
   const TARGET = 0.87;
-
-  const segments = [
-    { label: "Interesses", pct: 92, color: "#6557EA" },
-    { label: "Comportamento", pct: 85, color: "#9B8FF5" },
-    { label: "Lookalike", pct: 78, color: "#C4BCFB" },
-  ];
 
   useEffect(() => {
     let raf: number;
@@ -366,10 +359,6 @@ function MidiaProgramaticaWidget() {
       const fill = circumference * TARGET * p;
       if (arcRef.current) arcRef.current.setAttribute("stroke-dasharray", `${fill} ${circumference}`);
       if (numRef.current) numRef.current.textContent = `${Math.round(87 * p)}%`;
-      segments.forEach((seg, i) => {
-        if (segBarRefs.current[i]) segBarRefs.current[i]!.style.width = `${seg.pct * p}%`;
-        if (segNumRefs.current[i]) segNumRefs.current[i]!.textContent = `${Math.round(seg.pct * p)}%`;
-      });
       if (t < 1) raf = requestAnimationFrame(step);
     };
 
@@ -378,49 +367,69 @@ function MidiaProgramaticaWidget() {
   }, []);
 
   return (
-    <div style={{ height: "240px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "0 4px" }}>
-      <svg width="100%" viewBox="0 0 200 120" fill="none" style={{ overflow: "visible", maxWidth: "220px" }}>
-        <defs>
-          <linearGradient id="mpArcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#9B8FF5" />
-            <stop offset="100%" stopColor="#6557EA" />
-          </linearGradient>
-        </defs>
-        {/* Track */}
-        <path
-          d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`}
-          stroke="rgba(101,87,234,0.14)" strokeWidth="11" strokeLinecap="round" fill="none"
-        />
-        {/* Fill */}
-        <path
-          ref={arcRef}
-          d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`}
-          stroke="url(#mpArcGrad)" strokeWidth="11" strokeLinecap="round"
-          strokeDasharray={`0 ${circumference}`}
-          fill="none"
-        />
-        {/* Big number */}
-        <text ref={numRef} x={cx} y={cy - 22} textAnchor="middle" fill="#0F0F14" fontSize="40" fontWeight="700" letterSpacing="-2">0%</text>
-        <text x={cx} y={cy - 4} textAnchor="middle" fill="#9B9BB0" fontSize="11" letterSpacing="0.2">audience match</text>
-      </svg>
+    <div style={{ position: "relative", height: "240px", display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "24px 12px 0", overflow: "hidden" }}>
+      {/* Fade mask bottom */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "80px", background: "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)", pointerEvents: "none", zIndex: 2 }} />
+      {/* Widget card */}
+      <div style={{
+        width: "100%", maxWidth: "260px",
+        background: "#fff",
+        borderRadius: "20px",
+        border: "1px solid rgba(0,0,0,0.07)",
+        boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+        overflow: "hidden",
+      }}>
+        {/* Header */}
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          padding: "12px 16px 0",
+        }}>
+          <span style={{ fontSize: "12px", fontWeight: 600, color: "#0F0F14", letterSpacing: "-0.2px" }}>Audience Match</span>
+          <span style={{
+            display: "flex", alignItems: "center", gap: "5px",
+            fontSize: "10px", fontWeight: 600, color: "#16a34a",
+            background: "rgba(22,163,74,0.08)", borderRadius: "99px",
+            padding: "2px 8px",
+          }}>
+            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#16a34a", display: "inline-block" }} />
+            Live
+          </span>
+        </div>
 
-      {/* Segment bars */}
-      <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "9px", marginTop: "12px" }}>
-        {segments.map((seg, i) => (
-          <div key={seg.label} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <span style={{ fontSize: "11px", color: "#9B9BB0", width: "96px", textAlign: "right", flexShrink: 0, letterSpacing: "-0.1px" }}>{seg.label}</span>
-            <div style={{ flex: 1, height: "6px", background: "rgba(101,87,234,0.12)", borderRadius: "99px", overflow: "hidden" }}>
-              <div
-                ref={(el) => { segBarRefs.current[i] = el; }}
-                style={{ height: "100%", width: "0%", background: seg.color, borderRadius: "99px" }}
-              />
-            </div>
-            <span
-              ref={(el) => { segNumRefs.current[i] = el; }}
-              style={{ fontSize: "11px", color: seg.color, fontWeight: 700, width: "30px", letterSpacing: "-0.2px" }}
-            >0%</span>
-          </div>
-        ))}
+        {/* Chart area */}
+        <div style={{ padding: "4px 8px 108px", display: "flex", justifyContent: "center", alignItems: "flex-start" }}>
+          <svg width="100%" viewBox="0 0 200 140" fill="none" style={{ overflow: "hidden", maxWidth: "220px" }}>
+            <defs>
+              <linearGradient id="mpArcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#9B8FF5" />
+                <stop offset="100%" stopColor="#6557EA" />
+              </linearGradient>
+            </defs>
+
+            {/* Track */}
+            <path
+              d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`}
+              stroke="rgba(101,87,234,0.12)" strokeWidth="14" strokeLinecap="round" fill="none"
+            />
+
+            {/* Fill */}
+            <path
+              ref={arcRef}
+              d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`}
+              stroke="url(#mpArcGrad)" strokeWidth="14" strokeLinecap="round"
+              strokeDasharray={`0 ${circumference}`}
+              fill="none"
+            />
+
+            {/* Big number */}
+            <text ref={numRef} x={cx} y={cy - 26} textAnchor="middle" fill="#0F0F14" fontSize="36" fontWeight="800" letterSpacing="-2">0%</text>
+            <text x={cx} y={cy - 10} textAnchor="middle" fill="#9B9BB0" fontSize="10" letterSpacing="0.5">de segmentação precisa</text>
+
+            {/* Bottom labels */}
+            <text x={cx - r + 4} y={cy + 18} textAnchor="middle" fill="rgba(101,87,234,0.4)" fontSize="9" letterSpacing="0.5">0%</text>
+            <text x={cx + r - 4} y={cy + 18} textAnchor="middle" fill="#6557EA" fontSize="9" letterSpacing="0.5" fontWeight="600">100%</text>
+          </svg>
+        </div>
       </div>
     </div>
   );
@@ -446,31 +455,30 @@ function CTVWidget() {
   }, []);
 
   return (
-    <div style={{ height: "240px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "22px" }}>
-      <svg width="108" height="90" viewBox="0 0 108 90" fill="none">
-        <rect x="1" y="1" width="106" height="66" rx="10" stroke="rgba(101,87,234,0.2)" strokeWidth="2" />
-        <rect x="7" y="7" width="94" height="54" rx="7" fill="rgba(101,87,234,0.1)" />
-        <ellipse cx="54" cy="34" rx="20" ry="16" fill="rgba(101,87,234,0.18)" />
-        <polygon points="45,24 45,44 67,34" fill="rgba(101,87,234,0.85)" />
-        <circle cx="90" cy="16" r="2.5" fill="rgba(34,197,94,0.9)" />
-        <circle cx="97" cy="16" r="2.5" fill="rgba(34,197,94,0.55)" />
-        <circle cx="104" cy="16" r="2.5" fill="rgba(34,197,94,0.25)" />
-        <line x1="54" y1="67" x2="54" y2="78" stroke="rgba(0,0,0,0.1)" strokeWidth="2" />
-        <rect x="36" y="78" width="36" height="5" rx="2.5" fill="rgba(0,0,0,0.07)" />
-      </svg>
+    <div style={{ height: "280px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+      <style>{`
+        @keyframes ctv-ripple {
+          0%   { transform: scale(0.55); opacity: 0.6; }
+          100% { transform: scale(1);    opacity: 0; }
+        }
+      `}</style>
+      <div style={{ position: "relative", width: "260px", height: "260px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {([0, 0.7, 1.4] as number[]).map((delay, i) => (
+          <div key={i} style={{
+            position: "absolute",
+            width: "100%", height: "100%",
+            borderRadius: "50%",
+            border: `3px solid rgba(101,87,234,${0.35 - i * 0.08})`,
+            animation: `ctv-ripple 2.1s ease-out ${delay}s infinite`,
+          }} />
+        ))}
+        <img src="/play-icon.png" alt="" width={116} height={80} style={{ position: "relative", zIndex: 1, borderRadius: "12px", filter: "drop-shadow(0px 6px 18px rgba(16,16,25,0.12))", display: "block" }} />
+      </div>
       <div style={{ textAlign: "center" }}>
         <div style={{ fontSize: "44px", fontWeight: 700, color: "#0F0F14", letterSpacing: "-2px", lineHeight: 1 }}>
           {count}<span style={{ fontSize: "22px", color: "#6557EA", fontWeight: 600 }}>M</span>
         </div>
-        <div style={{ fontSize: "11px", color: "#9B9BB0", marginTop: "6px" }}>households alcançados</div>
-      </div>
-      <div style={{ display: "flex", gap: "28px" }}>
-        {[{ value: "150+", label: "plataformas" }, { value: "98%", label: "viewability" }].map((s, i) => (
-          <div key={i} style={{ textAlign: "center" }}>
-            <div style={{ fontSize: "14px", fontWeight: 700, color: "#6557EA", letterSpacing: "-0.3px" }}>{s.value}</div>
-            <div style={{ fontSize: "9.5px", color: "#9B9BB0", marginTop: "2px" }}>{s.label}</div>
-          </div>
-        ))}
+        <div style={{ fontSize: "12px", color: "#9B9BB0", marginTop: "4px" }}>lares com TV conectada alcançados</div>
       </div>
     </div>
   );
@@ -479,21 +487,22 @@ function CTVWidget() {
 // ─── Preload ──────────────────────────────────────────────────────────────────
 function PreloadWidget() {
   return (
-    <div style={{ height: "100%", position: "relative", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+    <div style={{
+      height: "100%",
+      position: "relative",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden",
+      background: "#F4F2FE",
+      maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+      WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+    }}>
       <img
         src="/preload-widget.png"
         alt="Preload"
         style={{ width: "100%", height: "100%", objectFit: "contain" }}
       />
-      <div style={{
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: "40%",
-        background: "linear-gradient(to bottom, transparent, rgba(255,255,255,1))",
-        pointerEvents: "none",
-      }} />
     </div>
   );
 }
@@ -511,6 +520,7 @@ const strategies: {
   descSize?: string;
   descMaxWidth?: string;
   textMarginTop?: string;
+  href?: string;
   widget?: React.ReactNode;
 }[] = [
   {
@@ -521,6 +531,7 @@ const strategies: {
     solid: true,
     descMaxWidth: "460px",
     textMarginTop: "16px",
+    href: "/useracquisition-app",
     widget: <AquisicaoWidget />,
   },
   {
@@ -531,15 +542,17 @@ const strategies: {
     solid: true,
     textMarginTop: "16px",
     noPadding: true,
+    href: "/retargeting",
     widget: <ReengagementWidget />,
   },
   {
     title: "CTV",
     description: <>Anuncie em TVs conectadas e streaming<br />para construir brand awareness e escalar<br />o alcance do seu app.</>,
     span: "lg:col-span-1",
-    widgetHeight: "240px",
+    widgetHeight: "280px",
     solid: true,
     textMarginTop: "16px",
+    href: "/ctv-connected-tv",
     widget: <CTVWidget />,
   },
   {
@@ -550,6 +563,7 @@ const strategies: {
     solid: true,
     descMaxWidth: "460px",
     textMarginTop: "16px",
+    href: "/app-chat-push",
     widget: <ChatBubbleWidget />,
   },
   {
@@ -560,6 +574,7 @@ const strategies: {
     solid: true,
     noPadding: true,
     textMarginTop: "16px",
+    href: "/preload",
     widget: <PreloadWidget />,
   },
   {
@@ -569,6 +584,7 @@ const strategies: {
     widgetHeight: "240px",
     solid: true,
     textMarginTop: "16px",
+    href: "/midia-programatica",
     widget: <MidiaProgramaticaWidget />,
   },
 ];
@@ -577,76 +593,114 @@ import React from "react";
 
 export default function Strategies() {
   return (
-    <section id="estrategias" className="relative overflow-hidden py-24 lg:py-32" style={{ backgroundImage: "url('/bg-estrategias.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+    <section id="estrategias" className="relative py-24 lg:py-32" style={{ background: "#ffffff" }}>
+
+      {/* Background gradient blobs — visíveis através dos bentos semitransparentes */}
+      <div aria-hidden style={{ position: "absolute", inset: 0, overflow: "visible", pointerEvents: "none", zIndex: 0 }}>
+        <div style={{ position: "absolute", top: "20%", left: "50%", transform: "translateX(-70%)", width: "1600px", height: "1600px", background: "radial-gradient(ellipse, rgba(155,145,255,0.11) 0%, transparent 60%)" }} />
+        <div style={{ position: "absolute", top: "52%", left: "50%", transform: "translateX(-30%)", width: "1400px", height: "1400px", background: "radial-gradient(ellipse, rgba(196,181,253,0.08) 0%, transparent 60%)" }} />
+      </div>
 
       <div className="relative max-w-[1200px] mx-auto px-4 lg:px-0" style={{ zIndex: 1 }}>
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <SectionBadge>Estratégias</SectionBadge>
+          <SectionBadge>Soluções</SectionBadge>
           <h2
             className="font-medium text-dark leading-tight mb-4"
-            style={{ fontSize: "48px", letterSpacing: "-1.92px" }}
+            style={{ fontSize: "48px", letterSpacing: "-1.92px", textWrap: "balance" }}
           >
-            Cobertura completa<br />do funil do seu app
+            Nossas Soluções
           </h2>
           <p className="text-body leading-relaxed" style={{ fontSize: "16px" }}>
-            Da primeira impressão ao evento de receita — cada estratégia foi
-            desenvolvida para uma etapa específica da jornada do usuário.
+            Cada solução atua em uma frente específica — combinadas, cobrem o funil completo do seu app.
           </p>
         </div>
 
         {/* Bento grid */}
         <div className="relative">
           <div className="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-3" style={{ zIndex: 1 }}>
-            {strategies.map((s) => (
-              <div
-                key={s.title}
-                className={`flex flex-col ${s.noPadding ? "" : "p-7"} ${s.span}`}
-                style={{
-                  background: s.dark
-                    ? "linear-gradient(145deg, #1E1640 0%, #2D1F5E 100%)"
-                    : s.solid
-                      ? "#fcfcfe"
-                      : "rgba(255, 255, 255, 0.55)",
-                  backdropFilter: s.dark || s.solid ? undefined : "blur(18px)",
-                  WebkitBackdropFilter: s.dark || s.solid ? undefined : "blur(18px)",
-                  border: s.dark
-                    ? "1px solid rgba(255,255,255,0.08)"
-                    : s.solid
-                      ? "1px solid #e5e5eb"
+            {strategies.map((s) => {
+              const Tag = (s.href ? "a" : "div") as ElementType;
+              return (
+                <Tag
+                  key={s.title}
+                  {...(s.href ? { href: s.href } : {})}
+                  className={`group flex flex-col ${s.noPadding ? "" : "p-7"} ${s.span} ${s.href ? "cursor-pointer" : ""}`}
+                  style={{
+                    background: s.dark
+                      ? "linear-gradient(145deg, #1E1640 0%, #2D1F5E 100%)"
+                      : "rgba(255, 255, 255, 0.62)",
+                    backdropFilter: s.dark ? undefined : "blur(20px)",
+                    WebkitBackdropFilter: s.dark ? undefined : "blur(20px)",
+                    border: s.dark
+                      ? "1px solid rgba(255,255,255,0.08)"
                       : "1px solid rgba(255, 255, 255, 0.80)",
-                  borderRadius: "24px",
-                  boxShadow: s.dark
-                    ? "0 4px 32px rgba(0,0,0,0.18)"
-                    : s.solid
-                      ? "0px 4px 20px 0px rgba(16,16,25,0.06)"
-                      : "0 4px 32px rgba(101, 87, 234, 0.06), 0 1px 0 rgba(255,255,255,0.9) inset",
-                  minHeight: `calc(${s.widgetHeight} + 120px)`,
-                  overflow: s.noPadding ? "hidden" : undefined,
-                }}
-              >
-                {s.widget && (
-                  <div style={{ flex: 1 }}>{s.widget}</div>
-                )}
-                <div style={{
-                  marginTop: s.textMarginTop ?? "auto",
-                  ...(s.noPadding ? { padding: "0 28px 28px 28px" } : {}),
-                }}>
-                  <h3
-                    className="font-medium"
-                    style={{ fontSize: s.titleSize ?? "24px", letterSpacing: "-0.4px", color: s.dark ? "rgba(255,255,255,0.92)" : "#0F0F14" }}
-                  >
-                    {s.title}
-                  </h3>
-                  <p
-                    className="leading-relaxed mt-2"
-                    style={{ fontSize: s.descSize ?? "15px", color: s.dark ? "rgba(255,255,255,0.45)" : s.solid ? "#7e7e92" : "#7A7A8C", maxWidth: s.descMaxWidth }}
-                  >
-                    {s.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+                    borderRadius: "24px",
+                    boxShadow: s.dark
+                      ? "0 4px 32px rgba(0,0,0,0.18)"
+                      : s.solid
+                        ? "0px 4px 20px 0px rgba(16,16,25,0.06)"
+                        : "0 4px 32px rgba(101, 87, 234, 0.06), 0 1px 0 rgba(255,255,255,0.9) inset",
+                    minHeight: `calc(${s.widgetHeight} + 120px)`,
+                    overflow: s.noPadding ? "hidden" : undefined,
+                    transition: "transform 0.25s ease, box-shadow 0.25s ease",
+                  }}
+                  onMouseEnter={s.href ? (e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = s.dark
+                      ? "0 12px 40px rgba(0,0,0,0.28)"
+                      : "0px 12px 32px 0px rgba(16,16,25,0.10)";
+                  } : undefined}
+                  onMouseLeave={s.href ? (e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = s.dark
+                      ? "0 4px 32px rgba(0,0,0,0.18)"
+                      : s.solid
+                        ? "0px 4px 20px 0px rgba(16,16,25,0.06)"
+                        : "0 4px 32px rgba(101, 87, 234, 0.06), 0 1px 0 rgba(255,255,255,0.9) inset";
+                  } : undefined}
+                >
+                  {s.widget && (
+                    <div style={{ flex: 1 }}>{s.widget}</div>
+                  )}
+                  <div style={{
+                    marginTop: s.textMarginTop ?? "auto",
+                    ...(s.noPadding ? { padding: "0 28px 28px 28px" } : {}),
+                  }}>
+                    <h3
+                      className="font-medium"
+                      style={{ fontSize: s.titleSize ?? "24px", letterSpacing: "-0.4px", color: s.dark ? "rgba(255,255,255,0.92)" : "#0F0F14" }}
+                    >
+                      {s.title}
+                    </h3>
+                    <p
+                      className="leading-relaxed mt-2"
+                      style={{ fontSize: s.descSize ?? "15px", color: s.dark ? "rgba(255,255,255,0.45)" : s.solid ? "#7e7e92" : "#7A7A8C", maxWidth: s.descMaxWidth }}
+                    >
+                      {s.description}
+                    </p>
+                    {s.href && (
+                      <div
+                        className="inline-flex items-center gap-1.5"
+                        style={{
+                          marginTop: "16px",
+                          fontSize: "12px",
+                          fontWeight: 600,
+                          color: s.dark ? "rgba(255,255,255,0.7)" : "var(--color-primary)",
+                          background: s.dark ? "rgba(255,255,255,0.08)" : "var(--color-primary-light)",
+                          borderRadius: "99px",
+                          padding: "5px 12px",
+                          letterSpacing: "-0.1px",
+                        }}
+                      >
+                        Ver solução
+                        <ArrowRight size={12} />
+                      </div>
+                    )}
+                  </div>
+                </Tag>
+              );
+            })}
           </div>
         </div>
       </div>
