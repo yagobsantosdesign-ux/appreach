@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Button from "@/components/ui/Button";
 import { useInView } from "@/hooks/useInView";
@@ -39,6 +39,7 @@ const CARD_BASE: React.CSSProperties = {
   minHeight: "220px",
   position: "relative",
   overflow: "hidden",
+  transition: "border 0.2s ease, box-shadow 0.2s ease",
 };
 
 const CARD_LIGHT: React.CSSProperties = {
@@ -76,6 +77,7 @@ function BadgeTag({ children, dark }: { children: React.ReactNode; dark?: boolea
 }
 
 export default function StatsBento() {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const { ref: headerRef, visible: headerVisible } = useInView();
   const c0 = useInView();
   const c1 = useInView();
@@ -123,7 +125,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 1 — 50+ Apps atendidos */}
-          <div ref={c1.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c1.visible ? " visible" : ""}`} style={CARD_LIGHT}>
+          <div ref={c1.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c1.visible ? " visible" : ""}`} style={{ ...CARD_LIGHT, border: hoveredCard === 1 ? "1px solid rgba(101,87,234,0.55)" : "1px solid rgba(235,235,235,0.9)" }} onMouseEnter={() => setHoveredCard(1)} onMouseLeave={() => setHoveredCard(null)}>
             <div>
               <BadgeTag>↑ Crescimento</BadgeTag>
               <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "#141414", marginTop: "14px" }}>
@@ -149,7 +151,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 3 — 300+ Campanhas */}
-          <div ref={c3.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c3.visible ? " visible" : ""}`} style={CARD_LIGHT}>
+          <div ref={c3.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c3.visible ? " visible" : ""}`} style={{ ...CARD_LIGHT, border: hoveredCard === 3 ? "1px solid rgba(101,87,234,0.55)" : "1px solid rgba(235,235,235,0.9)" }} onMouseEnter={() => setHoveredCard(3)} onMouseLeave={() => setHoveredCard(null)}>
             <div>
               <BadgeTag>↑ Escala</BadgeTag>
               <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "#141414", marginTop: "14px" }}>
@@ -165,7 +167,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 4 — R$500M+ dark */}
-          <div ref={c4.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c4.visible ? " visible" : ""}`} style={CARD_DARK}>
+          <div ref={c4.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c4.visible ? " visible" : ""}`} style={{ ...CARD_DARK, border: hoveredCard === 4 ? "1px solid rgba(200,180,255,0.5)" : "1px solid transparent" }} onMouseEnter={() => setHoveredCard(4)} onMouseLeave={() => setHoveredCard(null)}>
             <div>
               <BadgeTag dark>↑ Investimento</BadgeTag>
               <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "white", marginTop: "14px" }}>
@@ -181,7 +183,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 5 — 98% Satisfação */}
-          <div ref={c5.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c5.visible ? " visible" : ""}`} style={CARD_LIGHT}>
+          <div ref={c5.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c5.visible ? " visible" : ""}`} style={{ ...CARD_LIGHT, border: hoveredCard === 5 ? "1px solid rgba(101,87,234,0.55)" : "1px solid rgba(235,235,235,0.9)" }} onMouseEnter={() => setHoveredCard(5)} onMouseLeave={() => setHoveredCard(null)}>
             <div>
               <BadgeTag>↑ NPS</BadgeTag>
               <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "#141414", marginTop: "14px" }}>

@@ -824,13 +824,16 @@ export default function Strategies() {
                         : "0 4px 32px rgba(101, 87, 234, 0.06), 0 1px 0 rgba(255,255,255,0.9) inset",
                     minHeight: `calc(${s.widgetHeight} + 120px)`,
                     overflow: s.noPadding ? "hidden" : undefined,
-                    transition: "transform 0.25s ease, box-shadow 0.25s ease",
+                    transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s ease",
                   } as React.CSSProperties}
                   onMouseEnter={s.href ? (e: React.MouseEvent<HTMLElement>) => {
                     (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
                     (e.currentTarget as HTMLElement).style.boxShadow = s.dark
                       ? "0 12px 40px rgba(0,0,0,0.28)"
                       : "0px 12px 32px 0px rgba(16,16,25,0.10)";
+                    (e.currentTarget as HTMLElement).style.borderColor = s.dark
+                      ? "rgba(200,180,255,0.45)"
+                      : "rgba(101,87,234,0.45)";
                   } : undefined}
                   onMouseLeave={s.href ? (e: React.MouseEvent<HTMLElement>) => {
                     (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
@@ -839,6 +842,9 @@ export default function Strategies() {
                       : s.solid
                         ? "0px 4px 20px 0px rgba(16,16,25,0.06)"
                         : "0 4px 32px rgba(101, 87, 234, 0.06), 0 1px 0 rgba(255,255,255,0.9) inset";
+                    (e.currentTarget as HTMLElement).style.borderColor = s.dark
+                      ? "rgba(255,255,255,0.08)"
+                      : "rgba(255,255,255,0.80)";
                   } : undefined}
                 >
                   {s.widget && (
