@@ -758,7 +758,13 @@ import React from "react";
 
 export default function Strategies() {
   const { ref: headerRef, visible: headerVisible } = useInView();
-  const { ref: gridRef, visible: gridVisible } = useInView();
+  const s0 = useInView();
+  const s1 = useInView();
+  const s2 = useInView();
+  const s3 = useInView();
+  const s4 = useInView();
+  const s5 = useInView();
+  const cardViews = [s0, s1, s2, s3, s4, s5];
   return (
     <section id="estrategias" className="relative py-24 lg:py-32" style={{ background: "#ffffff" }}>
 
@@ -789,19 +795,19 @@ export default function Strategies() {
         {/* Bento grid */}
         <div className="relative">
           <div
-            ref={gridRef as React.RefObject<HTMLDivElement>}
             className="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-3"
             style={{ zIndex: 1 }}
           >
             {strategies.map((s, idx) => {
               const Tag = (s.href ? "a" : "div") as ElementType;
+              const { ref: cardRef, visible: cardVisible } = cardViews[idx];
               return (
                 <Tag
                   key={s.title}
+                  ref={cardRef as React.Ref<HTMLAnchorElement & HTMLDivElement>}
                   {...(s.href ? { href: s.href } : {})}
-                  className={`strategies-card group flex flex-col ${s.noPadding ? "" : "p-7"} ${s.span} ${s.href ? "cursor-pointer" : ""} reveal-scale${gridVisible ? " visible" : ""}`}
+                  className={`strategies-card group flex flex-col ${s.noPadding ? "" : "p-7"} ${s.span} ${s.href ? "cursor-pointer" : ""} reveal-scale${cardVisible ? " visible" : ""}`}
                   style={{
-                    "--reveal-delay": `${idx * 0.07}s`,
                     background: s.dark
                       ? "linear-gradient(145deg, #1E1640 0%, #2D1F5E 100%)"
                       : "rgba(255, 255, 255, 0.62)",
