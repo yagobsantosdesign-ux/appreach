@@ -30,11 +30,11 @@ export default function Stats() {
         <div className="flex flex-col lg:flex-row lg:items-start gap-16 lg:gap-24">
 
           {/* Left — texto */}
-          <div className="lg:w-[340px] lg:flex-shrink-0 lg:pt-2">
+          <div className="lg:w-[380px] lg:flex-shrink-0 lg:pt-2">
             <SectionBadge>Resultados</SectionBadge>
             <h2
               className="font-medium text-dark leading-tight mb-4"
-              style={{ fontSize: "40px", letterSpacing: "-1.6px" }}
+              style={{ fontSize: "40px", letterSpacing: "-1.6px", textWrap: "balance" }}
             >
               Números que provam o resultado
             </h2>

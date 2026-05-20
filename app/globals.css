@@ -79,8 +79,13 @@ body {
   animation: ticker 28s linear infinite;
 }
 
-.ticker-track:hover {
-  animation-play-state: paused;
+@keyframes ticker-reverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.ticker-track-reverse {
+  animation: ticker-reverse 28s linear infinite;
 }
 
 /* Navbar entrance */

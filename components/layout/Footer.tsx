@@ -35,106 +35,149 @@ const company = [
   { label: "Blog", href: "/blog" },
 ];
 
-const legal = [
-  { label: "Política de Privacidade", href: "#" },
-  { label: "Termos de Uso", href: "#" },
-];
-
-const linkClass = "text-sm text-white/40 hover:text-white transition-colors";
+const linkClass = "text-sm transition-colors duration-200 hover:text-[var(--color-primary)]";
 
 export default function Footer() {
   return (
-    <div className="px-4 pb-4" style={{ background: "var(--color-background)" }}>
-      <footer className="rounded-[28px] overflow-hidden" style={{ background: "#0D0D0D" }}>
-        <div className="max-w-[1300px] mx-auto">
+    <footer style={{ background: "var(--color-background)", borderTop: "1px solid var(--color-border)" }}>
+      <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
 
-        {/* Top section */}
-        <div className="px-10 lg:px-14 pt-14 grid grid-cols-1 lg:grid-cols-[1fr_auto_auto_auto] gap-12 lg:gap-20">
+        {/* Main grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr_1fr_1.6fr] gap-12 lg:gap-16 py-16">
 
-          {/* Left: tagline + contact */}
-          <div className="space-y-8">
-            <div className="space-y-3">
-              <h2
-                className="text-white font-medium leading-snug"
-                style={{ fontSize: "var(--text-h4)", letterSpacing: "-0.5px" }}
+          {/* Col 1 — Logo + descrição + sociais */}
+          <div className="flex flex-col gap-6">
+            <div>
+              <span
+                className="font-medium text-dark"
+                style={{ fontSize: "20px", letterSpacing: "-0.5px", fontFamily: "var(--font-heading)" }}
               >
-                Estratégia 360°<br />para apps que escalam.
-              </h2>
-              <p className="leading-relaxed max-w-xs text-white/40" style={{ fontSize: "var(--text-label)" }}>
-                Do primeiro install à receita — aquisição, retargeting, CTV e dados em uma só parceria.
+                appreach
+              </span>
+              <p
+                className="mt-3 leading-relaxed"
+                style={{ fontSize: "14px", color: "var(--color-muted)", maxWidth: "260px" }}
+              >
+                Estratégia 360° para apps que escalam — do primeiro install à receita.
               </p>
             </div>
 
-            <div className="space-y-3">
-              <a href="mailto:fale@appreach.com.br" className={linkClass}>
-                fale@appreach.com.br
-              </a>
-              <div className="flex gap-4 pt-1">
-                <a href="#" className="text-white/35 hover:text-white transition-colors"><IconInstagram /></a>
-                <a href="#" className="text-white/35 hover:text-white transition-colors"><IconX /></a>
-                <a href="#" className="text-white/35 hover:text-white transition-colors"><IconLinkedin /></a>
-              </div>
+            <a
+              href="mailto:fale@appreach.com.br"
+              className="text-sm transition-colors duration-200 hover:text-[var(--color-primary)]"
+              style={{ color: "var(--color-body)" }}
+            >
+              fale@appreach.com.br
+            </a>
+
+            <div className="flex gap-3">
+              {[
+                { icon: <IconInstagram />, href: "#" },
+                { icon: <IconX />, href: "#" },
+                { icon: <IconLinkedin />, href: "#" },
+              ].map(({ icon, href }, i) => (
+                <a
+                  key={i}
+                  href={href}
+                  className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200 hover:bg-[var(--color-primary-light)] hover:text-[var(--color-primary)]"
+                  style={{
+                    color: "var(--color-muted)",
+                    border: "1px solid var(--color-border)",
+                    background: "var(--color-surface)",
+                  }}
+                >
+                  {icon}
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Soluções */}
-          <nav className="space-y-4">
-            <h4 className="text-white text-sm font-semibold">Soluções</h4>
-            <ul className="space-y-3">
+          {/* Col 2 — Soluções */}
+          <nav className="flex flex-col gap-4">
+            <span className="text-xs font-semibold text-dark uppercase tracking-widest" style={{ letterSpacing: "0.08em" }}>
+              Soluções
+            </span>
+            <ul className="flex flex-col gap-3">
               {solutions.map((s) => (
                 <li key={s.href}>
-                  <a href={s.href} className={linkClass}>{s.label}</a>
+                  <a href={s.href} className={linkClass} style={{ color: "var(--color-muted)" }}>
+                    {s.label}
+                  </a>
                 </li>
               ))}
             </ul>
           </nav>
 
-          {/* Empresa */}
-          <nav className="space-y-4">
-            <h4 className="text-white text-sm font-semibold">Empresa</h4>
-            <ul className="space-y-3">
+          {/* Col 3 — Empresa */}
+          <nav className="flex flex-col gap-4">
+            <span className="text-xs font-semibold text-dark uppercase tracking-widest" style={{ letterSpacing: "0.08em" }}>
+              Empresa
+            </span>
+            <ul className="flex flex-col gap-3">
               {company.map((s) => (
                 <li key={s.href}>
-                  <a href={s.href} className={linkClass}>{s.label}</a>
+                  <a href={s.href} className={linkClass} style={{ color: "var(--color-muted)" }}>
+                    {s.label}
+                  </a>
                 </li>
               ))}
             </ul>
           </nav>
 
-          {/* Legal */}
-          <nav className="space-y-4">
-            <h4 className="text-white text-sm font-semibold">Legal</h4>
-            <ul className="space-y-3">
-              {legal.map((s) => (
-                <li key={s.href}>
-                  <a href={s.href} className={linkClass}>{s.label}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {/* Col 4 — Newsletter */}
+          <div className="flex flex-col gap-4">
+            <span className="text-xs font-semibold text-dark uppercase tracking-widest" style={{ letterSpacing: "0.08em" }}>
+              Newsletter
+            </span>
+            <p style={{ fontSize: "14px", color: "var(--color-muted)", lineHeight: 1.6 }}>
+              Insights de growth para apps direto na sua caixa de entrada.
+            </p>
+            <div className="flex gap-2 mt-1">
+              <input
+                type="email"
+                placeholder="Seu e-mail"
+                className="flex-1 px-4 py-2.5 rounded-full text-sm focus:outline-none focus:border-[var(--color-primary)] transition-colors"
+                style={{
+                  border: "1px solid var(--color-border)",
+                  background: "var(--color-surface)",
+                  color: "var(--color-dark)",
+                  fontSize: "13px",
+                }}
+              />
+              <button
+                className="px-5 py-2.5 rounded-full text-white text-sm font-semibold shrink-0 transition-all duration-200 hover:brightness-110"
+                style={{
+                  background: "var(--color-primary)",
+                  fontSize: "13px",
+                  boxShadow: "0 4px 14px rgba(101,87,234,0.3)",
+                }}
+              >
+                Assinar
+              </button>
+            </div>
+          </div>
 
         </div>
 
-        {/* Giant decorative wordmark */}
+        {/* Bottom bar */}
         <div
-          aria-hidden="true"
-          className="px-8 lg:px-10 mt-10 leading-none select-none overflow-hidden"
-          style={{
-            fontSize: "clamp(72px, 15vw, 210px)",
-            fontWeight: 700,
-            letterSpacing: "-0.04em",
-            lineHeight: 0.85,
-            background: "linear-gradient(to bottom, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
+          className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6"
+          style={{ borderTop: "1px solid var(--color-border)" }}
         >
-          appreach
+          <span style={{ fontSize: "13px", color: "var(--color-muted)" }}>
+            © 2025 Appreach. Todos os direitos reservados.
+          </span>
+          <div className="flex gap-5">
+            <a href="#" className="transition-colors hover:text-[var(--color-primary)]" style={{ fontSize: "13px", color: "var(--color-muted)" }}>
+              Política de Privacidade
+            </a>
+            <a href="#" className="transition-colors hover:text-[var(--color-primary)]" style={{ fontSize: "13px", color: "var(--color-muted)" }}>
+              Termos de Uso
+            </a>
+          </div>
         </div>
 
-        </div>{/* /max-w-[1300px] */}
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 }

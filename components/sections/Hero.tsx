@@ -188,7 +188,7 @@ export default function Hero() {
     >
       <canvas
         ref={canvasRef}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0 }}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0, maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.40) 0%, black 100%)" }}
       />
       <div
         className="relative flex flex-col items-center text-center"
@@ -218,7 +218,7 @@ export default function Hero() {
         {/* H1 */}
         <h1
           className="font-medium hero-fade-up hero-fade-up-2"
-          style={{ fontSize: "80px", color: "white", letterSpacing: "-3px", lineHeight: 1.02, maxWidth: "720px", marginBottom: "20px" }}
+          style={{ fontSize: "80px", color: "white", letterSpacing: "-3px", lineHeight: 1.02, maxWidth: "720px", marginBottom: "20px", textWrap: "balance" }}
         >
           <span style={{ display: "block" }}>Do primeiro</span>
           install à receita
@@ -229,7 +229,7 @@ export default function Hero() {
           className="hero-fade-up hero-fade-up-3"
           style={{ fontSize: "18px", color: "rgba(255,255,255,0.68)", maxWidth: "490px", lineHeight: 1.65, marginBottom: "36px" }}
         >
-          Cobrimos cada etapa do funil, da aquisição de usuários até eventos de compra e escala de receita.
+          Da aquisição ao evento de receita — estratégias integradas que fazem cada fase do seu app performar.
         </p>
 
         {/* CTAs */}

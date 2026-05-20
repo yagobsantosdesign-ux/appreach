@@ -1,253 +1,387 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
 
-const cases = [
+const DURATION = 5000;
+
+type CaseMetric = { value: string; label: string };
+
+const cases: {
+  id: string;
+  number: string;
+  category: string;
+  hookTitle: string;
+  desafio: string;
+  estrategia: string[];
+  porqueFuncionou: string;
+  metrics: CaseMetric[];
+  logo: string;
+  logoW: number;
+  logoH: number;
+  gradient: string;
+}[] = [
   {
     id: "roi",
-    title: "Retorno sobre investimento",
-    description:
-      "Installs qualificados com otimização por LTV e criativos iterativos reduziram CPI em 42%.",
-    metric: "+3×",
+    number: "01",
+    category: "Beleza",
+    hookTitle: "Como um app de beleza multiplicou o ROI em 3× com criativos certos",
+    desafio: "Escalar usuários qualificados sem perder qualidade, mantendo ROI mínimo positivo.",
+    estrategia: [
+      "Campanhas CPI com histórico de alta qualidade",
+      "Mix de criativos focados em performance",
+    ],
+    porqueFuncionou: "Unimos inteligência criativa a dados de LTV para instalar quem converte — não só quem clica.",
+    metrics: [
+      { value: "+222%", label: "installs" },
+      { value: "+7%",   label: "conversões" },
+      { value: "16×",   label: "ROI" },
+    ],
     logo: "/ticker-logo-1.svg",
     logoW: 124,
     logoH: 22,
-    mesh: `
-      radial-gradient(ellipse at 22% 18%, rgba(196,181,253,0.62) 0%, transparent 55%),
-      radial-gradient(ellipse at 78% 82%, rgba(221,214,254,0.52) 0%, transparent 52%),
-      radial-gradient(ellipse at 65% 12%, rgba(167,139,250,0.32) 0%, transparent 48%),
-      radial-gradient(ellipse at 8%  70%, rgba(165,180,252,0.28) 0%, transparent 44%),
-      #f8f6ff
-    `,
-    border: "linear-gradient(135deg, #c4b5fd 0%, #a5b4fc 45%, #ddd6fe 100%)",
+    gradient: "linear-gradient(200deg, #9B8FFB 0%, #6557EA 55%, #4338CA 100%)",
   },
   {
-    id: "retencao",
-    title: "Retenção D30",
-    description:
-      "Sequência de push + in-app ativada por comportamento reengajou usuários inativos no momento certo.",
-    metric: "+85%",
+    id: "food",
+    number: "02",
+    category: "Food",
+    hookTitle: "App de food escalou pedidos em 33% sem aumentar o CAC",
+    desafio: "Aumentar pedidos feitos pelo app, não pela loja física, com custo por conversão controlado.",
+    estrategia: [
+      "Campanhas CPI com otimização de inventários",
+      "Dados de eventos no funil do app",
+    ],
+    porqueFuncionou: "Segmentação por comportamento de compra reduziu desperdício de verba e elevou ROAS.",
+    metrics: [
+      { value: "−25%",  label: "custo por conversão" },
+      { value: "+33%",  label: "taxa de conversão" },
+      { value: "+36%",  label: "receita via app" },
+    ],
     logo: "/ticker-logo-2.svg",
     logoW: 61,
     logoH: 25,
-    mesh: `
-      radial-gradient(ellipse at 25% 20%, rgba(167,139,250,0.58) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 75%, rgba(196,181,253,0.52) 0%, transparent 52%),
-      radial-gradient(ellipse at 12% 78%, rgba(165,180,252,0.38) 0%, transparent 44%),
-      radial-gradient(ellipse at 68% 10%, rgba(221,214,254,0.45) 0%, transparent 48%),
-      #f5f3ff
-    `,
-    border: "linear-gradient(135deg, #a78bfa 0%, #818cf8 52%, #c4b5fd 100%)",
+    gradient: "linear-gradient(160deg, #7C6FF7 0%, #5B4ED8 55%, #3730A3 100%)",
   },
   {
-    id: "aquisicao",
-    title: "Aquisição em escala",
-    description:
-      "CTV + mídia programática escalou aquisição qualificada em múltiplos mercados simultâneos.",
-    metric: "+520k",
+    id: "eletronicos",
+    number: "03",
+    category: "Eletrônicos",
+    hookTitle: "Eletrônicos: 88% mais instalações com foco na primeira compra",
+    desafio: "Adquirir usuários que realmente compram pelo app pela primeira vez, não apenas instalam.",
+    estrategia: [
+      "Campanhas CPA com otimização de inventários",
+      "Foco em performance por evento de compra",
+    ],
+    porqueFuncionou: "Otimização por evento de compra, não por install, eliminou tráfego de baixa qualidade.",
+    metrics: [
+      { value: "+88%",  label: "installs" },
+      { value: "−51%",  label: "custo por instalação" },
+      { value: "+23%",  label: "ROAS" },
+    ],
     logo: "/ticker-logo-3.svg",
     logoW: 77,
     logoH: 35,
-    mesh: `
-      radial-gradient(ellipse at 22% 18%, rgba(216,180,254,0.58) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 78%, rgba(196,181,253,0.52) 0%, transparent 52%),
-      radial-gradient(ellipse at 65% 12%, rgba(240,171,252,0.30) 0%, transparent 48%),
-      radial-gradient(ellipse at 8%  72%, rgba(167,139,250,0.38) 0%, transparent 44%),
-      #faf5ff
-    `,
-    border: "linear-gradient(135deg, #d8b4fe 0%, #c4b5fd 50%, #a78bfa 100%)",
+    gradient: "linear-gradient(220deg, #A78BFA 0%, #7C6FF7 50%, #5B4ED8 100%)",
   },
   {
-    id: "roas",
-    title: "ROAS de campanha",
-    description:
-      "Otimização contínua de criativos e estratégia de bidding maximizou retorno sobre investimento.",
-    metric: "2.9×",
+    id: "banco",
+    number: "04",
+    category: "Fintech",
+    hookTitle: "Banco digital abriu 38% mais contas com retargeting preciso",
+    desafio: "Escalar abertura de contas e ativação de produtos financeiros com custo por ação controlado.",
+    estrategia: [
+      "Campanhas CPA em inventários premium",
+      "Retargeting para ativação de produtos financeiros",
+    ],
+    porqueFuncionou: "Combinamos prospecção de alta intenção com reengajamento cirúrgico em momentos de decisão.",
+    metrics: [
+      { value: "+38%",  label: "novas contas" },
+      { value: "+22%",  label: "conversão" },
+      { value: "−27%",  label: "custo por ação" },
+    ],
     logo: "/ticker-logo-4.svg",
     logoW: 54,
     logoH: 21,
-    mesh: `
-      radial-gradient(ellipse at 20% 20%, rgba(165,180,252,0.62) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 78%, rgba(196,181,253,0.52) 0%, transparent 52%),
-      radial-gradient(ellipse at 62% 10%, rgba(167,139,250,0.38) 0%, transparent 48%),
-      radial-gradient(ellipse at 10% 72%, rgba(221,214,254,0.48) 0%, transparent 44%),
-      #f5f3ff
-    `,
-    border: "linear-gradient(135deg, #a5b4fc 0%, #c4b5fd 50%, #818cf8 100%)",
+    gradient: "linear-gradient(180deg, #6557EA 0%, #4338CA 55%, #312E81 100%)",
   },
 ];
 
-const GAP = 20;
+const LABEL: React.CSSProperties = {
+  fontSize: "11px",
+  fontWeight: 700,
+  color: "#6557ea",
+  letterSpacing: "0.8px",
+  textTransform: "uppercase",
+  marginBottom: "8px",
+};
+
+const BODY: React.CSSProperties = {
+  fontSize: "14px",
+  color: "#3D3D4A",
+  lineHeight: 1.7,
+  textWrap: "pretty" as never,
+};
 
 export default function Cases() {
-  const [offset, setOffset] = useState(0);
-  const [sliding, setSliding] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const maxOffset = cases.length - 2;
-
-  const getTranslateX = (off: number) => {
-    if (!containerRef.current) return 0;
-    const w = containerRef.current.clientWidth;
-    return -off * ((w + GAP) / 2);
-  };
-
-  const [translateX, setTranslateX] = useState(0);
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const c = cases[active];
 
   useEffect(() => {
-    setTranslateX(getTranslateX(offset));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [offset]);
-
-  useEffect(() => {
-    const handleResize = () => setTranslateX(getTranslateX(offset));
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [offset]);
-
-  const navigate = (dir: "next" | "prev") => {
-    if (sliding) return;
-    const newOffset = dir === "next"
-      ? Math.min(maxOffset, offset + 1)
-      : Math.max(0, offset - 1);
-    if (newOffset === offset) return;
-    setSliding(true);
-    setOffset(newOffset);
-    setTimeout(() => setSliding(false), 420);
-  };
+    if (paused) return;
+    const t = setTimeout(() => setActive((p) => (p + 1) % cases.length), DURATION);
+    return () => clearTimeout(t);
+  }, [active, paused]);
 
   return (
-    <section id="cases" className="py-24 lg:py-32" style={{ background: "#ffffff" }}>
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+    <section
+      id="cases"
+      className="py-24 lg:py-32"
+      style={{ background: "transparent", position: "relative", overflow: "visible" }}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <style>{`
+        @keyframes tabFill {
+          from { transform: scaleX(0); }
+          to   { transform: scaleX(1); }
+        }
+        @keyframes caseFadeIn {
+          from { opacity: 0; transform: translateY(8px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes imgFadeIn {
+          from { opacity: 0; transform: scale(0.96); }
+          to   { opacity: 1; transform: scale(1); }
+        }
 
-        {/* Header row */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10">
+        /* ── Tabs ── */
+        .cases-tabs {
+          display: inline-flex;
+          background: rgba(255,255,255,0.28);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(255,255,255,0.50);
+          border-radius: 14px;
+          padding: 4px;
+          gap: 2px;
+        }
+        .cases-tab {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 20px;
+          border-radius: 10px;
+          border: none;
+          background: rgba(255,255,255,0.18);
+          box-shadow: inset 0 0 0 1px rgba(255,255,255,0.40);
+          cursor: pointer;
+          overflow: hidden;
+          transition: background 0.2s, box-shadow 0.2s;
+        }
+        .cases-tab:hover:not(.active) {
+          background: rgba(255,255,255,0.55);
+        }
+        .cases-tab.active {
+          background: #ffffff;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.06);
+        }
+        .cases-tab-num {
+          font-family: var(--font-geist-mono);
+          font-size: 11px;
+          font-weight: 600;
+          color: #C0C0C0;
+          letter-spacing: 0.4px;
+          transition: color 0.2s;
+        }
+        .cases-tab.active .cases-tab-num { color: #6557ea; }
+        .cases-tab-label {
+          font-size: 13px;
+          font-weight: 500;
+          color: #9A9AA8;
+          transition: color 0.2s;
+        }
+        .cases-tab.active .cases-tab-label { color: #141414; font-weight: 600; }
+        .cases-tab-bar { display: none; }
+
+        /* ── Card ── */
+        .case-card {
+          display: flex;
+          align-items: stretch;
+          gap: 40px;
+          border-radius: 20px;
+          padding: 52px 52px;
+          background: rgba(255,255,255,0.62);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255,255,255,0.8);
+          box-shadow: 0 2px 1px rgba(0,0,0,0.02), 0 8px 32px rgba(101,87,234,0.05);
+          min-height: 637px;
+          animation: caseFadeIn 0.4s cubic-bezier(0.22,1,0.36,1);
+        }
+        .case-image-col {
+          flex-shrink: 0;
+          width: 300px;
+          align-self: stretch;
+          border-radius: 12px;
+          animation: imgFadeIn 0.5s cubic-bezier(0.22,1,0.36,1);
+        }
+        .case-content-col { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; }
+
+        /* ── Content grid (no dividers) ── */
+        .cases-content-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 32px;
+        }
+        .cases-metrics-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 32px;
+        }
+        .cases-metric-value {
+          font-size: 48px;
+          font-weight: 500;
+          color: #141414;
+          line-height: 1;
+          letter-spacing: -2px;
+        }
+
+        @media (max-width: 768px) {
+          .cases-tabs { display: flex; width: 100%; }
+          .cases-tab { flex: 1; justify-content: center; }
+          .case-card { flex-direction: column; padding: 32px 24px; gap: 28px; }
+          .case-image-col { display: none; }
+          .cases-content-grid { grid-template-columns: 1fr; gap: 20px; }
+          .cases-metric-value { font-size: 32px !important; letter-spacing: -1.5px !important; }
+        }
+        @media (max-width: 480px) {
+          .cases-metrics-row { grid-template-columns: 1fr; gap: 20px; }
+        }
+      `}</style>
+
+      {/* Background gradient blobs — visíveis através do card semitransparente */}
+      <div aria-hidden style={{ position: "absolute", inset: 0, overflow: "visible", pointerEvents: "none", zIndex: 0 }}>
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-40%, -55%)", width: "1600px", height: "1600px", background: "radial-gradient(ellipse, rgba(155,145,255,0.20) 0%, transparent 60%)" }} />
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-15%, -45%)", width: "1400px", height: "1400px", background: "radial-gradient(ellipse, rgba(196,181,253,0.14) 0%, transparent 60%)" }} />
+        <div style={{ position: "absolute", bottom: "0%", left: "0%", transform: "translate(-20%, 25%)", width: "1000px", height: "1000px", background: "radial-gradient(ellipse, rgba(96,165,250,0.22) 0%, transparent 60%)" }} />
+      </div>
+
+      <div className="max-w-[1300px] mx-auto px-4 lg:px-16" style={{ position: "relative", zIndex: 1 }}>
+
+        {/* Header row: headline esquerda, tabs direita */}
+        <div className="flex items-end justify-between gap-10 mb-16 flex-wrap">
           <div>
-            <SectionBadge>Nossos Cases</SectionBadge>
+            <SectionBadge>Cases</SectionBadge>
             <h2
-              className="font-medium text-dark leading-tight mt-3"
-              style={{ fontSize: "48px", letterSpacing: "-1.92px" }}
+              className="font-medium leading-tight"
+              style={{
+                fontSize: "48px",
+                letterSpacing: "-1.92px",
+                color: "#141414",
+                marginTop: "12px",
+                maxWidth: "560px",
+                textWrap: "balance" as never,
+              }}
             >
-              Resultados reais de<br />quem escalou com a gente
+              Resultados reais. Apps que escalaram com a Appreach.
             </h2>
           </div>
 
-          {/* Nav arrows */}
-          <div className="flex gap-2 shrink-0">
-            <button
-              onClick={() => navigate("prev")}
-              disabled={offset === 0}
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity"
-              style={{
-                border: "1px solid var(--color-border)",
-                color: "var(--color-dark)",
-                opacity: offset === 0 ? 0.3 : 1,
-              }}
-            >
-              <ChevronLeft size={17} />
-            </button>
-            <button
-              onClick={() => navigate("next")}
-              disabled={offset === maxOffset}
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity"
-              style={{
-                border: "1px solid var(--color-border)",
-                color: "var(--color-dark)",
-                opacity: offset === maxOffset ? 0.3 : 1,
-              }}
-            >
-              <ChevronRight size={17} />
-            </button>
-          </div>
-        </div>
-
-        {/* Carousel */}
-        <div ref={containerRef} className="overflow-hidden">
-          <div
-            className="flex"
-            style={{
-              gap: `${GAP}px`,
-              transform: `translateX(${translateX}px)`,
-              transition: sliding ? "transform 0.42s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
-            }}
-          >
-            {cases.map((c) => (
-              <div
-                key={c.id}
-                style={{
-                  minWidth: `calc(50% - ${GAP / 2}px)`,
-                  flexShrink: 0,
-                  padding: "2px",
-                  borderRadius: "22px",
-                  background: c.border,
-                }}
+          <div className="cases-tabs" style={{ flexShrink: 0 }}>
+            {cases.map((item, i) => (
+              <button
+                key={item.id}
+                onClick={() => setActive(i)}
+                className={`cases-tab${active === i ? " active" : ""}`}
               >
-                <div
-                  className="rounded-[20px] flex flex-col justify-between"
-                  style={{ background: c.mesh, minHeight: "360px", padding: "10px" }}
-                >
-                  {/* Inner white semi-transparent panel */}
-                  <div
-                    className="flex flex-col justify-between h-full rounded-[13px]"
-                    style={{
-                      background: "rgba(255,255,255,0.64)",
-                      backdropFilter: "blur(12px)",
-                      WebkitBackdropFilter: "blur(12px)",
-                      padding: "22px 26px 26px",
-                      minHeight: "340px",
-                    }}
-                  >
-                    {/* Top */}
-                    <div>
-                      <p
-                        className="font-semibold text-dark"
-                        style={{ fontSize: "15px", letterSpacing: "-0.2px" }}
-                      >
-                        {c.title}
-                      </p>
-                      <p
-                        className="mt-2 leading-relaxed"
-                        style={{ fontSize: "15px", color: "rgba(20,20,20,0.55)", maxWidth: "340px" }}
-                      >
-                        {c.description}
-                      </p>
-                    </div>
-
-                    {/* Bottom */}
-                    <div className="flex items-end justify-between gap-4">
-                      <div className="flex items-baseline gap-1.5">
-                        <span
-                          className="font-medium text-dark leading-none"
-                          style={{ fontSize: "62px", letterSpacing: "-3px" }}
-                        >
-                          {c.metric}
-                        </span>
-                        <span
-                          className="font-medium text-dark"
-                          style={{ fontSize: "28px", letterSpacing: "-1px", lineHeight: 1 }}
-                        >
-                          ↑
-                        </span>
-                      </div>
-
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={c.logo}
-                        alt="Logo do cliente"
-                        width={c.logoW}
-                        height={c.logoH}
-                        className="object-contain shrink-0"
-                        style={{ maxHeight: "26px", maxWidth: "110px", opacity: 0.65 }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <span className="cases-tab-num">{item.number}</span>
+                <span className="cases-tab-label">{item.category}</span>
+              </button>
             ))}
           </div>
         </div>
+
+        {/* Card wrapper */}
+        <div style={{ position: "relative" }}>
+          <div aria-hidden style={{ position: "absolute", inset: 0, overflow: "visible", pointerEvents: "none", zIndex: 0 }}>
+            <div style={{ position: "absolute", top: "-80px", right: "-100px", width: "560px", height: "560px", background: "radial-gradient(ellipse, rgba(196,181,253,0.20) 0%, transparent 65%)" }} />
+            <div style={{ position: "absolute", bottom: "-80px", left: "-80px", width: "480px", height: "480px", background: "radial-gradient(ellipse, rgba(165,180,252,0.14) 0%, transparent 65%)" }} />
+          </div>
+          <div key={`card-${c.id}`} className="case-card" style={{ position: "relative", zIndex: 1 }}>
+
+          {/* Image */}
+          <div key={`img-${c.id}`} className="case-image-col" style={{ background: c.gradient }} />
+
+          {/* Content */}
+          <div className="case-content-col">
+
+            {/* Grupo topo: header + título com gap interno pequeno */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "12px", fontWeight: 600, color: "#6557ea", letterSpacing: "0.4px" }}>
+                    {c.number}
+                  </span>
+                  <span style={{ fontSize: "12px", fontWeight: 500, color: "#3D3D4A", background: "rgba(101,87,234,0.06)", borderRadius: "99px", padding: "3px 10px" }}>
+                    {c.category}
+                  </span>
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={c.logo} alt="Logo do cliente" width={c.logoW} height={c.logoH}
+                  style={{ maxHeight: "20px", width: "auto", opacity: 0.4, objectFit: "contain" }} />
+              </div>
+
+              <p
+                className="font-medium"
+                style={{
+                  fontSize: "22px", color: "#141414", lineHeight: 1.35,
+                  letterSpacing: "-0.5px", maxWidth: "520px",
+                  textWrap: "balance" as never,
+                }}
+              >
+                {c.hookTitle}
+              </p>
+            </div>
+
+            {/* Content columns */}
+            <div className="cases-content-grid">
+              <div>
+                <p style={LABEL}>Desafio</p>
+                <p style={BODY}>{c.desafio}</p>
+              </div>
+              <div>
+                <p style={LABEL}>Estratégia</p>
+                <ul style={{ ...BODY, listStyle: "none", padding: 0, margin: 0 }}>
+                  {c.estrategia.map((item, i) => (
+                    <li key={i} style={{ display: "flex", gap: "8px", marginBottom: "4px" }}>
+                      <span style={{ color: "#6557ea", flexShrink: 0 }}>→</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p style={LABEL}>Por que funcionou</p>
+                <p style={BODY}>{c.porqueFuncionou}</p>
+              </div>
+            </div>
+
+            {/* Metrics */}
+            <div className="cases-metrics-row">
+              {c.metrics.map((m, i) => (
+                <div key={i}>
+                  <p className="cases-metric-value">{m.value}</p>
+                  <p style={{ fontSize: "13px", color: "#909090", marginTop: "6px" }}>{m.label}</p>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+        </div>{/* end card wrapper */}
 
       </div>
     </section>
