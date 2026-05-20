@@ -136,6 +136,7 @@ export default function Cases() {
   const [active, setActive] = useState(0);
   const c = cases[active];
   const { ref: headerRef, visible: headerVisible } = useInView();
+  const { ref: cardRef, visible: cardVisible } = useInView();
 
   return (
     <section
@@ -316,7 +317,7 @@ export default function Cases() {
         </div>
 
         {/* Card wrapper */}
-        <div style={{ position: "relative" }}>
+        <div ref={cardRef as React.RefObject<HTMLDivElement>} className={`reveal-scale${cardVisible ? " visible" : ""}`} style={{ position: "relative" }}>
           <div aria-hidden style={{ position: "absolute", inset: 0, overflow: "visible", pointerEvents: "none", zIndex: 0 }}>
             <div style={{ position: "absolute", top: "-80px", right: "-100px", width: "560px", height: "560px", background: "radial-gradient(ellipse, rgba(196,181,253,0.20) 0%, transparent 65%)" }} />
             <div style={{ position: "absolute", bottom: "-80px", left: "-80px", width: "480px", height: "480px", background: "radial-gradient(ellipse, rgba(165,180,252,0.14) 0%, transparent 65%)" }} />

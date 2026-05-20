@@ -44,6 +44,7 @@ export default function Platforms() {
   const offsetRef = useRef(0);
   const rafRef    = useRef<number | undefined>(undefined);
   const { ref: headerRef, visible: headerVisible } = useInView();
+  const { ref: carouselRef, visible: carouselVisible } = useInView();
 
   useEffect(() => {
     const SPEED = (2 * Math.PI) / 28000; // ~28s full orbit
@@ -92,7 +93,8 @@ export default function Platforms() {
 
         {/* Arc carousel — desktop only */}
         <div
-          className="hidden lg:block"
+          ref={carouselRef as React.RefObject<HTMLDivElement>}
+          className={`hidden lg:block reveal${carouselVisible ? " visible" : ""}`}
           style={{ position: "relative", maxWidth: 800, height: 400, margin: "0 auto", overflow: "hidden" }}
         >
           {/* Background gradient circles — centers at (50%, calc(50%+217px)) */}
