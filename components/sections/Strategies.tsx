@@ -2,7 +2,6 @@
 
 import SectionBadge from "@/components/ui/SectionBadge";
 import { useEffect, useRef, useState, ElementType } from "react";
-import { ArrowRight } from "lucide-react";
 
 function easeInOut(t: number) {
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
@@ -599,13 +598,13 @@ function CTVWidget() {
 
 // ─── Preload ──────────────────────────────────────────────────────────────────
 function PreloadWidget() {
-  const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   const icons = [
     { src: "/icons/apple-photos.svg",   alt: "Photos" },
     { src: "/icons/apple-camera.svg",   alt: "Camera" },
     { src: "/icons/apple-messages.svg", alt: "Messages" },
-    { src: "/icons/seu-app.svg",        alt: "Seu App" },
+    { src: "/icons/app-appreach.png",    alt: "Appreach" },
     { src: "/icons/apple-phone.svg",    alt: "Phone" },
     { src: "/icons/apple-safari.svg",   alt: "Safari" },
     { src: "/icons/apple-clock.svg",    alt: "Clock" },
@@ -772,7 +771,7 @@ export default function Strategies() {
           <SectionBadge>Soluções</SectionBadge>
           <h2
             className="font-medium text-dark leading-tight mb-4"
-            style={{ fontSize: "48px", letterSpacing: "-1.4px", textWrap: "balance" }}
+            style={{ fontSize: "clamp(28px, 6.5vw, 48px)", letterSpacing: "-1.4px", textWrap: "balance" }}
           >
             Nossas Soluções
           </h2>
@@ -790,7 +789,7 @@ export default function Strategies() {
                 <Tag
                   key={s.title}
                   {...(s.href ? { href: s.href } : {})}
-                  className={`group flex flex-col ${s.noPadding ? "" : "p-7"} ${s.span} ${s.href ? "cursor-pointer" : ""}`}
+                  className={`strategies-card group flex flex-col ${s.noPadding ? "" : "p-7"} ${s.span} ${s.href ? "cursor-pointer" : ""}`}
                   style={{
                     background: s.dark
                       ? "linear-gradient(145deg, #1E1640 0%, #2D1F5E 100%)"
@@ -826,7 +825,7 @@ export default function Strategies() {
                   } : undefined}
                 >
                   {s.widget && (
-                    <div style={{ flex: 1 }}>{s.widget}</div>
+                    <div className="strategies-widget" style={{ flex: 1 }}>{s.widget}</div>
                   )}
                   <div style={{
                     marginTop: s.textMarginTop ?? "auto",
@@ -859,7 +858,6 @@ export default function Strategies() {
                         }}
                       >
                         Ver solução
-                        <ArrowRight size={12} />
                       </div>
                     )}
                   </div>

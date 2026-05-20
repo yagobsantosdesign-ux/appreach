@@ -1,4 +1,6 @@
-import Button from "@/components/ui/Button";
+"use client";
+
+import React from "react";
 
 const IconInstagram = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -22,6 +24,26 @@ const IconLinkedin = () => (
   </svg>
 );
 
+const INPUT: React.CSSProperties = {
+  width: "100%",
+  background: "#F7F7F9",
+  border: "1px solid rgba(0,0,0,0.08)",
+  borderRadius: "12px",
+  padding: "13px 16px",
+  fontSize: "15px",
+  color: "#141414",
+  outline: "none",
+  transition: "border-color 0.15s",
+};
+
+const LABEL: React.CSSProperties = {
+  fontSize: "13px",
+  fontWeight: 600,
+  color: "#3D3D4A",
+  marginBottom: "6px",
+  display: "block",
+};
+
 const solutions = [
   { label: "User Acquisition", href: "/useracquisition-app" },
   { label: "Retargeting", href: "/retargeting" },
@@ -37,15 +59,109 @@ const company = [
   { label: "Blog", href: "/blog" },
 ];
 
-const linkClass = "text-sm transition-colors duration-200 hover:text-[var(--color-primary)]";
-
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--color-background)", borderTop: "1px solid var(--color-border)" }}>
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+    <footer style={{
+      background: "linear-gradient(145deg, #1E1640 0%, #2D1F5E 55%, #1a1438 100%)",
+      borderTop: "1px solid rgba(255,255,255,0.06)",
+    }}>
 
-        {/* Main grid */}
-        <div className="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-16 py-16">
+      {/* ── Contact form card ── */}
+      <div className="max-w-[1300px] mx-auto px-4 lg:px-16" style={{ marginTop: "-260px", position: "relative", zIndex: 2 }}>
+        <div
+          className="footer-contact-card flex flex-col lg:flex-row"
+          style={{
+            background: "linear-gradient(145deg, #9B91FF 0%, #6557EA 100%)",
+            borderRadius: "32px",
+            padding: "64px 72px",
+            gap: "80px",
+            alignItems: "center",
+            boxShadow: "0 8px 40px rgba(101,87,234,0.30)",
+          }}
+        >
+          {/* Left — copy */}
+          <div style={{ flex: "0 0 auto", maxWidth: "380px" }}>
+            <div className="inline-flex items-center mb-4" style={{ gap: "8px" }}>
+              <span style={{ display: "inline-block", width: "20px", height: "1.5px", background: "rgba(255,255,255,0.6)", flexShrink: 0 }} />
+              <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.85)", letterSpacing: "1px", fontWeight: 600, fontFamily: "var(--font-geist-mono)", textTransform: "uppercase" }}>
+                Fale com a gente
+              </span>
+            </div>
+            <h2 className="font-medium" style={{ fontSize: "clamp(24px, 6vw, 40px)", letterSpacing: "-1.2px", lineHeight: 1.1, color: "white", textWrap: "balance" as never }}>
+              Pronto para escalar o seu app?
+            </h2>
+            <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.70)", lineHeight: 1.65, marginTop: "16px" }}>
+              Conte sobre o seu app e seus objetivos. Nossa equipe vai analisar o seu momento e indicar as estratégias mais indicadas — sem custo e sem compromisso.
+            </p>
+            <ul style={{ marginTop: "24px", display: "flex", flexDirection: "column", gap: "10px", listStyle: "none", padding: 0 }}>
+              {["Diagnóstico gratuito do seu funil", "Estratégia personalizada por vertical", "Relatórios transparentes com dados reais"].map((item) => (
+                <li key={item} style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "15px", color: "rgba(255,255,255,0.85)" }}>
+                  <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "rgba(255,255,255,0.5)", flexShrink: 0 }} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Right — form */}
+          <div style={{ flex: 1, background: "white", borderRadius: "20px", padding: "40px", boxShadow: "0 4px 32px rgba(0,0,0,0.10)" }}>
+            <form name="contato" method="POST" data-netlify="true" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <input type="hidden" name="form-name" value="contato" />
+              <div className="footer-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                <div>
+                  <label style={LABEL}>Nome</label>
+                  <input name="nome" type="text" placeholder="Seu nome" required style={INPUT}
+                    onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
+                    onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
+                </div>
+                <div>
+                  <label style={LABEL}>E-mail</label>
+                  <input name="email" type="email" placeholder="seu@email.com" required style={INPUT}
+                    onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
+                    onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
+                </div>
+              </div>
+              <div>
+                <label style={LABEL}>WhatsApp</label>
+                <input name="whatsapp" type="tel" placeholder="+55 (11) 99999-9999" style={INPUT}
+                  onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
+                  onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
+              </div>
+              <div>
+                <label style={LABEL}>Qual app você quer escalar?</label>
+                <input name="app" type="text" placeholder="Nome ou link do app" style={INPUT}
+                  onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
+                  onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
+              </div>
+              <div>
+                <label style={LABEL}>Mensagem (opcional)</label>
+                <textarea name="mensagem" placeholder="Conte mais sobre seus objetivos..." rows={4}
+                  style={{ ...INPUT, resize: "none" as never, lineHeight: 1.6 }}
+                  onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
+                  onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
+              </div>
+              <button type="submit" style={{
+                width: "100%", background: "linear-gradient(145deg, #9B91FF 0%, #6557EA 100%)",
+                color: "white", border: "none", borderRadius: "12px", padding: "15px 24px",
+                fontSize: "15px", fontWeight: 600, cursor: "pointer", display: "flex",
+                alignItems: "center", justifyContent: "center", gap: "8px", letterSpacing: "-0.2px",
+              }}
+                onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+                onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+              >
+                Enviar mensagem
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Nav grid ── */}
+      <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-16" style={{ paddingTop: "100px", paddingBottom: "64px" }}>
 
           {/* Col 1 — Logo + descrição + sociais */}
           <div className="flex flex-col gap-6">
@@ -55,20 +171,19 @@ export default function Footer() {
                 alt="Appreach"
                 width={140}
                 height={25}
-                style={{ display: "block" }}
+                style={{ display: "block", filter: "brightness(0) invert(1)" }}
               />
-              <p
-                className="mt-3 leading-relaxed"
-                style={{ fontSize: "14px", color: "var(--color-muted)", maxWidth: "260px" }}
-              >
+              <p className="mt-3 leading-relaxed" style={{ fontSize: "14px", color: "rgba(255,255,255,0.45)", maxWidth: "260px" }}>
                 Estratégia 360° para apps que escalam — do primeiro install à receita.
               </p>
             </div>
 
             <a
               href="mailto:fale@appreach.com.br"
-              className="text-sm transition-colors duration-200 hover:text-[var(--color-primary)]"
-              style={{ color: "var(--color-body)" }}
+              className="text-sm transition-colors duration-200"
+              style={{ color: "rgba(255,255,255,0.45)" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
             >
               fale@appreach.com.br
             </a>
@@ -82,11 +197,17 @@ export default function Footer() {
                 <a
                   key={i}
                   href={href}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200 hover:bg-[var(--color-primary-light)] hover:text-[var(--color-primary)]"
-                  style={{
-                    color: "var(--color-muted)",
-                    border: "1px solid var(--color-border)",
-                    background: "var(--color-surface)",
+                  className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
+                  style={{ color: "rgba(255,255,255,0.45)", border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.05)" }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.color = "white";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.25)";
+                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.10)";
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.10)";
+                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
                   }}
                 >
                   {icon}
@@ -98,58 +219,85 @@ export default function Footer() {
           {/* Cols direita — Soluções + Empresa */}
           <div className="flex gap-16 lg:gap-20">
             <nav className="flex flex-col gap-4">
-              <span className="text-xs font-semibold text-dark uppercase tracking-widest" style={{ letterSpacing: "0.08em" }}>
+              <span className="text-xs font-semibold uppercase tracking-widest" style={{ letterSpacing: "0.08em", color: "rgba(255,255,255,0.90)" }}>
                 Soluções
               </span>
               <ul className="flex flex-col gap-3">
                 {solutions.map((s) => (
                   <li key={s.href}>
-                    <a href={s.href} className={linkClass} style={{ color: "var(--color-muted)" }}>
-                      {s.label}
-                    </a>
+                    <a href={s.href} className="text-sm transition-colors duration-200" style={{ color: "rgba(255,255,255,0.45)" }}
+                      onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
+                      onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
+                    >{s.label}</a>
                   </li>
                 ))}
               </ul>
             </nav>
 
             <nav className="flex flex-col gap-4">
-              <span className="text-xs font-semibold text-dark uppercase tracking-widest" style={{ letterSpacing: "0.08em" }}>
+              <span className="text-xs font-semibold uppercase tracking-widest" style={{ letterSpacing: "0.08em", color: "rgba(255,255,255,0.90)" }}>
                 Empresa
               </span>
               <ul className="flex flex-col gap-3">
                 {company.map((s) => (
                   <li key={s.href}>
-                    <a href={s.href} className={linkClass} style={{ color: "var(--color-muted)" }}>
-                      {s.label}
-                    </a>
+                    <a href={s.href} className="text-sm transition-colors duration-200" style={{ color: "rgba(255,255,255,0.45)" }}
+                      onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
+                      onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
+                    >{s.label}</a>
                   </li>
                 ))}
               </ul>
             </nav>
           </div>
-
-
         </div>
+      </div>
 
-        {/* Bottom bar */}
-        <div
-          className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6"
-          style={{ borderTop: "1px solid var(--color-border)" }}
-        >
-          <span style={{ fontSize: "13px", color: "var(--color-muted)" }}>
+      {/* ── Logo watermark — faixa própria ── */}
+      <div style={{
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        overflow: "hidden",
+        padding: "32px 0",
+      }}>
+        <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+          <img
+            src="/logo-appreach.svg"
+            alt=""
+            aria-hidden
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+              filter: "brightness(0) invert(1)",
+              opacity: 0.08,
+            }}
+          />
+        </div>
+      </div>
+
+      {/* ── Bottom bar ── */}
+      <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6">
+          <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.30)" }}>
             © 2025 Appreach. Todos os direitos reservados.
           </span>
           <div className="flex gap-5">
-            <a href="#" className="transition-colors hover:text-[var(--color-primary)]" style={{ fontSize: "13px", color: "var(--color-muted)" }}>
-              Política de Privacidade
-            </a>
-            <a href="#" className="transition-colors hover:text-[var(--color-primary)]" style={{ fontSize: "13px", color: "var(--color-muted)" }}>
-              Termos de Uso
-            </a>
+            {["Política de Privacidade", "Termos de Uso"].map((label) => (
+              <a
+                key={label}
+                href="#"
+                className="transition-colors duration-200"
+                style={{ fontSize: "13px", color: "rgba(255,255,255,0.30)" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.30)")}
+              >
+                {label}
+              </a>
+            ))}
           </div>
         </div>
-
       </div>
+
     </footer>
   );
 }

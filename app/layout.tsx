@@ -36,9 +36,11 @@ export default function RootLayout({
         {/* figma-capture-script */}
         <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
       </head>
-      <body className="min-h-full flex flex-col bg-background text-body antialiased overflow-x-hidden">
+      <body className="min-h-full flex flex-col bg-background text-body antialiased">
         <SmoothScroll />
-        {children}
+        <div style={{ overflowX: "hidden", width: "100%" }}>
+          {children}
+        </div>
       </body>
     </html>
   );

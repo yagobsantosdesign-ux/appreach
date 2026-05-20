@@ -3,17 +3,17 @@ import SectionBadge from "@/components/ui/SectionBadge";
 const tickerLogos = [
   { src: "/ticker-logo-picpay.svg",        alt: "PicPay",        width: 108, height: 35 },
   { src: "/ticker-logo-casas-bahia.svg",   alt: "Casas Bahia",   width: 134, height: 14 },
-  { src: "/ticker-logo-sams-club.svg",     alt: "Sam's Club",    width: 42,  height: 42 },
+  { src: "/ticker-logo-sams-club.svg",     alt: "Sam's Club",    width: 110, height: 42 },
   { src: "/ticker-logo-rei-do-pitado.svg", alt: "Rei do Pitaco", width: 130, height: 27 },
   { src: "/ticker-logo-btg.svg",           alt: "BTG",           width: 90,  height: 36 },
-  { src: "/ticker-logo-reserva.svg",       alt: "Reserva",       width: 42,  height: 42 },
+  { src: "/ticker-logo-reserva.svg",       alt: "Reserva",       width: 120, height: 42 },
   { src: "/ticker-logo-clickbus.svg",      alt: "ClickBus",      width: 124, height: 30 },
   { src: "/ticker-logo-inter.svg",         alt: "Banco Inter",   width: 122, height: 31 },
   { src: "/ticker-logo-habibs.svg",        alt: "Habib's",       width: 118, height: 32 },
   { src: "/ticker-logo-burger-king.svg",   alt: "Burger King",   width: 44,  height: 48 },
   { src: "/ticker-logo-paramount.svg",     alt: "Paramount+",    width: 128, height: 30 },
   { src: "/ticker-logo-carrefour.svg",     alt: "Carrefour",     width: 52,  height: 42 },
-  { src: "/ticker-logo-bancopan.svg",      alt: "Banco Pan",     width: 56,  height: 40 },
+  { src: "/ticker-logo-bancopan.svg",      alt: "Banco Pan",     width: 110, height: 40 },
   { src: "/ticker-logo-natura.svg",        alt: "Natura",        width: 52,  height: 40 },
   { src: "/ticker-logo-ifood.svg",         alt: "iFood",         width: 68,  height: 36 },
   { src: "/ticker-logo-claro.svg",         alt: "Claro",         width: 96,  height: 35 },
@@ -76,7 +76,7 @@ export default function LogoTicker() {
             <SectionBadge>Clientes</SectionBadge>
             <h2
               className="font-medium text-dark leading-tight mt-3"
-              style={{ fontSize: "40px", letterSpacing: "-1.6px", textWrap: "balance" }}
+              style={{ fontSize: "clamp(26px, 6vw, 40px)", letterSpacing: "-1.6px", textWrap: "balance" }}
             >
               Grandes apps crescem com a Appreach.
             </h2>

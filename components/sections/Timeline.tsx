@@ -48,7 +48,7 @@ export default function Timeline() {
           <SectionBadge>Processo</SectionBadge>
           <h2
             className="font-medium text-dark leading-tight mt-3"
-            style={{ fontSize: "48px", letterSpacing: "-1.4px", textWrap: "balance" }}
+            style={{ fontSize: "clamp(28px, 6.5vw, 48px)", letterSpacing: "-1.4px", textWrap: "balance" }}
           >
             Processo claro, resultados mensuráveis.
           </h2>
@@ -171,6 +171,7 @@ export default function Timeline() {
             </div>
           ))}
         </div>
+
 
       </div>
     </section>

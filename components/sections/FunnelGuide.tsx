@@ -235,7 +235,7 @@ export default function FunnelGuide() {
             <h2
               ref={headlineRef}
               className="font-medium text-dark leading-tight"
-              style={{ fontSize: "48px", letterSpacing: "-1.92px", maxWidth: "520px", textWrap: "balance" }}
+              style={{ fontSize: "clamp(28px, 6.5vw, 48px)", letterSpacing: "-1.92px", maxWidth: "520px", textWrap: "balance" }}
             >
               Onde está o seu app agora?
             </h2>
@@ -245,7 +245,7 @@ export default function FunnelGuide() {
             >
               Cada app está em um momento diferente. Veja qual estratégia faz sentido para o estágio atual do seu crescimento.
             </p>
-            <Button href="#contato" variant="gradient" arrow size="md" className="mt-8">
+            <Button href="#contato" variant="gradient" size="md" className="mt-8">
               Diagnóstico gratuito
             </Button>
           </div>

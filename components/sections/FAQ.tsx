@@ -35,7 +35,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative py-24 lg:py-32" style={{ background: "transparent" }}>
+    <section className="relative py-24 lg:py-32" style={{ background: "transparent", paddingBottom: "320px" }}>
 
       {/* Blob roxo — centro-esquerda */}
       <div style={{ position: "absolute", top: "60%", left: "50%", transform: "translate(-70%, -50%)", width: "700px", height: "700px", background: "radial-gradient(ellipse, rgba(130,100,255,0.22) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
@@ -49,7 +49,7 @@ export default function FAQ() {
           <SectionBadge>FAQ</SectionBadge>
           <h2
             className="font-medium text-dark leading-tight mt-3"
-            style={{ fontSize: "48px", letterSpacing: "-1.92px", lineHeight: "110%", textWrap: "balance", maxWidth: "380px", margin: "0 auto" } as React.CSSProperties}
+            style={{ fontSize: "clamp(28px, 6.5vw, 48px)", letterSpacing: "-1.92px", lineHeight: "110%", textWrap: "balance", maxWidth: "380px", margin: "0 auto" } as React.CSSProperties}
           >
             Perguntas frequentes
           </h2>
@@ -63,7 +63,7 @@ export default function FAQ() {
 
         {/* Container externo — mais transparente */}
         <div
-          className="mx-auto"
+          className="faq-scroll-container mx-auto"
           style={{
             maxWidth: "640px",
             height: "520px",

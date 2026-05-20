@@ -75,7 +75,7 @@ export default function Platforms() {
           <SectionBadge>Plataformas</SectionBadge>
           <h2
             className="font-medium text-dark leading-tight mb-4"
-            style={{ fontSize: "48px", letterSpacing: "-1.92px", textWrap: "balance" }}
+            style={{ fontSize: "clamp(28px, 6.5vw, 48px)", letterSpacing: "-1.92px", textWrap: "balance" }}
           >
             Operamos onde seu usuário está
           </h2>

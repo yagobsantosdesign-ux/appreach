@@ -130,16 +130,33 @@ export default function Header() {
 
         {/* CTA + mobile toggle */}
         <div className="flex items-center justify-end gap-3">
-          <Button href="#contato" variant="dark" size="md" className="hidden md:inline-flex">
-            Fale com um especialista
-          </Button>
+          <div className="hidden md:block">
+            <Button href="#contato" variant="dark" size="md">
+              Fale com um especialista
+            </Button>
+          </div>
           <button
-            className="md:hidden p-1.5"
-            style={{ color: "white" }}
-            onClick={() => setOpen(!open)}
-            aria-label="Menu"
+            className="md:hidden flex items-center justify-center"
+            style={{ width: "44px", height: "44px", background: "transparent", border: "none", cursor: "pointer", padding: 0 }}
+            onClick={() => setOpen(o => !o)}
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            <div style={{ width: "26px", height: "12px", position: "relative" }}>
+              <span style={{
+                position: "absolute", left: 0, right: 0, top: 0,
+                height: "2px", background: "white", borderRadius: "2px",
+                transformOrigin: "center",
+                transition: "transform 0.28s cubic-bezier(0.4,0,0.2,1)",
+                transform: open ? "translateY(5px) rotate(45deg)" : "none",
+              }} />
+              <span style={{
+                position: "absolute", left: 0, right: 0, bottom: 0,
+                height: "2px", background: "white", borderRadius: "2px",
+                transformOrigin: "center",
+                transition: "transform 0.28s cubic-bezier(0.4,0,0.2,1)",
+                transform: open ? "translateY(-5px) rotate(-45deg)" : "none",
+              }} />
+            </div>
           </button>
         </div>
       </div>

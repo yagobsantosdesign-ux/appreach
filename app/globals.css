@@ -221,3 +221,34 @@ a:hover .logo-text {
     transform: translateY(0) scale(1);
   }
 }
+
+.hero-cta-row { margin-bottom: 64px; }
+
+/* ── Mobile responsiveness ─────────────────────────────────── */
+@media (max-width: 767px) {
+
+
+  /* Hero */
+  .hero-section { margin: 0 !important; border-radius: 0 !important; }
+  .hero-h1 { font-size: 46px !important; }
+  .hero-cta-row { margin-bottom: 40px; }
+  .hero-widget { display: none !important; }
+  .hero-phone-container { height: auto !important; overflow: visible !important; }
+  .hero-phone-container img { position: relative !important; left: auto !important; transform: none !important; bottom: auto !important; width: 80% !important; margin: 0 auto !important; display: block !important; }
+
+  /* Strategies bento — oculta widgets visuais, mostra só o texto */
+  .strategies-widget { display: none !important; }
+  .strategies-card { min-height: auto !important; }
+
+  /* Stats Bento */
+  .stats-card { padding: 24px !important; min-height: 160px !important; }
+  .stats-value { font-size: 30px !important; letter-spacing: -1px !important; }
+  .stats-photo { display: none !important; }
+
+  /* Footer contact card */
+  .footer-contact-card { padding: 36px 24px !important; gap: 36px !important; }
+  .footer-form-grid { grid-template-columns: 1fr !important; }
+
+  /* FAQ scroll container */
+  .faq-scroll-container { height: auto !important; max-height: 75vh !important; }
+}

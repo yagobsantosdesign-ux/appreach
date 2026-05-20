@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
+import Button from "@/components/ui/Button";
 
 const DURATION = 5000;
 
@@ -42,7 +43,7 @@ const cases: {
     logo: "/ticker-logo-1.svg",
     logoW: 124,
     logoH: 22,
-    gradient: "linear-gradient(200deg, #9B8FFB 0%, #6557EA 55%, #4338CA 100%)",
+    gradient: "linear-gradient(200deg, #9B91FF 0%, #6557EA 55%, #3D28A8 100%)",
     image: "/case-beleza.png",
   },
   {
@@ -64,7 +65,7 @@ const cases: {
     logo: "/ticker-logo-2.svg",
     logoW: 61,
     logoH: 25,
-    gradient: "linear-gradient(160deg, #7C6FF7 0%, #5B4ED8 55%, #3730A3 100%)",
+    gradient: "linear-gradient(160deg, #9B91FF 0%, #6557EA 55%, #3D28A8 100%)",
     image: "/case-food.png",
   },
   {
@@ -86,7 +87,7 @@ const cases: {
     logo: "/ticker-logo-3.svg",
     logoW: 77,
     logoH: 35,
-    gradient: "linear-gradient(220deg, #A78BFA 0%, #7C6FF7 50%, #5B4ED8 100%)",
+    gradient: "linear-gradient(220deg, #9B91FF 0%, #6557EA 50%, #3D28A8 100%)",
     image: "/case-eletronicos.png",
   },
   {
@@ -108,7 +109,7 @@ const cases: {
     logo: "/ticker-logo-4.svg",
     logoW: 54,
     logoH: 21,
-    gradient: "linear-gradient(180deg, #6557EA 0%, #4338CA 55%, #312E81 100%)",
+    gradient: "linear-gradient(180deg, #6557EA 0%, #3D28A8 55%, #1E1640 100%)",
     image: "/case-fintech.png",
     overlay: true,
   },
@@ -132,22 +133,13 @@ const BODY: React.CSSProperties = {
 
 export default function Cases() {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
   const c = cases[active];
-
-  useEffect(() => {
-    if (paused) return;
-    const t = setTimeout(() => setActive((p) => (p + 1) % cases.length), DURATION);
-    return () => clearTimeout(t);
-  }, [active, paused]);
 
   return (
     <section
       id="cases"
-      className="py-24 lg:py-32"
+      className="pb-24 lg:pb-32 pt-0 lg:pt-8"
       style={{ background: "transparent", position: "relative", overflow: "visible" }}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
       <style>{`
         @keyframes tabFill {
@@ -211,7 +203,6 @@ export default function Cases() {
           transition: color 0.2s;
         }
         .cases-tab.active .cases-tab-label { color: #141414; font-weight: 600; }
-        .cases-tab-bar { display: none; }
 
         /* ── Card ── */
         .case-card {
@@ -273,7 +264,7 @@ export default function Cases() {
       <div aria-hidden style={{ position: "absolute", inset: 0, overflow: "visible", pointerEvents: "none", zIndex: 0 }}>
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-40%, -55%)", width: "1600px", height: "1600px", background: "radial-gradient(ellipse, rgba(155,145,255,0.20) 0%, transparent 60%)" }} />
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-15%, -45%)", width: "1400px", height: "1400px", background: "radial-gradient(ellipse, rgba(196,181,253,0.14) 0%, transparent 60%)" }} />
-        <div style={{ position: "absolute", bottom: "0%", left: "0%", transform: "translate(-20%, 25%)", width: "1000px", height: "1000px", background: "radial-gradient(ellipse, rgba(96,165,250,0.22) 0%, transparent 60%)" }} />
+        <div style={{ position: "absolute", bottom: "0%", left: "0%", transform: "translate(-20%, 25%)", width: "1000px", height: "1000px", background: "radial-gradient(ellipse, rgba(155,145,255,0.12) 0%, transparent 60%)" }} />
       </div>
 
       <div className="max-w-[1300px] mx-auto px-4 lg:px-16" style={{ position: "relative", zIndex: 1 }}>
@@ -285,7 +276,7 @@ export default function Cases() {
             <h2
               className="font-medium leading-tight"
               style={{
-                fontSize: "48px",
+                fontSize: "clamp(28px, 6.5vw, 48px)",
                 letterSpacing: "-1.4px",
                 color: "#141414",
                 marginTop: "12px",
@@ -295,6 +286,14 @@ export default function Cases() {
             >
               Resultados reais. Apps que escalaram com a Appreach.
             </h2>
+            <p style={{ fontSize: "16px", color: "#6B6B7B", lineHeight: 1.65, marginTop: "14px", maxWidth: "440px" }}>
+              De startups a grandes marcas — veja como transformamos investimento em mídia em crescimento mensurável.
+            </p>
+            <div style={{ marginTop: "24px" }}>
+              <Button href="mailto:fale@appreach.com.br" variant="gradient" size="sm">
+                Quero resultados assim
+              </Button>
+            </div>
           </div>
 
           <div className="cases-tabs" style={{ flexShrink: 0 }}>

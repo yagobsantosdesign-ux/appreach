@@ -7,8 +7,8 @@ import Platforms from "@/components/sections/Platforms";
 import FunnelGuide from "@/components/sections/FunnelGuide";
 import Cases from "@/components/sections/Cases";
 import Timeline from "@/components/sections/Timeline";
+import StatsBento from "@/components/sections/StatsBento";
 import FAQ from "@/components/sections/FAQ";
-import ContactCTA from "@/components/sections/ContactCTA";
 
 export default function Home() {
   return (
@@ -22,8 +22,8 @@ export default function Home() {
         <FunnelGuide />
         <Cases />
         <Timeline />
+        <StatsBento />
         <FAQ />
-        <ContactCTA />
       </main>
       <Footer />
     </>
