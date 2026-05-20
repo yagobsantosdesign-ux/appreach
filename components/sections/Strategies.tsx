@@ -645,13 +645,13 @@ export default function Strategies() {
                     overflow: s.noPadding ? "hidden" : undefined,
                     transition: "transform 0.25s ease, box-shadow 0.25s ease",
                   }}
-                  onMouseEnter={s.href ? (e) => {
+                  onMouseEnter={s.href ? (e: React.MouseEvent<HTMLElement>) => {
                     (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
                     (e.currentTarget as HTMLElement).style.boxShadow = s.dark
                       ? "0 12px 40px rgba(0,0,0,0.28)"
                       : "0px 12px 32px 0px rgba(16,16,25,0.10)";
                   } : undefined}
-                  onMouseLeave={s.href ? (e) => {
+                  onMouseLeave={s.href ? (e: React.MouseEvent<HTMLElement>) => {
                     (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
                     (e.currentTarget as HTMLElement).style.boxShadow = s.dark
                       ? "0 4px 32px rgba(0,0,0,0.18)"
