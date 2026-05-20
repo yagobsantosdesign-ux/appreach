@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
+import { useInView } from "@/hooks/useInView";
 
 // 9 icons provided, using first 8 for the carousel
 const PLATFORMS = [
@@ -42,6 +43,7 @@ export default function Platforms() {
   const iconsRef  = useRef<(HTMLDivElement | null)[]>([]);
   const offsetRef = useRef(0);
   const rafRef    = useRef<number | undefined>(undefined);
+  const { ref: headerRef, visible: headerVisible } = useInView();
 
   useEffect(() => {
     const SPEED = (2 * Math.PI) / 28000; // ~28s full orbit
@@ -71,7 +73,11 @@ export default function Platforms() {
       <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
 
         {/* Header */}
-        <div className="text-center" style={{ maxWidth: 600, margin: "0 auto 56px" }}>
+        <div
+          ref={headerRef as React.RefObject<HTMLDivElement>}
+          className={`text-center reveal${headerVisible ? " visible" : ""}`}
+          style={{ maxWidth: 600, margin: "0 auto 56px" }}
+        >
           <SectionBadge>Plataformas</SectionBadge>
           <h2
             className="font-medium text-dark leading-tight mb-4"

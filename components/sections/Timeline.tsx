@@ -1,4 +1,8 @@
+"use client";
+
+import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
+import { useInView } from "@/hooks/useInView";
 
 const steps = [
   {
@@ -34,6 +38,8 @@ const steps = [
 ];
 
 export default function Timeline() {
+  const { ref: headerRef, visible: headerVisible } = useInView();
+  const { ref: cardRef, visible: cardVisible } = useInView();
   return (
     <section id="como-funciona" className="relative py-24 lg:py-32" style={{ background: "transparent" }}>
 
@@ -44,7 +50,11 @@ export default function Timeline() {
       <div className="relative max-w-[1300px] mx-auto px-4 lg:px-16">
 
         {/* Header */}
-        <div className="text-center mx-auto mb-12" style={{ maxWidth: "580px" }}>
+        <div
+          ref={headerRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mx-auto mb-12 reveal${headerVisible ? " visible" : ""}`}
+          style={{ maxWidth: "580px" }}
+        >
           <SectionBadge>Processo</SectionBadge>
           <h2
             className="font-medium text-dark leading-tight mt-3"
@@ -56,14 +66,15 @@ export default function Timeline() {
 
         {/* Card glassmorphism com as linhas dentro */}
         <div
-          className="overflow-hidden"
-          style={{
+          ref={cardRef as React.RefObject<HTMLDivElement>}
+          className={`overflow-hidden reveal${cardVisible ? " visible" : ""}`}
+          style={{ "--reveal-delay": "0.12s",
             background: "rgba(255, 255, 255, 0.28)",
             backdropFilter: "blur(12px)",
             borderRadius: "24px",
             border: "1px solid rgba(255, 255, 255, 0.80)",
             boxShadow: "0 4px 32px rgba(101, 87, 234, 0.06), 0 1px 0 rgba(255,255,255,0.9) inset",
-          }}
+          } as React.CSSProperties}
         >
           {steps.map((step, i) => (
             <div

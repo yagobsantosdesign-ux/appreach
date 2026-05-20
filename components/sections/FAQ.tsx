@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import SectionBadge from "@/components/ui/SectionBadge";
+import { useInView } from "@/hooks/useInView";
 
 const faqs = [
   {
@@ -33,6 +34,8 @@ const faqs = [
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { ref: headerRef, visible: headerVisible } = useInView();
+  const { ref: containerRef, visible: containerVisible } = useInView();
 
   return (
     <section className="relative py-24 lg:py-32" style={{ background: "transparent", paddingBottom: "320px" }}>
@@ -45,7 +48,11 @@ export default function FAQ() {
       <div className="relative max-w-[1300px] mx-auto px-4 lg:px-16" style={{ zIndex: 1 }}>
 
         {/* Header */}
-        <div className="text-center mx-auto mb-10" style={{ maxWidth: "560px" }}>
+        <div
+          ref={headerRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mx-auto mb-10 reveal${headerVisible ? " visible" : ""}`}
+          style={{ maxWidth: "560px" }}
+        >
           <SectionBadge>FAQ</SectionBadge>
           <h2
             className="font-medium text-dark leading-tight mt-3"
@@ -63,8 +70,10 @@ export default function FAQ() {
 
         {/* Container externo — mais transparente */}
         <div
-          className="faq-scroll-container mx-auto"
+          ref={containerRef as React.RefObject<HTMLDivElement>}
+          className={`faq-scroll-container mx-auto reveal${containerVisible ? " visible" : ""}`}
           style={{
+            "--reveal-delay": "0.12s",
             maxWidth: "640px",
             height: "520px",
             overflow: "hidden",
@@ -77,7 +86,7 @@ export default function FAQ() {
             display: "flex",
             flexDirection: "column",
             gap: "6px",
-          }}
+          } as React.CSSProperties}
         >
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;

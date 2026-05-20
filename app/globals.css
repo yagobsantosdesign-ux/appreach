@@ -224,6 +224,39 @@ a:hover .logo-text {
 
 .hero-cta-row { margin-bottom: 64px; }
 
+/* ── Scroll reveal ─────────────────────────────────────────────────────────── */
+@keyframes scroll-reveal-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scroll-reveal-scale {
+  from { opacity: 0; transform: translateY(22px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.reveal {
+  opacity: 0;
+}
+.reveal.visible {
+  animation-name: scroll-reveal-up;
+  animation-duration: 0.65s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-delay: var(--reveal-delay, 0s);
+  animation-fill-mode: both;
+}
+
+.reveal-scale {
+  opacity: 0;
+}
+.reveal-scale.visible {
+  animation-name: scroll-reveal-scale;
+  animation-duration: 0.65s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-delay: var(--reveal-delay, 0s);
+  animation-fill-mode: both;
+}
+
 /* ── Mobile responsiveness ─────────────────────────────────── */
 @media (max-width: 767px) {
 

@@ -2,6 +2,7 @@
 
 import SectionBadge from "@/components/ui/SectionBadge";
 import { useEffect, useRef, useState, ElementType } from "react";
+import { useInView } from "@/hooks/useInView";
 
 function easeInOut(t: number) {
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
@@ -756,6 +757,8 @@ const strategies: {
 import React from "react";
 
 export default function Strategies() {
+  const { ref: headerRef, visible: headerVisible } = useInView();
+  const { ref: gridRef, visible: gridVisible } = useInView();
   return (
     <section id="estrategias" className="relative py-24 lg:py-32" style={{ background: "#ffffff" }}>
 
@@ -767,7 +770,10 @@ export default function Strategies() {
 
       <div className="relative max-w-[1300px] mx-auto px-4 lg:px-16" style={{ zIndex: 1 }}>
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div
+          ref={headerRef as React.RefObject<HTMLDivElement>}
+          className={`text-center max-w-2xl mx-auto mb-16 reveal${headerVisible ? " visible" : ""}`}
+        >
           <SectionBadge>Soluções</SectionBadge>
           <h2
             className="font-medium text-dark leading-tight mb-4"
@@ -782,15 +788,20 @@ export default function Strategies() {
 
         {/* Bento grid */}
         <div className="relative">
-          <div className="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-3" style={{ zIndex: 1 }}>
-            {strategies.map((s) => {
+          <div
+            ref={gridRef as React.RefObject<HTMLDivElement>}
+            className="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-3"
+            style={{ zIndex: 1 }}
+          >
+            {strategies.map((s, idx) => {
               const Tag = (s.href ? "a" : "div") as ElementType;
               return (
                 <Tag
                   key={s.title}
                   {...(s.href ? { href: s.href } : {})}
-                  className={`strategies-card group flex flex-col ${s.noPadding ? "" : "p-7"} ${s.span} ${s.href ? "cursor-pointer" : ""}`}
+                  className={`strategies-card group flex flex-col ${s.noPadding ? "" : "p-7"} ${s.span} ${s.href ? "cursor-pointer" : ""} reveal-scale${gridVisible ? " visible" : ""}`}
                   style={{
+                    "--reveal-delay": `${idx * 0.07}s`,
                     background: s.dark
                       ? "linear-gradient(145deg, #1E1640 0%, #2D1F5E 100%)"
                       : "rgba(255, 255, 255, 0.62)",
@@ -808,7 +819,7 @@ export default function Strategies() {
                     minHeight: `calc(${s.widgetHeight} + 120px)`,
                     overflow: s.noPadding ? "hidden" : undefined,
                     transition: "transform 0.25s ease, box-shadow 0.25s ease",
-                  }}
+                  } as React.CSSProperties}
                   onMouseEnter={s.href ? (e: React.MouseEvent<HTMLElement>) => {
                     (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
                     (e.currentTarget as HTMLElement).style.boxShadow = s.dark

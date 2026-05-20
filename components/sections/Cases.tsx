@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Button from "@/components/ui/Button";
+import { useInView } from "@/hooks/useInView";
 
 const DURATION = 5000;
 
@@ -134,6 +135,7 @@ const BODY: React.CSSProperties = {
 export default function Cases() {
   const [active, setActive] = useState(0);
   const c = cases[active];
+  const { ref: headerRef, visible: headerVisible } = useInView();
 
   return (
     <section
@@ -270,7 +272,10 @@ export default function Cases() {
       <div className="max-w-[1300px] mx-auto px-4 lg:px-16" style={{ position: "relative", zIndex: 1 }}>
 
         {/* Header row: headline esquerda, tabs direita */}
-        <div className="flex items-end justify-between gap-10 mb-16 flex-wrap">
+        <div
+          ref={headerRef as React.RefObject<HTMLDivElement>}
+          className={`flex items-end justify-between gap-10 mb-16 flex-wrap reveal${headerVisible ? " visible" : ""}`}
+        >
           <div>
             <SectionBadge>Cases</SectionBadge>
             <h2

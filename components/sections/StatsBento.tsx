@@ -3,6 +3,7 @@
 import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Button from "@/components/ui/Button";
+import { useInView } from "@/hooks/useInView";
 
 const stats = [
   {
@@ -75,12 +76,18 @@ function BadgeTag({ children, dark }: { children: React.ReactNode; dark?: boolea
 }
 
 export default function StatsBento() {
+  const { ref: headerRef, visible: headerVisible } = useInView();
+  const { ref: gridRef, visible: gridVisible } = useInView();
   return (
     <section className="py-12 lg:py-16" style={{ background: "transparent" }}>
       <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
 
         {/* Header */}
-        <div className="text-center mx-auto mb-10" style={{ maxWidth: "560px" }}>
+        <div
+          ref={headerRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mx-auto mb-10 reveal${headerVisible ? " visible" : ""}`}
+          style={{ maxWidth: "560px" }}
+        >
           <SectionBadge>Números</SectionBadge>
           <h2
             className="font-medium text-dark leading-tight mt-3"
@@ -98,10 +105,13 @@ export default function StatsBento() {
           </div>
         </div>
 
-        <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          ref={gridRef as React.RefObject<HTMLDivElement>}
+          className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        >
 
           {/* Cell 0 — Foto 1 */}
-          <div className="stats-photo" style={{ ...CARD_MUTED, padding: 0, overflow: "hidden" }}>
+          <div className={`stats-photo reveal-scale${gridVisible ? " visible" : ""}`} style={{ ...CARD_MUTED, padding: 0, overflow: "hidden", "--reveal-delay": "0s" } as React.CSSProperties}>
             <img
               src="/stats-photo-1.jpg"
               alt=""
@@ -111,7 +121,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 1 — 50+ Apps atendidos */}
-          <div className="stats-card" style={CARD_LIGHT}>
+          <div className={`stats-card reveal-scale${gridVisible ? " visible" : ""}`} style={{ ...CARD_LIGHT, "--reveal-delay": "0.08s" } as React.CSSProperties}>
             <div>
               <BadgeTag>↑ Crescimento</BadgeTag>
               <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "#141414", marginTop: "14px" }}>
@@ -127,7 +137,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 2 — Foto 2 */}
-          <div className="stats-photo" style={{ ...CARD_MUTED, padding: 0, overflow: "hidden" }}>
+          <div className={`stats-photo reveal-scale${gridVisible ? " visible" : ""}`} style={{ ...CARD_MUTED, padding: 0, overflow: "hidden", "--reveal-delay": "0.16s" } as React.CSSProperties}>
             <img
               src="/stats-photo-2.png"
               alt=""
@@ -137,7 +147,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 3 — 300+ Campanhas */}
-          <div className="stats-card" style={CARD_LIGHT}>
+          <div className={`stats-card reveal-scale${gridVisible ? " visible" : ""}`} style={{ ...CARD_LIGHT, "--reveal-delay": "0.24s" } as React.CSSProperties}>
             <div>
               <BadgeTag>↑ Escala</BadgeTag>
               <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "#141414", marginTop: "14px" }}>
@@ -153,7 +163,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 4 — R$500M+ dark */}
-          <div className="stats-card" style={CARD_DARK}>
+          <div className={`stats-card reveal-scale${gridVisible ? " visible" : ""}`} style={{ ...CARD_DARK, "--reveal-delay": "0.32s" } as React.CSSProperties}>
             <div>
               <BadgeTag dark>↑ Investimento</BadgeTag>
               <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "white", marginTop: "14px" }}>
@@ -169,7 +179,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 5 — 98% Satisfação */}
-          <div className="stats-card" style={CARD_LIGHT}>
+          <div className={`stats-card reveal-scale${gridVisible ? " visible" : ""}`} style={{ ...CARD_LIGHT, "--reveal-delay": "0.40s" } as React.CSSProperties}>
             <div>
               <BadgeTag>↑ NPS</BadgeTag>
               <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "#141414", marginTop: "14px" }}>
