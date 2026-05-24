@@ -64,10 +64,12 @@ export default function Footer() {
     <footer style={{
       background: "linear-gradient(145deg, #1E1640 0%, #2D1F5E 55%, #1a1438 100%)",
       borderTop: "1px solid rgba(255,255,255,0.06)",
+      paddingLeft: "40px",
+      paddingRight: "40px",
     }}>
 
       {/* ── Contact form card ── */}
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16" style={{ marginTop: "-260px", position: "relative", zIndex: 2 }}>
+      <div className="max-w-[1350px] mx-auto" style={{ marginTop: "-260px", position: "relative", zIndex: 2 }}>
         <div
           className="footer-contact-card flex flex-col lg:flex-row"
           style={{
@@ -87,7 +89,7 @@ export default function Footer() {
                 Fale com a gente
               </span>
             </div>
-            <h2 className="font-medium" style={{ fontSize: "clamp(24px, 6vw, 40px)", letterSpacing: "-1.2px", lineHeight: 1.1, color: "white", textWrap: "balance" as never }}>
+            <h2 className="" style={{ fontSize: "clamp(24px, 6vw, 40px)", letterSpacing: "-0.02em", lineHeight: "120%", color: "white", textWrap: "balance" as never }}>
               Pronto para escalar o seu app?
             </h2>
             <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.70)", lineHeight: 1.65, marginTop: "16px" }}>
@@ -160,7 +162,7 @@ export default function Footer() {
       </div>
 
       {/* ── Nav grid ── */}
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+      <div className="max-w-[1350px] mx-auto">
         <div className="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-16" style={{ paddingTop: "100px", paddingBottom: "64px" }}>
 
           {/* Col 1 — Logo + descrição + sociais */}
@@ -259,7 +261,7 @@ export default function Footer() {
         overflow: "hidden",
         padding: "32px 0",
       }}>
-        <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+        <div className="max-w-[1350px] mx-auto">
           <img
             src="/logo-appreach.svg"
             alt=""
@@ -276,7 +278,7 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+      <div className="max-w-[1350px] mx-auto">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6">
           <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.30)" }}>
             © 2025 Appreach. Todos os direitos reservados.

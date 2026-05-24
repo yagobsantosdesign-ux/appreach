@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Button from "@/components/ui/Button";
 import { useInView } from "@/hooks/useInView";
@@ -35,7 +35,7 @@ const CARD_BASE: React.CSSProperties = {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "flex-start",
-  padding: "40px",
+  padding: "25px",
   minHeight: "220px",
   position: "relative",
   overflow: "hidden",
@@ -44,10 +44,8 @@ const CARD_BASE: React.CSSProperties = {
 
 const CARD_LIGHT: React.CSSProperties = {
   ...CARD_BASE,
-  background: "rgba(255,255,255,0.72)",
-  border: "1px solid rgba(235,235,235,0.9)",
-  backdropFilter: "blur(12px)",
-  boxShadow: "0 4px 24px rgba(101,87,234,0.07), 0 1px 0 rgba(255,255,255,0.9) inset",
+  background: "white",
+  border: "1px solid rgba(0,0,0,0.04)",
 };
 
 const CARD_MUTED: React.CSSProperties = {
@@ -58,16 +56,17 @@ const CARD_MUTED: React.CSSProperties = {
 
 const CARD_DARK: React.CSSProperties = {
   ...CARD_BASE,
-  background: "linear-gradient(145deg, #9B91FF 0%, #6557EA 100%)",
+  background: "linear-gradient(120deg, #A8ADF9 15.89%, #6557EA 104.04%)",
   boxShadow: "0 8px 32px rgba(101,87,234,0.30)",
 };
 
 function BadgeTag({ children, dark }: { children: React.ReactNode; dark?: boolean }) {
   return (
     <span style={{
+      fontFamily: "var(--font-mono)",
       fontSize: "11px", fontWeight: 700, letterSpacing: "0.8px",
       textTransform: "uppercase",
-      color: dark ? "rgba(255,255,255,0.7)" : "#6557EA",
+      color: dark ? "rgba(255,255,255,0.7)" : "var(--color-primary)",
       background: dark ? "rgba(255,255,255,0.12)" : "rgba(101,87,234,0.08)",
       borderRadius: "99px", padding: "3px 10px",
     }}>
@@ -77,7 +76,6 @@ function BadgeTag({ children, dark }: { children: React.ReactNode; dark?: boolea
 }
 
 export default function StatsBento() {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const { ref: headerRef, visible: headerVisible } = useInView();
   const c0 = useInView();
   const c1 = useInView();
@@ -86,33 +84,52 @@ export default function StatsBento() {
   const c4 = useInView();
   const c5 = useInView();
   return (
-    <section className="py-12 lg:py-16" style={{ background: "transparent" }}>
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+    <section style={{ background: "#fafafa", padding: "80px 40px" }}>
+      <div style={{ maxWidth: "1350px", margin: "0 auto" }}>
 
         {/* Header */}
         <div
           ref={headerRef as React.RefObject<HTMLDivElement>}
-          className={`text-center mx-auto mb-10 reveal${headerVisible ? " visible" : ""}`}
-          style={{ maxWidth: "560px" }}
+          className={`text-center mx-auto reveal${headerVisible ? " visible" : ""}`}
+          style={{ maxWidth: "560px", marginBottom: "80px" }}
         >
           <SectionBadge>Números</SectionBadge>
           <h2
-            className="font-medium text-dark leading-tight mt-3"
-            style={{ fontSize: "clamp(28px, 6.5vw, 48px)", letterSpacing: "-1.4px", textWrap: "balance" }}
+            className="text-dark mt-3"
+            style={{ fontSize: "clamp(28px, 6.5vw, 48px)", letterSpacing: "-0.02em", lineHeight: "120%", textWrap: "balance" }}
           >
-            Resultados que falam por si.
+            Resultados que falam por si
           </h2>
-          <p style={{ fontSize: "17px", color: "#6B6B7B", lineHeight: 1.65, marginTop: "16px", textWrap: "balance" }}>
+          <p style={{ fontSize: "17px", color: "var(--color-muted)", lineHeight: 1.65, marginTop: "16px", textWrap: "balance" }}>
             Mais de uma década construindo crescimento sustentável para apps em todos os verticais.
           </p>
           <div className="flex justify-center mt-7">
-            <Button href="mailto:fale@appreach.com.br" variant="gradient" size="md">
-              Falar com especialista
-            </Button>
+            <a
+              href="#contato"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "48px",
+                padding: "0 20px",
+                borderRadius: "12px",
+                background: "#6557ea",
+                color: "white",
+                fontSize: "16px",
+                fontWeight: 600,
+                letterSpacing: "-0.32px",
+                textDecoration: "none",
+                transition: "opacity 0.2s ease",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+              onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+            >
+              Diagnóstico gratuito
+            </a>
           </div>
         </div>
 
-        <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
 
           {/* Cell 0 — Foto 1 */}
           <div ref={c0.ref as React.RefObject<HTMLDivElement>} className={`stats-photo reveal-scale${c0.visible ? " visible" : ""}`} style={{ ...CARD_MUTED, padding: 0, overflow: "hidden" } as React.CSSProperties}>
@@ -125,18 +142,18 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 1 — 50+ Apps atendidos */}
-          <div ref={c1.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c1.visible ? " visible" : ""}`} style={{ ...CARD_LIGHT, border: hoveredCard === 1 ? "1px solid rgba(101,87,234,0.55)" : "1px solid rgba(235,235,235,0.9)" }} onMouseEnter={() => setHoveredCard(1)} onMouseLeave={() => setHoveredCard(null)}>
+          <div ref={c1.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c1.visible ? " visible" : ""}`} style={CARD_LIGHT}>
             <div>
               <BadgeTag>↑ Crescimento</BadgeTag>
-              <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "#141414", marginTop: "14px" }}>
+              <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "var(--color-dark)", marginTop: "14px" }}>
                 {stats[0].value}
               </p>
             </div>
             <div>
-              <p style={{ fontSize: "15px", fontWeight: 600, color: "#141414", letterSpacing: "-0.3px" }}>
+              <p style={{ fontSize: "15px", fontWeight: 600, color: "var(--color-dark)", letterSpacing: "-0.3px" }}>
                 {stats[0].label}
               </p>
-              <p style={{ fontSize: "13px", color: "#909090", marginTop: "2px" }}>{stats[0].sub}</p>
+              <p style={{ fontSize: "13px", color: "var(--color-muted)", marginTop: "2px" }}>{stats[0].sub}</p>
             </div>
           </div>
 
@@ -151,23 +168,23 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 3 — 300+ Campanhas */}
-          <div ref={c3.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c3.visible ? " visible" : ""}`} style={{ ...CARD_LIGHT, border: hoveredCard === 3 ? "1px solid rgba(101,87,234,0.55)" : "1px solid rgba(235,235,235,0.9)" }} onMouseEnter={() => setHoveredCard(3)} onMouseLeave={() => setHoveredCard(null)}>
+          <div ref={c3.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c3.visible ? " visible" : ""}`} style={CARD_LIGHT}>
             <div>
               <BadgeTag>↑ Escala</BadgeTag>
-              <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "#141414", marginTop: "14px" }}>
+              <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "var(--color-dark)", marginTop: "14px" }}>
                 {stats[2].value}
               </p>
             </div>
             <div>
-              <p style={{ fontSize: "15px", fontWeight: 600, color: "#141414", letterSpacing: "-0.3px" }}>
+              <p style={{ fontSize: "15px", fontWeight: 600, color: "var(--color-dark)", letterSpacing: "-0.3px" }}>
                 {stats[2].label}
               </p>
-              <p style={{ fontSize: "13px", color: "#909090", marginTop: "2px" }}>{stats[2].sub}</p>
+              <p style={{ fontSize: "13px", color: "var(--color-muted)", marginTop: "2px" }}>{stats[2].sub}</p>
             </div>
           </div>
 
           {/* Cell 4 — R$500M+ dark */}
-          <div ref={c4.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c4.visible ? " visible" : ""}`} style={{ ...CARD_DARK, border: hoveredCard === 4 ? "1px solid rgba(200,180,255,0.5)" : "1px solid transparent" }} onMouseEnter={() => setHoveredCard(4)} onMouseLeave={() => setHoveredCard(null)}>
+          <div ref={c4.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c4.visible ? " visible" : ""}`} style={CARD_DARK}>
             <div>
               <BadgeTag dark>↑ Investimento</BadgeTag>
               <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "white", marginTop: "14px" }}>
@@ -183,18 +200,18 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 5 — 98% Satisfação */}
-          <div ref={c5.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c5.visible ? " visible" : ""}`} style={{ ...CARD_LIGHT, border: hoveredCard === 5 ? "1px solid rgba(101,87,234,0.55)" : "1px solid rgba(235,235,235,0.9)" }} onMouseEnter={() => setHoveredCard(5)} onMouseLeave={() => setHoveredCard(null)}>
+          <div ref={c5.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c5.visible ? " visible" : ""}`} style={CARD_LIGHT}>
             <div>
               <BadgeTag>↑ NPS</BadgeTag>
-              <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "#141414", marginTop: "14px" }}>
+              <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "var(--color-dark)", marginTop: "14px" }}>
                 {stats[1].value}
               </p>
             </div>
             <div>
-              <p style={{ fontSize: "15px", fontWeight: 600, color: "#141414", letterSpacing: "-0.3px" }}>
+              <p style={{ fontSize: "15px", fontWeight: 600, color: "var(--color-dark)", letterSpacing: "-0.3px" }}>
                 {stats[1].label}
               </p>
-              <p style={{ fontSize: "13px", color: "#909090", marginTop: "2px" }}>{stats[1].sub}</p>
+              <p style={{ fontSize: "13px", color: "var(--color-muted)", marginTop: "2px" }}>{stats[1].sub}</p>
             </div>
           </div>
 

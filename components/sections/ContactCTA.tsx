@@ -2,8 +2,8 @@ import Button from "@/components/ui/Button";
 
 export default function ContactCTA() {
   return (
-    <section id="contato" className="py-16 lg:py-24" style={{ background: "#ffffff" }}>
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+    <section id="contato" className="py-16 lg:py-24" style={{ background: "#ffffff", paddingLeft: "40px", paddingRight: "40px" }}>
+      <div style={{ maxWidth: "1350px", margin: "0 auto" }}>
 
         {/* Banner card */}
         <div
@@ -36,8 +36,8 @@ export default function ContactCTA() {
             </span>
 
             <h2
-              className="text-white font-medium"
-              style={{ fontSize: "clamp(32px, 4.5vw, 48px)", letterSpacing: "-1.4px", lineHeight: 1.1, textWrap: "balance" }}
+              className="text-white"
+              style={{ fontSize: "clamp(32px, 4.5vw, 48px)", letterSpacing: "-0.02em", lineHeight: "120%", textWrap: "balance" }}
             >
               Pronto para escalar o seu app?
             </h2>

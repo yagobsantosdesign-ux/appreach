@@ -15,12 +15,12 @@
   /* Font */
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
-  --font-heading: 'Satoshi', system-ui, sans-serif;
+  --font-heading: var(--font-inter), system-ui, sans-serif;
 
   /* Font sizes — design system */
   --text-h1: 60px;
   --text-h2: 48px;
-  --text-h3: 26px;
+  --text-h3: 32px;
   --text-h4: 20px;
   --text-hero-sub: 18px;
   --text-body: 16px;
@@ -29,22 +29,27 @@
 
   /* Section tint */
   --color-section-tint: #F5F4FF;
+
+  /* Card — surface tokens */
+  --radius-card: 24px;        /* standard card radius */
+  --radius-card-lg: 32px;     /* large panels / bento */
+  --border-surface: rgba(0,0,0,0.06); /* flat surface border */
 }
 
-/* Card shadow utility */
 .card {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
-  transition: box-shadow 0.2s ease;
-}
-.card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.10), 0 8px 32px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 24px;
+  transition: transform 0.2s ease;
 }
 
 h1, h2, h3, h4 {
-  letter-spacing: -1.4px;
-  font-family: 'Satoshi', system-ui, sans-serif;
-  font-weight: 500;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
 }
+
+h1 { line-height: 110%; letter-spacing: -0.04em; }
+h2 { line-height: 120%; letter-spacing: -0.02em; }
+h3 { line-height: 140%; letter-spacing: -0.02em; }
 
 * {
   box-sizing: border-box;
@@ -63,6 +68,7 @@ body {
   color: var(--color-body);
   font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 16px;
+  line-height: 160%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -106,12 +112,8 @@ body {
   100% { transform: rotate(360deg); border-radius: 8px;  }
 }
 
-.logo-mark {
-  transition: box-shadow 0.3s ease;
-}
 .logo-mark:hover {
   animation: logo-morph-spin 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  box-shadow: 0 0 0 4px rgba(101,87,234,0.15), 0 10px 28px rgba(101,87,234,0.45);
 }
 
 .logo-text {
@@ -145,16 +147,7 @@ a:hover .logo-text {
 
 /* Button hover — glow + lift */
 .shadow-hover {
-  transition: box-shadow 0.22s ease, transform 0.22s ease;
-}
-.shadow-hover:hover {
-  box-shadow: 0 16px 36px rgba(101, 87, 234, 0.48) !important;
-}
-.shadow-hover-white:hover {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25) !important;
-}
-.shadow-hover-dark:hover {
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45) !important;
+  transition: transform 0.22s ease;
 }
 
 /* Widget float + entrance — animações combinadas (fade-up primeiro, float em seguida) */
@@ -257,13 +250,20 @@ a:hover .logo-text {
   animation-fill-mode: both;
 }
 
+/* ── Hero desktop min-height ───────────────────────────────── */
+@media (min-width: 1024px) {
+  .hero-section {
+    min-height: 100svh;
+  }
+}
+
 /* ── Mobile responsiveness ─────────────────────────────────── */
 @media (max-width: 767px) {
 
 
   /* Hero */
   .hero-section { margin: 0 !important; border-radius: 0 !important; }
-  .hero-h1 { font-size: 46px !important; }
+  .hero-h1 { font-size: 46px !important; line-height: 110% !important; letter-spacing: -0.04em !important; }
   .hero-cta-row { margin-bottom: 40px; }
   .hero-widget { display: none !important; }
   .hero-phone-container { height: auto !important; overflow: visible !important; }

@@ -24,8 +24,8 @@ const LABEL: React.CSSProperties = {
 
 export default function ContactForm() {
   return (
-    <section className="py-12 lg:py-16" style={{ background: "transparent" }}>
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+    <section className="py-12 lg:py-16" style={{ background: "transparent", paddingLeft: "40px", paddingRight: "40px" }}>
+      <div style={{ maxWidth: "1350px", margin: "0 auto" }}>
         <div
           style={{
             background: "linear-gradient(145deg, #9B91FF 0%, #6557EA 100%)",
@@ -48,8 +48,8 @@ export default function ContactForm() {
               </span>
             </div>
             <h2
-              className="font-medium"
-              style={{ fontSize: "40px", letterSpacing: "-1.2px", lineHeight: 1.1, color: "white", textWrap: "balance" as never }}
+              className=""
+              style={{ fontSize: "40px", letterSpacing: "-0.02em", lineHeight: "120%", color: "white", textWrap: "balance" as never }}
             >
               Pronto para escalar o seu app?
             </h2>

@@ -31,8 +31,6 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${GeistMono.variable} ${inter.variable} h-full`}>
       <head>
-        <link rel="preconnect" href="https://api.fontshare.com" />
-        <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500&display=swap" rel="stylesheet" />
         {/* figma-capture-script */}
         <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
       </head>

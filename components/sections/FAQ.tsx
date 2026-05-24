@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import { useInView } from "@/hooks/useInView";
 
@@ -35,28 +35,28 @@ const faqs = [
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { ref: headerRef, visible: headerVisible } = useInView();
-  const { ref: containerRef, visible: containerVisible } = useInView();
+  const { ref: listRef, visible: listVisible } = useInView();
 
   return (
-    <section className="relative py-24 lg:py-32" style={{ background: "transparent", paddingBottom: "320px" }}>
+    <section className="relative py-24 lg:py-32" style={{ background: "#fafafa", paddingBottom: "280px", paddingLeft: "40px", paddingRight: "40px" }}>
 
-      {/* Blob roxo — centro-esquerda */}
-      <div style={{ position: "absolute", top: "60%", left: "50%", transform: "translate(-70%, -50%)", width: "700px", height: "700px", background: "radial-gradient(ellipse, rgba(130,100,255,0.22) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-      {/* Blob azul — centro-direita */}
-      <div style={{ position: "absolute", top: "60%", left: "50%", transform: "translate(-30%, -40%)", width: "600px", height: "600px", background: "radial-gradient(ellipse, rgba(80,140,255,0.18) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+      {/* Blob roxo */}
+      <div style={{ position: "absolute", top: "48%", left: "50%", transform: "translate(-70%, -50%)", width: "700px", height: "700px", background: "radial-gradient(ellipse, rgba(130,100,255,0.22) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+      {/* Blob azul */}
+      <div style={{ position: "absolute", top: "48%", left: "50%", transform: "translate(-30%, -40%)", width: "600px", height: "600px", background: "radial-gradient(ellipse, rgba(80,140,255,0.18) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
 
-      <div className="relative max-w-[1300px] mx-auto px-4 lg:px-16" style={{ zIndex: 1 }}>
+      <div className="relative" style={{ maxWidth: "1350px", margin: "0 auto", zIndex: 1 }}>
 
         {/* Header */}
         <div
           ref={headerRef as React.RefObject<HTMLDivElement>}
-          className={`text-center mx-auto mb-10 reveal${headerVisible ? " visible" : ""}`}
-          style={{ maxWidth: "560px" }}
+          className={`text-center mx-auto reveal${headerVisible ? " visible" : ""}`}
+          style={{ maxWidth: "560px", marginBottom: "56px" }}
         >
           <SectionBadge>FAQ</SectionBadge>
           <h2
-            className="font-medium text-dark leading-tight mt-3"
-            style={{ fontSize: "clamp(28px, 6.5vw, 48px)", letterSpacing: "-1.92px", lineHeight: "110%", textWrap: "balance", maxWidth: "380px", margin: "0 auto" } as React.CSSProperties}
+            className="text-dark mt-3"
+            style={{ fontSize: "clamp(28px, 6.5vw, 48px)", letterSpacing: "-0.02em", lineHeight: "120%", textWrap: "balance", maxWidth: "380px", margin: "12px auto 0" } as React.CSSProperties}
           >
             Perguntas frequentes
           </h2>
@@ -68,70 +68,95 @@ export default function FAQ() {
           </p>
         </div>
 
-        {/* Container externo — mais transparente */}
+        {/* FAQ list */}
         <div
-          ref={containerRef as React.RefObject<HTMLDivElement>}
-          className={`faq-scroll-container mx-auto reveal${containerVisible ? " visible" : ""}`}
-          style={{
-            "--reveal-delay": "0.12s",
-            maxWidth: "640px",
-            height: "520px",
-            overflow: "hidden",
-            background: "rgba(255, 255, 255, 0.28)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-            borderRadius: "28px",
-            border: "1px solid rgba(255, 255, 255, 0.50)",
-            padding: "10px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "6px",
-          } as React.CSSProperties}
+          ref={listRef as React.RefObject<HTMLDivElement>}
+          className={`mx-auto flex flex-col reveal${listVisible ? " visible" : ""}`}
+          style={{ maxWidth: "800px", gap: "12px", "--reveal-delay": "0.1s", height: "720px", overflow: "hidden" } as React.CSSProperties}
         >
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
-              /* Card individual por pergunta */
               <div
                 key={i}
-                className="overflow-hidden"
                 style={{
-                  background: "rgba(255, 255, 255, 0.72)",
-                  borderRadius: "18px",
-                  border: "1px solid rgba(255, 255, 255, 0.90)",
-                  boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
+                  background: "rgba(255,255,255,0.72)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  borderRadius: "16px",
+                  border: "1px solid rgba(255,255,255,0.9)",
+                  boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
+                  overflow: "hidden",
                 }}
               >
                 <button
-                  className="w-full flex items-center justify-between gap-6 text-left group"
-                  style={{ padding: "20px 24px" }}
+                  className="w-full flex items-center gap-4 text-left"
+                  style={{ padding: "20px 24px", cursor: "pointer", background: "none", border: "none" }}
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                 >
-                  <span
-                    className="font-medium text-dark transition-colors duration-200 group-hover:text-[var(--color-primary)]"
-                    style={{ fontSize: "16px", letterSpacing: "-0.3px", fontFamily: "var(--font-heading)", lineHeight: 1.3 }}
-                  >
+                  {/* Number badge */}
+                  <span style={{
+                    flexShrink: 0,
+                    width: "34px",
+                    height: "34px",
+                    borderRadius: "10px",
+                    background: "rgba(101,87,234,0.08)",
+                    color: "var(--color-primary)",
+                    fontSize: "13px",
+                    fontWeight: 700,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "var(--font-mono)",
+                    letterSpacing: "0.5px",
+                  }}>
+                    {i + 1}
+                  </span>
+
+                  {/* Question */}
+                  <span style={{
+                    flex: 1,
+                    fontSize: "16px",
+                    fontWeight: 600,
+                    letterSpacing: "-0.3px",
+                    color: "var(--color-dark)",
+                    lineHeight: 1.35,
+                    fontFamily: "var(--font-heading)",
+                  }}>
                     {faq.question}
                   </span>
-                  <span
-                    className="shrink-0 transition-colors duration-200"
-                    style={{ color: isOpen ? "var(--color-primary)" : "var(--color-muted)" }}
-                  >
-                    {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+
+                  {/* Chevron circle */}
+                  <span style={{
+                    flexShrink: 0,
+                    width: "34px",
+                    height: "34px",
+                    borderRadius: "50%",
+                    border: "1.5px solid rgba(101,87,234,0.35)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "var(--color-primary)",
+                    transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.35s cubic-bezier(0.4,0,0.2,1)",
+                  }}>
+                    <ChevronDown size={16} strokeWidth={2} />
                   </span>
                 </button>
 
-                <div
-                  style={{
-                    maxHeight: isOpen ? "300px" : "0px",
-                    overflow: "hidden",
-                    transition: "max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
-                  }}
-                >
-                  <p
-                    className="leading-relaxed"
-                    style={{ padding: "0 24px 20px", fontSize: "14px", color: "var(--color-muted)", lineHeight: 1.75 }}
-                  >
+                {/* Answer */}
+                <div style={{
+                  maxHeight: isOpen ? "300px" : "0px",
+                  overflow: "hidden",
+                  transition: "max-height 0.35s cubic-bezier(0.4,0,0.2,1)",
+                }}>
+                  <p style={{
+                    padding: "0 24px 22px",
+                    paddingLeft: "74px",
+                    fontSize: "14px",
+                    color: "var(--color-muted)",
+                    lineHeight: 1.75,
+                  }}>
                     {faq.answer}
                   </p>
                 </div>

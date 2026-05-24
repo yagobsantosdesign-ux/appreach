@@ -1,32 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import SectionBadge from "@/components/ui/SectionBadge";
-import Button from "@/components/ui/Button";
 import { useInView } from "@/hooks/useInView";
 
-const DURATION = 5000;
-
-type CaseMetric = { value: string; label: string };
-
-const cases: {
-  id: string;
-  number: string;
-  category: string;
-  hookTitle: string;
-  desafio: string;
-  estrategia: string[];
-  porqueFuncionou: string;
-  metrics: CaseMetric[];
-  logo: string;
-  logoW: number;
-  logoH: number;
-  gradient: string;
-  image?: string;
-  overlay?: boolean;
-}[] = [
+const cases = [
   {
-    id: "roi",
+    id: "beleza",
     number: "01",
     category: "Beleza",
     hookTitle: "Como um app de beleza multiplicou o ROI em 3× com criativos certos",
@@ -44,7 +23,6 @@ const cases: {
     logo: "/ticker-logo-1.svg",
     logoW: 124,
     logoH: 22,
-    gradient: "linear-gradient(200deg, #9B91FF 0%, #6557EA 55%, #3D28A8 100%)",
     image: "/case-beleza.png",
   },
   {
@@ -66,7 +44,6 @@ const cases: {
     logo: "/ticker-logo-2.svg",
     logoW: 61,
     logoH: 25,
-    gradient: "linear-gradient(160deg, #9B91FF 0%, #6557EA 55%, #3D28A8 100%)",
     image: "/case-food.png",
   },
   {
@@ -88,11 +65,10 @@ const cases: {
     logo: "/ticker-logo-3.svg",
     logoW: 77,
     logoH: 35,
-    gradient: "linear-gradient(220deg, #9B91FF 0%, #6557EA 50%, #3D28A8 100%)",
     image: "/case-eletronicos.png",
   },
   {
-    id: "banco",
+    id: "fintech",
     number: "04",
     category: "Fintech",
     hookTitle: "Banco digital abriu 38% mais contas com retargeting preciso",
@@ -110,9 +86,7 @@ const cases: {
     logo: "/ticker-logo-4.svg",
     logoW: 54,
     logoH: 21,
-    gradient: "linear-gradient(180deg, #6557EA 0%, #3D28A8 55%, #1E1640 100%)",
     image: "/case-fintech.png",
-    overlay: true,
   },
 ];
 
@@ -127,47 +101,43 @@ const LABEL: React.CSSProperties = {
 
 const BODY: React.CSSProperties = {
   fontSize: "16px",
-  color: "#3D3D4A",
-  lineHeight: 1.7,
-  textWrap: "pretty" as never,
+  color: "#3d3d4a",
+  lineHeight: "170%",
 };
+
+/* Subtle flat surface border — slightly more present than 4% for readability */
+const SURFACE_BORDER = "1px solid rgba(0,0,0,0.06)";
 
 export default function Cases() {
   const [active, setActive] = useState(0);
   const c = cases[active];
   const { ref: headerRef, visible: headerVisible } = useInView();
-  const { ref: cardRef, visible: cardVisible } = useInView();
+  const { ref: cardRef,   visible: cardVisible   } = useInView();
 
   return (
     <section
       id="cases"
-      className="pb-24 lg:pb-32 pt-0 lg:pt-8"
-      style={{ background: "transparent", position: "relative", overflow: "visible" }}
+      style={{ background: "white", padding: "80px 40px" }}
     >
       <style>{`
-        @keyframes tabFill {
-          from { transform: scaleX(0); }
-          to   { transform: scaleX(1); }
-        }
         @keyframes caseFadeIn {
           from { opacity: 0; transform: translateY(8px); }
           to   { opacity: 1; transform: translateY(0); }
         }
         @keyframes imgFadeIn {
-          from { opacity: 0; transform: scale(0.96); }
+          from { opacity: 0; transform: scale(0.97); }
           to   { opacity: 1; transform: scale(1); }
         }
 
-        /* ── Tabs ── */
+        /* Tab bar */
         .cases-tabs {
           display: inline-flex;
-          background: rgba(255,255,255,0.28);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(255,255,255,0.50);
+          background: rgba(250,250,250,0.62);
+          border: ${SURFACE_BORDER};
           border-radius: 14px;
           padding: 4px;
           gap: 2px;
+          flex-shrink: 0;
         }
         .cases-tab {
           position: relative;
@@ -177,61 +147,61 @@ export default function Cases() {
           padding: 10px 20px;
           border-radius: 10px;
           border: none;
-          background: rgba(255,255,255,0.18);
-          box-shadow: inset 0 0 0 1px rgba(255,255,255,0.40);
+          background: transparent;
           cursor: pointer;
-          overflow: hidden;
-          transition: background 0.2s, box-shadow 0.2s;
+          transition: background 0.15s;
         }
         .cases-tab:hover:not(.active) {
-          background: rgba(255,255,255,0.55);
+          background: rgba(0,0,0,0.03);
         }
         .cases-tab.active {
           background: #ffffff;
+          /* Functional affordance shadow — shows which tab is selected */
           box-shadow: 0 1px 3px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.06);
         }
         .cases-tab-num {
-          font-family: var(--font-geist-mono);
+          font-family: var(--font-mono);
           font-size: 11px;
           font-weight: 600;
-          color: #C0C0C0;
+          color: #c0c0c0;
           letter-spacing: 0.4px;
-          transition: color 0.2s;
+          transition: color 0.15s;
         }
         .cases-tab.active .cases-tab-num { color: #6557ea; }
         .cases-tab-label {
           font-size: 13px;
           font-weight: 500;
-          color: #9A9AA8;
-          transition: color 0.2s;
+          color: #9a9aa8;
+          transition: color 0.15s;
         }
-        .cases-tab.active .cases-tab-label { color: #141414; font-weight: 600; }
+        .cases-tab.active .cases-tab-label { color: #251d49; font-weight: 600; }
 
-        /* ── Card ── */
+        /* Card */
         .case-card {
           display: flex;
           align-items: stretch;
           gap: 40px;
-          border-radius: 20px;
-          padding: 52px 52px;
-          background: rgba(255,255,255,0.62);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(255,255,255,0.8);
-          box-shadow: 0 2px 1px rgba(0,0,0,0.02), 0 8px 32px rgba(101,87,234,0.05);
-          min-height: 637px;
+          border-radius: 24px;
+          padding: 53px;
+          background: rgba(250,250,250,0.62);
+          border: ${SURFACE_BORDER};
           animation: caseFadeIn 0.4s cubic-bezier(0.22,1,0.36,1);
         }
         .case-image-col {
           flex-shrink: 0;
-          width: 220px;
-          align-self: stretch;
+          width: 316px;
           border-radius: 12px;
+          overflow: hidden;
+          background: white;
           animation: imgFadeIn 0.5s cubic-bezier(0.22,1,0.36,1);
         }
-        .case-content-col { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; }
-
-        /* ── Content grid (no dividers) ── */
+        .case-content-col {
+          flex: 1;
+          min-width: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
         .cases-content-grid {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
@@ -245,7 +215,7 @@ export default function Cases() {
         .cases-metric-value {
           font-size: 48px;
           font-weight: 500;
-          color: #141414;
+          color: #251d49;
           line-height: 1;
           letter-spacing: -2px;
         }
@@ -263,46 +233,63 @@ export default function Cases() {
         }
       `}</style>
 
-      {/* Background gradient blobs — visíveis através do card semitransparente */}
-      <div aria-hidden style={{ position: "absolute", inset: 0, overflow: "visible", pointerEvents: "none", zIndex: 0 }}>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-40%, -55%)", width: "1600px", height: "1600px", background: "radial-gradient(ellipse, rgba(155,145,255,0.20) 0%, transparent 60%)" }} />
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-15%, -45%)", width: "1400px", height: "1400px", background: "radial-gradient(ellipse, rgba(196,181,253,0.14) 0%, transparent 60%)" }} />
-        <div style={{ position: "absolute", bottom: "0%", left: "0%", transform: "translate(-20%, 25%)", width: "1000px", height: "1000px", background: "radial-gradient(ellipse, rgba(155,145,255,0.12) 0%, transparent 60%)" }} />
-      </div>
+      <div style={{ maxWidth: "1350px", margin: "0 auto" }}>
 
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16" style={{ position: "relative", zIndex: 1 }}>
-
-        {/* Header row: headline esquerda, tabs direita */}
+        {/* Header row */}
         <div
           ref={headerRef as React.RefObject<HTMLDivElement>}
-          className={`flex items-end justify-between gap-10 mb-16 flex-wrap reveal${headerVisible ? " visible" : ""}`}
+          className={`reveal${headerVisible ? " visible" : ""}`}
+          style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "40px", marginBottom: "48px", flexWrap: "wrap" }}
         >
-          <div>
-            <SectionBadge>Cases</SectionBadge>
-            <h2
-              className="font-medium leading-tight"
-              style={{
-                fontSize: "clamp(28px, 6.5vw, 48px)",
-                letterSpacing: "-1.4px",
-                color: "#141414",
-                marginTop: "12px",
-                maxWidth: "560px",
-                textWrap: "balance" as never,
-              }}
-            >
-              Resultados reais. Apps que escalaram com a Appreach.
+          {/* Headline */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "499px" }}>
+            <div style={{ display: "inline-flex", gap: "8px", alignItems: "center" }}>
+              <div style={{ background: "#6557ea", height: "1.5px", width: "20px", flexShrink: 0 }} />
+              <span style={{
+                fontFamily: "var(--font-mono)",
+                fontWeight: 600,
+                color: "#6557ea",
+                fontSize: "11px",
+                letterSpacing: "1px",
+                textTransform: "uppercase",
+              }}>
+                Cases
+              </span>
+            </div>
+
+            <h2 style={{ color: "#251d49", fontSize: "48px" }}>
+              Apps que escalaram com a Appreach.
             </h2>
-            <p style={{ fontSize: "16px", color: "#6B6B7B", lineHeight: 1.65, marginTop: "14px", maxWidth: "440px" }}>
+
+            <p style={{ fontSize: "16px", color: "#6b6b7b", lineHeight: "165%" }}>
               De startups a grandes marcas — veja como transformamos investimento em mídia em crescimento mensurável.
             </p>
-            <div style={{ marginTop: "24px" }}>
-              <Button href="mailto:fale@appreach.com.br" variant="gradient" size="sm">
-                Quero resultados assim
-              </Button>
-            </div>
+
+            <a
+              href="#contato"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#6557ea",
+                color: "white",
+                height: "48px",
+                borderRadius: "12px",
+                padding: "0 20px",
+                fontSize: "16px",
+                fontWeight: 600,
+                letterSpacing: "-0.02em",
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+                alignSelf: "flex-start",
+              }}
+            >
+              Quero resultados como estes!
+            </a>
           </div>
 
-          <div className="cases-tabs" style={{ flexShrink: 0 }}>
+          {/* Tabs */}
+          <div className="cases-tabs">
             {cases.map((item, i) => (
               <button
                 key={item.id}
@@ -316,91 +303,90 @@ export default function Cases() {
           </div>
         </div>
 
-        {/* Card wrapper */}
-        <div ref={cardRef as React.RefObject<HTMLDivElement>} className={`reveal-scale${cardVisible ? " visible" : ""}`} style={{ position: "relative" }}>
-          <div aria-hidden style={{ position: "absolute", inset: 0, overflow: "visible", pointerEvents: "none", zIndex: 0 }}>
-            <div style={{ position: "absolute", top: "-80px", right: "-100px", width: "560px", height: "560px", background: "radial-gradient(ellipse, rgba(196,181,253,0.20) 0%, transparent 65%)" }} />
-            <div style={{ position: "absolute", bottom: "-80px", left: "-80px", width: "480px", height: "480px", background: "radial-gradient(ellipse, rgba(165,180,252,0.14) 0%, transparent 65%)" }} />
-          </div>
-          <div key={`card-${c.id}`} className="case-card" style={{ position: "relative", zIndex: 1 }}>
+        {/* Case card */}
+        <div
+          ref={cardRef as React.RefObject<HTMLDivElement>}
+          className={`reveal-scale${cardVisible ? " visible" : ""}`}
+        >
+          <div key={`card-${c.id}`} className="case-card">
 
-          {/* Image */}
-          <div key={`img-${c.id}`} className="case-image-col" style={{ background: "#ffffff", overflow: "hidden", position: "relative" }}>
-            {c.image && (
-              <>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={c.image} alt={`Case ${c.category}`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              </>
-            )}
-          </div>
+            {/* Image */}
+            <div key={`img-${c.id}`} className="case-image-col">
+              {c.image && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={c.image}
+                  alt={`Case ${c.category}`}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              )}
+            </div>
 
-          {/* Content */}
-          <div className="case-content-col">
+            {/* Content */}
+            <div className="case-content-col">
 
-            {/* Grupo topo: header + título com gap interno pequeno */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "12px", fontWeight: 600, color: "#6557ea", letterSpacing: "0.4px" }}>
-                    {c.number}
-                  </span>
-                  <span style={{ fontSize: "12px", fontWeight: 500, color: "#3D3D4A", background: "rgba(101,87,234,0.06)", borderRadius: "99px", padding: "3px 10px" }}>
-                    {c.category}
-                  </span>
+              {/* Top: badge + title */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <span style={{ fontFamily: "var(--font-mono)", fontSize: "12px", fontWeight: 600, color: "#6557ea", letterSpacing: "0.4px" }}>
+                      {c.number}
+                    </span>
+                    <span style={{ fontSize: "12px", fontWeight: 500, color: "#3d3d4a", background: "rgba(101,87,234,0.06)", borderRadius: "99px", padding: "3px 10px" }}>
+                      {c.category}
+                    </span>
+                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={c.logo}
+                    alt="Logo do cliente"
+                    width={c.logoW}
+                    height={c.logoH}
+                    style={{ maxHeight: "20px", width: "auto", opacity: 0.4, objectFit: "contain" }}
+                  />
                 </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={c.logo} alt="Logo do cliente" width={c.logoW} height={c.logoH}
-                  style={{ maxHeight: "20px", width: "auto", opacity: 0.4, objectFit: "contain" }} />
+
+                <p style={{ fontSize: "22px", fontWeight: 500, color: "#251d49", lineHeight: "140%", letterSpacing: "-0.5px", maxWidth: "360px" }}>
+                  {c.hookTitle}
+                </p>
               </div>
 
-              <p
-                className="font-medium"
-                style={{
-                  fontSize: "22px", color: "#141414", lineHeight: 1.35,
-                  letterSpacing: "-0.5px", maxWidth: "520px",
-                  textWrap: "balance" as never,
-                }}
-              >
-                {c.hookTitle}
-              </p>
-            </div>
-
-            {/* Content columns */}
-            <div className="cases-content-grid">
-              <div>
-                <p style={LABEL}>Desafio</p>
-                <p style={BODY}>{c.desafio}</p>
-              </div>
-              <div>
-                <p style={LABEL}>Estratégia</p>
-                <ul style={{ ...BODY, listStyle: "none", padding: 0, margin: 0 }}>
-                  {c.estrategia.map((item, i) => (
-                    <li key={i} style={{ display: "flex", gap: "8px", marginBottom: "4px" }}>
-                      <span style={{ color: "#6557ea", flexShrink: 0 }}>→</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <p style={LABEL}>Por que funcionou</p>
-                <p style={BODY}>{c.porqueFuncionou}</p>
-              </div>
-            </div>
-
-            {/* Metrics */}
-            <div className="cases-metrics-row">
-              {c.metrics.map((m, i) => (
-                <div key={i}>
-                  <p className="cases-metric-value">{m.value}</p>
-                  <p style={{ fontSize: "13px", color: "#909090", marginTop: "6px" }}>{m.label}</p>
+              {/* Content columns */}
+              <div className="cases-content-grid">
+                <div>
+                  <p style={LABEL}>Desafio</p>
+                  <p style={BODY}>{c.desafio}</p>
                 </div>
-              ))}
-            </div>
+                <div>
+                  <p style={LABEL}>Estratégia</p>
+                  <ul style={{ ...BODY, listStyle: "none", padding: 0, margin: 0 }}>
+                    {c.estrategia.map((item, i) => (
+                      <li key={i} style={{ display: "flex", gap: "8px", marginBottom: "4px" }}>
+                        <span style={{ color: "#6557ea", flexShrink: 0 }}>→</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p style={LABEL}>Por que funcionou</p>
+                  <p style={BODY}>{c.porqueFuncionou}</p>
+                </div>
+              </div>
 
+              {/* Metrics */}
+              <div className="cases-metrics-row">
+                {c.metrics.map((m, i) => (
+                  <div key={i}>
+                    <p className="cases-metric-value">{m.value}</p>
+                    <p style={{ fontSize: "13px", color: "#909090", marginTop: "6px" }}>{m.label}</p>
+                  </div>
+                ))}
+              </div>
+
+            </div>
           </div>
         </div>
-        </div>{/* end card wrapper */}
 
       </div>
     </section>

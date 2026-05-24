@@ -1,6 +1,48 @@
 "use client";
-import { useEffect, useRef } from "react";
-import Button from "@/components/ui/Button";
+import { useEffect, useRef, useState } from "react";
+
+const barPatterns = [
+  [38, 56, 50, 30, 58, 80, 24, 46, 72, 28, 52, 40],
+  [65, 30, 72, 45, 20, 55, 68, 35, 48, 75, 25, 60],
+  [22, 68, 40, 62, 35, 48, 78, 28, 55, 42, 65, 32],
+];
+
+const GAUGE_BARS = 12;
+const FILLED_MAX = 9;
+const PCT_MAX = 78.9;
+const CYCLE_MS = 9000;
+
+const C_EMPTY: [number, number, number] = [237, 233, 254];
+const C_FILLED: [number, number, number] = [101, 87, 234];
+
+function easeInOut(t: number) {
+  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+}
+
+function lerpRGB(a: [number, number, number], b: [number, number, number], t: number) {
+  return `rgb(${Math.round(a[0] + (b[0] - a[0]) * t)},${Math.round(a[1] + (b[1] - a[1]) * t)},${Math.round(a[2] + (b[2] - a[2]) * t)})`;
+}
+
+const arcDeg = 162;
+const startAngle = 180 + (180 - arcDeg) / 2;
+const step = arcDeg / (GAUGE_BARS - 1);
+const cx = 140, cy = 152;
+const r = 96;
+const barW = 13, barH = 44;
+
+const round5 = (n: number) => Math.round(n * 1e5) / 1e5;
+
+function buildBars() {
+  return Array.from({ length: GAUGE_BARS }, (_, i) => {
+    const angleDeg = round5(startAngle + i * step);
+    const angleRad = (angleDeg * Math.PI) / 180;
+    const pivotX = round5(cx + r * Math.cos(angleRad));
+    const pivotY = round5(cy + r * Math.sin(angleRad));
+    return { i, angleDeg, pivotX, pivotY };
+  });
+}
+
+const gaugeBarDefs = buildBars();
 
 const GRID = 70;
 const DASH = 11;
@@ -9,6 +51,10 @@ const SPEED = 0.09;
 const TOP_SKIP = 80;
 
 export default function Hero() {
+  const rectRefs = useRef<(SVGRectElement | null)[]>([]);
+  const numRef = useRef<HTMLDivElement | null>(null);
+  const [patternIdx, setPatternIdx] = useState(0);
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mouseRef = useRef<{ x: number; y: number } | null>(null);
   const cellsRef = useRef<number[]>([]);
@@ -60,7 +106,7 @@ export default function Hero() {
           const hx = Math.cos(angle) * DASH / 2;
           const hy = Math.sin(angle) * DASH / 2;
 
-          ctx.strokeStyle = `rgba(10,0,40,${0.22 + prog * 0.18})`;
+          ctx.strokeStyle = `rgba(101,87,234,${0.07 + prog * 0.13})`;
           ctx.lineWidth = 1.5;
           ctx.lineCap = "round";
           ctx.beginPath();
@@ -80,182 +126,256 @@ export default function Hero() {
     };
   }, []);
 
+  useEffect(() => {
+    const id = setInterval(() => setPatternIdx(i => (i + 1) % barPatterns.length), 2200);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const startTime = Date.now();
+
+    const tick = () => {
+      const t = ((Date.now() - startTime) % CYCLE_MS) / CYCLE_MS;
+
+      let p: number;
+      if (t < 0.38) {
+        p = easeInOut(t / 0.38);
+      } else if (t < 0.52) {
+        p = 1;
+      } else if (t < 0.90) {
+        p = 1 - easeInOut((t - 0.52) / 0.38);
+      } else {
+        p = 0;
+      }
+
+      const filledLevel = p * FILLED_MAX;
+
+      for (let i = 0; i < GAUGE_BARS; i++) {
+        const el = rectRefs.current[i];
+        if (el) {
+          const barT = Math.min(1, Math.max(0, filledLevel - i));
+          el.setAttribute("fill", lerpRGB(C_EMPTY, C_FILLED, barT));
+        }
+      }
+
+      if (numRef.current) {
+        numRef.current.textContent = `+${(p * PCT_MAX).toFixed(1)}%`;
+      }
+    };
+
+    const id = setInterval(tick, 16);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <section
-      className="hero-section relative overflow-hidden"
+      className="hero-section relative overflow-hidden flex flex-col"
       onMouseMove={(e) => {
         const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
         mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
       }}
       onMouseLeave={() => { mouseRef.current = null; }}
-      style={{
-        background: "radial-gradient(ellipse 140% 90% at 50% 0%, #9B91FF 0%, #6557EA 45%, #3D28A8 100%)",
-        paddingTop: "138px",
-        paddingBottom: "0px",
-        margin: "12px 20px 0",
-        borderRadius: "28px",
-      }}
+      style={{ background: "#fafafa", paddingTop: "134px", paddingBottom: "80px" }}
     >
       <canvas
         ref={canvasRef}
-        style={{
-          position: "absolute", inset: 0, width: "100%", height: "100%",
-          pointerEvents: "none", zIndex: 0,
-          maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.40) 0%, black 100%)",
-        }}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0 }}
       />
 
+      <div aria-hidden style={{
+        position: "absolute", top: 0, right: 0,
+        width: "55%", height: "100%",
+        background: "radial-gradient(ellipse 80% 80% at 85% 15%, rgba(101,87,234,0.06) 0%, transparent 70%)",
+        pointerEvents: "none", zIndex: 0,
+      }} />
 
+      {/* Container */}
       <div
-        className="relative flex flex-col items-center text-center"
-        style={{ zIndex: 1, maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}
+        className="relative flex flex-col lg:flex-row items-stretch"
+        style={{ flex: 1, zIndex: 1, maxWidth: "1350px", width: "100%", margin: "0 auto", padding: "0 40px", gap: "48px" }}
       >
-        {/* Badge */}
-        <div
-          className="inline-flex items-center gap-2 hero-fade-up hero-fade-up-1"
-          style={{
-            background: "rgba(255,255,255,0.14)",
-            backdropFilter: "blur(10px)",
-            border: "1px solid rgba(255,255,255,0.22)",
-            borderRadius: "100px",
-            padding: "5px 16px 5px 6px",
-            marginBottom: "28px",
-          }}
-        >
-          <span style={{ background: "white", color: "#6557ea", fontSize: "10px", fontWeight: 700, letterSpacing: "0.6px", padding: "3px 10px", borderRadius: "100px" }}>
-            AGÊNCIA
-          </span>
-          <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.88)" }}>
-            Performance para apps móveis
-          </span>
-        </div>
+        {/* LEFT */}
+        <div className="flex flex-col justify-between" style={{ flex: 1 }}>
 
-        {/* H1 */}
-        <h1
-          className="hero-h1 font-medium hero-fade-up hero-fade-up-2"
-          style={{ fontSize: "76px", color: "white", letterSpacing: "-2.2px", lineHeight: 1.05, maxWidth: "720px", marginBottom: "20px", textWrap: "balance" }}
-        >
-          <span style={{ display: "block" }}>Do primeiro</span>
-          install à receita
-        </h1>
+          {/* Headline group */}
+          <div className="flex flex-col" style={{ gap: "23px" }}>
+            <h1
+              className="hero-h1 hero-fade-up hero-fade-up-1"
+              style={{ fontSize: "60px", color: "#251d49", letterSpacing: "-0.04em", lineHeight: "110%", maxWidth: "444px", textWrap: "balance" } as React.CSSProperties}
+            >
+              Do primeiro install à receita
+            </h1>
 
-        {/* Subtitle */}
-        <p
-          className="hero-fade-up hero-fade-up-3"
-          style={{ fontSize: "16px", color: "rgba(255,255,255,0.68)", maxWidth: "580px", lineHeight: 1.65, marginBottom: "36px", textWrap: "balance" }}
-        >
-          A agência especializada em performance para apps móveis. Cuidamos de toda a jornada do usuário — da aquisição até a receita.
-        </p>
+            <p
+              className="hero-fade-up hero-fade-up-2"
+              style={{ fontSize: "18px", color: "#40404f", maxWidth: "485px", lineHeight: "160%" }}
+            >
+              Da aquisição ao evento de receita — estratégias integradas que fazem cada fase do seu app performar.
+            </p>
 
-        {/* CTAs */}
-        <div className="hero-cta-row flex items-center gap-3 hero-fade-up hero-fade-up-4">
-          <Button href="#contato" variant="dark" size="md">
-            Falar com especialista
-          </Button>
-          <div className="hidden md:block">
-            <Button href="#como-funciona" variant="glass" size="md">
-              Como funciona
-            </Button>
+            <div className="flex items-center hero-fade-up hero-fade-up-3" style={{ gap: "12px" }}>
+              <a
+                href="#contato"
+                className="inline-flex items-center justify-center font-semibold transition-all duration-200 hover:-translate-y-0.5"
+                style={{
+                  background: "#6557ea",
+                  color: "white",
+                  height: "48px",
+                  borderRadius: "12px",
+                  padding: "0 20px",
+                  fontSize: "16px",
+                  letterSpacing: "-0.02em",
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Começar agora
+              </a>
+              <a
+                href="#como-funciona"
+                className="inline-flex items-center justify-center font-semibold transition-all duration-200 hover:-translate-y-0.5"
+                style={{
+                  border: "1px solid rgba(37,29,73,0.12)",
+                  color: "#3d3d4a",
+                  height: "48px",
+                  borderRadius: "12px",
+                  padding: "0 21px",
+                  fontSize: "16px",
+                  letterSpacing: "-0.02em",
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Como Funciona
+              </a>
+            </div>
+          </div>
+
+          {/* Social proof */}
+          <div className="hidden lg:flex flex-col hero-fade-up hero-fade-up-4" style={{ gap: "15px", maxWidth: "335px", paddingTop: "32px" }}>
+            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                {[0, 1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    style={{
+                      width: "34px",
+                      height: "34px",
+                      borderRadius: "50%",
+                      background: "#251d49",
+                      border: "1.5px solid white",
+                      marginRight: i < 3 ? "-6px" : "0",
+                      position: "relative",
+                      zIndex: 4 - i,
+                      flexShrink: 0,
+                    }}
+                  />
+                ))}
+              </div>
+              <span style={{ fontSize: "18px", color: "#40404f", lineHeight: "160%", flexShrink: 0 }}>|</span>
+              <span style={{ fontSize: "18px", color: "#40404f", lineHeight: "160%" }}>+50 Apps atendidos</span>
+            </div>
+            <p style={{ fontSize: "18px", color: "#40404f", lineHeight: "160%" }}>
+              +300 campanhas ativas — de startups a marcas que você já conhece.
+            </p>
           </div>
         </div>
 
-        {/* iPhone + widgets */}
+        {/* RIGHT: Gradient panel + floating widgets */}
         <div
-          className="hero-fade-up hero-fade-up-5 hero-phone-container"
-          style={{ position: "relative", width: "900px", maxWidth: "100%", margin: "0 auto", height: "520px" }}
+          className="hero-fade-up hero-fade-up-5 hidden lg:flex"
+          style={{ flex: 1, minWidth: "500px" }}
         >
-
-          {/* Widget 1 — Performance (right) */}
-          <div className="hero-widget" style={{
-            position: "absolute",
-            bottom: "260px",
-            right: "0px",
-            background: "white",
-            border: "1px solid rgba(0,0,0,0.06)",
-            borderRadius: "20px",
-            padding: "18px 20px",
-            boxShadow: "0 12px 40px rgba(0,0,0,0.20), 0 1px 0 rgba(255,255,255,0.20) inset",
-            width: "260px",
-            zIndex: 10,
+          <div style={{
+            flex: 1,
+            background: "linear-gradient(to bottom, #c9cdfc, #e1e4fe)",
+            borderRadius: "43px",
+            position: "relative",
+            overflow: "visible",
           }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
-              <div style={{ width: "36px", height: "36px", borderRadius: "10px", background: "#DCFCE7", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path d="M3 17L9 11L13 15L21 7" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M14 7H21V14" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <div>
-                <div style={{ fontSize: "13px", fontWeight: 600, color: "#141414", letterSpacing: "-0.2px" }}>Performance</div>
-                <div style={{ fontSize: "11px", color: "#909090", marginTop: "1px" }}>Campanha ativa</div>
-              </div>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px" }}>
-              {[
-                { label: "Installs", value: "1.240" },
-                { label: "ROAS", value: "4.8x" },
-                { label: "Receita", value: "R$12K" },
-              ].map(m => (
-                <div key={m.label} style={{ background: "#F7F7F7", border: "1px solid #EBEBEB", borderRadius: "10px", padding: "10px 8px", textAlign: "center" }}>
-                  <div style={{ fontSize: "11px", color: "#909090", marginBottom: "4px" }}>{m.label}</div>
-                  <div style={{ fontSize: "15px", fontWeight: 700, color: "#141414", letterSpacing: "-0.5px" }}>{m.value}</div>
-                </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Widget 2 — installs (left) */}
-          <div className="hero-widget" style={{
-            position: "absolute",
-            bottom: "120px",
-            left: "0px",
-            background: "white",
-            border: "1px solid rgba(0,0,0,0.06)",
-            borderRadius: "20px",
-            padding: "18px 20px",
-            boxShadow: "0 12px 40px rgba(0,0,0,0.20), 0 1px 0 rgba(255,255,255,0.20) inset",
-            width: "260px",
-            zIndex: 10,
-          }}>
-            {/* Header */}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <div style={{ width: "28px", height: "28px", borderRadius: "8px", background: "#DCFCE7", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-                    <path d="M5 12L10 17L19 7" stroke="#22C55E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <span style={{ fontSize: "12px", fontWeight: 600, color: "#141414", letterSpacing: "0.2px" }}>User Acquisition</span>
-              </div>
-              <span style={{ fontSize: "11px", color: "#909090" }}>60d</span>
-            </div>
-            {/* Metric */}
-            <div style={{ marginBottom: "10px" }}>
-              <div style={{ fontSize: "36px", fontWeight: 700, color: "#141414", letterSpacing: "-1.5px", lineHeight: 1 }}>+340%</div>
-              <div style={{ fontSize: "12px", color: "#909090", marginTop: "4px" }}>crescimento em installs</div>
-            </div>
-            {/* Footer */}
-            <div style={{ paddingTop: "10px", borderTop: "1px solid #EBEBEB", fontSize: "12px", color: "#909090" }}>
-              App de Finanças
-            </div>
-          </div>
-
-          {/* iPhone image */}
-          <img
-            src="/iphone-hero.png"
-            alt="App performance"
-            style={{
+            {/* Card 1 — Total de vendas */}
+            <div className="widget-float" style={{
               position: "absolute",
-              bottom: "0px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "544px",
-              display: "block",
-              filter: "drop-shadow(0 32px 64px rgba(0,0,0,0.28))",
-            }}
-          />
+              top: "60%",
+              left: "-134px",
+              width: "268px",
+              background: "white",
+              borderRadius: "24px",
+              padding: "22px 22px 18px",
+              boxShadow: "0 24px 24px rgba(0,0,0,0.18), 0 4px 6px rgba(0,0,0,0.08)",
+              textAlign: "left",
+            }}>
+              <span style={{ fontSize: "14px", fontWeight: 600, color: "#251d49", letterSpacing: "-0.3px", display: "block", marginBottom: "8px" }}>
+                Total de vendas
+              </span>
+              <span style={{ fontSize: "34px", fontWeight: 700, letterSpacing: "-0.05em", lineHeight: 1, color: "#251d49", display: "block" }}>
+                R$ 28.500
+              </span>
+              <div style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "11px", fontWeight: 600, color: "#6557EA", marginTop: "6px", marginBottom: "12px" }}>
+                <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#6557EA", display: "inline-block", flexShrink: 0 }} />
+                10,2% vs mês anterior
+              </div>
+              <div style={{ display: "flex", alignItems: "flex-end", gap: "3px", height: "54px" }}>
+                {barPatterns[patternIdx].map((h, i) => (
+                  <div key={i} style={{
+                    flex: 1,
+                    height: `${h * 0.58}px`,
+                    borderRadius: "4px 4px 2px 2px",
+                    background: h >= 50 ? "#6557EA" : "#D6D1FB",
+                    transition: "height 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                  }} />
+                ))}
+              </div>
+            </div>
 
+            {/* Card 2 — Revenue Snapshot */}
+            <div className="widget-float-2" style={{
+              position: "absolute",
+              top: "31%",
+              right: "-78px",
+              width: "236px",
+              background: "white",
+              borderRadius: "24px",
+              padding: "18px 18px 14px",
+              boxShadow: "0 24px 24px rgba(0,0,0,0.18), 0 4px 6px rgba(0,0,0,0.08)",
+            }}>
+              <span style={{ fontSize: "14px", fontWeight: 600, color: "#251d49", letterSpacing: "-0.3px", display: "block", marginBottom: "6px" }}>
+                Revenue Snapshot
+              </span>
+              <div style={{ display: "flex", justifyContent: "center", position: "relative", height: "110px", margin: "0 -4px" }}>
+                <svg width="196" height="102" viewBox="0 0 280 160" fill="none" style={{ display: "block", overflow: "visible" }} suppressHydrationWarning>
+                  {gaugeBarDefs.map(({ i, angleDeg, pivotX, pivotY }) => (
+                    <rect
+                      key={i}
+                      ref={(el) => { rectRefs.current[i] = el; }}
+                      x={pivotX - barW / 2}
+                      y={pivotY - barH}
+                      width={barW}
+                      height={barH}
+                      rx="6"
+                      fill={`rgb(${C_EMPTY[0]},${C_EMPTY[1]},${C_EMPTY[2]})`}
+                      transform={`rotate(${angleDeg + 90}, ${pivotX}, ${pivotY})`}
+                    />
+                  ))}
+                </svg>
+                <div style={{ position: "absolute", bottom: "6px", left: "50%", transform: "translateX(-50%)", textAlign: "center", whiteSpace: "nowrap", pointerEvents: "none" }}>
+                  <div ref={numRef} style={{ fontSize: "26px", fontWeight: 700, color: "#6557EA", letterSpacing: "-0.06em", lineHeight: 1 }}>
+                    +0.0%
+                  </div>
+                  <div style={{ fontSize: "10px", color: "#909090", marginTop: "3px" }}>Success rate</div>
+                </div>
+              </div>
+              <div style={{ marginTop: "10px", paddingTop: "10px", borderTop: "1px solid #F0F0F0", fontSize: "11px", color: "#3D3D4A", lineHeight: 1.55, textAlign: "center" }}>
+                Você conquistou{" "}
+                <strong style={{ color: "#6557ea" }}>R$ 3,2K</strong>{" "}
+                em receita hoje
+              </div>
+            </div>
+
+          </div>
         </div>
+
       </div>
     </section>
   );

@@ -2,6 +2,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import LogoTicker from "@/components/sections/LogoTicker";
+import WhyAppreach from "@/components/sections/WhyAppreach";
 import Strategies from "@/components/sections/Strategies";
 import Platforms from "@/components/sections/Platforms";
 import FunnelGuide from "@/components/sections/FunnelGuide";
@@ -17,6 +18,7 @@ export default function Home() {
       <main style={{ background: "#ffffff" }}>
         <Hero />
         <LogoTicker />
+        <WhyAppreach />
         <Strategies />
         <Platforms />
         <FunnelGuide />

@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import SectionBadge from "@/components/ui/SectionBadge";
+import React, { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 
 const steps = [
@@ -37,154 +37,225 @@ const steps = [
   },
 ];
 
+const CARD_W      = 476;
+const CARD_H      = 708;
+const SIDE_SCALE  = 349 / 476;                                        // ≈ 0.733
+const SIDE_OFFSET = CARD_W / 2 + 64 + (CARD_W * SIDE_SCALE) / 2;    // ≈ 476.5 px
+
 export default function Timeline() {
-  const { ref: headerRef, visible: headerVisible } = useInView();
-  const { ref: cardRef, visible: cardVisible } = useInView();
+  const [active, setActive] = useState(0);
+  const { ref: headerRef,   visible: headerVisible   } = useInView();
+  const { ref: carouselRef, visible: carouselVisible } = useInView();
+
+  const prev = () => setActive((a) => Math.max(0, a - 1));
+  const next = () => setActive((a) => Math.min(steps.length - 1, a + 1));
+
   return (
-    <section id="como-funciona" className="relative py-24 lg:py-32" style={{ background: "transparent" }}>
+    <section
+      id="como-funciona"
+      style={{ background: "white", padding: "80px 0", overflow: "hidden" }}
+    >
+      <style>{`
+        @media (max-width: 767px) {
+          .process-track    { height: 520px !important; }
+          .process-card     { width: 82vw !important; height: auto !important; min-height: 460px !important; }
+          .process-nav-left  { left: 16px !important; }
+          .process-nav-right { right: 16px !important; }
+        }
+      `}</style>
 
-      {/* Blobs de fundo */}
-      <div style={{ position: "absolute", top: "10%", left: "50%", transform: "translateX(-65%)", width: "1400px", height: "1400px", background: "radial-gradient(ellipse, rgba(155,145,255,0.06) 0%, transparent 60%)", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", top: "45%", left: "50%", transform: "translateX(-35%)", width: "1200px", height: "1200px", background: "radial-gradient(ellipse, rgba(196,181,253,0.04) 0%, transparent 60%)", pointerEvents: "none" }} />
-
-      <div className="relative max-w-[1300px] mx-auto px-4 lg:px-16">
-
-        {/* Header */}
+      {/* ── Header ─────────────────────────────────────────────────────── */}
+      <div style={{ maxWidth: "1350px", margin: "0 auto", padding: "0 40px" }}>
         <div
           ref={headerRef as React.RefObject<HTMLDivElement>}
-          className={`text-center mx-auto mb-12 reveal${headerVisible ? " visible" : ""}`}
-          style={{ maxWidth: "580px" }}
+          className={`reveal${headerVisible ? " visible" : ""}`}
+          style={{ textAlign: "center", marginBottom: "64px" }}
         >
-          <SectionBadge>Processo</SectionBadge>
-          <h2
-            className="font-medium text-dark leading-tight mt-3"
-            style={{ fontSize: "clamp(28px, 6.5vw, 48px)", letterSpacing: "-1.4px", textWrap: "balance" }}
-          >
-            Processo claro, resultados mensuráveis.
+          {/* Badge */}
+          <div style={{ display: "inline-flex", gap: "8px", alignItems: "center", marginBottom: "16px" }}>
+            <div style={{ background: "#6557ea", height: "1.5px", width: "20px", flexShrink: 0 }} />
+            <span style={{
+              fontFamily: "var(--font-mono)",
+              fontWeight: 600,
+              color: "#6557ea",
+              fontSize: "11px",
+              letterSpacing: "1px",
+              textTransform: "uppercase",
+            }}>
+              Processo
+            </span>
+          </div>
+
+          <h2 style={{
+            color: "#251d49",
+            fontSize: "48px",
+            maxWidth: "700px",
+            margin: "0 auto 16px",
+            textWrap: "balance",
+          } as React.CSSProperties}>
+            Inicie com a Appreach em alguns passos simples
           </h2>
+
+          <p style={{ fontSize: "16px", color: "#3d3d4a", lineHeight: "160%", maxWidth: "480px", margin: "0 auto", textWrap: "balance" } as React.CSSProperties}>
+            Em algumas semanas seu app estará entre os melhores do mercado.
+          </p>
         </div>
+      </div>
 
-        {/* Card glassmorphism com as linhas dentro */}
+      {/* ── Carousel ───────────────────────────────────────────────────── */}
+      <div
+        ref={carouselRef as React.RefObject<HTMLDivElement>}
+        className={`reveal-scale${carouselVisible ? " visible" : ""}`}
+        style={{ "--reveal-delay": "0.1s" } as React.CSSProperties}
+      >
+        <div style={{ maxWidth: "1350px", margin: "0 auto", overflow: "hidden", position: "relative" }}>
+          {/* Fade overlay — laterais */}
+          <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, white 0%, transparent 8%, transparent 92%, white 100%)", pointerEvents: "none", zIndex: 3 }} />
+        {/* Track */}
         <div
-          ref={cardRef as React.RefObject<HTMLDivElement>}
-          className={`overflow-hidden reveal${cardVisible ? " visible" : ""}`}
-          style={{ "--reveal-delay": "0.12s",
-            background: "rgba(255, 255, 255, 0.28)",
-            backdropFilter: "blur(12px)",
-            borderRadius: "24px",
-            border: "1px solid rgba(255, 255, 255, 0.80)",
-            boxShadow: "0 4px 32px rgba(101, 87, 234, 0.06), 0 1px 0 rgba(255,255,255,0.9) inset",
-          } as React.CSSProperties}
+          className="process-track"
+          style={{ position: "relative", height: `${CARD_H}px`, marginBottom: "40px" }}
         >
-          {steps.map((step, i) => (
-            <div
-              key={step.number}
-              className="group relative overflow-hidden transition-colors duration-300 hover:bg-white/40"
-              style={{ borderTop: i > 0 ? "1px solid rgba(235,235,235,0.7)" : undefined }}
-            >
-              {/* Acento lateral */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-[3px] opacity-0 group-hover:opacity-100 transition-all duration-300 origin-top scale-y-0 group-hover:scale-y-100"
-                style={{ background: "var(--color-primary)" }}
-              />
+          {steps.map((step, i) => {
+            const isActive = i === active;
+            const scale    = isActive ? 1 : SIDE_SCALE;
+            const tx       = (i - active) * SIDE_OFFSET;
+            const opacity  = isActive ? 1 : 0.24;
 
-              {/* Desktop: 3-col grid */}
+            return (
               <div
-                className="hidden lg:grid items-start gap-x-12 py-12 px-10 transition-[padding] duration-300 group-hover:pl-12"
-                style={{ gridTemplateColumns: "72px 1fr 1fr" }}
+                key={step.number}
+                className="process-card"
+                onClick={() => !isActive && setActive(i)}
+                style={{
+                  position: "absolute",
+                  left: "50%",
+                  top: "50%",
+                  width: `${CARD_W}px`,
+                  height: `${CARD_H}px`,
+                  transform: `translate(calc(-50% + ${tx}px), -50%) scale(${scale})`,
+                  transition: "transform 0.55s cubic-bezier(0.22,1,0.36,1), opacity 0.4s ease",
+                  opacity,
+                  cursor: isActive ? "default" : "pointer",
+                  borderRadius: "24px",
+                  background: "#251d49",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
+                  transformOrigin: "center center",
+                  zIndex: isActive ? 2 : 1,
+                }}
               >
-                {/* Número */}
-                <span
-                  className="select-none leading-none text-[var(--color-border)] group-hover:text-[var(--color-primary)] transition-colors duration-300"
-                  style={{
-                    fontSize: "48px",
-                    fontFamily: "var(--font-geist-mono)",
-                    fontWeight: 500,
-                    letterSpacing: "-2px",
-                    lineHeight: 1,
-                  }}
-                >
-                  {step.number}
-                </span>
+                {/* Visual placeholder area */}
+                <div style={{
+                  flex: 1,
+                  background: "linear-gradient(180deg, #3d317e 0%, #2b2060 100%)",
+                }} />
 
-                {/* Tag + título */}
-                <div className="flex flex-col gap-2">
-                  <span
-                    style={{
-                      fontSize: "11px",
-                      fontFamily: "var(--font-geist-mono)",
-                      fontWeight: 500,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      color: "var(--color-primary)",
-                    }}
-                  >
-                    {step.tag}
+                {/* Text area */}
+                <div style={{
+                  padding: "32px 36px 40px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                  flexShrink: 0,
+                }}>
+                  <span style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    color: "#8885f4",
+                    letterSpacing: "1px",
+                    textTransform: "uppercase",
+                  }}>
+                    Passo {step.number} — {step.tag}
                   </span>
-                  <h3
-                    className="font-medium text-dark"
-                    style={{ fontSize: "20px", letterSpacing: "-0.5px", fontFamily: "var(--font-heading)", lineHeight: 1.2 }}
-                  >
+
+                  <h3 style={{
+                    color: "white",
+                    fontSize: "28px",
+                    letterSpacing: "-0.02em",
+                    lineHeight: "130%",
+                    margin: 0,
+                  }}>
                     {step.title}
                   </h3>
-                </div>
 
-                {/* Descrição */}
-                <p
-                  className="leading-relaxed pt-[3px]"
-                  style={{ fontSize: "16px", color: "var(--color-muted)" }}
-                >
-                  {step.description}
-                </p>
-              </div>
-
-              {/* Mobile */}
-              <div className="lg:hidden py-7 px-6 flex flex-col gap-2">
-                <div className="flex items-center gap-3 mb-1">
-                  <span
-                    className="select-none leading-none text-[var(--color-border)]"
-                    style={{
-                      fontSize: "28px",
-                      fontFamily: "var(--font-geist-mono)",
-                      fontWeight: 500,
-                      letterSpacing: "-1px",
-                      lineHeight: 1,
-                    }}
-                  >
-                    {step.number}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "10px",
-                      fontFamily: "var(--font-geist-mono)",
-                      fontWeight: 500,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      color: "var(--color-primary)",
-                    }}
-                  >
-                    {step.tag}
-                  </span>
+                  <p style={{
+                    fontSize: "15px",
+                    color: "rgba(255,255,255,0.6)",
+                    lineHeight: "160%",
+                    margin: 0,
+                  }}>
+                    {step.description}
+                  </p>
                 </div>
-                <h3
-                  className="font-medium text-dark"
-                  style={{ fontSize: "17px", letterSpacing: "-0.4px", fontFamily: "var(--font-heading)" }}
-                >
-                  {step.title}
-                </h3>
-                <p
-                  className="leading-relaxed"
-                  style={{ fontSize: "16px", color: "var(--color-muted)" }}
-                >
-                  {step.description}
-                </p>
               </div>
-            </div>
-          ))}
+            );
+          })}
+
+          {/* Left nav — absolute, centered on the gap between side and active card */}
+          <button
+            className="process-nav-left"
+            onClick={prev}
+            disabled={active === 0}
+            aria-label="Anterior"
+            style={{
+              position: "absolute",
+              left: "calc(50% - 292px)",
+              top: "50%",
+              transform: "translateY(-50%)",
+              zIndex: 10,
+              width: "44px",
+              height: "44px",
+              borderRadius: "50%",
+              background: "#6557ea",
+              border: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: active === 0 ? "default" : "pointer",
+              opacity: active === 0 ? 0.35 : 1,
+              transition: "opacity 0.2s ease",
+              flexShrink: 0,
+            }}
+          >
+            <ChevronLeft size={20} color="white" />
+          </button>
+
+          {/* Right nav */}
+          <button
+            className="process-nav-right"
+            onClick={next}
+            disabled={active === steps.length - 1}
+            aria-label="Próximo"
+            style={{
+              position: "absolute",
+              right: "calc(50% - 292px)",
+              top: "50%",
+              transform: "translateY(-50%)",
+              zIndex: 10,
+              width: "44px",
+              height: "44px",
+              borderRadius: "50%",
+              background: "#6557ea",
+              border: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: active === steps.length - 1 ? "default" : "pointer",
+              opacity: active === steps.length - 1 ? 0.35 : 1,
+              transition: "opacity 0.2s ease",
+              flexShrink: 0,
+            }}
+          >
+            <ChevronRight size={20} color="white" />
+          </button>
         </div>
-
-
+        </div>
       </div>
+
     </section>
   );
 }

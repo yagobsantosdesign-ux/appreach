@@ -25,16 +25,16 @@ const stats = [
 
 export default function Stats() {
   return (
-    <section className="py-24 lg:py-32 bg-white">
-      <div className="max-w-[1300px] mx-auto px-4 lg:px-16">
+    <section className="py-24 lg:py-32 bg-white" style={{ paddingLeft: "40px", paddingRight: "40px" }}>
+      <div style={{ maxWidth: "1350px", margin: "0 auto" }}>
         <div className="flex flex-col lg:flex-row lg:items-start gap-16 lg:gap-24">
 
           {/* Left — texto */}
           <div className="lg:w-[380px] lg:flex-shrink-0 lg:pt-2">
             <SectionBadge>Resultados</SectionBadge>
             <h2
-              className="font-medium text-dark leading-tight mb-4"
-              style={{ fontSize: "48px", letterSpacing: "-1.4px", textWrap: "balance" }}
+              className="text-dark mb-4"
+              style={{ fontSize: "48px", letterSpacing: "-0.02em", lineHeight: "120%", textWrap: "balance" }}
             >
               Números que provam o resultado
             </h2>
