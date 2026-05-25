@@ -44,87 +44,10 @@ function buildBars() {
 
 const gaugeBarDefs = buildBars();
 
-const GRID = 70;
-const DASH = 11;
-const HOVER_R = 90;
-const SPEED = 0.09;
-const TOP_SKIP = 80;
-
 export default function Hero() {
   const rectRefs = useRef<(SVGRectElement | null)[]>([]);
   const numRef = useRef<HTMLDivElement | null>(null);
   const [patternIdx, setPatternIdx] = useState(0);
-
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const mouseRef = useRef<{ x: number; y: number } | null>(null);
-  const cellsRef = useRef<number[]>([]);
-  const dashRafRef = useRef<number>(0);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let cols = 0, rows = 0;
-
-    const resize = () => {
-      const w = canvas.parentElement?.clientWidth ?? window.innerWidth;
-      const h = canvas.parentElement?.clientHeight ?? window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
-      cols = Math.ceil(w / GRID) + 1;
-      rows = Math.ceil(h / GRID) + 1;
-      cellsRef.current = Array.from({ length: cols * rows }, () => 0);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const mouse = mouseRef.current;
-
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const idx = r * cols + c;
-          const cx = c * GRID + GRID / 2;
-          const cy = r * GRID + GRID / 2;
-
-          if (cy < TOP_SKIP) continue;
-
-          let prog = cellsRef.current[idx] ?? 0;
-          if (mouse) {
-            const dx = cx - mouse.x, dy = cy - mouse.y;
-            const near = Math.sqrt(dx * dx + dy * dy) < HOVER_R;
-            prog = near ? Math.min(1, prog + SPEED) : Math.max(0, prog - SPEED * 0.5);
-          } else {
-            prog = Math.max(0, prog - SPEED * 0.5);
-          }
-          cellsRef.current[idx] = prog;
-
-          const angle = (-45 + prog * 90) * (Math.PI / 180);
-          const hx = Math.cos(angle) * DASH / 2;
-          const hy = Math.sin(angle) * DASH / 2;
-
-          ctx.strokeStyle = `rgba(101,87,234,${0.07 + prog * 0.13})`;
-          ctx.lineWidth = 1.5;
-          ctx.lineCap = "round";
-          ctx.beginPath();
-          ctx.moveTo(cx - hx, cy - hy);
-          ctx.lineTo(cx + hx, cy + hy);
-          ctx.stroke();
-        }
-      }
-
-      dashRafRef.current = requestAnimationFrame(draw);
-    };
-
-    dashRafRef.current = requestAnimationFrame(draw);
-    return () => {
-      cancelAnimationFrame(dashRafRef.current);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
 
   useEffect(() => {
     const id = setInterval(() => setPatternIdx(i => (i + 1) % barPatterns.length), 2200);
@@ -170,17 +93,8 @@ export default function Hero() {
   return (
     <section
       className="hero-section relative overflow-hidden flex flex-col"
-      onMouseMove={(e) => {
-        const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-        mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-      }}
-      onMouseLeave={() => { mouseRef.current = null; }}
       style={{ background: "#fafafa", paddingTop: "134px", paddingBottom: "80px" }}
     >
-      <canvas
-        ref={canvasRef}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0 }}
-      />
 
       <div aria-hidden style={{
         position: "absolute", top: 0, right: 0,
@@ -210,7 +124,7 @@ export default function Hero() {
               className="hero-fade-up hero-fade-up-2"
               style={{ fontSize: "18px", color: "#40404f", maxWidth: "485px", lineHeight: "160%" }}
             >
-              Da aquisição ao evento de receita — estratégias integradas que fazem cada fase do seu app performar.
+              Da aquisição ao evento de receita, estratégias integradas que fazem cada fase do seu app performar.
             </p>
 
             <div className="flex items-center hero-fade-up hero-fade-up-3" style={{ gap: "12px" }}>
@@ -255,57 +169,97 @@ export default function Hero() {
           <div className="hidden lg:flex flex-col hero-fade-up hero-fade-up-4" style={{ gap: "15px", maxWidth: "335px", paddingTop: "32px" }}>
             <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
               <div style={{ display: "flex", alignItems: "center" }}>
-                {[0, 1, 2, 3].map((i) => (
-                  <div
-                    key={i}
+                {[1, 2, 3, 4].map((n, i) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={n}
+                    src={`/avatar-${n}.png`}
+                    alt=""
+                    aria-hidden="true"
                     style={{
                       width: "34px",
                       height: "34px",
                       borderRadius: "50%",
-                      background: "#251d49",
                       border: "1.5px solid white",
                       marginRight: i < 3 ? "-6px" : "0",
                       position: "relative",
                       zIndex: 4 - i,
                       flexShrink: 0,
+                      objectFit: "cover",
                     }}
                   />
                 ))}
               </div>
               <span style={{ fontSize: "18px", color: "#40404f", lineHeight: "160%", flexShrink: 0 }}>|</span>
-              <span style={{ fontSize: "18px", color: "#40404f", lineHeight: "160%" }}>+50 Apps atendidos</span>
+              <span style={{ fontSize: "14px", color: "#40404f", lineHeight: "160%", maxWidth: "148px", display: "inline-block" }}>Time de especialistas em mobile marketing</span>
             </div>
             <p style={{ fontSize: "18px", color: "#40404f", lineHeight: "160%" }}>
-              +300 campanhas ativas — de startups a marcas que você já conhece.
+              +300 campanhas ativas, de startups a marcas que você já conhece.
             </p>
           </div>
         </div>
 
-        {/* RIGHT: Gradient panel + floating widgets */}
+        {/* RIGHT: iPhone + gradiente + widgets */}
         <div
-          className="hero-fade-up hero-fade-up-5 hidden lg:flex"
-          style={{ flex: 1, minWidth: "500px" }}
+          className="hidden lg:flex"
+          style={{ flex: 1, minWidth: "500px", position: "relative", alignSelf: "stretch" }}
         >
+          {/* [1] Retângulo gradiente — ocupa 80% inferior */}
           <div style={{
-            flex: 1,
-            background: "linear-gradient(to bottom, #c9cdfc, #e1e4fe)",
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "80%",
+            background: "linear-gradient(to bottom, #C9CDFC, #EFF1FE)",
             borderRadius: "43px",
-            position: "relative",
-            overflow: "visible",
-          }}>
+            zIndex: 0,
+          }} />
 
-            {/* Card 1 — Total de vendas */}
-            <div className="widget-float" style={{
+          {/* [2] iPhone — animado, base alinhada ao retângulo */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/iphone-hero.png"
+            alt=""
+            aria-hidden="true"
+            className="iphone-enter"
+            style={{
               position: "absolute",
-              top: "60%",
-              left: "-134px",
-              width: "268px",
-              background: "white",
-              borderRadius: "24px",
-              padding: "22px 22px 18px",
-              boxShadow: "0 24px 24px rgba(0,0,0,0.18), 0 4px 6px rgba(0,0,0,0.08)",
-              textAlign: "left",
-            }}>
+              bottom: 0,
+              left: "50%",
+              height: "100%",
+              width: "auto",
+              objectFit: "contain",
+              objectPosition: "bottom center",
+              zIndex: 1,
+            }}
+          />
+
+          {/* [3] Máscara fade — estática, some a base do iPhone */}
+          <div aria-hidden style={{
+            position: "absolute",
+            bottom: "-80px",
+            left: 0,
+            right: 0,
+            height: "calc(20% + 80px)",
+            background: "linear-gradient(to bottom, transparent 0%, #fafafa 60%)",
+            pointerEvents: "none",
+            zIndex: 2,
+          }} />
+
+          {/* Card 1 — Total de vendas */}
+          <div className="widget-float" style={{
+            position: "absolute",
+            top: "60%",
+            left: "-134px",
+            width: "268px",
+            background: "white",
+            borderRadius: "24px",
+            padding: "22px 22px 18px",
+            boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)",
+            textAlign: "left",
+            zIndex: 3,
+          }}>
               <span style={{ fontSize: "14px", fontWeight: 600, color: "#251d49", letterSpacing: "-0.3px", display: "block", marginBottom: "8px" }}>
                 Total de vendas
               </span>
@@ -329,17 +283,18 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Card 2 — Revenue Snapshot */}
-            <div className="widget-float-2" style={{
-              position: "absolute",
-              top: "31%",
-              right: "-78px",
-              width: "236px",
-              background: "white",
-              borderRadius: "24px",
-              padding: "18px 18px 14px",
-              boxShadow: "0 24px 24px rgba(0,0,0,0.18), 0 4px 6px rgba(0,0,0,0.08)",
-            }}>
+          {/* Card 2 — Revenue Snapshot */}
+          <div className="widget-float-2" style={{
+            position: "absolute",
+            top: "31%",
+            right: "-78px",
+            width: "236px",
+            background: "white",
+            borderRadius: "24px",
+            padding: "18px 18px 14px",
+            boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)",
+            zIndex: 3,
+          }}>
               <span style={{ fontSize: "14px", fontWeight: 600, color: "#251d49", letterSpacing: "-0.3px", display: "block", marginBottom: "6px" }}>
                 Revenue Snapshot
               </span>
@@ -371,9 +326,8 @@ export default function Hero() {
                 <strong style={{ color: "#6557ea" }}>R$ 3,2K</strong>{" "}
                 em receita hoje
               </div>
-            </div>
-
           </div>
+
         </div>
 
       </div>

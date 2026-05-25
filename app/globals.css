@@ -158,6 +158,16 @@ a:hover .logo-text {
 
 .widget-float   { opacity: 0; animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.48s forwards, float 4s   ease-in-out 1.2s  infinite; }
 .widget-float-2 { opacity: 0; animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.48s forwards, float 5s   ease-in-out 1.35s infinite; }
+
+@keyframes iphone-slide-up {
+  from { opacity: 0; transform: translateX(-50%) translateY(72px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.iphone-enter {
+  opacity: 0;
+  animation: iphone-slide-up 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
 .widget-float-3 { opacity: 0; animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.60s forwards, float 4.5s ease-in-out 1.4s  infinite; }
 .widget-float-4 { opacity: 0; animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.60s forwards, float 3.8s ease-in-out 1.2s  infinite; }
 

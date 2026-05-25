@@ -43,34 +43,21 @@ export default function Header() {
     `}</style>
     <header
       className="header-anim fixed top-0 left-0 right-0 z-50"
-      style={{ padding: "12px 16px 0" }}
+      style={{
+        background: scrolled || open ? "white" : "transparent",
+        transition: "background 0.3s ease",
+      }}
     >
-      <div
-        className="max-w-[1350px] mx-auto"
-        style={{
-          background: scrolled || open ? "white" : "transparent",
-          borderRadius: open ? "16px 16px 0 0" : "16px",
-          border: scrolled || open ? "1px solid rgba(0,0,0,0.07)" : "none",
-          borderBottom: open ? "none" : undefined,
-          transition: "background 0.3s ease, border-radius 0.2s ease",
-        }}
-      >
+      <div className="max-w-[1350px] mx-auto">
         {/* Nav row */}
         <div
-          className="px-4 lg:px-8 grid items-center h-[64px]"
+          className="px-6 lg:px-10 grid items-center h-[80px]"
           style={{ gridTemplateColumns: "auto 1fr auto" }}
         >
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 shrink-0">
-            <div
-              className="logo-mark flex items-center justify-center rounded-lg overflow-hidden shrink-0"
-              style={{ width: "32px", height: "32px", background: "rgba(101,87,234,0.08)" }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo-mark.svg" alt="" width={32} height={32} className="object-contain" aria-hidden="true" />
-            </div>
+          <a href="/" className="flex items-center shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo-text.svg" alt="Appreach" width={94} height={24} className="logo-text object-contain" style={{ width: "94px", height: "24px", flexShrink: 0 }} />
+            <img src="/logo-nav.svg" alt="Appreach" width={136} height={24} className="object-contain" style={{ width: "136px", height: "24px", flexShrink: 0 }} />
           </a>
 
           {/* Nav — desktop */}
@@ -83,7 +70,7 @@ export default function Header() {
             >
               <button
                 className="inline-flex items-center gap-1.5 px-[9px] h-[44px] rounded-lg font-medium transition-colors"
-                style={{ fontSize: "18px", color: "#3d3d4a" }}
+                style={{ fontSize: "16px", color: "#3d3d4a" }}
                 onMouseEnter={e => (e.currentTarget.style.background = "rgba(0,0,0,0.05)")}
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
               >
@@ -114,7 +101,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 className="inline-flex items-center px-[9px] h-[44px] rounded-lg font-medium transition-colors"
-                style={{ fontSize: "18px", color: "#3d3d4a" }}
+                style={{ fontSize: "16px", color: "#3d3d4a" }}
                 onMouseEnter={e => (e.currentTarget.style.background = "rgba(0,0,0,0.05)")}
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
               >
@@ -125,7 +112,7 @@ export default function Header() {
             <a
               href="/carreiras"
               className="inline-flex items-center px-[9px] h-[44px] rounded-lg font-medium transition-colors"
-              style={{ fontSize: "18px", color: "#3d3d4a" }}
+              style={{ fontSize: "16px", color: "#3d3d4a" }}
               onMouseEnter={e => (e.currentTarget.style.background = "rgba(0,0,0,0.05)")}
               onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
             >
@@ -163,14 +150,11 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile menu — dentro do island */}
+        {/* Mobile menu */}
         {open && (
           <div
-            className="md:hidden px-4 py-4 flex flex-col gap-1"
-            style={{
-              borderTop: "1px solid rgba(0,0,0,0.07)",
-              borderRadius: "0 0 16px 16px",
-            }}
+            className="md:hidden px-6 py-4 flex flex-col gap-1"
+            style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}
           >
             <button
               className="flex items-center justify-between px-3 py-2.5 rounded-xl text-body hover:text-dark hover:bg-surface transition-colors font-medium w-full text-left"

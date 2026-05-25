@@ -52,8 +52,8 @@ export default function WhyAppreach() {
               "--reveal-delay": "0s",
               gridColumn: "span 2",
               borderRadius: "24px",
-              background: "linear-gradient(120deg, #A8ADF9 15.89%, #6557EA 104.04%)",
-              boxShadow: "0 8px 32px rgba(101,87,234,0.28)",
+              background: "#ffffff",
+              border: "1px solid rgba(0,0,0,0.06)",
               padding: "32px",
               display: "flex",
               gap: "28px",
@@ -69,8 +69,8 @@ export default function WhyAppreach() {
                 alignSelf: "flex-start",
                 padding: "3px 10px",
                 borderRadius: "99px",
-                background: "rgba(255,255,255,0.15)",
-                color: "rgba(255,255,255,0.85)",
+                background: "rgba(101,87,234,0.08)",
+                color: "var(--color-primary)",
                 fontSize: "11px",
                 fontWeight: 600,
                 fontFamily: "var(--font-mono)",
@@ -83,15 +83,16 @@ export default function WhyAppreach() {
                 <h3 style={{
                   fontSize: "clamp(22px, 2.2vw, 30px)",
                   fontWeight: 600,
-                  color: "#ffffff",
+                  color: "#0f0f14",
                   letterSpacing: "-0.02em",
                   lineHeight: "130%",
                   marginBottom: "10px",
                   fontFamily: "var(--font-heading)",
+                  maxWidth: "305px",
                 }}>
-                  Primeiros dados<br />em dias.
+                  Primeiros resultados em dias, não meses.
                 </h3>
-                <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.72)", lineHeight: "1.65", maxWidth: "340px" }}>
+                <p style={{ fontSize: "15px", color: "var(--color-muted)", lineHeight: "1.65", maxWidth: "340px" }}>
                   Sem longas esperas. Em menos de uma semana, suas campanhas já estão no ar e gerando dados reais para otimizar.
                 </p>
               </div>
@@ -101,9 +102,9 @@ export default function WhyAppreach() {
             <div style={{
               width: "210px",
               flexShrink: 0,
-              background: "rgba(255,255,255,0.10)",
+              background: "#F4F4F6",
               borderRadius: "16px",
-              border: "1px solid rgba(255,255,255,0.14)",
+              border: "1px solid rgba(0,0,0,0.06)",
               padding: "20px 16px",
               display: "flex",
               flexDirection: "column",
@@ -111,7 +112,7 @@ export default function WhyAppreach() {
               gap: "14px",
             }}>
               {/* Cabeçalho */}
-              <div style={{ fontSize: "9px", fontFamily: "var(--font-mono)", textTransform: "uppercase", letterSpacing: "1.2px", color: "rgba(255,255,255,0.4)" }}>
+              <div style={{ fontSize: "9px", fontFamily: "var(--font-mono)", textTransform: "uppercase", letterSpacing: "1.2px", color: "rgba(0,0,0,0.3)" }}>
                 Semana 1
               </div>
 
@@ -132,17 +133,17 @@ export default function WhyAppreach() {
                       aspectRatio: "1",
                       borderRadius: "7px",
                       background: item.peak
-                        ? "#ffffff"
+                        ? "#6557ea"
                         : item.milestone
-                        ? "rgba(255,255,255,0.28)"
-                        : "rgba(255,255,255,0.07)",
+                        ? "rgba(101,87,234,0.15)"
+                        : "rgba(0,0,0,0.05)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       fontSize: "10px",
                       fontWeight: 700,
                       fontFamily: "var(--font-mono)",
-                      color: item.peak ? "#6557ea" : item.milestone ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.2)",
+                      color: item.peak ? "#ffffff" : item.milestone ? "#6557ea" : "rgba(0,0,0,0.2)",
                     }}
                   >
                     {item.d}
@@ -151,7 +152,7 @@ export default function WhyAppreach() {
               </div>
 
               {/* Linha conectora */}
-              <div style={{ position: "relative", height: "1px", background: "rgba(255,255,255,0.1)", margin: "0 2px" }}>
+              <div style={{ position: "relative", height: "1px", background: "rgba(0,0,0,0.08)", margin: "0 2px" }}>
                 {[0, 28.5, 100].map((pct, i) => (
                   <div key={i} style={{
                     position: "absolute",
@@ -161,8 +162,8 @@ export default function WhyAppreach() {
                     width: i === 2 ? "8px" : "5px",
                     height: i === 2 ? "8px" : "5px",
                     borderRadius: "50%",
-                    background: i === 2 ? "#ffffff" : "rgba(255,255,255,0.45)",
-                    border: i === 2 ? "2px solid rgba(255,255,255,0.3)" : "none",
+                    background: i === 2 ? "#6557ea" : "rgba(0,0,0,0.2)",
+                    border: i === 2 ? "2px solid rgba(101,87,234,0.3)" : "none",
                   }} />
                 ))}
               </div>
@@ -178,8 +179,8 @@ export default function WhyAppreach() {
                     <span style={{
                       fontSize: "8px",
                       fontFamily: "var(--font-mono)",
-                      color: m.highlight ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.35)",
-                      background: m.highlight ? "rgba(255,255,255,0.15)" : "transparent",
+                      color: m.highlight ? "#6557ea" : "rgba(0,0,0,0.3)",
+                      background: m.highlight ? "rgba(101,87,234,0.1)" : "transparent",
                       padding: m.highlight ? "1px 5px" : "0",
                       borderRadius: "4px",
                       fontWeight: 600,
@@ -188,7 +189,7 @@ export default function WhyAppreach() {
                     }}>
                       {m.tag}
                     </span>
-                    <span style={{ fontSize: "11px", color: m.highlight ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.45)", fontWeight: m.highlight ? 600 : 400 }}>
+                    <span style={{ fontSize: "11px", color: m.highlight ? "#251d49" : "rgba(0,0,0,0.35)", fontWeight: m.highlight ? 600 : 400 }}>
                       {m.label}
                     </span>
                   </div>
@@ -264,6 +265,7 @@ export default function WhyAppreach() {
                 lineHeight: "130%",
                 marginBottom: "10px",
                 fontFamily: "var(--font-heading)",
+                maxWidth: "195px",
               }}>
                 Você não precisa ser especialista.
               </h3>
@@ -281,8 +283,8 @@ export default function WhyAppreach() {
               "--reveal-delay": "0.16s",
               gridColumn: "span 1",
               borderRadius: "24px",
-              background: "#F4F4F6",
-              border: "1px solid rgba(235,235,235,0.6)",
+              background: "linear-gradient(120deg, #A8ADF9 15.89%, #6557EA 104.04%)",
+              boxShadow: "0 8px 32px rgba(101,87,234,0.28)",
               padding: "32px",
               display: "flex",
               flexDirection: "column",
@@ -295,7 +297,7 @@ export default function WhyAppreach() {
               <div style={{
                 fontSize: "clamp(56px, 6vw, 72px)",
                 fontWeight: 700,
-                color: "#251d49",
+                color: "#ffffff",
                 letterSpacing: "-0.04em",
                 lineHeight: 1,
                 fontFamily: "var(--font-heading)",
@@ -305,7 +307,7 @@ export default function WhyAppreach() {
               <div style={{
                 fontSize: "13px",
                 fontWeight: 600,
-                color: "var(--color-primary)",
+                color: "rgba(255,255,255,0.75)",
                 fontFamily: "var(--font-mono)",
                 textTransform: "uppercase",
                 letterSpacing: "0.8px",
@@ -314,7 +316,7 @@ export default function WhyAppreach() {
                 apps escalados
               </div>
             </div>
-            <p style={{ fontSize: "14px", color: "#6b6b78", lineHeight: "1.6" }}>
+            <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.72)", lineHeight: "1.6" }}>
               De early-stage a grandes marcas. Já navegamos todos os estágios de crescimento de um app.
             </p>
           </div>
