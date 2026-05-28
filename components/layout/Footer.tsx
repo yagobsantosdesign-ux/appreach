@@ -77,32 +77,54 @@ export default function Footer() {
             borderRadius: "32px",
             padding: "64px 72px",
             gap: "80px",
-            alignItems: "center",
+            alignItems: "stretch",
             boxShadow: "0 8px 40px rgba(101,87,234,0.30)",
           }}
         >
           {/* Left — copy */}
-          <div style={{ flex: "0 0 auto", maxWidth: "380px" }}>
-            <div className="inline-flex items-center mb-4" style={{ gap: "8px" }}>
-              <span style={{ display: "inline-block", width: "20px", height: "1.5px", background: "rgba(255,255,255,0.6)", flexShrink: 0 }} />
-              <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.85)", letterSpacing: "1px", fontWeight: 600, fontFamily: "var(--font-geist-mono)", textTransform: "uppercase" }}>
-                Fale com a gente
-              </span>
+          <div style={{ flex: "0 0 auto", maxWidth: "380px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div>
+              <div className="inline-flex items-center mb-4" style={{ gap: "8px" }}>
+                <span style={{ display: "inline-block", width: "20px", height: "1.5px", background: "rgba(255,255,255,0.6)", flexShrink: 0 }} />
+                <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.85)", letterSpacing: "1px", fontWeight: 600, fontFamily: "var(--font-geist-mono)", textTransform: "uppercase" }}>
+                  Fale com a gente
+                </span>
+              </div>
+              <h2 className="" style={{ fontSize: "clamp(24px, 6vw, 40px)", letterSpacing: "-0.02em", lineHeight: "120%", color: "white", textWrap: "balance" as never }}>
+                Pronto para escalar o seu app?
+              </h2>
+              <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.70)", lineHeight: 1.65, marginTop: "16px" }}>
+                Conte sobre o seu app e seus objetivos. Nossa equipe vai analisar o seu momento e indicar as estratégias mais indicadas — sem custo e sem compromisso.
+              </p>
+              <ul style={{ marginTop: "24px", display: "flex", flexDirection: "column", gap: "10px", listStyle: "none", padding: 0 }}>
+                {["Diagnóstico gratuito do seu funil", "Estratégia personalizada por vertical", "Relatórios transparentes com dados reais"].map((item) => (
+                  <li key={item} style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "15px", color: "rgba(255,255,255,0.85)" }}>
+                    <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "rgba(255,255,255,0.5)", flexShrink: 0 }} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <h2 className="" style={{ fontSize: "clamp(24px, 6vw, 40px)", letterSpacing: "-0.02em", lineHeight: "120%", color: "white", textWrap: "balance" as never }}>
-              Pronto para escalar o seu app?
-            </h2>
-            <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.70)", lineHeight: 1.65, marginTop: "16px" }}>
-              Conte sobre o seu app e seus objetivos. Nossa equipe vai analisar o seu momento e indicar as estratégias mais indicadas — sem custo e sem compromisso.
-            </p>
-            <ul style={{ marginTop: "24px", display: "flex", flexDirection: "column", gap: "10px", listStyle: "none", padding: 0 }}>
-              {["Diagnóstico gratuito do seu funil", "Estratégia personalizada por vertical", "Relatórios transparentes com dados reais"].map((item) => (
-                <li key={item} style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "15px", color: "rgba(255,255,255,0.85)" }}>
-                  <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "rgba(255,255,255,0.5)", flexShrink: 0 }} />
-                  {item}
-                </li>
-              ))}
-            </ul>
+
+            {/* Rodapé: resposta rápida + contato direto */}
+            <div style={{ paddingTop: "28px", borderTop: "1px solid rgba(255,255,255,0.15)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span style={{ color: "rgba(255,255,255,0.9)", fontSize: "14px", fontWeight: 600, letterSpacing: "-0.1px" }}>
+                  Retorno em até 24h
+                </span>
+              </div>
+              <a
+                href="mailto:fale@appreach.com.br"
+                style={{ color: "rgba(255,255,255,0.60)", fontSize: "14px", textDecoration: "none", transition: "color 0.15s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.60)")}
+              >
+                fale@appreach.com.br
+              </a>
+            </div>
           </div>
 
           {/* Right — form */}

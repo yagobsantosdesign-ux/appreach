@@ -173,7 +173,7 @@ export default function Hero() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     key={n}
-                    src={`/avatar-${n}.png`}
+                    src={`/avatar-${n}.webp`}
                     alt=""
                     aria-hidden="true"
                     style={{

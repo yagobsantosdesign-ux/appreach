@@ -33,14 +33,14 @@ export default function ContactForm() {
             padding: "64px 72px",
             display: "flex",
             gap: "80px",
-            alignItems: "center",
+            alignItems: "stretch",
             boxShadow: "0 8px 40px rgba(101,87,234,0.30)",
           }}
           className="contact-form-wrapper flex-col lg:flex-row"
         >
 
           {/* Left — copy */}
-          <div style={{ flex: "0 0 auto", maxWidth: "380px" }}>
+          <div style={{ flex: "0 0 auto", maxWidth: "380px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
             <div className="inline-flex items-center mb-4" style={{ gap: "8px" }}>
               <span style={{ display: "inline-block", width: "20px", height: "1.5px", background: "rgba(255,255,255,0.6)", flexShrink: 0 }} />
               <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.85)", letterSpacing: "1px", fontWeight: 600, fontFamily: "var(--font-geist-mono)", textTransform: "uppercase" }}>
@@ -68,6 +68,26 @@ export default function ContactForm() {
                 </li>
               ))}
             </ul>
+
+            {/* Rodapé: resposta rápida + contato direto */}
+            <div style={{ paddingTop: "28px", borderTop: "1px solid rgba(255,255,255,0.15)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span style={{ color: "rgba(255,255,255,0.9)", fontSize: "14px", fontWeight: 600, letterSpacing: "-0.1px" }}>
+                  Retorno em até 24h
+                </span>
+              </div>
+              <a
+                href="mailto:contato@appreach.com.br"
+                style={{ color: "rgba(255,255,255,0.60)", fontSize: "14px", textDecoration: "none", transition: "color 0.15s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.60)")}
+              >
+                contato@appreach.com.br
+              </a>
+            </div>
           </div>
 
           {/* Right — form card */}
