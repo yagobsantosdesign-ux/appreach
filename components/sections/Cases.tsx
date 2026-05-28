@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { useInView } from "@/hooks/useInView";
@@ -20,10 +20,11 @@ const cases = [
       { value: "+7%",   label: "conversões" },
       { value: "16×",   label: "ROI" },
     ],
-    logo: "/ticker-logo-1.svg",
-    logoW: 124,
-    logoH: 22,
-    image: "/case-beleza.png",
+    logo: "/case-logo-beleza.webp",
+    logoW: 120,
+    logoH: 20,
+    image: "/case-beleza.webp",
+    mobileImage: "/case-beleza-mobile.webp",
   },
   {
     id: "food",
@@ -41,10 +42,11 @@ const cases = [
       { value: "+33%",  label: "taxa de conversão" },
       { value: "+36%",  label: "receita via app" },
     ],
-    logo: "/ticker-logo-2.svg",
-    logoW: 61,
-    logoH: 25,
-    image: "/case-food.png",
+    logo: "/case-logo-food.webp",
+    logoW: 72,
+    logoH: 32,
+    image: "/case-food.webp",
+    mobileImage: "/case-food-mobile.webp",
   },
   {
     id: "eletronicos",
@@ -62,10 +64,11 @@ const cases = [
       { value: "−51%",  label: "custo por instalação" },
       { value: "+23%",  label: "ROAS" },
     ],
-    logo: "/ticker-logo-3.svg",
-    logoW: 77,
-    logoH: 35,
-    image: "/case-eletronicos.png",
+    logo: "/case-logo-eletronicos.webp",
+    logoW: 110,
+    logoH: 20,
+    image: "/case-eletronicos.webp",
+    mobileImage: "/case-eletronicos-mobile.webp",
   },
   {
     id: "fintech",
@@ -83,10 +86,11 @@ const cases = [
       { value: "+22%",  label: "conversão" },
       { value: "−27%",  label: "custo por ação" },
     ],
-    logo: "/ticker-logo-4.svg",
-    logoW: 54,
-    logoH: 21,
-    image: "/case-fintech.png",
+    logo: "/case-logo-fintech.webp",
+    logoW: 90,
+    logoH: 28,
+    image: "/case-fintech.webp",
+    mobileImage: "/case-fintech-mobile.webp",
   },
 ];
 
@@ -117,6 +121,7 @@ export default function Cases() {
   return (
     <section
       id="cases"
+      className="cases-section"
       style={{ background: "white", padding: "80px 40px" }}
     >
       <style>{`
@@ -222,10 +227,15 @@ export default function Cases() {
 
         @media (max-width: 768px) {
           .cases-tabs { display: flex; width: 100%; }
-          .cases-tab { flex: 1; justify-content: center; }
-          .case-card { flex-direction: column; padding: 32px 24px; gap: 28px; }
-          .case-image-col { display: none; }
-          .cases-content-grid { grid-template-columns: 1fr; gap: 20px; }
+          .cases-tab { flex: 1; justify-content: center; padding: 8px 4px; }
+          .cases-tab-num { display: none; }
+          .cases-tab-label { font-size: 12px; }
+          .case-card { flex-direction: column; padding: 24px 20px; gap: 24px; }
+          .case-image-col { display: block; width: 100%; aspect-ratio: 16/9; height: auto; flex-shrink: 0; }
+          .case-image-col img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; }
+          .case-content-col { justify-content: flex-start; gap: 32px; }
+          .cases-content-grid { grid-template-columns: 1fr; gap: 24px; }
+          .cases-metrics-row { gap: 24px; }
           .cases-metric-value { font-size: 32px !important; letter-spacing: -1.5px !important; }
         }
         @media (max-width: 480px) {
@@ -313,12 +323,17 @@ export default function Cases() {
             {/* Image */}
             <div key={`img-${c.id}`} className="case-image-col">
               {c.image && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={c.image}
-                  alt={`Case ${c.category}`}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                />
+                <picture>
+                  {c.mobileImage && (
+                    <source media="(max-width: 768px)" srcSet={c.mobileImage} />
+                  )}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={c.image}
+                    alt={`Case ${c.category}`}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </picture>
               )}
             </div>
 
@@ -342,11 +357,11 @@ export default function Cases() {
                     alt="Logo do cliente"
                     width={c.logoW}
                     height={c.logoH}
-                    style={{ maxHeight: "20px", width: "auto", opacity: 0.4, objectFit: "contain" }}
+                    style={{ maxHeight: "20px", width: "auto", opacity: 0.5, objectFit: "contain", mixBlendMode: "multiply" }}
                   />
                 </div>
 
-                <p style={{ fontSize: "22px", fontWeight: 500, color: "#251d49", lineHeight: "140%", letterSpacing: "-0.5px", maxWidth: "360px" }}>
+                <p style={{ fontSize: "22px", fontWeight: 600, color: "#251d49", lineHeight: "140%", letterSpacing: "-0.5px", maxWidth: "360px" }}>
                   {c.hookTitle}
                 </p>
               </div>

@@ -1,18 +1,18 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useRef } from "react";
 import { useInView } from "@/hooks/useInView";
 
 const PLATFORMS = [
-  { name: "Google Ads", img: "/platform-icon-1.png" },
-  { name: "Meta Ads",   img: "/platform-icon-2.png" },
-  { name: "TikTok Ads", img: "/platform-icon-3.png" },
-  { name: "AppsFlyer",  img: "/platform-icon-4.png" },
-  { name: "Adjust",     img: "/platform-icon-5.png" },
-  { name: "Firebase",   img: "/platform-icon-6.png" },
-  { name: "Branch",     img: "/platform-icon-7.png" },
-  { name: "Singular",   img: "/platform-icon-8.png" },
-  { name: "Platform 9", img: "/platform-icon-9.png" },
+  { name: "Google Ads", img: "/platform-icon-1.webp" },
+  { name: "Meta Ads",   img: "/platform-icon-2.webp" },
+  { name: "TikTok Ads", img: "/platform-icon-3.webp" },
+  { name: "AppsFlyer",  img: "/platform-icon-4.webp" },
+  { name: "Adjust",     img: "/platform-icon-5.webp" },
+  { name: "Firebase",   img: "/platform-icon-6.webp" },
+  { name: "Branch",     img: "/platform-icon-7.webp" },
+  { name: "Singular",   img: "/platform-icon-8.webp" },
+  { name: "Platform 9", img: "/platform-icon-9.webp" },
 ];
 
 const CX    = 400;
@@ -64,9 +64,9 @@ export default function Platforms() {
   }, []);
 
   return (
-    <section style={{ background: "#fafafa", padding: "80px 40px" }}>
+    <section className="platforms-section" style={{ background: "#fafafa", padding: "80px 40px" }}>
       <div style={{ maxWidth: "1350px", margin: "0 auto" }}>
-        <div style={{
+        <div className="platforms-card" style={{
           background: "white",
           borderRadius: "24px",
           border: "1px solid rgba(0,0,0,0.06)",
@@ -104,10 +104,10 @@ export default function Platforms() {
             </p>
           </div>
 
-          {/* Arc carousel — desktop */}
+          {/* Arc carousel */}
           <div
             ref={carouselRef as React.RefObject<HTMLDivElement>}
-            className={`hidden lg:block reveal${carouselVisible ? " visible" : ""}`}
+            className={`platforms-arc-carousel reveal${carouselVisible ? " visible" : ""}`}
             style={{ position: "relative", width: 800, height: 400, overflow: "hidden" }}
           >
             {/* Background gradient blob */}
@@ -164,8 +164,8 @@ export default function Platforms() {
             })}
           </div>
 
-          {/* Grid — mobile */}
-          <div className="flex lg:hidden justify-center flex-wrap gap-6">
+          {/* Grid — mobile fallback (hidden via CSS) */}
+          <div className="platforms-icon-grid justify-center flex-wrap gap-6">
             {PLATFORMS.map((p) => (
               <div key={p.name} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
                 <div style={{ width: 80, height: 80, borderRadius: 14, overflow: "hidden" }}>

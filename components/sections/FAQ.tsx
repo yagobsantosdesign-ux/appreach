@@ -38,7 +38,7 @@ export default function FAQ() {
   const { ref: listRef, visible: listVisible } = useInView();
 
   return (
-    <section className="relative py-24 lg:py-32" style={{ background: "#fafafa", paddingBottom: "280px", paddingLeft: "40px", paddingRight: "40px" }}>
+    <section className="faq-section relative py-24 lg:py-32" style={{ background: "#fafafa", paddingBottom: "280px", paddingLeft: "40px", paddingRight: "40px" }}>
 
       {/* Blob roxo */}
       <div style={{ position: "absolute", top: "48%", left: "50%", transform: "translate(-70%, -50%)", width: "700px", height: "700px", background: "radial-gradient(ellipse, rgba(130,100,255,0.22) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
@@ -71,8 +71,8 @@ export default function FAQ() {
         {/* FAQ list */}
         <div
           ref={listRef as React.RefObject<HTMLDivElement>}
-          className={`mx-auto flex flex-col reveal${listVisible ? " visible" : ""}`}
-          style={{ maxWidth: "800px", gap: "12px", "--reveal-delay": "0.1s", height: "720px", overflow: "hidden" } as React.CSSProperties}
+          className={`faq-list mx-auto flex flex-col reveal${listVisible ? " visible" : ""}`}
+          style={{ maxWidth: "800px", gap: "12px", "--reveal-delay": "0.1s" } as React.CSSProperties}
         >
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
@@ -94,25 +94,6 @@ export default function FAQ() {
                   style={{ padding: "20px 24px", cursor: "pointer", background: "none", border: "none" }}
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                 >
-                  {/* Number badge */}
-                  <span style={{
-                    flexShrink: 0,
-                    width: "34px",
-                    height: "34px",
-                    borderRadius: "10px",
-                    background: "rgba(101,87,234,0.08)",
-                    color: "var(--color-primary)",
-                    fontSize: "13px",
-                    fontWeight: 700,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: "var(--font-mono)",
-                    letterSpacing: "0.5px",
-                  }}>
-                    {i + 1}
-                  </span>
-
                   {/* Question */}
                   <span style={{
                     flex: 1,
@@ -132,7 +113,6 @@ export default function FAQ() {
                     width: "34px",
                     height: "34px",
                     borderRadius: "50%",
-                    border: "1.5px solid rgba(101,87,234,0.35)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",

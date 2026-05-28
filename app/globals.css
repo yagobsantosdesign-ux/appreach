@@ -260,6 +260,13 @@ a:hover .logo-text {
   animation-fill-mode: both;
 }
 
+/* Strategies mobile CTA — hidden by default */
+.strategies-card-btn { display: none; }
+
+/* Platforms — carousel always visible, grid hidden by default */
+.platforms-arc-carousel { display: block; }
+.platforms-icon-grid { display: none; }
+
 /* ── Hero desktop min-height ───────────────────────────────── */
 @media (min-width: 1024px) {
   .hero-section {
@@ -267,34 +274,162 @@ a:hover .logo-text {
   }
 }
 
-/* ── Mobile responsiveness ─────────────────────────────────── */
-@media (max-width: 767px) {
+/* ── FAQ list — desktop-only clipped height ────────────────── */
+.faq-list { height: 720px; overflow: hidden; }
 
+/* ── Tablet (768–1023px) ────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .why-section { padding: 80px 24px !important; }
+  .why-grid { grid-template-columns: 1fr 1fr !important; }
+  .why-grid > :last-child { grid-column: 1 / -1; }
+  .strategies-section { padding: 80px 24px !important; }
+  .strategies-grid { grid-template-columns: 1fr 1fr !important; }
+  .strategies-card { height: auto !important; min-height: 260px !important; }
+  .funnel-section { padding: 80px 24px !important; }
+  .funnel-layout { flex-direction: column !important; gap: 48px !important; }
+  .funnel-left { width: 100% !important; }
+  .funnel-right { width: 100% !important; }
+  .contact-form-section { padding-left: 24px !important; padding-right: 24px !important; }
+  .contact-form-wrapper { padding: 48px !important; gap: 48px !important; }
+  .contact-cta-section { padding-left: 24px !important; padding-right: 24px !important; }
+  .timeline-header { padding: 0 24px !important; }
+  .timeline-section { padding-left: 24px !important; padding-right: 24px !important; }
 
-  /* Hero */
-  .hero-section { margin: 0 !important; border-radius: 0 !important; }
-  .hero-h1 { font-size: 46px !important; line-height: 110% !important; letter-spacing: -0.04em !important; }
-  .hero-cta-row { margin-bottom: 40px; }
-  .hero-widget { display: none !important; }
-  .hero-phone-container { height: auto !important; overflow: visible !important; }
-  .hero-phone-container img { position: relative !important; left: auto !important; transform: none !important; bottom: auto !important; width: 80% !important; margin: 0 auto !important; display: block !important; }
+  /* Cases */
+  .cases-section { padding: 80px 24px !important; }
 
-  /* Strategies bento — oculta widgets visuais, mostra só o texto */
-  .strategies-widget { display: none !important; }
-  .strategies-card { min-height: auto !important; }
+  /* Platforms */
+  .platforms-section { padding: 80px 24px !important; }
+  .platforms-card { padding: 56px 56px 32px !important; }
 
   /* Stats Bento */
+  .stats-bento-section { padding: 80px 24px !important; }
+
+  /* Footer — remove overlap, card padding */
+  .faq-section { padding-bottom: 80px !important; }
+  .footer-card-container { margin-top: 0 !important; }
+  .footer-contact-card { padding: 48px !important; gap: 48px !important; }
+  footer { padding-left: 24px !important; padding-right: 24px !important; }
+
+  /* Hero — tablet */
+  .hero-section { padding-left: 24px !important; padding-right: 24px !important; }
+  .hero-container { padding-left: 0 !important; padding-right: 0 !important; }
+  .hero-h1 { font-size: 50px !important; }
+  .hero-phone-wrapper { flex: 0 0 480px !important; min-height: 480px !important; width: 100% !important; min-width: 0 !important; }
+  .hero-widget-1 { left: 12px !important; top: auto !important; bottom: 48px !important; width: 195px !important; }
+  .hero-widget-2 { right: 12px !important; top: 60px !important; width: 175px !important; }
+}
+
+/* ── Mobile (≤767px) ─────────────────────────────────────────── */
+@media (max-width: 767px) {
+
+  /* Hero */
+  .hero-section { margin: 0 !important; border-radius: 0 !important; padding-left: 20px !important; padding-right: 20px !important; padding-bottom: 24px !important; }
+  .hero-container { padding-left: 0 !important; padding-right: 0 !important; gap: 72px !important; }
+  .hero-h1 { font-size: 38px !important; line-height: 110% !important; letter-spacing: -0.04em !important; max-width: 100% !important; }
+  .hero-cta-row { margin-bottom: 40px; }
+  .hero-phone-wrapper { flex: 0 0 360px !important; min-height: 360px !important; width: 100% !important; min-width: 0 !important; }
+  .hero-widget-1 { left: 0 !important; top: auto !important; bottom: 48px !important; width: 175px !important; transform: scale(0.72) !important; transform-origin: bottom left !important; }
+  .hero-widget-2 { right: 0 !important; top: 60px !important; width: 155px !important; transform: scale(0.72) !important; transform-origin: top right !important; }
+  .hero-phone-mask { height: calc(50% + 80px) !important; background: linear-gradient(to bottom, transparent 0%, #fafafa 45%) !important; }
+
+  /* Section padding */
+  .why-section { padding: 64px 20px !important; }
+  .strategies-section { padding: 64px 20px !important; }
+  .funnel-section { padding: 64px 20px !important; }
+  .faq-section { padding-left: 20px !important; padding-right: 20px !important; padding-bottom: 80px !important; }
+  .contact-form-section { padding-left: 20px !important; padding-right: 20px !important; }
+  .contact-cta-section { padding-left: 20px !important; padding-right: 20px !important; }
+  .timeline-header { padding: 0 20px !important; }
+  .timeline-section { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Section h2 */
+  .why-section h2, .strategies-section h2, .funnel-section h2, .timeline-section h2 { font-size: 32px !important; }
+
+  /* Logo ticker */
+  .ticker-track { gap: 48px !important; }
+  .logo-ticker-section { padding-top: 40px !important; }
+
+  /* Why Appreach */
+  .why-grid { grid-template-columns: 1fr !important; }
+  .why-card { min-height: 400px !important; }
+  .why-grid > .why-card:first-child { min-height: 480px !important; }
+
+  /* Strategies */
+  .strategies-grid { grid-template-columns: 1fr !important; }
+  .strategies-card { height: auto !important; min-height: 0 !important; aspect-ratio: 3/4 !important; gap: 20px !important; justify-content: space-between !important; background: #ffffff !important; }
+.strategies-widget { display: none !important; }
+
+  /* Funnel Guide */
+  .funnel-layout { flex-direction: column !important; gap: 40px !important; }
+  .funnel-left { width: 100% !important; }
+  .funnel-right { width: 100% !important; }
+  .funnel-card { position: relative !important; top: auto !important; padding: 28px !important; }
+  .funnel-stage-title { font-size: 22px !important; }
+
+  /* Cases */
+  .cases-section { padding: 64px 20px !important; }
+  .cases-section h2 { font-size: 32px !important; line-height: 120% !important; }
+  .cases-tab { padding: 8px 4px !important; }
+
+  /* Platforms — borda a borda, carrossel escalado */
+  .platforms-section { padding: 0 !important; }
+  .platforms-section > div { max-width: 100% !important; padding: 0 !important; }
+  .platforms-card { border-radius: 0 !important; border: none !important; padding: 64px 24px 64px !important; gap: 32px !important; }
+  .platforms-section h2 { font-size: 32px !important; }
+  .platforms-arc-carousel {
+    transform: scale(0.47) !important;
+    transform-origin: top center !important;
+    margin-bottom: -212px !important;
+  }
+
+  /* Stats Bento */
+  .stats-bento-section { padding: 64px 20px !important; }
   .stats-card { padding: 24px !important; min-height: 160px !important; }
   .stats-value { font-size: 30px !important; letter-spacing: -1px !important; }
   .stats-photo { display: none !important; }
 
-  /* Footer contact card */
-  .footer-contact-card { padding: 36px 24px !important; gap: 36px !important; }
-  .footer-form-grid { grid-template-columns: 1fr !important; }
+  /* FAQ */
+  .faq-list { height: auto !important; overflow: visible !important; }
 
-  /* FunnelGuide — scroll normal no mobile */
-  .funnel-card { position: relative !important; top: auto !important; }
+  /* Contact Form */
+  .contact-form-wrapper { padding: 32px 24px !important; gap: 32px !important; align-items: stretch !important; }
+  .contact-form-grid { grid-template-columns: 1fr !important; }
+
+  /* Contact CTA */
+  .contact-cta-banner { padding: 40px 24px !important; min-height: auto !important; }
+
+  /* Footer */
+  .footer-card-container { margin-top: 0 !important; margin-left: -20px !important; margin-right: -20px !important; max-width: calc(100% + 40px) !important; }
+  .footer-contact-card { border-radius: 0 !important; box-shadow: none !important; padding: 36px 24px !important; gap: 36px !important; align-items: stretch !important; }
+  .footer-form-card { padding: 24px !important; }
+  .footer-form-grid { grid-template-columns: 1fr !important; }
+  footer { border-top: none !important; padding-left: 20px !important; padding-right: 20px !important; }
 
   /* FAQ scroll container */
   .faq-scroll-container { height: auto !important; max-height: 75vh !important; }
+
+  /* Platforms — sem padding na section, 64px só no card */
+  .platforms-section { padding: 0 !important; }
+  .platforms-card { border: none !important; padding-top: 64px !important; padding-bottom: 64px !important; }
+
+  /* Strategies cards — equal 3:4 ratio, icon top / text bottom */
+  .strategies-card { aspect-ratio: 3/4 !important; min-height: 0 !important; height: auto !important; justify-content: space-between !important; }
+  .strategies-card-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    background: #6557ea;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    padding: 10px 16px;
+    border-radius: 10px;
+    align-self: flex-start;
+  }
+
+  /* Cases tabs — sem overflow */
+  .cases-tabs .cases-tab { padding: 8px 4px !important; }
+  .cases-tab-num { display: none !important; }
 }

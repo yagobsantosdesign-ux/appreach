@@ -2,12 +2,12 @@ import Button from "@/components/ui/Button";
 
 export default function ContactCTA() {
   return (
-    <section id="contato" className="py-16 lg:py-24" style={{ background: "#ffffff", paddingLeft: "40px", paddingRight: "40px" }}>
+    <section id="contato" className="contact-cta-section py-16 lg:py-24" style={{ background: "#ffffff", paddingLeft: "40px", paddingRight: "40px" }}>
       <div style={{ maxWidth: "1350px", margin: "0 auto" }}>
 
         {/* Banner card */}
         <div
-          className="relative overflow-hidden rounded-[28px] flex flex-col items-center justify-center text-center"
+          className="contact-cta-banner relative overflow-hidden rounded-[28px] flex flex-col items-center justify-center text-center"
           style={{
             background: "linear-gradient(145deg, #1E1640 0%, #2D1F5E 55%, #1a1438 100%)",
             padding: "64px 56px",

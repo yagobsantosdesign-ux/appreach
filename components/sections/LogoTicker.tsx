@@ -2,7 +2,6 @@
 import React from "react";
 
 const logos = [
-  { src: "/ticker-logo-rei-do-pitado.svg", alt: "Rei do Pitaco",  h: 18  },
   { src: "/ticker-logo-netshoes.svg",       alt: "Netshoes",       h: 18  },
   { src: "/ticker-logo-burger-king.svg",    alt: "Burger King",    h: 48  },
   { src: "/ticker-logo-bradesco.svg",       alt: "Bradesco",       h: 26  },
@@ -12,7 +11,6 @@ const logos = [
   { src: "/ticker-logo-btg.svg",            alt: "BTG",            h: 44  },
   { src: "/ticker-logo-natura.svg",         alt: "Natura",         h: 39  },
   { src: "/ticker-logo-bancopan.svg",       alt: "Banco Pan",      h: 44  },
-  { src: "/ticker-logo-reserva.svg",        alt: "Reserva",        h: 18  },
   { src: "/ticker-logo-inter.svg",          alt: "Banco Inter",    h: 28  },
   { src: "/ticker-logo-habibs.svg",         alt: "Habib's",        h: 28  },
   { src: "/ticker-logo-paramount.svg",      alt: "Paramount+",     h: 26  },
@@ -23,7 +21,7 @@ const logos = [
 
 export default function LogoTicker() {
   return (
-    <section style={{ background: "#fafafa", padding: "80px 0", overflow: "hidden" }}>
+    <section className="logo-ticker-section" style={{ background: "#fafafa", padding: "80px 0", overflow: "hidden" }}>
       <div style={{ maxWidth: "1350px", margin: "0 auto", position: "relative", overflow: "hidden" }}>
         {/* Gradient fade overlay — laterais */}
         <div

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useRef, useState } from "react";
 
 const barPatterns = [
@@ -105,7 +105,7 @@ export default function Hero() {
 
       {/* Container */}
       <div
-        className="relative flex flex-col lg:flex-row items-stretch"
+        className="hero-container relative flex flex-col lg:flex-row items-stretch"
         style={{ flex: 1, zIndex: 1, maxWidth: "1350px", width: "100%", margin: "0 auto", padding: "0 40px", gap: "48px" }}
       >
         {/* LEFT */}
@@ -201,8 +201,8 @@ export default function Hero() {
 
         {/* RIGHT: iPhone + gradiente + widgets */}
         <div
-          className="hidden lg:flex"
-          style={{ flex: 1, minWidth: "500px", position: "relative", alignSelf: "stretch" }}
+          className="hero-phone-wrapper flex"
+          style={{ flex: 1, position: "relative", alignSelf: "stretch" }}
         >
           {/* [1] Retângulo gradiente — ocupa 80% inferior */}
           <div style={{
@@ -219,7 +219,7 @@ export default function Hero() {
           {/* [2] iPhone — animado, base alinhada ao retângulo */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/iphone-hero.png"
+            src="/iphone-hero.webp"
             alt=""
             aria-hidden="true"
             className="iphone-enter"
@@ -236,7 +236,7 @@ export default function Hero() {
           />
 
           {/* [3] Máscara fade — estática, some a base do iPhone */}
-          <div aria-hidden style={{
+          <div aria-hidden className="hero-phone-mask" style={{
             position: "absolute",
             bottom: "-80px",
             left: 0,
@@ -248,29 +248,29 @@ export default function Hero() {
           }} />
 
           {/* Card 1 — Total de vendas */}
-          <div className="widget-float" style={{
+          <div className="widget-float hero-widget-1" style={{
             position: "absolute",
             top: "60%",
-            left: "-134px",
-            width: "268px",
+            left: "-104px",
+            width: "210px",
             background: "white",
-            borderRadius: "24px",
-            padding: "22px 22px 18px",
+            borderRadius: "20px",
+            padding: "16px 16px 14px",
             boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)",
             textAlign: "left",
             zIndex: 3,
           }}>
-              <span style={{ fontSize: "14px", fontWeight: 600, color: "#251d49", letterSpacing: "-0.3px", display: "block", marginBottom: "8px" }}>
+              <span style={{ fontSize: "12px", fontWeight: 600, color: "#251d49", letterSpacing: "-0.3px", display: "block", marginBottom: "6px" }}>
                 Total de vendas
               </span>
-              <span style={{ fontSize: "34px", fontWeight: 700, letterSpacing: "-0.05em", lineHeight: 1, color: "#251d49", display: "block" }}>
+              <span style={{ fontSize: "26px", fontWeight: 700, letterSpacing: "-0.05em", lineHeight: 1, color: "#251d49", display: "block" }}>
                 R$ 28.500
               </span>
-              <div style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "11px", fontWeight: 600, color: "#6557EA", marginTop: "6px", marginBottom: "12px" }}>
-                <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#6557EA", display: "inline-block", flexShrink: 0 }} />
+              <div style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "10px", fontWeight: 600, color: "#6557EA", marginTop: "5px", marginBottom: "10px" }}>
+                <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#6557EA", display: "inline-block", flexShrink: 0 }} />
                 10,2% vs mês anterior
               </div>
-              <div style={{ display: "flex", alignItems: "flex-end", gap: "3px", height: "54px" }}>
+              <div style={{ display: "flex", alignItems: "flex-end", gap: "3px", height: "42px" }}>
                 {barPatterns[patternIdx].map((h, i) => (
                   <div key={i} style={{
                     flex: 1,
@@ -284,22 +284,22 @@ export default function Hero() {
             </div>
 
           {/* Card 2 — Revenue Snapshot */}
-          <div className="widget-float-2" style={{
+          <div className="widget-float-2 hero-widget-2" style={{
             position: "absolute",
             top: "31%",
-            right: "-78px",
-            width: "236px",
+            right: "-58px",
+            width: "185px",
             background: "white",
-            borderRadius: "24px",
-            padding: "18px 18px 14px",
+            borderRadius: "20px",
+            padding: "14px 14px 12px",
             boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)",
             zIndex: 3,
           }}>
-              <span style={{ fontSize: "14px", fontWeight: 600, color: "#251d49", letterSpacing: "-0.3px", display: "block", marginBottom: "6px" }}>
+              <span style={{ fontSize: "12px", fontWeight: 600, color: "#251d49", letterSpacing: "-0.3px", display: "block", marginBottom: "5px" }}>
                 Revenue Snapshot
               </span>
-              <div style={{ display: "flex", justifyContent: "center", position: "relative", height: "110px", margin: "0 -4px" }}>
-                <svg width="196" height="102" viewBox="0 0 280 160" fill="none" style={{ display: "block", overflow: "visible" }} suppressHydrationWarning>
+              <div style={{ display: "flex", justifyContent: "center", position: "relative", height: "86px", margin: "0 -4px" }}>
+                <svg width="154" height="80" viewBox="0 0 280 160" fill="none" style={{ display: "block", overflow: "visible" }} suppressHydrationWarning>
                   {gaugeBarDefs.map(({ i, angleDeg, pivotX, pivotY }) => (
                     <rect
                       key={i}
@@ -315,13 +315,13 @@ export default function Hero() {
                   ))}
                 </svg>
                 <div style={{ position: "absolute", bottom: "6px", left: "50%", transform: "translateX(-50%)", textAlign: "center", whiteSpace: "nowrap", pointerEvents: "none" }}>
-                  <div ref={numRef} style={{ fontSize: "26px", fontWeight: 700, color: "#6557EA", letterSpacing: "-0.06em", lineHeight: 1 }}>
+                  <div ref={numRef} style={{ fontSize: "20px", fontWeight: 700, color: "#6557EA", letterSpacing: "-0.06em", lineHeight: 1 }}>
                     +0.0%
                   </div>
-                  <div style={{ fontSize: "10px", color: "#909090", marginTop: "3px" }}>Success rate</div>
+                  <div style={{ fontSize: "9px", color: "#909090", marginTop: "2px" }}>Success rate</div>
                 </div>
               </div>
-              <div style={{ marginTop: "10px", paddingTop: "10px", borderTop: "1px solid #F0F0F0", fontSize: "11px", color: "#3D3D4A", lineHeight: 1.55, textAlign: "center" }}>
+              <div style={{ marginTop: "8px", paddingTop: "8px", borderTop: "1px solid #F0F0F0", fontSize: "10px", color: "#3D3D4A", lineHeight: 1.55, textAlign: "center" }}>
                 Você conquistou{" "}
                 <strong style={{ color: "#6557ea" }}>R$ 3,2K</strong>{" "}
                 em receita hoje

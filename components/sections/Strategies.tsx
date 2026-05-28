@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import { useInView } from "@/hooks/useInView";
@@ -8,62 +8,37 @@ const strategies = [
     title: "Aquisição de Usuários",
     description: "Campanhas de UA com segmentação precisa para atrair novos usuários qualificados e maximizar o volume de installs.",
     href: "/useracquisition-app",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#6557ea" xmlns="http://www.w3.org/2000/svg">
-        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-      </svg>
-    ),
+    icon: <img src="/icon-strategy-1.webp" width={28} height={28} alt="" />,
   },
   {
     title: "Retargeting",
     description: "Reengaje usuários que já instalaram seu app e converta intenções em compras e eventos de receita.",
     href: "/retargeting",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#6557ea" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
-      </svg>
-    ),
+    icon: <img src="/icon-strategy-2.webp" width={28} height={28} alt="" />,
   },
   {
     title: "CTV",
     description: "Anuncie em TVs conectadas e streaming para construir brand awareness e escalar o alcance do seu app.",
     href: "/ctv-connected-tv",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#6557ea" xmlns="http://www.w3.org/2000/svg">
-        <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/>
-        <path d="M9 8l5 4-5 4z" opacity=".8"/>
-      </svg>
-    ),
+    icon: <img src="/icon-strategy-3.webp" width={28} height={28} alt="" />,
   },
   {
     title: "App Chat & Push",
     description: "Comunicação direta dentro e fora do app com mensagens personalizadas para aumentar retenção e LTV.",
     href: "/app-chat-push",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#6557ea" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
-      </svg>
-    ),
+    icon: <img src="/icon-strategy-4.webp" width={28} height={28} alt="" />,
   },
   {
     title: "Preload",
     description: "Seu app pré-instalado em dispositivos novos, garantindo presença desde o primeiro acesso do usuário.",
     href: "/preload",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#6557ea" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-4-3.5l-3.5-3.5H12V8h2v4h2.5L13 15.5z"/>
-      </svg>
-    ),
+    icon: <img src="/icon-strategy-5.webp" width={28} height={28} alt="" />,
   },
   {
     title: "Mídia Programática",
     description: "Compra de mídia em escala com dados de primeira parte para atingir o usuário certo, no momento certo.",
     href: "/midia-programatica",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#6557ea" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-12.5c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 5.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/>
-      </svg>
-    ),
+    icon: <img src="/icon-strategy-6.webp" width={28} height={28} alt="" />,
   },
 ];
 
@@ -76,6 +51,7 @@ export default function Strategies() {
   return (
     <section
       id="estrategias"
+      className="strategies-section"
       style={{ background: "#fafafa", padding: "80px 40px", position: "relative", overflow: "hidden" }}
     >
       {/* Blob roxo */}
@@ -113,7 +89,7 @@ export default function Strategies() {
         </div>
 
         {/* Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
+        <div className="strategies-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
           {strategies.map((s, idx) => {
             const { ref: cardRef, visible: cardVisible } = cardViews[idx];
             const delay = `${(idx % 3) * 0.1}s`;
@@ -122,10 +98,13 @@ export default function Strategies() {
                 key={s.title}
                 href={s.href}
                 ref={cardRef as unknown as React.RefObject<HTMLAnchorElement>}
-                className={`card reveal-scale${cardVisible ? " visible" : ""}`}
+                className={`strategies-card card reveal-scale${cardVisible ? " visible" : ""}`}
                 style={{
                   "--reveal-delay": delay,
-                  background: "white",
+                  background: "rgba(255,255,255,0.80)",
+                  backdropFilter: "blur(20px)",
+                  WebkitBackdropFilter: "blur(20px)",
+                  border: "1px solid rgba(255,255,255,0.50)",
                   borderRadius: "24px",
                   padding: "25px",
                   height: "412px",
@@ -158,13 +137,21 @@ export default function Strategies() {
                 </div>
 
                 {/* Text */}
-                <div>
-                  <h3 style={{ fontSize: "32px", color: "#0f0f14", marginBottom: "16px" }}>
-                    {s.title}
-                  </h3>
-                  <p style={{ fontSize: "16px", color: "#909090", lineHeight: "160%" }}>
-                    {s.description}
-                  </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  <div>
+                    <h3 style={{ fontSize: "32px", color: "#0f0f14", marginBottom: "16px" }}>
+                      {s.title}
+                    </h3>
+                    <p style={{ fontSize: "16px", color: "#909090", lineHeight: "160%" }}>
+                      {s.description}
+                    </p>
+                  </div>
+                  <span className="strategies-card-btn">
+                    Ver detalhes
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
                 </div>
               </a>
             );

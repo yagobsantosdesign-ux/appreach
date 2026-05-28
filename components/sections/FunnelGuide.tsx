@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useRef, useEffect, useState } from "react";
 import { Tv2, UserPlus, MessageCircle, TrendingUp } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
@@ -8,28 +8,28 @@ const stages = [
     title: "Alcance",
     description: "Construa presença antes do install — em TVs, dispositivos novos e inventários premium.",
     icon: Tv2,
-    img: "/funil-alcance.png",
+    img: "/funil-alcance.webp",
     imgAlt: "Alcance",
   },
   {
     title: "Aquisição",
     description: "Atraia usuários com alto potencial de ativação com segmentação precisa e criativos otimizados.",
     icon: UserPlus,
-    img: "/funil-aquisicao.png",
+    img: "/funil-aquisicao.webp",
     imgAlt: "Aquisição",
   },
   {
     title: "Engajamento",
     description: "Ative e retenha usuários com comunicação personalizada dentro e fora do app.",
     icon: MessageCircle,
-    img: "/funil-engajamento.png",
+    img: "/funil-engajamento.webp",
     imgAlt: "Engajamento",
   },
   {
     title: "Receita",
     description: "Reengaje quem já instalou e converta intenções em compras, eventos e LTV crescente.",
     icon: TrendingUp,
-    img: "/funil-receita.png",
+    img: "/funil-receita.webp",
     imgAlt: "Receita",
   },
 ];
@@ -102,15 +102,16 @@ export default function FunnelGuide() {
   }, []);
 
   return (
-    <section style={{ background: "#fafafa", padding: "80px 40px" }}>
+    <section className="funnel-section" style={{ background: "#fafafa", padding: "80px 40px" }}>
       <div
+        className="funnel-layout"
         style={{ maxWidth: "1350px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}
       >
 
         {/* LEFT — sticky */}
         <div
           ref={leftRef}
-          className="lg:sticky lg:top-[220px] funnel-card"
+          className="funnel-left lg:sticky lg:top-[220px] funnel-card"
           style={{ width: "400px", flexShrink: 0 }}
         >
           <div
@@ -133,7 +134,7 @@ export default function FunnelGuide() {
               </span>
             </div>
 
-            <h2 style={{ color: "#251d49", fontSize: "48px" }}>
+            <h2 style={{ color: "#251d49", fontSize: "48px", fontWeight: 600, lineHeight: "120%", letterSpacing: "-0.02em" }}>
               Onde está o seu app agora?
             </h2>
 
@@ -166,7 +167,7 @@ export default function FunnelGuide() {
         </div>
 
         {/* RIGHT — stacking cards */}
-        <div style={{ width: "542px", flexShrink: 0, display: "flex", flexDirection: "column", gap: "16px" }}>
+        <div className="funnel-right" style={{ width: "542px", flexShrink: 0, display: "flex", flexDirection: "column", gap: "16px" }}>
           {stages.map((stage, i) => {
             const Icon = stage.icon;
             return (
@@ -205,12 +206,12 @@ export default function FunnelGuide() {
                   }}>
                     <Icon size={15} color="#fff" strokeWidth={2.5} />
                   </div>
-                  <p style={{ fontSize: "26px", fontWeight: 500, color: "#251d49", letterSpacing: "-0.5px", lineHeight: "39px" }}>
+                  <p className="funnel-stage-title" style={{ fontSize: "32px", fontWeight: 600, color: "#251d49", letterSpacing: "-0.02em", lineHeight: "140%" }}>
                     {stage.title}
                   </p>
                 </div>
 
-                <p style={{ fontSize: "16px", color: "#909090", lineHeight: "165%", maxWidth: "360px" }}>
+                <p style={{ fontSize: "16px", color: "#909090", lineHeight: "160%", maxWidth: "360px" }}>
                   {stage.description}
                 </p>
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -10,30 +10,37 @@ const steps = [
     tag: "Descoberta",
     title: "Briefing & Diagnóstico",
     description: "Entendemos os objetivos do app, o estágio do funil e os KPIs que mais importam para o negócio.",
+    image: "/processo-01.webp",
   },
   {
     number: "02",
     tag: "Estratégia",
     title: "Planejamento Estratégico",
     description: "Definimos as estratégias certas para cada etapa — sem desperdício de verba e com foco em resultado.",
+    image: "/processo-02.webp",
   },
   {
     number: "03",
     tag: "Execução",
     title: "Ativação das Campanhas",
     description: "Lançamos as campanhas com criativos otimizados, segmentação precisa e integração de tracking.",
+    image: "/processo-03.webp",
+    imageScale: 1.5,
   },
   {
     number: "04",
     tag: "Performance",
     title: "Otimização Contínua",
     description: "Monitoramos em tempo real e ajustamos bid, criativos e audiências para maximizar a performance.",
+    image: "/processo-04.webp",
+    imageCover: true,
   },
   {
     number: "05",
     tag: "Crescimento",
     title: "Relatório & Escala",
     description: "Reportes claros com insights acionáveis e decisão conjunta sobre escalar o que está funcionando.",
+    image: "/processo-05.webp",
   },
 ];
 
@@ -53,19 +60,33 @@ export default function Timeline() {
   return (
     <section
       id="como-funciona"
-      style={{ background: "white", padding: "80px 0", overflow: "hidden" }}
+      className="timeline-section"
+      style={{ background: "white", padding: "80px 40px", overflow: "hidden" }}
     >
       <style>{`
         @media (max-width: 767px) {
-          .process-track    { height: 520px !important; }
-          .process-card     { width: 82vw !important; height: auto !important; min-height: 460px !important; }
-          .process-nav-left  { left: 16px !important; }
-          .process-nav-right { right: 16px !important; }
+          .timeline-carousel-outer { overflow: visible !important; }
+          .process-track { height: auto !important; min-height: 0 !important; }
+          .process-card { display: none !important; }
+          .process-card-active {
+            display: flex !important;
+            position: relative !important;
+            left: auto !important;
+            top: auto !important;
+            transform: none !important;
+            width: 82vw !important;
+            height: 520px !important;
+            margin: 0 auto !important;
+          }
+          .process-card-visual { flex: 1 !important; height: auto !important; }
+          .timeline-fade-overlay { display: none !important; }
+          .process-nav-left  { left: calc(50% - 41vw - 22px) !important; }
+          .process-nav-right { right: calc(50% - 41vw - 22px) !important; }
         }
       `}</style>
 
       {/* ── Header ─────────────────────────────────────────────────────── */}
-      <div style={{ maxWidth: "1350px", margin: "0 auto", padding: "0 40px" }}>
+      <div className="timeline-header" style={{ maxWidth: "1350px", margin: "0 auto", padding: "0 40px" }}>
         <div
           ref={headerRef as React.RefObject<HTMLDivElement>}
           className={`reveal${headerVisible ? " visible" : ""}`}
@@ -108,9 +129,9 @@ export default function Timeline() {
         className={`reveal-scale${carouselVisible ? " visible" : ""}`}
         style={{ "--reveal-delay": "0.1s" } as React.CSSProperties}
       >
-        <div style={{ maxWidth: "1350px", margin: "0 auto", overflow: "hidden", position: "relative" }}>
+        <div className="timeline-carousel-outer" style={{ maxWidth: "1350px", margin: "0 auto", overflow: "hidden", position: "relative", paddingTop: "20px", paddingBottom: "20px" }}>
           {/* Fade overlay — laterais */}
-          <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, white 0%, transparent 8%, transparent 92%, white 100%)", pointerEvents: "none", zIndex: 3 }} />
+          <div aria-hidden className="timeline-fade-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, white 0%, transparent 8%, transparent 92%, white 100%)", pointerEvents: "none", zIndex: 3 }} />
         {/* Track */}
         <div
           className="process-track"
@@ -125,7 +146,7 @@ export default function Timeline() {
             return (
               <div
                 key={step.number}
-                className="process-card"
+                className={`process-card${isActive ? " process-card-active" : ""}`}
                 onClick={() => !isActive && setActive(i)}
                 style={{
                   position: "absolute",
@@ -139,7 +160,7 @@ export default function Timeline() {
                   cursor: isActive ? "default" : "pointer",
                   borderRadius: "24px",
                   background: "#251d49",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  border: "none",
                   overflow: "hidden",
                   display: "flex",
                   flexDirection: "column",
@@ -147,11 +168,29 @@ export default function Timeline() {
                   zIndex: isActive ? 2 : 1,
                 }}
               >
-                {/* Visual placeholder area */}
-                <div style={{
-                  flex: 1,
-                  background: "linear-gradient(180deg, #3d317e 0%, #2b2060 100%)",
-                }} />
+                {/* Visual area */}
+                {step.image ? (
+                  <div className="process-card-visual" style={{
+                    flex: 1,
+                    overflow: "hidden",
+                    background: "linear-gradient(180deg, #3d317e 0%, #2b2060 100%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: step.imageCover ? "0" : "32px",
+                  }}>
+                    <img
+                      src={step.image}
+                      alt=""
+                      style={step.imageCover
+                        ? { width: "100%", height: "100%", objectFit: "cover", display: "block" }
+                        : { maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block", transform: step.imageScale ? `scale(${step.imageScale})` : undefined }
+                      }
+                    />
+                  </div>
+                ) : (
+                  <div style={{ flex: 1, background: "linear-gradient(180deg, #3d317e 0%, #2b2060 100%)" }} />
+                )}
 
                 {/* Text area */}
                 <div style={{

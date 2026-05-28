@@ -24,7 +24,7 @@ const LABEL: React.CSSProperties = {
 
 export default function ContactForm() {
   return (
-    <section className="py-12 lg:py-16" style={{ background: "transparent", paddingLeft: "40px", paddingRight: "40px" }}>
+    <section className="contact-form-section py-12 lg:py-16" style={{ background: "transparent", paddingLeft: "40px", paddingRight: "40px" }}>
       <div style={{ maxWidth: "1350px", margin: "0 auto" }}>
         <div
           style={{
@@ -36,7 +36,7 @@ export default function ContactForm() {
             alignItems: "center",
             boxShadow: "0 8px 40px rgba(101,87,234,0.30)",
           }}
-          className="flex-col lg:flex-row"
+          className="contact-form-wrapper flex-col lg:flex-row"
         >
 
           {/* Left — copy */}
@@ -89,7 +89,7 @@ export default function ContactForm() {
               <input type="hidden" name="form-name" value="contato" />
 
               {/* Nome + E-mail */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+              <div className="contact-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
                 <div>
                   <label style={LABEL}>Nome</label>
                   <input name="nome" type="text" placeholder="Seu nome" required style={INPUT}

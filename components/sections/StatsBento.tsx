@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
@@ -84,7 +84,7 @@ export default function StatsBento() {
   const c4 = useInView();
   const c5 = useInView();
   return (
-    <section style={{ background: "#fafafa", padding: "80px 40px" }}>
+    <section className="stats-bento-section" style={{ background: "#fafafa", padding: "80px 40px" }}>
       <div style={{ maxWidth: "1350px", margin: "0 auto" }}>
 
         {/* Header */}
@@ -160,7 +160,7 @@ export default function StatsBento() {
           {/* Cell 2 — Foto 2 */}
           <div ref={c2.ref as React.RefObject<HTMLDivElement>} className={`stats-photo reveal-scale${c2.visible ? " visible" : ""}`} style={{ ...CARD_MUTED, padding: 0, overflow: "hidden" } as React.CSSProperties}>
             <img
-              src="/stats-photo-2.png"
+              src="/stats-photo-2.webp"
               alt=""
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: "220px" }}
               onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none" }}

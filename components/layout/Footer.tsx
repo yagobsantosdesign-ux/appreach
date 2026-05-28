@@ -69,7 +69,7 @@ export default function Footer() {
     }}>
 
       {/* ── Contact form card ── */}
-      <div className="max-w-[1350px] mx-auto" style={{ marginTop: "-260px", position: "relative", zIndex: 2 }}>
+      <div className="footer-card-container max-w-[1350px] mx-auto" style={{ marginTop: "-260px", position: "relative", zIndex: 2 }}>
         <div
           className="footer-contact-card flex flex-col lg:flex-row"
           style={{
@@ -106,7 +106,7 @@ export default function Footer() {
           </div>
 
           {/* Right — form */}
-          <div style={{ flex: 1, background: "white", borderRadius: "20px", padding: "40px", boxShadow: "0 4px 32px rgba(0,0,0,0.10)" }}>
+          <div className="footer-form-card" style={{ flex: 1, background: "white", borderRadius: "20px", padding: "40px", boxShadow: "0 4px 32px rgba(0,0,0,0.10)" }}>
             <form name="contato" method="POST" data-netlify="true" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               <input type="hidden" name="form-name" value="contato" />
               <div className="footer-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
