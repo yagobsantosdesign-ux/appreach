@@ -260,8 +260,20 @@ a:hover .logo-text {
   animation-fill-mode: both;
 }
 
-/* Strategies mobile CTA — hidden by default */
-.strategies-card-btn { display: none; }
+/* Strategies CTA button */
+.strategies-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(101,87,234,0.08);
+  color: #6557ea;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 8px 14px;
+  border-radius: 8px;
+  align-self: flex-start;
+}
 
 /* Platforms — carousel always visible, grid hidden by default */
 .platforms-arc-carousel { display: block; }
