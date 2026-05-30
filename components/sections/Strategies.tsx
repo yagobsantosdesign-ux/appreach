@@ -7,7 +7,7 @@ import SectionBadge from "@/components/ui/SectionBadge";
 const strategies = [
   {
     title: "Aquisição de Usuários",
-    description: "Atraia os usuários certos — pessoas com maior potencial de compra e engajamento — com campanhas de aquisição otimizadas para performance.",
+    description: "Atraia os usuários com maior potencial de compra e engajamento, em campanhas otimizadas para performance.",
     href: "/useracquisition-app",
     icon: <img src="/icon-strategy-1.webp" width={28} height={28} alt="" />,
   },
@@ -25,7 +25,7 @@ const strategies = [
   },
   {
     title: "Push Ads",
-    description: "Alcance o usuário certo, na hora certa, fora do app. Notificações personalizadas que reativam, convertem e aumentam o LTV — sem depender de ele abrir o app primeiro.",
+    description: "Alcance o usuário certo, na hora certa, fora do app. Notificações que reativam, convertem e aumentam o LTV.",
     href: "/app-chat-push",
     icon: <img src="/icon-strategy-4.webp" width={28} height={28} alt="" />,
   },
@@ -131,7 +131,7 @@ export default function Strategies() {
                     <h3 style={{ fontSize: "32px", color: "#251d49", marginBottom: "16px" }}>
                       {s.title}
                     </h3>
-                    <p style={{ fontSize: "16px", color: "var(--color-muted)", lineHeight: "160%" }}>
+                    <p style={{ fontSize: "16px", color: "var(--color-muted)", lineHeight: "160%", textWrap: "balance" } as React.CSSProperties}>
                       {s.description}
                     </p>
                   </div>

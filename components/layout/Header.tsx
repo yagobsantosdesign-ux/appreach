@@ -151,61 +151,80 @@ export default function Header() {
         </div>
 
         {/* Mobile menu */}
-        {open && (
-          <div
-            className="md:hidden px-6 py-4 flex flex-col gap-1"
-            style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}
-          >
-            <button
-              className="flex items-center justify-between px-3 py-2.5 rounded-xl text-body hover:text-dark hover:bg-surface transition-colors font-medium w-full text-left"
-              style={{ fontSize: "15px" }}
-              onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
+        <div
+          className="md:hidden grid"
+          style={{
+            gridTemplateRows: open ? "1fr" : "0fr",
+            opacity: open ? 1 : 0,
+            pointerEvents: open ? "auto" : "none",
+            transition: "grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease",
+          }}
+          aria-hidden={!open}
+        >
+          <div className="overflow-hidden" style={{ minHeight: 0 }}>
+            <div
+              className="px-6 py-4 flex flex-col gap-1"
+              style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}
             >
-              Soluções
-              <ChevronDown size={13} className={`transition-transform duration-200 ${mobileSolutionsOpen ? "rotate-180" : ""}`} />
-            </button>
-
-            {mobileSolutionsOpen && (
-              <div className="flex flex-col gap-0.5 pl-3 mb-1">
-                {solutions.map((s) => (
-                  <a
-                    key={s.href}
-                    href={s.href}
-                    onClick={() => setOpen(false)}
-                    className="px-3 py-2 rounded-xl text-muted hover:text-dark hover:bg-surface transition-colors font-medium"
-                    style={{ fontSize: "14px" }}
-                  >
-                    {s.label}
-                  </a>
-                ))}
-              </div>
-            )}
-
-            <div className="border-t border-border my-1" />
-
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="px-3 py-2.5 rounded-xl text-body hover:text-dark hover:bg-surface transition-colors font-medium"
+              <button
+                className="flex items-center justify-between px-3 py-2.5 rounded-xl text-body hover:text-dark hover:bg-surface transition-colors font-medium w-full text-left"
                 style={{ fontSize: "15px" }}
+                onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
               >
-                {link.label}
-              </a>
-            ))}
+                Soluções
+                <ChevronDown size={13} className={`transition-transform duration-200 ${mobileSolutionsOpen ? "rotate-180" : ""}`} />
+              </button>
 
-            <Button
-              href="#contato"
-              onClick={() => setOpen(false)}
-              variant="gradient"
-              size="md"
-              fullWidth
-            >
-              Fale com especialista
-            </Button>
+              <div
+                className="grid"
+                style={{
+                  gridTemplateRows: mobileSolutionsOpen ? "1fr" : "0fr",
+                  transition: "grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
+                }}
+              >
+                <div className="overflow-hidden" style={{ minHeight: 0 }}>
+                  <div className="flex flex-col gap-0.5 pl-3 pt-1 pb-1">
+                    {solutions.map((s) => (
+                      <a
+                        key={s.href}
+                        href={s.href}
+                        onClick={() => setOpen(false)}
+                        className="px-3 py-2 rounded-xl text-muted hover:text-dark hover:bg-surface transition-colors font-medium"
+                        style={{ fontSize: "14px" }}
+                      >
+                        {s.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-border my-1" />
+
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="px-3 py-2.5 rounded-xl text-body hover:text-dark hover:bg-surface transition-colors font-medium"
+                  style={{ fontSize: "15px" }}
+                >
+                  {link.label}
+                </a>
+              ))}
+
+              <Button
+                href="#contato"
+                onClick={() => setOpen(false)}
+                variant="gradient"
+                size="md"
+                fullWidth
+              >
+                Fale com especialista
+              </Button>
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </header>
     </>

@@ -96,9 +96,9 @@ export default function Timeline() {
           <SectionBadge>Processo</SectionBadge>
 
           <h2 style={{
-            color: "#251d49",
+            color: "var(--color-heading)",
             fontSize: "48px",
-            maxWidth: "700px",
+            maxWidth: "440px",
             margin: "0 auto 16px",
             textWrap: "balance",
           } as React.CSSProperties}>

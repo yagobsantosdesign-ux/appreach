@@ -123,9 +123,9 @@ export default function Hero() {
           <div className="flex flex-col" style={{ gap: "23px" }}>
             <h1
               className="hero-h1 hero-fade-up hero-fade-up-1"
-              style={{ fontSize: "60px", color: "#251d49", letterSpacing: "-0.04em", lineHeight: "110%", maxWidth: "444px", textWrap: "balance" } as React.CSSProperties}
+              style={{ fontSize: "60px", color: "var(--color-heading)", letterSpacing: "-0.04em", lineHeight: "110%", maxWidth: "620px", textWrap: "balance" } as React.CSSProperties}
             >
-              Cada fase do seu funil. Uma única equipe
+              Cada fase do seu funil. Uma única equipe.
             </h1>
 
             <p
@@ -322,7 +322,7 @@ export default function Hero() {
                     />
                   ))}
                 </svg>
-                <div style={{ position: "absolute", bottom: "6px", left: "50%", transform: "translateX(-50%)", textAlign: "center", whiteSpace: "nowrap", pointerEvents: "none" }}>
+                <div style={{ position: "absolute", bottom: "0px", left: "50%", transform: "translateX(-50%)", textAlign: "center", whiteSpace: "nowrap", pointerEvents: "none" }}>
                   <div ref={numRef} style={{ fontSize: "20px", fontWeight: 700, color: "#6557EA", letterSpacing: "-0.06em", lineHeight: 1 }}>
                     +0.0%
                   </div>

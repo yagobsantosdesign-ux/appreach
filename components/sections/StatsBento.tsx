@@ -84,7 +84,7 @@ export default function StatsBento() {
   const c4 = useInView();
   const c5 = useInView();
   return (
-    <section className="stats-bento-section" style={{ background: "#fafafa", padding: "80px 40px" }}>
+    <section className="stats-bento-section" style={{ background: "#fafafa", padding: "80px 40px 382px" }}>
       <div style={{ maxWidth: "1350px", margin: "0 auto" }}>
 
         {/* Header */}
@@ -145,7 +145,7 @@ export default function StatsBento() {
           <div ref={c1.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c1.visible ? " visible" : ""}`} style={CARD_LIGHT}>
             <div>
               <BadgeTag>↑ Crescimento</BadgeTag>
-              <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "var(--color-dark)", marginTop: "14px" }}>
+              <p className="stats-value" style={{ color: "var(--color-dark)", marginTop: "14px" }}>
                 {stats[0].value}
               </p>
             </div>
@@ -171,7 +171,7 @@ export default function StatsBento() {
           <div ref={c3.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c3.visible ? " visible" : ""}`} style={CARD_LIGHT}>
             <div>
               <BadgeTag>↑ Escala</BadgeTag>
-              <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "var(--color-dark)", marginTop: "14px" }}>
+              <p className="stats-value" style={{ color: "var(--color-dark)", marginTop: "14px" }}>
                 {stats[2].value}
               </p>
             </div>
@@ -187,7 +187,7 @@ export default function StatsBento() {
           <div ref={c4.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c4.visible ? " visible" : ""}`} style={CARD_DARK}>
             <div>
               <BadgeTag dark>↑ Investimento</BadgeTag>
-              <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "white", marginTop: "14px" }}>
+              <p className="stats-value" style={{ color: "white", marginTop: "14px" }}>
                 {stats[3].value}
               </p>
             </div>
@@ -203,7 +203,7 @@ export default function StatsBento() {
           <div ref={c5.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c5.visible ? " visible" : ""}`} style={CARD_LIGHT}>
             <div>
               <BadgeTag>↑ NPS</BadgeTag>
-              <p className="stats-value" style={{ fontSize: "44px", fontWeight: 500, letterSpacing: "-2px", lineHeight: 1, color: "var(--color-dark)", marginTop: "14px" }}>
+              <p className="stats-value" style={{ color: "var(--color-dark)", marginTop: "14px" }}>
                 {stats[1].value}
               </p>
             </div>

@@ -27,7 +27,7 @@ export default function WhyAppreach() {
         >
           <SectionBadge>POR QUÊ A APPREACH</SectionBadge>
           <h2 style={{
-            color: "#251d49",
+            color: "var(--color-heading)",
             fontSize: "48px",
             fontWeight: 600,
             lineHeight: "120%",
@@ -81,8 +81,8 @@ export default function WhyAppreach() {
                 fontWeight: 600,
                 color: "#ffffff",
                 lineHeight: "140%",
-                letterSpacing: "-1.4px",
-                marginBottom: "12px",
+                letterSpacing: "-0.02em",
+                marginBottom: "16px",
                 maxWidth: "270px",
                 textWrap: "balance",
               } as React.CSSProperties}>
@@ -93,7 +93,8 @@ export default function WhyAppreach() {
                 color: "rgba(255,255,255,0.65)",
                 lineHeight: "160%",
                 maxWidth: "240px",
-              }}>
+                textWrap: "balance",
+              } as React.CSSProperties}>
                 A Appreach cuida de tudo. Você foca no produto, nós cuidamos do crescimento.
               </p>
             </div>
@@ -142,10 +143,10 @@ export default function WhyAppreach() {
               <h3 style={{
                 fontSize: "32px",
                 fontWeight: 600,
-                color: "#251d49",
+                color: "var(--color-heading)",
                 lineHeight: "140%",
-                letterSpacing: "-1.4px",
-                marginBottom: "12px",
+                letterSpacing: "-0.02em",
+                marginBottom: "16px",
                 maxWidth: "300px",
                 textWrap: "balance",
               } as React.CSSProperties}>
@@ -153,10 +154,11 @@ export default function WhyAppreach() {
               </h3>
               <p style={{
                 fontSize: "16px",
-                color: "#909090",
+                color: "var(--color-muted)",
                 lineHeight: "160%",
                 maxWidth: "295px",
-              }}>
+                textWrap: "balance",
+              } as React.CSSProperties}>
                 Sem longas esperas. Em menos de uma semana, suas campanhas já estão no ar e gerando dados reais.
               </p>
             </div>
@@ -205,10 +207,10 @@ export default function WhyAppreach() {
               <h3 style={{
                 fontSize: "32px",
                 fontWeight: 600,
-                color: "#251d49",
+                color: "var(--color-heading)",
                 lineHeight: "140%",
-                letterSpacing: "-1.4px",
-                marginBottom: "12px",
+                letterSpacing: "-0.02em",
+                marginBottom: "16px",
                 maxWidth: "220px",
                 textWrap: "balance",
               } as React.CSSProperties}>
@@ -216,10 +218,11 @@ export default function WhyAppreach() {
               </h3>
               <p style={{
                 fontSize: "16px",
-                color: "#909090",
+                color: "var(--color-muted)",
                 lineHeight: "160%",
                 maxWidth: "315px",
-              }}>
+                textWrap: "balance",
+              } as React.CSSProperties}>
                 Relatórios sem jargão, dashboard em tempo real e check-ins quinzenais. Você sempre no controle.
               </p>
             </div>

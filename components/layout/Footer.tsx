@@ -69,7 +69,7 @@ export default function Footer() {
     }}>
 
       {/* ── Contact form card ── */}
-      <div className="footer-card-container max-w-[1350px] mx-auto" style={{ marginTop: "-260px", position: "relative", zIndex: 2 }}>
+      <div id="contato" className="footer-card-container max-w-[1350px] mx-auto" style={{ marginTop: "-260px", position: "relative", zIndex: 2, scrollMarginTop: "100px" }}>
         <div
           className="footer-contact-card flex flex-col lg:flex-row"
           style={{
@@ -139,30 +139,44 @@ export default function Footer() {
                     onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
                 </div>
                 <div>
-                  <label style={LABEL}>E-mail</label>
+                  <label style={LABEL}>E-mail profissional</label>
                   <input name="email" type="email" placeholder="seu@email.com" required style={INPUT}
                     onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
                     onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
                 </div>
               </div>
               <div>
-                <label style={LABEL}>WhatsApp</label>
+                <label style={LABEL}>WhatsApp <span style={{ fontWeight: 400, color: "#9A9AA8" }}>(opcional)</span></label>
                 <input name="whatsapp" type="tel" placeholder="+55 (11) 99999-9999" style={INPUT}
                   onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
                   onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
               </div>
               <div>
-                <label style={LABEL}>Qual app você quer escalar?</label>
-                <input name="app" type="text" placeholder="Nome ou link do app" style={INPUT}
+                <label style={LABEL}>Seu app</label>
+                <input name="app" type="text" placeholder="Nome ou link do app" required style={INPUT}
                   onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
                   onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
               </div>
               <div>
-                <label style={LABEL}>Mensagem (opcional)</label>
-                <textarea name="mensagem" placeholder="Conte mais sobre seus objetivos..." rows={4}
-                  style={{ ...INPUT, resize: "none" as never, lineHeight: 1.6 }}
-                  onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                  onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
+                <label style={LABEL}>Qual seu principal objetivo hoje?</label>
+                <div style={{ position: "relative" }}>
+                  <select name="objetivo" required defaultValue=""
+                    style={{ ...INPUT, color: "#9A9AA8", cursor: "pointer", paddingRight: "40px", appearance: "none", WebkitAppearance: "none" }}
+                    onChange={e => (e.currentTarget.style.color = e.currentTarget.value ? "#141414" : "#9A9AA8")}
+                    onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
+                    onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")}
+                  >
+                    <option value="" disabled>Selecione uma opção</option>
+                    <option value="aumentar-installs" style={{ color: "#141414" }}>Aumentar installs</option>
+                    <option value="melhorar-roas" style={{ color: "#141414" }}>Melhorar ROAS</option>
+                    <option value="reduzir-cac" style={{ color: "#141414" }}>Reduzir CAC</option>
+                    <option value="escalar-receita" style={{ color: "#141414" }}>Escalar receita</option>
+                  </select>
+                  <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" fill="none"
+                    style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "rgba(0,0,0,0.4)" }}>
+                    <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
               </div>
               <button type="submit" style={{
                 width: "100%", background: "linear-gradient(145deg, #9B91FF 0%, #6557EA 100%)",
@@ -173,10 +187,7 @@ export default function Footer() {
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
               >
-                Enviar mensagem
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/>
-                </svg>
+                Quero escalar meu app
               </button>
             </form>
           </div>

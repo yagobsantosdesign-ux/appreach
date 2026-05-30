@@ -211,13 +211,6 @@ export default function Cases() {
           grid-template-columns: 1fr 1fr 1fr;
           gap: 32px;
         }
-        .cases-metric-value {
-          font-size: 48px;
-          font-weight: 500;
-          color: #251d49;
-          line-height: 1;
-          letter-spacing: -2px;
-        }
 
         @media (max-width: 768px) {
           .cases-tabs { display: flex; width: 100%; }
@@ -230,7 +223,6 @@ export default function Cases() {
           .case-content-col { justify-content: flex-start; gap: 32px; }
           .cases-content-grid { grid-template-columns: 1fr; gap: 24px; }
           .cases-metrics-row { gap: 24px; }
-          .cases-metric-value { font-size: 32px !important; letter-spacing: -1.5px !important; }
         }
         @media (max-width: 480px) {
           .cases-metrics-row { grid-template-columns: 1fr; gap: 20px; }
@@ -315,7 +307,7 @@ export default function Cases() {
                   </span>
                 </div>
 
-                <p style={{ fontSize: "22px", fontWeight: 600, color: "#251d49", lineHeight: "140%", letterSpacing: "-0.5px", maxWidth: "360px" }}>
+                <p style={{ fontSize: "22px", fontWeight: 600, color: "var(--color-heading)", lineHeight: "140%", letterSpacing: "-0.5px", maxWidth: "520px", textWrap: "balance" }}>
                   {c.hookTitle}
                 </p>
               </div>
@@ -347,8 +339,8 @@ export default function Cases() {
               <div className="cases-metrics-row">
                 {c.metrics.map((m, i) => (
                   <div key={i}>
-                    <p className="cases-metric-value">{m.value}</p>
-                    <p style={{ fontSize: "13px", color: "#909090", marginTop: "6px" }}>{m.label}</p>
+                    <p className="stats-value" style={{ color: "var(--color-heading)" }}>{m.value}</p>
+                    <p style={{ fontSize: "13px", color: "var(--color-muted)", marginTop: "6px" }}>{m.label}</p>
                   </div>
                 ))}
               </div>
