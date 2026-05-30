@@ -13,6 +13,14 @@ const stats = [
   { value: "R$500M+", label: "Em mídia gerenciada" },
 ];
 
+// NOTE: anos e textos da trajetória são placeholders — ajustar com a história real.
+const journey = [
+  { year: "2019", title: "O começo", desc: "Nascemos para resolver o marketing de apps com estratégia e dados — não com achismo." },
+  { year: "2021", title: "Primeiras escalas", desc: "Estruturamos campanhas full-funnel e provamos resultado real para os primeiros clientes." },
+  { year: "2023", title: "Portfólio 360°", desc: "Adicionamos CTV, Apple Search Ads, retargeting e mídia programática à nossa operação." },
+  { year: "2025", title: "Crescendo com dados e IA", desc: "Num mercado em constante evolução, usamos dados e IA para gerar crescimento real para os apps que confiam na gente." },
+];
+
 // NOTE: nomes (dos arquivos das fotos) e cargos são placeholders — ajustar com os dados reais do time.
 const team = [
   { name: "Henri", role: "Co-fundador & CEO", photo: "/team-henri.webp" },
@@ -146,14 +154,14 @@ export default function QuemSomosPage() {
               <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: "40px" }}>
                 <div>
                   <h2 style={{ fontSize: "var(--text-h3)", color: "var(--color-heading)", marginBottom: "12px" }}>Nossa visão</h2>
-                  <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "170%", maxWidth: "440px" }}>
-                    Ser a parceira de crescimento de referência para apps na América Latina — transformando dados em decisões e mídia em resultado real, sem desperdício.
+                  <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "170%", maxWidth: "460px" }}>
+                    Na Appreach, enxergamos um mercado onde todo app — de startups a líderes de categoria — tem acesso a estratégias de crescimento de verdade, sustentadas por dados e não por achismo. Acreditamos que mídia bem investida transforma installs em receita previsível, não em números de vaidade. Nossa visão é ser a parceira de crescimento de referência na América Latina, dando a cada cliente a clareza e a confiança para escalar com eficiência.
                   </p>
                 </div>
                 <div>
                   <h2 style={{ fontSize: "var(--text-h3)", color: "var(--color-heading)", marginBottom: "12px" }}>Nossa missão</h2>
-                  <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "170%", maxWidth: "440px" }}>
-                    Escalar apps de ponta a ponta com estratégia personalizada por vertical, relatórios transparentes e otimização contínua — do alcance à receita.
+                  <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "170%", maxWidth: "460px" }}>
+                    Nossa missão é transformar a forma como apps crescem, unindo dados, criativos e mídia em uma estratégia 360° — do primeiro install à receita. Combinamos inteligência analítica, segmentação precisa e otimização contínua para atrair os usuários certos e maximizar o retorno de cada real investido. Trabalhamos com transparência total, relatórios sem jargão e parceria próxima em cada etapa da jornada, para que escalar o seu app seja um processo claro, mensurável e sem desperdício.
                   </p>
                 </div>
               </div>
@@ -161,22 +169,59 @@ export default function QuemSomosPage() {
           </div>
         </section>
 
-        {/* ── Faixa statement ── */}
+        {/* ── Nossa trajetória ── */}
         <section style={{ background: "linear-gradient(145deg, #1E1640 0%, #2D1F5E 55%, #1a1438 100%)", padding: "96px 0" }}>
           <div className="product-container">
-          <div style={{ maxWidth: "880px", margin: "0 auto", textAlign: "center" }}>
-            <h2
-              style={{
-                color: "#ffffff",
-                fontSize: "clamp(26px, 3.4vw, 40px)",
-                lineHeight: "140%",
-                letterSpacing: "-0.02em",
-                textWrap: "balance" as never,
-              }}
-            >
-              Num mercado em constante evolução, usamos dados e estratégia para gerar crescimento real para os apps que confiam na gente.
-            </h2>
-          </div>
+            <div className="about-journey-row flex flex-col lg:flex-row" style={{ gap: "80px", alignItems: "flex-start" }}>
+              {/* Esquerda: título */}
+              <div className="about-journey-head" style={{ flex: "0 0 auto", maxWidth: "360px" }}>
+                <SectionBadge dark>Nossa trajetória</SectionBadge>
+                <h2 style={{ color: "#ffffff", fontSize: "clamp(28px, 3.4vw, 40px)", lineHeight: "120%", letterSpacing: "-0.02em", marginBottom: "16px", textWrap: "balance" as never }}>
+                  De onde viemos
+                </h2>
+                <p style={{ color: "rgba(255,255,255,0.60)", fontSize: "16px", lineHeight: "160%" }}>
+                  Cada conquista mostra o quanto evoluímos — e o quanto ainda queremos crescer junto com os apps dos nossos clientes.
+                </p>
+              </div>
+
+              {/* Direita: timeline */}
+              <div style={{ flex: 1, position: "relative" }}>
+                {/* Linha vertical contínua */}
+                <div aria-hidden style={{ position: "absolute", left: "15px", top: "16px", bottom: "16px", width: "2px", background: "rgba(255,255,255,0.15)" }} />
+                {journey.map((item, i) => (
+                  <div key={item.year} style={{ display: "flex", gap: "24px", position: "relative", paddingBottom: i < journey.length - 1 ? "44px" : 0 }}>
+                    <div
+                      style={{
+                        position: "relative",
+                        zIndex: 1,
+                        flexShrink: 0,
+                        width: "32px",
+                        height: "32px",
+                        borderRadius: "9px",
+                        background: "var(--color-primary)",
+                        color: "#fff",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "14px",
+                        fontWeight: 600,
+                        boxShadow: "0 4px 16px rgba(101,87,234,0.45)",
+                      }}
+                    >
+                      {i + 1}
+                    </div>
+                    <div style={{ paddingTop: "3px" }}>
+                      <h3 style={{ color: "#ffffff", fontSize: "20px", fontWeight: 600, letterSpacing: "-0.3px", marginBottom: "6px" }}>
+                        {item.year} — {item.title}
+                      </h3>
+                      <p style={{ color: "rgba(255,255,255,0.60)", fontSize: "16px", lineHeight: "160%", maxWidth: "440px" }}>
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
