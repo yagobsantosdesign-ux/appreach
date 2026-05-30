@@ -49,6 +49,14 @@ export default function Hero() {
   const numRef = useRef<HTMLDivElement | null>(null);
   const [patternIdx, setPatternIdx] = useState(0);
 
+  const avatars = [
+    "/iris_neutro.png",
+    "/mano_neutro.png",
+    "/livia_neutro.png",
+    "/neto_neutro.png",
+    "/henri_neutro.png",
+  ];
+
   useEffect(() => {
     const id = setInterval(() => setPatternIdx(i => (i + 1) % barPatterns.length), 2200);
     return () => clearInterval(id);
@@ -117,14 +125,14 @@ export default function Hero() {
               className="hero-h1 hero-fade-up hero-fade-up-1"
               style={{ fontSize: "60px", color: "#251d49", letterSpacing: "-0.04em", lineHeight: "110%", maxWidth: "444px", textWrap: "balance" } as React.CSSProperties}
             >
-              Do primeiro install à receita
+              Cada fase do seu funil. Uma única equipe
             </h1>
 
             <p
               className="hero-fade-up hero-fade-up-2"
               style={{ fontSize: "18px", color: "#40404f", maxWidth: "485px", lineHeight: "160%" }}
             >
-              Da aquisição ao evento de receita, estratégias integradas que fazem cada fase do seu app performar.
+              Da aquisição à receita, estratégias integradas que cobrem cada etapa do seu app.
             </p>
 
             <div className="flex items-center hero-fade-up hero-fade-up-3" style={{ gap: "12px" }}>
@@ -169,11 +177,11 @@ export default function Hero() {
           <div className="hidden lg:flex flex-col hero-fade-up hero-fade-up-4" style={{ gap: "15px", maxWidth: "335px", paddingTop: "32px" }}>
             <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
               <div style={{ display: "flex", alignItems: "center" }}>
-                {[1, 2, 3, 4].map((n, i) => (
+                {avatars.map((src, i) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    key={n}
-                    src={`/avatar-${n}.webp`}
+                    key={src}
+                    src={src}
                     alt=""
                     aria-hidden="true"
                     style={{
@@ -181,9 +189,9 @@ export default function Hero() {
                       height: "34px",
                       borderRadius: "50%",
                       border: "1.5px solid white",
-                      marginRight: i < 3 ? "-6px" : "0",
+                      marginRight: i < avatars.length - 1 ? "-6px" : "0",
                       position: "relative",
-                      zIndex: 4 - i,
+                      zIndex: avatars.length - i,
                       flexShrink: 0,
                       objectFit: "cover",
                     }}

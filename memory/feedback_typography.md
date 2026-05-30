@@ -12,3 +12,13 @@ Sempre que possível, usar quebras de texto naturais para deixar o título "boni
 - Nunca usar `<br>` para quebrar títulos — ajustar `maxWidth` do elemento para forçar a quebra natural no ponto certo
 - Avaliar se a quebra cria linhas bem equilibradas (ex: "A estratégia certa para / cada etapa do funil" é melhor que "A estratégia certa para cada / etapa do funil")
 - Verificar se nenhuma palavra ficou sozinha na última linha
+
+## Sem travessão (—)
+
+**Regra permanente:** nunca usar travessão (`—`) em nenhum texto visível do site, nem em novos conteúdos criados.
+
+**Substituições:**
+- ` — ` entre frases → `, ` (vírgula)
+- ` — ` introduzindo conclusão → `. ` (ponto, com próxima palavra maiúscula)
+- `Palavra — Subtítulo` em labels/badges → `Palavra: Subtítulo` (dois-pontos)
+- `Passo N — Tag` → `Passo N: Tag`

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { useInView } from "@/hooks/useInView";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 const PLATFORMS = [
   { name: "Google Ads", img: "/platform-icon-1.webp" },
@@ -83,23 +84,11 @@ export default function Platforms() {
             className={`reveal${headerVisible ? " visible" : ""}`}
             style={{ textAlign: "center", maxWidth: "504px" }}
           >
-            <div style={{ display: "inline-flex", gap: "8px", alignItems: "center", marginBottom: "14px" }}>
-              <div style={{ background: "#6557ea", height: "1.5px", width: "20px", flexShrink: 0 }} />
-              <span style={{
-                fontFamily: "var(--font-mono)",
-                fontWeight: 600,
-                color: "#6557ea",
-                fontSize: "11px",
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-              }}>
-                Plataformas
-              </span>
-            </div>
+            <SectionBadge>Plataformas</SectionBadge>
             <h2 style={{ color: "#251d49", fontSize: "48px", marginBottom: "14px" }}>
               Operamos onde seu usuário está
             </h2>
-            <p style={{ fontSize: "16px", color: "#909090", lineHeight: "160%" }}>
+            <p style={{ fontSize: "16px", color: "var(--color-muted)", lineHeight: "160%" }}>
               Parceiros certificados das principais plataformas de mídia e mensuração do mercado mobile.
             </p>
           </div>
@@ -172,7 +161,7 @@ export default function Platforms() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={p.img} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </div>
-                <span style={{ fontSize: 11, color: "#909090", fontFamily: "var(--font-mono)" }}>
+                <span style={{ fontSize: 11, color: "var(--color-muted)", fontFamily: "var(--font-mono)" }}>
                   {p.name}
                 </span>
               </div>

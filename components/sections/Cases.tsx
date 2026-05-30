@@ -2,27 +2,27 @@
 
 import React, { useState } from "react";
 import { useInView } from "@/hooks/useInView";
+import SectionBadge from "@/components/ui/SectionBadge";
+import Button from "@/components/ui/Button";
 
 const cases = [
   {
     id: "beleza",
     number: "01",
     category: "Beleza",
-    hookTitle: "Como um app de beleza multiplicou o ROI em 3× com criativos certos",
-    desafio: "Escalar usuários qualificados sem perder qualidade, mantendo ROI mínimo positivo.",
+    hookTitle: "Um app de beleza multiplicou o ROI em 3× com criativos orientados por performance",
+    desafio: "Escalar usuários qualificados sem perder eficiência, mantendo crescimento sustentável e ROI positivo.",
     estrategia: [
-      "Campanhas CPI com histórico de alta qualidade",
-      "Mix de criativos focados em performance",
+      "Campanhas CPA otimizadas para qualidade",
+      "Testes contínuos de criativos focados em performance",
+      "Segmentação baseada em comportamento e potencial de conversão",
     ],
-    porqueFuncionou: "Unimos inteligência criativa a dados de LTV para instalar quem converte — não só quem clica.",
+    porqueFuncionou: "Combinamos inteligência criativa e análise de dados para atrair usuários com maior potencial de retenção e receita — não apenas volume de installs.",
     metrics: [
       { value: "+222%", label: "installs" },
       { value: "+7%",   label: "conversões" },
-      { value: "16×",   label: "ROI" },
+      { value: "3×",    label: "aumento no ROI" },
     ],
-    logo: "/case-logo-beleza.webp",
-    logoW: 120,
-    logoH: 20,
     image: "/case-beleza.webp",
     mobileImage: "/case-beleza-mobile.webp",
   },
@@ -30,21 +30,19 @@ const cases = [
     id: "food",
     number: "02",
     category: "Food",
-    hookTitle: "App de food escalou pedidos em 33% sem aumentar o CAC",
-    desafio: "Aumentar pedidos feitos pelo app, não pela loja física, com custo por conversão controlado.",
+    hookTitle: "Como um app de food aumentou os pedidos em 33% sem elevar o CAC",
+    desafio: "Fazer os usuários migrarem os pedidos para o app — reduzindo dependência da loja física e mantendo o custo por conversão sob controle.",
     estrategia: [
-      "Campanhas CPI com otimização de inventários",
-      "Dados de eventos no funil do app",
+      "Campanhas CPI otimizadas para conversão dentro do app",
+      "Análise de eventos ao longo do funil de compra",
+      "Otimização contínua de inventários e segmentações",
     ],
-    porqueFuncionou: "Segmentação por comportamento de compra reduziu desperdício de verba e elevou ROAS.",
+    porqueFuncionou: "Usamos dados de comportamento e intenção de compra para alcançar usuários mais propensos a finalizar pedidos no app — reduzindo desperdício de mídia e aumentando a receita.",
     metrics: [
       { value: "−25%",  label: "custo por conversão" },
       { value: "+33%",  label: "taxa de conversão" },
       { value: "+36%",  label: "receita via app" },
     ],
-    logo: "/case-logo-food.webp",
-    logoW: 72,
-    logoH: 32,
     image: "/case-food.webp",
     mobileImage: "/case-food-mobile.webp",
   },
@@ -52,21 +50,19 @@ const cases = [
     id: "eletronicos",
     number: "03",
     category: "Eletrônicos",
-    hookTitle: "Eletrônicos: 88% mais instalações com foco na primeira compra",
-    desafio: "Adquirir usuários que realmente compram pelo app pela primeira vez, não apenas instalam.",
+    hookTitle: "Aquisição inteligente: o crescimento de um app de eletrônicos focado em primeira compra",
+    desafio: "Atrair usuários com real intenção de compra — e não apenas gerar volume de instalações sem conversão.",
     estrategia: [
-      "Campanhas CPA com otimização de inventários",
-      "Foco em performance por evento de compra",
+      "Campanhas CPA otimizadas para eventos de compra",
+      "Segmentação baseada em comportamento e intenção de consumo",
+      "Otimização contínua de inventários com foco em ROAS",
     ],
-    porqueFuncionou: "Otimização por evento de compra, não por install, eliminou tráfego de baixa qualidade.",
+    porqueFuncionou: "Ao otimizar campanhas para eventos de compra, e não apenas installs, eliminamos tráfego de baixa qualidade e aumentamos a eficiência da aquisição.",
     metrics: [
       { value: "+88%",  label: "installs" },
       { value: "−51%",  label: "custo por instalação" },
       { value: "+23%",  label: "ROAS" },
     ],
-    logo: "/case-logo-eletronicos.webp",
-    logoW: 110,
-    logoH: 20,
     image: "/case-eletronicos.webp",
     mobileImage: "/case-eletronicos-mobile.webp",
   },
@@ -74,21 +70,19 @@ const cases = [
     id: "fintech",
     number: "04",
     category: "Fintech",
-    hookTitle: "Banco digital abriu 38% mais contas com retargeting preciso",
-    desafio: "Escalar abertura de contas e ativação de produtos financeiros com custo por ação controlado.",
+    hookTitle: "38% mais contas abertas com retargeting orientado por intenção",
+    desafio: "Escalar a abertura de contas e ativação de produtos financeiros mantendo eficiência no custo por aquisição.",
     estrategia: [
       "Campanhas CPA em inventários premium",
-      "Retargeting para ativação de produtos financeiros",
+      "Retargeting focado em usuários com alta intenção de conversão",
+      "Reengajamento baseado em comportamento dentro da jornada financeira",
     ],
-    porqueFuncionou: "Combinamos prospecção de alta intenção com reengajamento cirúrgico em momentos de decisão.",
+    porqueFuncionou: "Combinamos prospecção qualificada com retargeting preciso para impactar usuários nos momentos mais decisivos da conversão.",
     metrics: [
       { value: "+38%",  label: "novas contas" },
-      { value: "+22%",  label: "conversão" },
+      { value: "+22%",  label: "taxa de conversão" },
       { value: "−27%",  label: "custo por ação" },
     ],
-    logo: "/case-logo-fintech.webp",
-    logoW: 90,
-    logoH: 28,
     image: "/case-fintech.webp",
     mobileImage: "/case-fintech-mobile.webp",
   },
@@ -97,7 +91,7 @@ const cases = [
 const LABEL: React.CSSProperties = {
   fontSize: "11px",
   fontWeight: 700,
-  color: "#6557ea",
+  color: "var(--color-primary)",
   letterSpacing: "0.8px",
   textTransform: "uppercase",
   marginBottom: "8px",
@@ -105,11 +99,11 @@ const LABEL: React.CSSProperties = {
 
 const BODY: React.CSSProperties = {
   fontSize: "16px",
-  color: "#3d3d4a",
+  color: "var(--color-body)",
   lineHeight: "170%",
 };
 
-/* Subtle flat surface border — slightly more present than 4% for readability */
+/* Subtle flat surface border,slightly more present than 4% for readability */
 const SURFACE_BORDER = "1px solid rgba(0,0,0,0.06)";
 
 export default function Cases() {
@@ -161,7 +155,7 @@ export default function Cases() {
         }
         .cases-tab.active {
           background: #ffffff;
-          /* Functional affordance shadow — shows which tab is selected */
+          /* Functional affordance shadow,shows which tab is selected */
           box-shadow: 0 1px 3px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.06);
         }
         .cases-tab-num {
@@ -172,7 +166,7 @@ export default function Cases() {
           letter-spacing: 0.4px;
           transition: color 0.15s;
         }
-        .cases-tab.active .cases-tab-num { color: #6557ea; }
+        .cases-tab.active .cases-tab-num { color: var(--color-primary); }
         .cases-tab-label {
           font-size: 13px;
           font-weight: 500;
@@ -253,49 +247,19 @@ export default function Cases() {
         >
           {/* Headline */}
           <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "499px" }}>
-            <div style={{ display: "inline-flex", gap: "8px", alignItems: "center" }}>
-              <div style={{ background: "#6557ea", height: "1.5px", width: "20px", flexShrink: 0 }} />
-              <span style={{
-                fontFamily: "var(--font-mono)",
-                fontWeight: 600,
-                color: "#6557ea",
-                fontSize: "11px",
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-              }}>
-                Cases
-              </span>
-            </div>
+            <SectionBadge className="!mb-0">Cases</SectionBadge>
 
             <h2 style={{ color: "#251d49", fontSize: "48px" }}>
               Apps que escalaram com a Appreach.
             </h2>
 
             <p style={{ fontSize: "16px", color: "#6b6b7b", lineHeight: "165%" }}>
-              De startups a grandes marcas — veja como transformamos investimento em mídia em crescimento mensurável.
+              De startups a grandes marcas,veja como transformamos investimento em mídia em crescimento mensurável.
             </p>
 
-            <a
-              href="#contato"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "#6557ea",
-                color: "white",
-                height: "48px",
-                borderRadius: "12px",
-                padding: "0 20px",
-                fontSize: "16px",
-                fontWeight: 600,
-                letterSpacing: "-0.02em",
-                textDecoration: "none",
-                whiteSpace: "nowrap",
-                alignSelf: "flex-start",
-              }}
-            >
-              Quero resultados como estes!
-            </a>
+            <Button href="#contato" size="xl" variant="gradient" style={{ alignSelf: "flex-start" }}>
+              Quero escalar meu app agora
+            </Button>
           </div>
 
           {/* Tabs */}
@@ -342,23 +306,13 @@ export default function Cases() {
 
               {/* Top: badge + title */}
               <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                    <span style={{ fontFamily: "var(--font-mono)", fontSize: "12px", fontWeight: 600, color: "#6557ea", letterSpacing: "0.4px" }}>
-                      {c.number}
-                    </span>
-                    <span style={{ fontSize: "12px", fontWeight: 500, color: "#3d3d4a", background: "rgba(101,87,234,0.06)", borderRadius: "99px", padding: "3px 10px" }}>
-                      {c.category}
-                    </span>
-                  </div>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={c.logo}
-                    alt="Logo do cliente"
-                    width={c.logoW}
-                    height={c.logoH}
-                    style={{ maxHeight: "20px", width: "auto", opacity: 0.5, objectFit: "contain", mixBlendMode: "multiply" }}
-                  />
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "12px", fontWeight: 600, color: "#6557ea", letterSpacing: "0.4px" }}>
+                    {c.number}
+                  </span>
+                  <span style={{ fontSize: "12px", fontWeight: 500, color: "#3d3d4a", background: "rgba(101,87,234,0.06)", borderRadius: "99px", padding: "3px 10px" }}>
+                    {c.category}
+                  </span>
                 </div>
 
                 <p style={{ fontSize: "22px", fontWeight: 600, color: "#251d49", lineHeight: "140%", letterSpacing: "-0.5px", maxWidth: "360px" }}>

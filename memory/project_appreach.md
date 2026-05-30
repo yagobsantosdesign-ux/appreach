@@ -35,13 +35,14 @@ Agência de marketing especializada em campanhas para aplicativos móveis. Cobre
 - **GeistMono** (`var(--font-geist-mono)`) — labels uppercase, badges (SectionBadge), métricas label, step numbers, detalhes de seção
 
 **Tipografia (tamanhos fixos — sem clamp):**
-- H1: `60px` `font-medium` | H2: `48px` `font-medium` | H3/card titles: `26px` `font-medium`
-- **Headings nunca usam bold — sempre `font-medium` (500)**
-- **Letter-spacing de todos os headings (h1–h4): `-1.4px` (definido globalmente em globals.css)**
+- H1: `60px` | H2: `48px` | H3/card titles: `32px`
+- **⚠️ REGRA PERMANENTE: Headings são SEMPRE `fontWeight: 600` (bold). globals.css já define isso globalmente.**
+- **⚠️ REGRA PERMANENTE: Cor de todos os headings é sempre `#251d49`. NUNCA `#141414`, `#0f0f14` nem outras variações. Exceção: heading sobre fundo escuro/foto pode usar `#ffffff`.**
+- **Letter-spacing de todos os headings: `-1.4px` (fixo em px, nunca `-0.02em` ou similares)**
 - Hero subtítulo: `18px` | Body: `16px` | Labels/badges: `14px` | Botões: variado
 - **Textos body em cards e seções: sempre `16px`** (não usar 14px ou 15px)
 
-**Container:** `max-w-[1300px] mx-auto px-4 lg:px-16` — máx 1300px, 64px padding desktop
+**Container padrão:** `maxWidth: "1350px", margin: "0 auto", padding: "0 40px"` — todas as seções usam esse valor. Não usar 1300px nem padding 64px.
 
 **Cards (padrão consolidado):**
 - Background: `#F7F7F7`
@@ -51,10 +52,25 @@ Agência de marketing especializada em campanhas para aplicativos móveis. Cobre
 
 **Referências de design:** Finns (finns.framer.website), Lunera (lunera.framer.ai), Alter (alter.framer.website)
 
-## Componentes Compartilhados
+## Componentes Compartilhados (UI)
 
-- **SectionBadge** (`components/ui/SectionBadge.tsx`) — pill com fundo `#F7F7F7` e border `1px solid #EBEBEB`; padrão para label de seção. Badge fica **junto ao título** (não separado acima).
-- **SmoothScroll** (`components/SmoothScroll.tsx`) — Lenis com `duration: 1.2`
+> **REGRA FUNDAMENTAL:** A **home page é a referência aprovada**. Todas as outras páginas (produto, quem somos, carreiras, etc.) devem seguir os componentes e design system definidos na home. Antes de qualquer edição em outra página, verificar o que já existe na home e reutilizar.
+
+- **`SectionBadge`** (`components/ui/SectionBadge.tsx`) — label de seção com linha + texto mono uppercase. **Nunca** replicar manualmente — sempre usar este componente.
+- **`Button`** (`components/ui/Button.tsx`) — variantes: `gradient` (flat roxo `var(--color-primary)`), `ghost` (outline primário), `glass`, `white`, `dark`. Tamanhos: `sm`, `md`, `lg`, `xl` (16px/48px — padrão para CTAs de seção). Aceita prop `style` para override de layout (ex: `alignSelf`). **Nunca** criar `<a>` ou `<button>` manual para CTA.
+- **`FAQItem`** (`components/ui/FAQItem.tsx`) — item de accordion do FAQ. Props: `question`, `answer`, `isOpen`, `onToggle`. Usar em todas as páginas.
+- **`SmoothScroll`** (`components/SmoothScroll.tsx`) — Lenis com `duration: 1.2`
+
+## Template de Páginas de Produto
+
+Estrutura obrigatória (nessa ordem):
+```
+Header → ProductHero → ProductFeatures → FAQ → Footer
+```
+- **`ProductHero`** (`components/sections/product/ProductHero.tsx`) — props: `badge`, `title`, `subtitle`. H1: `clamp(32px, 4.5vw, 60px)`. Container: 1350px / 40px.
+- **`ProductFeatures`** (`components/sections/product/ProductFeatures.tsx`) — props: `badge`, `title`, `subtitle`, `features[]`. Container: 1350px / 40px. Cores via CSS vars.
+- **`FAQ`** (`components/sections/FAQ.tsx`) — usa `FAQItem` internamente. Padding top: `pt-12 lg:pt-16`.
+- **`ContactCTA`** — **não usar em páginas de produto**. Apenas na home.
 
 ## Contatos do Cliente
 

@@ -49,7 +49,7 @@ const solutions = [
   { label: "Retargeting", href: "/retargeting" },
   { label: "CTV", href: "/ctv-connected-tv" },
   { label: "Apple Search Ads", href: "/apple-search-ads" },
-  { label: "IA & Dados — Reach Lab", href: "/#estrategias" },
+  { label: "IA & Dados: Reach Lab", href: "/#estrategias" },
 ];
 
 const company = [
@@ -94,7 +94,7 @@ export default function Footer() {
                 Pronto para escalar o seu app?
               </h2>
               <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.70)", lineHeight: 1.65, marginTop: "16px" }}>
-                Conte sobre o seu app e seus objetivos. Nossa equipe vai analisar o seu momento e indicar as estratégias mais indicadas — sem custo e sem compromisso.
+                Conte sobre o seu app e seus objetivos. Nossa equipe vai analisar o seu momento e indicar as estratégias mais indicadas, sem custo e sem compromisso.
               </p>
               <ul style={{ marginTop: "24px", display: "flex", flexDirection: "column", gap: "10px", listStyle: "none", padding: 0 }}>
                 {["Diagnóstico gratuito do seu funil", "Estratégia personalizada por vertical", "Relatórios transparentes com dados reais"].map((item) => (
@@ -198,7 +198,7 @@ export default function Footer() {
                 style={{ display: "block", filter: "brightness(0) invert(1)" }}
               />
               <p className="mt-3 leading-relaxed" style={{ fontSize: "14px", color: "rgba(255,255,255,0.45)", maxWidth: "260px" }}>
-                Estratégia 360° para apps que escalam — do primeiro install à receita.
+                Estratégia 360° para apps que escalam, do primeiro install à receita.
               </p>
             </div>
 

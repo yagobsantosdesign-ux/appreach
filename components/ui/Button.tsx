@@ -3,7 +3,7 @@
 import { ReactNode, CSSProperties } from "react";
 
 type Variant = "gradient" | "glass" | "ghost" | "white" | "dark";
-type Size = "sm" | "md" | "lg";
+type Size = "sm" | "md" | "lg" | "xl";
 
 interface ButtonProps {
   variant?: Variant;
@@ -13,6 +13,7 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   fullWidth?: boolean;
   className?: string;
+  style?: CSSProperties;
   children: ReactNode;
 }
 
@@ -20,6 +21,7 @@ const sizes = {
   sm: { px: "px-4", font: "13px", gap: "gap-2",   height: 44 },
   md: { px: "px-5", font: "14px", gap: "gap-2.5", height: 44 },
   lg: { px: "px-7", font: "15px", gap: "gap-3",   height: 44 },
+  xl: { px: "px-5", font: "16px", gap: "gap-2.5", height: 48 },
 };
 
 export default function Button({
@@ -30,6 +32,7 @@ export default function Button({
   type = "button",
   fullWidth = false,
   className = "",
+  style: styleProp,
   children,
 }: ButtonProps) {
   const s = sizes[size];
@@ -45,8 +48,7 @@ export default function Button({
   const variantStyle: CSSProperties =
     variant === "gradient"
       ? {
-          background: "linear-gradient(167deg, #9B91FF 0%, #6557EA 100%)",
-          boxShadow: "0 8px 14px rgba(101,87,234,0.35)",
+          background: "var(--color-primary)",
         }
       : variant === "glass"
       ? {
@@ -62,7 +64,6 @@ export default function Button({
 
   const hoverClass = variant === "white" ? "shadow-hover-white"
                   : variant === "dark"  ? "shadow-hover-dark"
-                  : variant === "gradient" ? "shadow-hover"
                   : "";
 
   const classes = [
@@ -79,6 +80,7 @@ export default function Button({
   const buttonStyle: CSSProperties = {
     ...variantStyle,
     minHeight: s.height,
+    ...styleProp,
   };
 
   const inner = (

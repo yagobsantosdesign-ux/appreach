@@ -31,11 +31,11 @@ export default function WhyAppreach() {
             fontSize: "48px",
             fontWeight: 600,
             lineHeight: "120%",
-            letterSpacing: "-0.02em",
+            letterSpacing: "-1.4px",
             margin: "12px auto 0",
             maxWidth: "520px",
           }}>
-            Simples de contratar.<br />Difícil de largar.
+            Fácil de começar.<br />Impossível de parar.
           </h2>
         </div>
 
@@ -81,7 +81,7 @@ export default function WhyAppreach() {
                 fontWeight: 600,
                 color: "#ffffff",
                 lineHeight: "140%",
-                letterSpacing: "-0.02em",
+                letterSpacing: "-1.4px",
                 marginBottom: "12px",
                 maxWidth: "270px",
                 textWrap: "balance",
@@ -94,7 +94,7 @@ export default function WhyAppreach() {
                 lineHeight: "160%",
                 maxWidth: "240px",
               }}>
-                A Appreach cuida de tudo. Você foca no produto — nós cuidamos do crescimento.
+                A Appreach cuida de tudo. Você foca no produto, nós cuidamos do crescimento.
               </p>
             </div>
           </div>
@@ -144,7 +144,7 @@ export default function WhyAppreach() {
                 fontWeight: 600,
                 color: "#251d49",
                 lineHeight: "140%",
-                letterSpacing: "-0.02em",
+                letterSpacing: "-1.4px",
                 marginBottom: "12px",
                 maxWidth: "300px",
                 textWrap: "balance",
@@ -207,7 +207,7 @@ export default function WhyAppreach() {
                 fontWeight: 600,
                 color: "#251d49",
                 lineHeight: "140%",
-                letterSpacing: "-0.02em",
+                letterSpacing: "-1.4px",
                 marginBottom: "12px",
                 maxWidth: "220px",
                 textWrap: "balance",
@@ -220,7 +220,7 @@ export default function WhyAppreach() {
                 lineHeight: "160%",
                 maxWidth: "315px",
               }}>
-                Relatórios sem jargão, dashboard em tempo real e reuniões quinzenais. Você sempre sabe o que está acontecendo.
+                Relatórios sem jargão, dashboard em tempo real e check-ins quinzenais. Você sempre no controle.
               </p>
             </div>
           </div>

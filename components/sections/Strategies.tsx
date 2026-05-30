@@ -2,11 +2,12 @@
 
 import React from "react";
 import { useInView } from "@/hooks/useInView";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 const strategies = [
   {
     title: "Aquisição de Usuários",
-    description: "Campanhas de UA com segmentação precisa para atrair novos usuários qualificados e maximizar o volume de installs.",
+    description: "Atraia os usuários certos — pessoas com maior potencial de compra e engajamento — com campanhas de aquisição otimizadas para performance.",
     href: "/useracquisition-app",
     icon: <img src="/icon-strategy-1.webp" width={28} height={28} alt="" />,
   },
@@ -23,8 +24,8 @@ const strategies = [
     icon: <img src="/icon-strategy-3.webp" width={28} height={28} alt="" />,
   },
   {
-    title: "App Chat & Push",
-    description: "Comunicação direta dentro e fora do app com mensagens personalizadas para aumentar retenção e LTV.",
+    title: "Push Ads",
+    description: "Alcance o usuário certo, na hora certa, fora do app. Notificações personalizadas que reativam, convertem e aumentam o LTV — sem depender de ele abrir o app primeiro.",
     href: "/app-chat-push",
     icon: <img src="/icon-strategy-4.webp" width={28} height={28} alt="" />,
   },
@@ -67,24 +68,12 @@ export default function Strategies() {
           className={`reveal${headerVisible ? " visible" : ""}`}
           style={{ textAlign: "center", marginBottom: "64px" }}
         >
-          <div style={{ display: "inline-flex", gap: "8px", alignItems: "center", marginBottom: "16px" }}>
-            <div style={{ background: "#6557ea", height: "1.5px", width: "20px", flexShrink: 0 }} />
-            <span style={{
-              fontFamily: "var(--font-mono)",
-              fontWeight: 600,
-              color: "#6557ea",
-              fontSize: "11px",
-              letterSpacing: "1px",
-              textTransform: "uppercase",
-            }}>
-              Soluções
-            </span>
-          </div>
+          <SectionBadge>Soluções</SectionBadge>
           <h2 style={{ color: "#251d49", fontSize: "48px", lineHeight: "120%", letterSpacing: "-0.02em", marginBottom: "16px" }}>
             Nossas Soluções
           </h2>
-          <p style={{ fontSize: "16px", color: "#3d3d4a", lineHeight: "160%", maxWidth: "504px", margin: "0 auto" }}>
-            Cada solução atua em uma frente específica — combinadas, cobrem o funil completo do seu app.
+          <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "160%", maxWidth: "504px", margin: "0 auto" }}>
+            Cada solução atua em uma frente específica. Combinadas, cobrem o funil completo do seu app.
           </p>
         </div>
 
@@ -124,7 +113,7 @@ export default function Strategies() {
               >
                 {/* Icon */}
                 <div style={{
-                  background: "#eff2fe",
+                  background: "var(--color-primary-light)",
                   width: "56px",
                   height: "56px",
                   borderRadius: "12px",
@@ -139,10 +128,10 @@ export default function Strategies() {
                 {/* Text */}
                 <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                   <div>
-                    <h3 style={{ fontSize: "32px", color: "#0f0f14", marginBottom: "16px" }}>
+                    <h3 style={{ fontSize: "32px", color: "#251d49", marginBottom: "16px" }}>
                       {s.title}
                     </h3>
-                    <p style={{ fontSize: "16px", color: "#909090", lineHeight: "160%" }}>
+                    <p style={{ fontSize: "16px", color: "var(--color-muted)", lineHeight: "160%" }}>
                       {s.description}
                     </p>
                   </div>

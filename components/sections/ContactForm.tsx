@@ -39,7 +39,7 @@ export default function ContactForm() {
           className="contact-form-wrapper flex-col lg:flex-row"
         >
 
-          {/* Left — copy */}
+          {/* Left,copy */}
           <div style={{ flex: "0 0 auto", maxWidth: "380px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
             <div className="inline-flex items-center mb-4" style={{ gap: "8px" }}>
               <span style={{ display: "inline-block", width: "20px", height: "1.5px", background: "rgba(255,255,255,0.6)", flexShrink: 0 }} />
@@ -54,7 +54,7 @@ export default function ContactForm() {
               Pronto para escalar o seu app?
             </h2>
             <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.70)", lineHeight: 1.65, marginTop: "16px" }}>
-              Conte sobre o seu app e seus objetivos. Nossa equipe vai analisar o seu momento e indicar as estratégias mais indicadas — sem custo e sem compromisso.
+              Conte sobre o seu app e seus objetivos. Nossa equipe vai analisar o seu momento e indicar as estratégias mais indicadas,sem custo e sem compromisso.
             </p>
             <ul style={{ marginTop: "24px", display: "flex", flexDirection: "column", gap: "10px", listStyle: "none", padding: 0 }}>
               {[
@@ -90,7 +90,7 @@ export default function ContactForm() {
             </div>
           </div>
 
-          {/* Right — form card */}
+          {/* Right,form card */}
           <div
             style={{
               flex: 1,

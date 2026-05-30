@@ -1,1 +1,1 @@
-{"version":"0.0.1","configurations":[{"name":"appreach-dev","runtimeExecutable":"npm","runtimeArgs":["run","dev","--","-H","0.0.0.0"],"port":3000}]}
+{"version":"0.0.1","configurations":[{"name":"appreach","runtimeExecutable":"npm","runtimeArgs":["run","dev"],"port":3000}]}

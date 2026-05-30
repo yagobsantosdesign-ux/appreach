@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 const steps = [
   {
@@ -16,7 +17,7 @@ const steps = [
     number: "02",
     tag: "Estratégia",
     title: "Planejamento Estratégico",
-    description: "Definimos as estratégias certas para cada etapa — sem desperdício de verba e com foco em resultado.",
+    description: "Definimos as estratégias certas para cada etapa,sem desperdício de verba e com foco em resultado.",
     image: "/processo-02.webp",
   },
   {
@@ -92,20 +93,7 @@ export default function Timeline() {
           className={`reveal${headerVisible ? " visible" : ""}`}
           style={{ textAlign: "center", marginBottom: "64px" }}
         >
-          {/* Badge */}
-          <div style={{ display: "inline-flex", gap: "8px", alignItems: "center", marginBottom: "16px" }}>
-            <div style={{ background: "#6557ea", height: "1.5px", width: "20px", flexShrink: 0 }} />
-            <span style={{
-              fontFamily: "var(--font-mono)",
-              fontWeight: 600,
-              color: "#6557ea",
-              fontSize: "11px",
-              letterSpacing: "1px",
-              textTransform: "uppercase",
-            }}>
-              Processo
-            </span>
-          </div>
+          <SectionBadge>Processo</SectionBadge>
 
           <h2 style={{
             color: "#251d49",
@@ -114,11 +102,11 @@ export default function Timeline() {
             margin: "0 auto 16px",
             textWrap: "balance",
           } as React.CSSProperties}>
-            Inicie com a Appreach em alguns passos simples
+            Seu crescimento começa aqui
           </h2>
 
           <p style={{ fontSize: "16px", color: "#3d3d4a", lineHeight: "160%", maxWidth: "480px", margin: "0 auto", textWrap: "balance" } as React.CSSProperties}>
-            Em algumas semanas seu app estará entre os melhores do mercado.
+            Com a Appreach, seu app evolui mais rápido e ganha espaço entre os principais players do mercado.
           </p>
         </div>
       </div>
@@ -130,7 +118,7 @@ export default function Timeline() {
         style={{ "--reveal-delay": "0.1s" } as React.CSSProperties}
       >
         <div className="timeline-carousel-outer" style={{ maxWidth: "1350px", margin: "0 auto", overflow: "hidden", position: "relative", paddingTop: "20px", paddingBottom: "20px" }}>
-          {/* Fade overlay — laterais */}
+          {/* Fade overlay,laterais */}
           <div aria-hidden className="timeline-fade-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, white 0%, transparent 8%, transparent 92%, white 100%)", pointerEvents: "none", zIndex: 3 }} />
         {/* Track */}
         <div
@@ -208,7 +196,7 @@ export default function Timeline() {
                     letterSpacing: "1px",
                     textTransform: "uppercase",
                   }}>
-                    Passo {step.number} — {step.tag}
+                    Passo {step.number}: {step.tag}
                   </span>
 
                   <h3 style={{
@@ -234,7 +222,7 @@ export default function Timeline() {
             );
           })}
 
-          {/* Left nav — absolute, centered on the gap between side and active card */}
+          {/* Left nav,absolute, centered on the gap between side and active card */}
           <button
             className="process-nav-left"
             onClick={prev}
@@ -249,7 +237,7 @@ export default function Timeline() {
               width: "44px",
               height: "44px",
               borderRadius: "50%",
-              background: "#6557ea",
+              background: "var(--color-primary)",
               border: "none",
               display: "flex",
               alignItems: "center",
@@ -278,7 +266,7 @@ export default function Timeline() {
               width: "44px",
               height: "44px",
               borderRadius: "50%",
-              background: "#6557ea",
+              background: "var(--color-primary)",
               border: "none",
               display: "flex",
               alignItems: "center",

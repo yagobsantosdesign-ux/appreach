@@ -19,7 +19,7 @@ const stats = [
   {
     value: "98%",
     label: "Satisfação dos clientes",
-    description: "NPS mensurado — clientes que recomendam a Appreach.",
+    description: "NPS mensurado. Clientes que recomendam a Appreach.",
   },
 ];
 

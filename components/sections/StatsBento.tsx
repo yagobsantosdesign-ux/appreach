@@ -9,7 +9,7 @@ const stats = [
   {
     value: "50+",
     label: "Apps atendidos",
-    sub: "em múltiplos verticais",
+    sub: "de startups a top 10 da categoria",
   },
   {
     value: "98%",
@@ -23,8 +23,8 @@ const stats = [
   },
   {
     value: "R$500M+",
-    label: "Em investimento gerenciado",
-    sub: "em mídia para apps",
+    label: "Em mídia gerenciada",
+    sub: "nos últimos 5 anos",
     dark: true,
   },
 ];
@@ -101,7 +101,7 @@ export default function StatsBento() {
             Resultados que falam por si
           </h2>
           <p style={{ fontSize: "17px", color: "var(--color-muted)", lineHeight: 1.65, marginTop: "16px", textWrap: "balance" }}>
-            Mais de uma década construindo crescimento sustentável para apps em todos os verticais.
+            Crescimento sustentável para apps em todas as verticais.
           </p>
           <div className="flex justify-center mt-7">
             <a

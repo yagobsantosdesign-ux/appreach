@@ -11,11 +11,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Appreach — Estratégia completa para apps",
+  title: "Appreach: Estratégia completa para apps",
   description:
     "Soluções 360º para aplicativos: aquisição de usuários, retargeting, CTV, app chat, preload e muito mais. Do primeiro install à receita.",
   openGraph: {
-    title: "Appreach — Estratégia completa para apps",
+    title: "Appreach: Estratégia completa para apps",
     description:
       "Soluções 360º para aplicativos: aquisição de usuários, retargeting, CTV, app chat, preload e muito mais.",
     locale: "pt_BR",

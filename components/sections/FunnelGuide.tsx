@@ -2,11 +2,13 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Tv2, UserPlus, MessageCircle, TrendingUp } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
+import SectionBadge from "@/components/ui/SectionBadge";
+import Button from "@/components/ui/Button";
 
 const stages = [
   {
     title: "Alcance",
-    description: "Construa presença antes do install — em TVs, dispositivos novos e inventários premium.",
+    description: "Construa presença antes do install,em TVs, dispositivos novos e inventários premium.",
     icon: Tv2,
     img: "/funil-alcance.webp",
     imgAlt: "Alcance",
@@ -108,7 +110,7 @@ export default function FunnelGuide() {
         style={{ maxWidth: "1350px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}
       >
 
-        {/* LEFT — sticky */}
+        {/* LEFT,sticky */}
         <div
           ref={leftRef}
           className="funnel-left lg:sticky lg:top-[220px] funnel-card"
@@ -119,54 +121,23 @@ export default function FunnelGuide() {
             className={`reveal${headerVisible ? " visible" : ""}`}
             style={{ display: "flex", flexDirection: "column", gap: "16px" }}
           >
-            {/* Badge */}
-            <div style={{ display: "inline-flex", gap: "8px", alignItems: "center" }}>
-              <div style={{ background: "#6557ea", height: "1.5px", width: "20px", flexShrink: 0 }} />
-              <span style={{
-                fontFamily: "var(--font-mono)",
-                fontWeight: 600,
-                color: "#6557ea",
-                fontSize: "11px",
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-              }}>
-                Funil
-              </span>
-            </div>
+            <SectionBadge className="!mb-0">Funil</SectionBadge>
 
-            <h2 style={{ color: "#251d49", fontSize: "48px", fontWeight: 600, lineHeight: "120%", letterSpacing: "-0.02em" }}>
+            <h2 style={{ color: "#251d49", fontSize: "48px", fontWeight: 600, lineHeight: "120%", letterSpacing: "-1.4px" }}>
               Onde está o seu app agora?
             </h2>
 
-            <p style={{ fontSize: "16px", color: "#3d3d4a", lineHeight: "160%", maxWidth: "379px" }}>
+            <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "160%", maxWidth: "379px" }}>
               Cada app está em um momento diferente. Veja qual estratégia faz sentido para o estágio atual do seu crescimento.
             </p>
 
-            <a
-              href="#contato"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "#6557ea",
-                color: "white",
-                height: "48px",
-                borderRadius: "12px",
-                padding: "0 20px",
-                fontSize: "16px",
-                fontWeight: 600,
-                letterSpacing: "-0.02em",
-                textDecoration: "none",
-                whiteSpace: "nowrap",
-                alignSelf: "flex-start",
-              }}
-            >
+            <Button href="#contato" size="xl" variant="gradient" style={{ alignSelf: "flex-start" }}>
               Diagnóstico gratuito
-            </a>
+            </Button>
           </div>
         </div>
 
-        {/* RIGHT — stacking cards */}
+        {/* RIGHT,stacking cards */}
         <div className="funnel-right" style={{ width: "542px", flexShrink: 0, display: "flex", flexDirection: "column", gap: "16px" }}>
           {stages.map((stage, i) => {
             const Icon = stage.icon;
@@ -198,7 +169,7 @@ export default function FunnelGuide() {
                   <div style={{
                     width: "34px", height: "34px",
                     borderRadius: "50%",
-                    background: "#6557ea",
+                    background: "var(--color-primary)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -206,7 +177,7 @@ export default function FunnelGuide() {
                   }}>
                     <Icon size={15} color="#fff" strokeWidth={2.5} />
                   </div>
-                  <p className="funnel-stage-title" style={{ fontSize: "32px", fontWeight: 600, color: "#251d49", letterSpacing: "-0.02em", lineHeight: "140%" }}>
+                  <p className="funnel-stage-title" style={{ fontSize: "32px", fontWeight: 600, color: "#251d49", letterSpacing: "-1.4px", lineHeight: "140%" }}>
                     {stage.title}
                   </p>
                 </div>

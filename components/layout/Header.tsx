@@ -9,7 +9,7 @@ const solutions = [
   { label: "Retargeting", href: "/retargeting" },
   { label: "CTV", href: "/ctv-connected-tv" },
   { label: "Apple Search Ads", href: "/apple-search-ads" },
-  { label: "IA & Dados — Reach Lab", href: "/#estrategias" },
+  { label: "IA & Dados: Reach Lab", href: "/#estrategias" },
 ];
 
 const navLinks = [
