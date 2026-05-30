@@ -10,7 +10,7 @@ interface ProductHeroProps {
 export default function ProductHero({ badge, title, subtitle }: ProductHeroProps) {
   return (
     <section style={{ background: "#ffffff", paddingTop: "134px", paddingBottom: "72px" }}>
-      <div style={{ maxWidth: "1350px", margin: "0 auto", padding: "0 40px" }}>
+      <div className="product-container">
 
         {/* Linha topo: bloco de texto esq | CTAs dir */}
         <div

@@ -307,6 +307,8 @@ a:hover .logo-text {
 @media (min-width: 1024px) {
   .product-features-section { padding-bottom: 344px; }
 }
+/* Shared section container for service pages — side padding standardized like home (40 → 24 tablet → 20 mobile) */
+.product-container { max-width: 1350px; margin: 0 auto; padding: 0 40px; }
 
 /* ── Tablet (768–1023px) ────────────────────────────────────── */
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -319,6 +321,7 @@ a:hover .logo-text {
   .product-feature-card { height: auto !important; }
   .product-feature-card > div { flex: 0 0 auto !important; width: 100% !important; }
   .product-feature-card > div:last-child { min-height: 240px; }
+  .product-container { padding-left: 24px !important; padding-right: 24px !important; }
   .funnel-section { padding: 80px 24px !important; }
   .funnel-layout { flex-direction: column !important; gap: 48px !important; }
   .funnel-left { width: 100% !important; }
@@ -367,6 +370,7 @@ a:hover .logo-text {
   .hero-phone-mask { height: calc(50% + 80px) !important; background: linear-gradient(to bottom, transparent 0%, #fafafa 45%) !important; }
 
   /* Section padding */
+  .product-container { padding-left: 20px !important; padding-right: 20px !important; }
   .why-section { padding: 64px 20px !important; }
   .strategies-section { padding: 64px 20px !important; }
   .funnel-section { padding: 64px 20px !important; }
