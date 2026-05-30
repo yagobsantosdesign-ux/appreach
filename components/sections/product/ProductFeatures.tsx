@@ -100,7 +100,7 @@ export default function ProductFeatures({
   features,
 }: ProductFeaturesProps) {
   return (
-    <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
+    <section className="product-features-section" style={{ background: "#FFFFFF" }}>
       <div style={{ maxWidth: "1350px", margin: "0 auto", padding: "0 40px" }}>
 
         {/* Header centralizado */}

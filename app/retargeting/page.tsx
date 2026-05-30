@@ -2,7 +2,6 @@
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import FAQ from "@/components/sections/FAQ";
 import ProductHero from "@/components/sections/product/ProductHero";
 import ProductFeatures from "@/components/sections/product/ProductFeatures";
 
@@ -67,8 +66,6 @@ export default function RetargetingPage() {
           subtitle="Segmentação comportamental, criativos dinâmicos e atribuição incremental para maximizar a receita dos usuários existentes."
           features={features}
         />
-
-        <FAQ />
 
       </main>
       <Footer />
