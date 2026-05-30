@@ -142,7 +142,7 @@ export default function ProductFeatures({
                 className={`product-feature-card flex flex-col ${imageRight ? "lg:flex-row" : "lg:flex-row-reverse"}`}
                 style={{
                   background: "#FFFFFF",
-                  border: "1px solid #EBEBEB",
+                  border: "1px solid var(--color-border)",
                   borderRadius: "20px",
                   overflow: "hidden",
                   height: "580px",

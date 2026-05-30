@@ -45,13 +45,13 @@ const CARD_BASE: React.CSSProperties = {
 const CARD_LIGHT: React.CSSProperties = {
   ...CARD_BASE,
   background: "white",
-  border: "1px solid rgba(0,0,0,0.04)",
+  border: "1px solid var(--color-border)",
 };
 
 const CARD_MUTED: React.CSSProperties = {
   ...CARD_BASE,
   background: "#F4F4F6",
-  border: "1px solid rgba(235,235,235,0.6)",
+  border: "1px solid var(--color-border)",
 };
 
 const CARD_DARK: React.CSSProperties = {

@@ -156,7 +156,7 @@ export default function FunnelGuide() {
                   background: "rgba(255, 255, 255, 0.55)",
                   backdropFilter: "blur(18px)",
                   WebkitBackdropFilter: "blur(18px)",
-                  border: "1px solid rgba(0,0,0,0.06)",
+                  border: "1px solid var(--color-border)",
                   borderRadius: "24px",
                   padding: "41px",
                   marginBottom: i < stages.length - 1 ? "0" : "0",

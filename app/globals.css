@@ -10,7 +10,7 @@
   --color-heading: #251d49;
   --color-body: #3D3D4A;
   --color-muted: #909090;
-  --color-border: #EBEBEB;
+  --color-border: rgba(101,87,234,0.14); /* roxo bem claro, quase invisível (bordas de cards) */
   --color-success: #22C55E;
 
   /* Font */
@@ -40,11 +40,11 @@
   /* Card — surface tokens */
   --radius-card: 24px;        /* standard card radius */
   --radius-card-lg: 32px;     /* large panels / bento */
-  --border-surface: rgba(0,0,0,0.06); /* flat surface border */
+  --border-surface: rgba(101,87,234,0.14); /* flat surface border — roxo claro */
 }
 
 .card {
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid var(--border-surface);
   border-radius: 24px;
   transition: transform 0.2s ease;
 }

@@ -104,7 +104,7 @@ const BODY: React.CSSProperties = {
 };
 
 /* Subtle flat surface border,slightly more present than 4% for readability */
-const SURFACE_BORDER = "1px solid rgba(0,0,0,0.06)";
+const SURFACE_BORDER = "1px solid var(--color-border)";
 
 export default function Cases() {
   const [active, setActive] = useState(0);

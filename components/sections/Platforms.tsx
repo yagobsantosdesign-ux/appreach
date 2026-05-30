@@ -70,7 +70,7 @@ export default function Platforms() {
         <div className="platforms-card" style={{
           background: "white",
           borderRadius: "24px",
-          border: "1px solid rgba(0,0,0,0.06)",
+          border: "1px solid var(--color-border)",
           padding: "80px 80px 24px",
           display: "flex",
           flexDirection: "column",

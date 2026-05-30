@@ -246,7 +246,7 @@ export default function QuemSomosPage() {
                   key={m.name}
                   style={{
                     background: "#ffffff",
-                    border: "1px solid #EBEBEB",
+                    border: "1px solid var(--color-border)",
                     borderRadius: "20px",
                     overflow: "hidden",
                     display: "flex",
@@ -267,9 +267,9 @@ export default function QuemSomosPage() {
                           href="#"
                           aria-label={label}
                           className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
-                          style={{ color: "var(--color-muted)", border: "1px solid #EBEBEB" }}
+                          style={{ color: "var(--color-muted)", border: "1px solid var(--color-border)" }}
                           onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-primary)"; e.currentTarget.style.borderColor = "rgba(101,87,234,0.35)"; }}
-                          onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-muted)"; e.currentTarget.style.borderColor = "#EBEBEB"; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-muted)"; e.currentTarget.style.borderColor = "var(--color-border)"; }}
                         >
                           {icon}
                         </a>
