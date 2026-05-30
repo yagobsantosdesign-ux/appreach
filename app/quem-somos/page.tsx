@@ -87,7 +87,7 @@ export default function QuemSomosPage() {
         {/* ── Hero ── */}
         <section style={{ background: "#ffffff", paddingTop: "134px", paddingBottom: "72px" }}>
           <div className="product-container">
-            <div className="about-hero-row flex flex-col lg:flex-row" style={{ gap: "64px", alignItems: "flex-start" }}>
+            <div className="about-hero-row flex flex-col lg:flex-row" style={{ gap: "64px", alignItems: "flex-end" }}>
               {/* Copy */}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <SectionBadge>Quem somos</SectionBadge>
@@ -98,11 +98,11 @@ export default function QuemSomosPage() {
                     letterSpacing: "-0.04em",
                     lineHeight: "110%",
                     textWrap: "balance" as never,
-                    maxWidth: "540px",
+                    maxWidth: "620px",
                     marginBottom: "20px",
                   }}
                 >
-                  Estratégia 360° para apps que querem escalar
+                  Estratégia 360° para apps que escalam
                 </h1>
                 <p style={{ fontSize: "var(--text-hero-sub)", color: "var(--color-body)", lineHeight: "160%", maxWidth: "480px", marginBottom: "28px" }}>
                   Somos a Appreach — agência de marketing para apps mobile, do primeiro install à receita. Unimos dados, criativos e mídia para crescer o seu app com eficiência.
