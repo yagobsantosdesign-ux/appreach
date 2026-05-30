@@ -316,6 +316,9 @@ a:hover .logo-text {
   .strategies-section { padding: 80px 24px !important; }
   .strategies-grid { grid-template-columns: 1fr 1fr !important; }
   .strategies-card { height: auto !important; min-height: 260px !important; }
+  .product-feature-card { height: auto !important; }
+  .product-feature-card > div { flex: 0 0 auto !important; width: 100% !important; }
+  .product-feature-card > div:last-child { min-height: 240px; }
   .funnel-section { padding: 80px 24px !important; }
   .funnel-layout { flex-direction: column !important; gap: 48px !important; }
   .funnel-left { width: 100% !important; }
@@ -373,7 +376,7 @@ a:hover .logo-text {
   .timeline-section { padding-left: 20px !important; padding-right: 20px !important; }
 
   /* Section h2 */
-  .why-section h2, .strategies-section h2, .funnel-section h2, .timeline-section h2 { font-size: 32px !important; }
+  .why-section h2, .strategies-section h2, .funnel-section h2, .timeline-section h2, .product-features-section h2 { font-size: 32px !important; }
 
   /* Logo ticker */
   .ticker-track { gap: 48px !important; }
@@ -391,6 +394,13 @@ a:hover .logo-text {
   .strategies-card { height: auto !important; min-height: 0 !important; aspect-ratio: 3/4 !important; gap: 20px !important; justify-content: space-between !important; background: #ffffff !important; }
   .strategies-card h3 { font-size: 24px !important; }
   .strategies-card p { font-size: 14px !important; }
+  /* Service/product feature cards — match home card scale on mobile */
+  .product-feature-title { font-size: 24px !important; }
+  .product-features-section p, .product-features-section li span { font-size: 14px !important; }
+  .product-feature-card { height: auto !important; }
+  .product-feature-card > div { flex: 0 0 auto !important; width: 100% !important; }
+  .product-feature-card > div:first-child { padding: 28px 24px 4px !important; }
+  .product-feature-card > div:last-child { min-height: 200px; padding: 16px 24px 24px !important; }
 .strategies-widget { display: none !important; }
 
   /* Funnel Guide */

@@ -112,10 +112,7 @@ export default function ProductFeatures({
           <h2
             style={{
               fontSize: "48px",
-              fontWeight: 600,
-              color: "#251d49",
-              letterSpacing: "-1.4px",
-              lineHeight: "120%",
+              color: "var(--color-heading)",
               maxWidth: "580px",
               margin: "0 auto 16px",
             }}
@@ -142,7 +139,7 @@ export default function ProductFeatures({
             return (
               <div
                 key={i}
-                className={`flex flex-col ${imageRight ? "lg:flex-row" : "lg:flex-row-reverse"}`}
+                className={`product-feature-card flex flex-col ${imageRight ? "lg:flex-row" : "lg:flex-row-reverse"}`}
                 style={{
                   background: "#FFFFFF",
                   border: "1px solid #EBEBEB",
@@ -162,12 +159,10 @@ export default function ProductFeatures({
                   }}
                 >
                   <h3
+                    className="product-feature-title"
                     style={{
                       fontSize: "32px",
-                      fontWeight: 600,
-                      color: "#251d49",
-                      letterSpacing: "-1.4px",
-                      lineHeight: "140%",
+                      color: "var(--color-heading)",
                       marginBottom: "14px",
                       maxWidth: "300px",
                       textWrap: "balance",

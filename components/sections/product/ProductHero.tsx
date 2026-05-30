@@ -23,11 +23,8 @@ export default function ProductHero({ badge, title, subtitle }: ProductHeroProps
             {/* H1 — tamanho responsivo, semibold (600), Inter via globals.css */}
             <h1
               style={{
-                fontSize: "clamp(32px, 4.5vw, 60px)",
-                fontWeight: 600,
-                color: "#251d49",
-                letterSpacing: "-0.04em",
-                lineHeight: "110%",
+                fontSize: "clamp(32px, 4.5vw, var(--text-h1))",
+                color: "var(--color-heading)",
                 textWrap: "balance" as never,
                 marginBottom: "20px",
               }}
@@ -36,8 +33,8 @@ export default function ProductHero({ badge, title, subtitle }: ProductHeroProps
             </h1>
             <p
               style={{
-                fontSize: "18px",
-                color: "#3d3d4a",
+                fontSize: "var(--text-hero-sub)",
+                color: "var(--color-body)",
                 lineHeight: "160%",
                 maxWidth: "480px",
               }}
