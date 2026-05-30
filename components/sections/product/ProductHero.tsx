@@ -43,8 +43,8 @@ export default function ProductHero({ badge, title, subtitle }: ProductHeroProps
             </p>
           </div>
 
-          {/* Direita: CTAs alinhados ao rodapé do bloco */}
-          <div>
+          {/* Direita: CTAs alinhados ao rodapé do bloco, encostados à borda direita */}
+          <div style={{ marginLeft: "auto" }}>
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
               <Button href="#contato" size="xl" variant="gradient">
                 Falar com especialista
