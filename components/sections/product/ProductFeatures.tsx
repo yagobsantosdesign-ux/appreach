@@ -146,7 +146,8 @@ export default function ProductFeatures({
                   borderRadius: "20px",
                   overflow: "hidden",
                   height: "580px",
-                }}
+                  "--card-index": i,
+                } as React.CSSProperties}
               >
                 {/* Lado texto */}
                 <div

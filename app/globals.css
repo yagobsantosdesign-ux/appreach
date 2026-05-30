@@ -306,6 +306,8 @@ a:hover .logo-text {
 .product-features-section { padding: 96px 0; }
 @media (min-width: 1024px) {
   .product-features-section { padding-bottom: 344px; }
+  /* Sticky stacking cards — each card pins below the header with a growing offset so the previous cards' tops peek through */
+  .product-feature-card { position: sticky; top: calc(100px + var(--card-index, 0) * 22px); }
 }
 /* Shared section container for service pages — side padding standardized like home (40 → 24 tablet → 20 mobile) */
 .product-container { max-width: 1350px; margin: 0 auto; padding: 0 40px; }
