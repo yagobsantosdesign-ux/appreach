@@ -172,7 +172,7 @@ export default function QuemSomosPage() {
         {/* ── Nossa trajetória ── */}
         <section style={{ background: "linear-gradient(145deg, #1E1640 0%, #2D1F5E 55%, #1a1438 100%)", padding: "96px 0" }}>
           <div className="product-container">
-            <div className="about-journey-row flex flex-col lg:flex-row" style={{ gap: "80px", alignItems: "flex-start" }}>
+            <div className="about-journey-row flex flex-col lg:flex-row" style={{ gap: "48px", alignItems: "flex-start", justifyContent: "space-between" }}>
               {/* Esquerda: título */}
               <div className="about-journey-head" style={{ flex: "0 0 auto", maxWidth: "360px" }}>
                 <SectionBadge dark>Nossa trajetória</SectionBadge>
@@ -185,7 +185,7 @@ export default function QuemSomosPage() {
               </div>
 
               {/* Direita: timeline */}
-              <div style={{ flex: 1, position: "relative" }}>
+              <div className="about-journey-timeline" style={{ flex: "0 0 auto", maxWidth: "520px", position: "relative" }}>
                 {/* Linha vertical contínua */}
                 <div aria-hidden style={{ position: "absolute", left: "15px", top: "16px", bottom: "16px", width: "2px", background: "rgba(255,255,255,0.15)" }} />
                 {journey.map((item, i) => (
