@@ -80,6 +80,7 @@ export default function Timeline() {
             margin: 0 auto !important;
           }
           .process-card-visual { flex: 1 !important; height: auto !important; }
+          .process-card-visual img { --img-scale: 1.95 !important; }
           .timeline-fade-overlay { display: none !important; }
           .process-nav-left  { left: calc(50% - 41vw - 22px) !important; }
           .process-nav-right { right: calc(50% - 41vw - 22px) !important; }
@@ -172,7 +173,7 @@ export default function Timeline() {
                       alt=""
                       style={step.imageCover
                         ? { width: "100%", height: "100%", objectFit: "cover", display: "block" }
-                        : { maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block", transform: step.imageScale ? `scale(${step.imageScale})` : undefined }
+                        : ({ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block", ...(step.imageScale ? { "--img-scale": step.imageScale, transform: "scale(var(--img-scale))" } : {}) } as React.CSSProperties)
                       }
                     />
                   </div>
