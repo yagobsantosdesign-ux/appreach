@@ -165,7 +165,7 @@ export default function ProductFeatures({
                       fontSize: "32px",
                       color: "var(--color-heading)",
                       marginBottom: "14px",
-                      maxWidth: "300px",
+                      maxWidth: "360px",
                       textWrap: "balance",
                     } as React.CSSProperties}
                   >
