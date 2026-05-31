@@ -20,6 +20,15 @@ Agência de marketing especializada em campanhas para aplicativos móveis. Cobre
 - **Deploy:** Netlify (`netlify.toml` configurado, formulário via Netlify Forms)
 - **Idioma:** Português (pt-BR)
 
+## Gotchas do dev server (Turbopack — Next 16 pré-release)
+
+Dois bugs recorrentes do dev server, **ambos resolvidos limpando o cache `.next`** (`npm run clean` + reiniciar o dev):
+
+1. **Reload infinito ("reiniciando toda hora"):** Turbopack panica em loop — `FATAL: Failed to write app endpoint /page — Next.js package not found` (HMR). A página serve `200`, mas o navegador recarrega sem parar. `next build` (produção) nunca é afetado.
+2. **Mudança em CSS não reflete no preview:** ao editar `globals.css`, o valor antigo persiste mesmo com reload/restart — o Turbopack serve o CSS do cache. O fonte está certo; é só limpar `.next`.
+
+Regra: se uma edição não aparecer no preview, **suspeite do cache `.next` antes de caçar bug no código**. Há o script `npm run clean` no `package.json` para isso.
+
 ## Design System
 
 **Cores (atualizadas — cinzas neutros, sem tint roxo):**
