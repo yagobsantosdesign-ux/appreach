@@ -198,7 +198,7 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
 
       {/* ── Nav grid ── */}
       <div className="max-w-[1350px] mx-auto">
-        <div className="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-16" style={{ paddingTop: "100px", paddingBottom: "64px" }}>
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-16" style={{ paddingTop: hideContactForm ? "64px" : "100px", paddingBottom: "64px" }}>
 
           {/* Col 1 — Logo + descrição + sociais */}
           <div className="flex flex-col gap-6">
