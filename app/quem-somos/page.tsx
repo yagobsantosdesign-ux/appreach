@@ -301,7 +301,7 @@ export default function QuemSomosPage() {
         </section>
 
       </main>
-      <Footer />
+      <Footer hideContactForm />
     </>
   );
 }

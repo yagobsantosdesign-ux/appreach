@@ -308,8 +308,8 @@ a:hover .logo-text {
   .product-features-section { padding-bottom: 96px; } /* runway removida */
   /* Sticky stacking cards — each card pins below the header with a growing offset so the previous cards' tops peek through */
   .product-feature-card { position: sticky; top: calc(100px + var(--card-index, 0) * 22px); }
-  /* About team section — runway for floating footer card */
-  .about-team-section { padding-bottom: 344px !important; }
+  /* About team section — padding inferior */
+  .about-team-section { padding-bottom: 114px !important; }
 }
 /* Shared section container for service pages — side padding standardized like home (40 → 24 tablet → 20 mobile) */
 .product-container { max-width: 1350px; margin: 0 auto; padding: 0 40px; }
