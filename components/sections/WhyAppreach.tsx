@@ -6,9 +6,9 @@ import { useInView } from "@/hooks/useInView";
 
 export default function WhyAppreach() {
   const { ref: headerRef, visible: headerVisible } = useInView();
-  const c0 = useInView();
-  const c1 = useInView();
-  const c2 = useInView();
+  const { ref: c0Ref, visible: c0Visible } = useInView();
+  const { ref: c1Ref, visible: c1Visible } = useInView();
+  const { ref: c2Ref, visible: c2Visible } = useInView();
 
   return (
     <section className="why-section" style={{ background: "#ffffff", padding: "80px 40px", position: "relative", overflow: "hidden" }}>
@@ -48,8 +48,8 @@ export default function WhyAppreach() {
 
           {/* ── Card 1: Foto ── */}
           <div
-            ref={c0.ref as React.RefObject<HTMLDivElement>}
-            className={`why-card reveal-scale${c0.visible ? " visible" : ""}`}
+            ref={c0Ref as React.RefObject<HTMLDivElement>}
+            className={`why-card reveal-scale${c0Visible ? " visible" : ""}`}
             style={{
               "--reveal-delay": "0s",
               borderRadius: "24px",
@@ -102,8 +102,8 @@ export default function WhyAppreach() {
 
           {/* ── Card 2: Cronograma ── */}
           <div
-            ref={c1.ref as React.RefObject<HTMLDivElement>}
-            className={`why-card reveal-scale${c1.visible ? " visible" : ""}`}
+            ref={c1Ref as React.RefObject<HTMLDivElement>}
+            className={`why-card reveal-scale${c1Visible ? " visible" : ""}`}
             style={{
               "--reveal-delay": "0.1s",
               borderRadius: "24px",
@@ -166,8 +166,8 @@ export default function WhyAppreach() {
 
           {/* ── Card 3: iPhone ── */}
           <div
-            ref={c2.ref as React.RefObject<HTMLDivElement>}
-            className={`why-card reveal-scale${c2.visible ? " visible" : ""}`}
+            ref={c2Ref as React.RefObject<HTMLDivElement>}
+            className={`why-card reveal-scale${c2Visible ? " visible" : ""}`}
             style={{
               "--reveal-delay": "0.18s",
               borderRadius: "24px",

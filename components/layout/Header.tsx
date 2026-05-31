@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
 
@@ -55,10 +56,10 @@ export default function Header() {
           style={{ gridTemplateColumns: "auto 1fr auto" }}
         >
           {/* Logo */}
-          <a href="/" className="flex items-center shrink-0">
+          <Link href="/" className="flex items-center shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo-nav.svg" alt="Appreach" width={136} height={24} className="object-contain" style={{ width: "136px", height: "24px", flexShrink: 0 }} />
-          </a>
+          </Link>
 
           {/* Nav — desktop */}
           <nav className="hidden md:flex items-center justify-center gap-7">

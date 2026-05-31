@@ -21,6 +21,8 @@ export function useInView<T extends Element = HTMLDivElement>(
     );
     observer.observe(el);
     return () => observer.disconnect();
+    // Observa o elemento uma única vez no mount; `options` é estável por uso.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { ref, visible };

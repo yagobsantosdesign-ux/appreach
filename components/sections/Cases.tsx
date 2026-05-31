@@ -283,7 +283,6 @@ export default function Cases() {
                   {c.mobileImage && (
                     <source media="(max-width: 768px)" srcSet={c.mobileImage} />
                   )}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={c.image}
                     alt={`Case ${c.category}`}

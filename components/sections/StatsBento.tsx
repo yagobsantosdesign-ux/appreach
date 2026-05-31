@@ -2,7 +2,6 @@
 
 import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
-import Button from "@/components/ui/Button";
 import { useInView } from "@/hooks/useInView";
 
 const stats = [
@@ -77,12 +76,12 @@ function BadgeTag({ children, dark }: { children: React.ReactNode; dark?: boolea
 
 export default function StatsBento() {
   const { ref: headerRef, visible: headerVisible } = useInView();
-  const c0 = useInView();
-  const c1 = useInView();
-  const c2 = useInView();
-  const c3 = useInView();
-  const c4 = useInView();
-  const c5 = useInView();
+  const { ref: c0Ref, visible: c0Visible } = useInView();
+  const { ref: c1Ref, visible: c1Visible } = useInView();
+  const { ref: c2Ref, visible: c2Visible } = useInView();
+  const { ref: c3Ref, visible: c3Visible } = useInView();
+  const { ref: c4Ref, visible: c4Visible } = useInView();
+  const { ref: c5Ref, visible: c5Visible } = useInView();
   return (
     <section className="stats-bento-section" style={{ background: "#fafafa", padding: "80px 40px 382px" }}>
       <div style={{ maxWidth: "1350px", margin: "0 auto" }}>
@@ -132,7 +131,7 @@ export default function StatsBento() {
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
 
           {/* Cell 0 — Foto 1 */}
-          <div ref={c0.ref as React.RefObject<HTMLDivElement>} className={`stats-photo reveal-scale${c0.visible ? " visible" : ""}`} style={{ ...CARD_MUTED, padding: 0, overflow: "hidden" } as React.CSSProperties}>
+          <div ref={c0Ref as React.RefObject<HTMLDivElement>} className={`stats-photo reveal-scale${c0Visible ? " visible" : ""}`} style={{ ...CARD_MUTED, padding: 0, overflow: "hidden" } as React.CSSProperties}>
             <img
               src="/stats-photo-1.jpg"
               alt=""
@@ -142,7 +141,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 1 — 50+ Apps atendidos */}
-          <div ref={c1.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c1.visible ? " visible" : ""}`} style={CARD_LIGHT}>
+          <div ref={c1Ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c1Visible ? " visible" : ""}`} style={CARD_LIGHT}>
             <div>
               <BadgeTag>↑ Crescimento</BadgeTag>
               <p className="stats-value" style={{ color: "var(--color-dark)", marginTop: "14px" }}>
@@ -158,7 +157,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 2 — Foto 2 */}
-          <div ref={c2.ref as React.RefObject<HTMLDivElement>} className={`stats-photo reveal-scale${c2.visible ? " visible" : ""}`} style={{ ...CARD_MUTED, padding: 0, overflow: "hidden" } as React.CSSProperties}>
+          <div ref={c2Ref as React.RefObject<HTMLDivElement>} className={`stats-photo reveal-scale${c2Visible ? " visible" : ""}`} style={{ ...CARD_MUTED, padding: 0, overflow: "hidden" } as React.CSSProperties}>
             <img
               src="/stats-photo-2.webp"
               alt=""
@@ -168,7 +167,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 3 — 300+ Campanhas */}
-          <div ref={c3.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c3.visible ? " visible" : ""}`} style={CARD_LIGHT}>
+          <div ref={c3Ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c3Visible ? " visible" : ""}`} style={CARD_LIGHT}>
             <div>
               <BadgeTag>↑ Escala</BadgeTag>
               <p className="stats-value" style={{ color: "var(--color-dark)", marginTop: "14px" }}>
@@ -184,7 +183,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 4 — R$500M+ dark */}
-          <div ref={c4.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c4.visible ? " visible" : ""}`} style={CARD_DARK}>
+          <div ref={c4Ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c4Visible ? " visible" : ""}`} style={CARD_DARK}>
             <div>
               <BadgeTag dark>↑ Investimento</BadgeTag>
               <p className="stats-value" style={{ color: "white", marginTop: "14px" }}>
@@ -200,7 +199,7 @@ export default function StatsBento() {
           </div>
 
           {/* Cell 5 — 98% Satisfação */}
-          <div ref={c5.ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c5.visible ? " visible" : ""}`} style={CARD_LIGHT}>
+          <div ref={c5Ref as React.RefObject<HTMLDivElement>} className={`stats-card reveal-scale${c5Visible ? " visible" : ""}`} style={CARD_LIGHT}>
             <div>
               <BadgeTag>↑ NPS</BadgeTag>
               <p className="stats-value" style={{ color: "var(--color-dark)", marginTop: "14px" }}>
