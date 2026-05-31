@@ -50,11 +50,13 @@ export default function Hero() {
   const [patternIdx, setPatternIdx] = useState(0);
 
   const avatars = [
-    "/iris_neutro.png",
-    "/mano_neutro.png",
-    "/livia_neutro.png",
-    "/neto_neutro.png",
-    "/henri_neutro.png",
+    "/iris_neutro.webp",
+    "/mano_neutro.webp",
+    "/livia_neutro.webp",
+    "/neto_neutro.webp",
+    "/henri_neutro.webp",
+    "/ana_neutro.webp",
+    "/alexia_neutro.webp",
   ];
 
   useEffect(() => {
@@ -174,35 +176,31 @@ export default function Hero() {
           </div>
 
           {/* Social proof */}
-          <div className="hidden lg:flex flex-col hero-fade-up hero-fade-up-4" style={{ gap: "15px", maxWidth: "335px", paddingTop: "32px" }}>
-            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                {avatars.map((src, i) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={src}
-                    src={src}
-                    alt=""
-                    aria-hidden="true"
-                    style={{
-                      width: "34px",
-                      height: "34px",
-                      borderRadius: "50%",
-                      border: "1.5px solid white",
-                      marginRight: i < avatars.length - 1 ? "-6px" : "0",
-                      position: "relative",
-                      zIndex: avatars.length - i,
-                      flexShrink: 0,
-                      objectFit: "cover",
-                    }}
-                  />
-                ))}
-              </div>
-              <span style={{ fontSize: "18px", color: "#40404f", lineHeight: "160%", flexShrink: 0 }}>|</span>
-              <span style={{ fontSize: "14px", color: "#40404f", lineHeight: "160%", maxWidth: "148px", display: "inline-block" }}>Time de especialistas em mobile marketing</span>
+          <div className="hidden lg:flex flex-col hero-fade-up hero-fade-up-4" style={{ gap: "14px", maxWidth: "335px", paddingTop: "32px" }}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              {avatars.map((src, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={src}
+                  src={src}
+                  alt=""
+                  aria-hidden="true"
+                  style={{
+                    width: "34px",
+                    height: "34px",
+                    borderRadius: "50%",
+                    border: "1.5px solid white",
+                    marginRight: i < avatars.length - 1 ? "-6px" : "0",
+                    position: "relative",
+                    zIndex: avatars.length - i,
+                    flexShrink: 0,
+                    objectFit: "cover",
+                  }}
+                />
+              ))}
             </div>
-            <p style={{ fontSize: "18px", color: "#40404f", lineHeight: "160%" }}>
-              +300 campanhas ativas, de startups a marcas que você já conhece.
+            <p style={{ fontSize: "18px", color: "#40404f", lineHeight: "160%", maxWidth: "330px" }}>
+              Um time de especialistas em mídia, dados e criação para o seu app.
             </p>
           </div>
         </div>

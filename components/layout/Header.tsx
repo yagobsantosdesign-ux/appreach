@@ -108,16 +108,6 @@ export default function Header() {
                 {link.label}
               </a>
             ))}
-
-            <a
-              href="/carreiras"
-              className="inline-flex items-center px-[9px] h-[44px] rounded-lg font-medium transition-colors"
-              style={{ fontSize: "16px", color: "#3d3d4a" }}
-              onMouseEnter={e => (e.currentTarget.style.background = "rgba(0,0,0,0.05)")}
-              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-            >
-              Junte-se a nós
-            </a>
           </nav>
 
           {/* CTA + mobile toggle */}

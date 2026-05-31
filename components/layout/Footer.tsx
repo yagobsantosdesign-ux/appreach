@@ -59,7 +59,7 @@ const company = [
   { label: "Blog", href: "/blog" },
 ];
 
-export default function Footer() {
+export default function Footer({ hideContactForm = false }: { hideContactForm?: boolean }) {
   return (
     <footer style={{
       background: "linear-gradient(145deg, #1E1640 0%, #2D1F5E 55%, #1a1438 100%)",
@@ -68,7 +68,8 @@ export default function Footer() {
       paddingRight: "40px",
     }}>
 
-      {/* ── Contact form card ── */}
+      {/* ── Contact form card (oculto nas páginas de serviço) ── */}
+      {!hideContactForm && (
       <div id="contato" className="footer-card-container max-w-[1350px] mx-auto" style={{ marginTop: "-260px", position: "relative", zIndex: 2, scrollMarginTop: "100px" }}>
         <div
           className="footer-contact-card flex flex-col lg:flex-row"
@@ -193,6 +194,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      )}
 
       {/* ── Nav grid ── */}
       <div className="max-w-[1350px] mx-auto">

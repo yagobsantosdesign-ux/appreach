@@ -14,7 +14,6 @@ const logos = [
   { src: "/ticker-logo-inter.svg",          alt: "Banco Inter",    h: 28  },
   { src: "/ticker-logo-habibs.svg",         alt: "Habib's",        h: 28  },
   { src: "/ticker-logo-paramount.svg",      alt: "Paramount+",     h: 26  },
-  { src: "/ticker-logo-carrefour.svg",      alt: "Carrefour",      h: 28  },
   { src: "/ticker-logo-picpay.svg",         alt: "PicPay",         h: 28  },
   { src: "/ticker-logo-clickbus.svg",       alt: "ClickBus",       h: 30  },
 ];

@@ -28,6 +28,8 @@ const team = [
   { name: "Lívia", role: "Head de Criação", photo: "/team-livia.webp" },
   { name: "Mano", role: "Head de Mídia", photo: "/team-mano.webp" },
   { name: "Neto", role: "Head de Dados", photo: "/team-neto.webp" },
+  { name: "Ana", role: "Head de Performance", photo: "/team-ana.webp" },
+  { name: "Aléxia", role: "Head de Conteúdo", photo: "/team-alexia.webp" },
 ];
 
 function IconLinkedin() {
@@ -53,39 +55,6 @@ const PLACEHOLDER_BG: React.CSSProperties = {
   position: "relative",
   overflow: "hidden",
 };
-function PlaceholderDots() {
-  return (
-    <>
-      <div
-        aria-hidden
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: "radial-gradient(circle, rgba(101,87,234,0.09) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-      <span
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "12px",
-          color: "#6557EA",
-          fontFamily: "var(--font-geist-mono)",
-          letterSpacing: "1px",
-          textTransform: "uppercase",
-          opacity: 0.45,
-        }}
-      >
-        Placeholder
-      </span>
-    </>
-  );
-}
-
 export default function QuemSomosPage() {
   return (
     <>
@@ -101,7 +70,7 @@ export default function QuemSomosPage() {
                 <SectionBadge>Quem somos</SectionBadge>
                 <h1
                   style={{
-                    fontSize: "clamp(32px, 4.5vw, var(--text-h1))",
+                    fontSize: "clamp(38px, 6vw, var(--text-h1))",
                     color: "var(--color-heading)",
                     letterSpacing: "-0.04em",
                     lineHeight: "110%",
@@ -139,7 +108,8 @@ export default function QuemSomosPage() {
 
             {/* Imagem destaque */}
             <div style={{ ...PLACEHOLDER_BG, width: "100%", aspectRatio: "16 / 9", marginTop: "52px" }}>
-              <PlaceholderDots />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/about-meeting.webp" alt="Equipe da Appreach reunida no escritório" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
             </div>
           </div>
         </section>
@@ -149,7 +119,8 @@ export default function QuemSomosPage() {
           <div className="product-container">
             <div className="about-vm-row flex flex-col lg:flex-row" style={{ gap: "64px", alignItems: "stretch" }}>
               <div className="about-vm-media" style={{ ...PLACEHOLDER_BG, flex: 1, minHeight: "420px" }}>
-                <PlaceholderDots />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/about-office.webp" alt="Time da Appreach reunido em evento da marca" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
               <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: "40px" }}>
                 <div>
@@ -170,9 +141,29 @@ export default function QuemSomosPage() {
         </section>
 
         {/* ── Nossa trajetória ── */}
-        <section style={{ background: "linear-gradient(145deg, #1E1640 0%, #2D1F5E 55%, #1a1438 100%)", padding: "96px 0" }}>
-          <div className="product-container">
-            <div className="about-journey-row flex flex-col lg:flex-row" style={{ gap: "48px", alignItems: "flex-start", justifyContent: "space-between" }}>
+        <section className="journey-section" style={{ position: "relative", overflow: "hidden", background: "linear-gradient(135deg, #140343 0%, #070118 100%)", padding: "96px 0" }}>
+          <div className="product-container" style={{ position: "relative", zIndex: 1 }}>
+            {/* Moeda decorativa — desktop: fundo-esquerda; mobile: centralizada na base (ref. Figma 6522:4) */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/coin.webp"
+              alt=""
+              aria-hidden="true"
+              className="journey-coin"
+              style={{
+                position: "absolute",
+                left: "36px",
+                bottom: "-96px",
+                width: "547px",
+                height: "366px",
+                objectFit: "contain",
+                pointerEvents: "none",
+                userSelect: "none",
+                zIndex: 0,
+                opacity: 0.45,
+              }}
+            />
+            <div className="about-journey-row flex flex-col lg:flex-row" style={{ position: "relative", zIndex: 1, gap: "48px", alignItems: "flex-start", justifyContent: "space-between" }}>
               {/* Esquerda: título */}
               <div className="about-journey-head" style={{ flex: "0 0 auto", maxWidth: "360px" }}>
                 <SectionBadge dark>Nossa trajetória</SectionBadge>
@@ -232,7 +223,7 @@ export default function QuemSomosPage() {
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <SectionBadge>Time</SectionBadge>
               </div>
-              <h2 style={{ fontSize: "48px", color: "var(--color-heading)", lineHeight: "120%", marginBottom: "16px" }}>
+              <h2 style={{ fontSize: "48px", color: "var(--color-heading)", lineHeight: "120%", marginBottom: "16px", textWrap: "balance" as never, maxWidth: "440px", marginLeft: "auto", marginRight: "auto" }}>
                 A equipe por trás da Appreach
               </h2>
               <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "160%" }}>
@@ -240,7 +231,7 @@ export default function QuemSomosPage() {
               </p>
             </div>
 
-            <div className="about-team-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
+            <div className="about-team-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "24px" }}>
               {team.map((m) => (
                 <div
                   key={m.name}

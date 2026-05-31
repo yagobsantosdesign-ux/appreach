@@ -68,7 +68,7 @@ export default function UAPage() {
         />
 
       </main>
-      <Footer />
+      <Footer hideContactForm />
     </>
   );
 }

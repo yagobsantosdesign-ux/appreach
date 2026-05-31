@@ -68,7 +68,7 @@ export default function AppleSearchAdsPage() {
         />
 
       </main>
-      <Footer />
+      <Footer hideContactForm />
     </>
   );
 }
