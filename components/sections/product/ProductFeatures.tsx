@@ -1,10 +1,14 @@
+"use client";
+
 import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
+import { useInView } from "@/hooks/useInView";
 
 interface Feature {
   title: string;
   description: string;
   bullets: string[];
+  image?: { src: string; alt: string };
 }
 
 interface ProductFeaturesProps {
@@ -42,7 +46,7 @@ function CheckIcon() {
   );
 }
 
-function ImagePlaceholder() {
+function ImageSlot({ image }: { image?: { src: string; alt: string } }) {
   return (
     <div
       style={{
@@ -65,30 +69,128 @@ function ImagePlaceholder() {
           minHeight: "500px",
         }}
       >
-        <div
-          aria-hidden
+        {image ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={image.src}
+            alt={image.alt}
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
+        ) : (
+          <>
+            <div
+              aria-hidden
+              style={{
+                position: "absolute",
+                inset: 0,
+                backgroundImage:
+                  "radial-gradient(circle, rgba(101,87,234,0.09) 1px, transparent 1px)",
+                backgroundSize: "28px 28px",
+              }}
+            />
+            <span
+              style={{
+                position: "relative",
+                fontSize: "12px",
+                color: "var(--color-primary)",
+                fontFamily: "var(--font-geist-mono)",
+                letterSpacing: "1px",
+                textTransform: "uppercase",
+                opacity: 0.4,
+              }}
+            >
+              placeholder
+            </span>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function FeatureCard({ feature, i }: { feature: Feature; i: number }) {
+  const { ref, visible } = useInView<HTMLDivElement>();
+  const imageRight = i % 2 === 0;
+  return (
+    <div
+      ref={ref}
+      className={`product-feature-card reveal-scale${visible ? " visible" : ""} flex flex-col ${imageRight ? "lg:flex-row" : "lg:flex-row-reverse"}`}
+      style={{
+        background: "#FFFFFF",
+        border: "1px solid var(--color-border)",
+        borderRadius: "20px",
+        overflow: "hidden",
+        height: "580px",
+        "--card-index": i,
+      } as React.CSSProperties}
+    >
+      {/* Lado texto */}
+      <div
+        style={{
+          flex: "0 0 50%",
+          padding: imageRight ? "40px" : "40px 40px 40px 0",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <h3
+          className="product-feature-title"
           style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "radial-gradient(circle, rgba(101,87,234,0.09) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-        <span
+            fontSize: "32px",
+            color: "var(--color-heading)",
+            marginBottom: "14px",
+            maxWidth: "360px",
+            textWrap: "balance",
+          } as React.CSSProperties}
+        >
+          {feature.title}
+        </h3>
+        <p
           style={{
-            position: "relative",
-            fontSize: "12px",
-            color: "var(--color-primary)",
-            fontFamily: "var(--font-geist-mono)",
-            letterSpacing: "1px",
-            textTransform: "uppercase",
-            opacity: 0.4,
+            fontSize: "16px",
+            color: "var(--color-body)",
+            lineHeight: "160%",
+            marginBottom: "28px",
+            maxWidth: "380px",
+            textWrap: "pretty",
+          } as React.CSSProperties}
+        >
+          {feature.description}
+        </p>
+        <ul
+          style={{
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
           }}
         >
-          placeholder
-        </span>
+          {feature.bullets.map((bullet, j) => (
+            <li
+              key={j}
+              style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}
+            >
+              <CheckIcon />
+              <span
+                style={{
+                  fontSize: "16px",
+                  color: "var(--color-body)",
+                  lineHeight: "160%",
+                  maxWidth: "340px",
+                }}
+              >
+                {bullet}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
+
+      {/* Lado imagem (ou placeholder enquanto não houver) */}
+      <ImageSlot image={feature.image} />
     </div>
   );
 }
@@ -99,12 +201,13 @@ export default function ProductFeatures({
   subtitle,
   features,
 }: ProductFeaturesProps) {
+  const { ref: headRef, visible: headVisible } = useInView<HTMLDivElement>();
   return (
-    <section className="product-features-section" style={{ background: "#FFFFFF" }}>
+    <section id="como-funciona" className="product-features-section" style={{ background: "#FFFFFF", scrollMarginTop: "100px" }}>
       <div className="product-container">
 
         {/* Header centralizado */}
-        <div style={{ textAlign: "center", marginBottom: "56px" }}>
+        <div ref={headRef} className={`reveal${headVisible ? " visible" : ""}`} style={{ textAlign: "center", marginBottom: "56px" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <SectionBadge>{badge}</SectionBadge>
           </div>
@@ -113,7 +216,7 @@ export default function ProductFeatures({
             style={{
               fontSize: "48px",
               color: "var(--color-heading)",
-              maxWidth: "580px",
+              maxWidth: "680px",
               margin: "0 auto 16px",
             }}
           >
@@ -134,95 +237,9 @@ export default function ProductFeatures({
 
         {/* Cards de features */}
         <div style={{ display: "flex", flexDirection: "column", gap: "56px" }}>
-          {features.map((feature, i) => {
-            const imageRight = i % 2 === 0;
-            return (
-              <div
-                key={i}
-                className={`product-feature-card flex flex-col ${imageRight ? "lg:flex-row" : "lg:flex-row-reverse"}`}
-                style={{
-                  background: "#FFFFFF",
-                  border: "1px solid var(--color-border)",
-                  borderRadius: "20px",
-                  overflow: "hidden",
-                  height: "580px",
-                  "--card-index": i,
-                } as React.CSSProperties}
-              >
-                {/* Lado texto */}
-                <div
-                  style={{
-                    flex: "0 0 50%",
-                    padding: imageRight ? "40px" : "40px 40px 40px 0",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <h3
-                    className="product-feature-title"
-                    style={{
-                      fontSize: "32px",
-                      color: "var(--color-heading)",
-                      marginBottom: "14px",
-                      maxWidth: "360px",
-                      textWrap: "balance",
-                    } as React.CSSProperties}
-                  >
-                    {feature.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "16px",
-                      color: "var(--color-body)",
-                      lineHeight: "160%",
-                      marginBottom: "28px",
-                      maxWidth: "380px",
-                      textWrap: "pretty",
-                    } as React.CSSProperties}
-                  >
-                    {feature.description}
-                  </p>
-                  <ul
-                    style={{
-                      listStyle: "none",
-                      padding: 0,
-                      margin: 0,
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "12px",
-                    }}
-                  >
-                    {feature.bullets.map((bullet, j) => (
-                      <li
-                        key={j}
-                        style={{
-                          display: "flex",
-                          alignItems: "flex-start",
-                          gap: "10px",
-                        }}
-                      >
-                        <CheckIcon />
-                        <span
-                          style={{
-                            fontSize: "16px",
-                            color: "var(--color-body)",
-                            lineHeight: "160%",
-                            maxWidth: "340px",
-                          }}
-                        >
-                          {bullet}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Lado placeholder */}
-                <ImagePlaceholder />
-              </div>
-            );
-          })}
+          {features.map((feature, i) => (
+            <FeatureCard key={i} feature={feature} i={i} />
+          ))}
         </div>
 
       </div>

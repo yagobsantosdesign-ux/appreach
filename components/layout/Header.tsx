@@ -10,12 +10,18 @@ const solutions = [
   { label: "Retargeting", href: "/retargeting" },
   { label: "CTV", href: "/ctv-connected-tv" },
   { label: "Apple Search Ads", href: "/apple-search-ads" },
-  { label: "IA & Dados: Reach Lab", href: "/#estrategias" },
+  { label: "ASO", href: "/aso" },
+  { label: "Native Ads", href: "/native-ads" },
+  { label: "IA & Dados: Reach Lab", href: "/reach-lab" },
+  { label: "Push Ads", href: "/app-chat-push" },
+  { label: "Preload", href: "/preload" },
+  { label: "Mídia Programática", href: "/midia-programatica" },
 ];
 
 const navLinks = [
   { label: "Quem somos", href: "/quem-somos" },
   { label: "Cases", href: "/#cases" },
+  { label: "Carreiras", href: "/carreiras" },
 ];
 
 export default function Header() {
@@ -81,12 +87,12 @@ export default function Header() {
 
               {solutionsOpen && (
                 <div className="absolute top-full left-0 pt-2 z-50">
-                  <div className="bg-white rounded-2xl py-1.5 border border-border" style={{ minWidth: "220px" }}>
+                  <div className="bg-white rounded-2xl p-1.5 border border-border grid" style={{ gridTemplateColumns: "1fr 1fr", columnGap: "4px", minWidth: "420px" }}>
                     {solutions.map((s) => (
                       <a
                         key={s.href}
                         href={s.href}
-                        className="flex items-center px-4 py-2.5 text-body hover:text-dark hover:bg-surface transition-colors font-medium"
+                        className="flex items-center px-4 py-2.5 rounded-lg text-body hover:text-dark hover:bg-[rgba(0,0,0,0.04)] transition-colors font-medium whitespace-nowrap"
                         style={{ fontSize: "14px" }}
                       >
                         {s.label}

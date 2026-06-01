@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Button from "@/components/ui/Button";
+import Reveal from "@/components/ui/Reveal";
 
 const stats = [
   { value: "+300", label: "Campanhas executadas" },
@@ -15,7 +16,7 @@ const stats = [
 
 // NOTE: anos e textos da trajetória são placeholders — ajustar com a história real.
 const journey = [
-  { year: "2019", title: "O começo", desc: "Nascemos para resolver o marketing de apps com estratégia e dados — não com achismo." },
+  { year: "2019", title: "O começo", desc: "Nascemos para resolver o marketing de apps com estratégia e dados, não com achismo." },
   { year: "2021", title: "Primeiras escalas", desc: "Estruturamos campanhas full-funnel e provamos resultado real para os primeiros clientes." },
   { year: "2023", title: "Portfólio 360°", desc: "Adicionamos CTV, Apple Search Ads, retargeting e mídia programática à nossa operação." },
   { year: "2025", title: "Crescendo com dados e IA", desc: "Num mercado em constante evolução, usamos dados e IA para gerar crescimento real para os apps que confiam na gente." },
@@ -82,7 +83,7 @@ export default function QuemSomosPage() {
                   Estratégia 360° para apps que escalam
                 </h1>
                 <p style={{ fontSize: "var(--text-hero-sub)", color: "var(--color-body)", lineHeight: "160%", maxWidth: "480px", marginBottom: "28px" }}>
-                  Somos a Appreach — agência de marketing para apps mobile, do primeiro install à receita. Unimos dados, criativos e mídia para crescer o seu app com eficiência.
+                  Somos a Appreach, agência de marketing para apps mobile, do primeiro install à receita. Unimos dados, criativos e mídia para crescer o seu app com eficiência.
                 </p>
                 <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                   <Button href="/#contato" size="xl" variant="gradient">Falar com especialista</Button>
@@ -107,16 +108,19 @@ export default function QuemSomosPage() {
             </div>
 
             {/* Imagem destaque */}
-            <div style={{ ...PLACEHOLDER_BG, width: "100%", aspectRatio: "16 / 9", marginTop: "52px" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/about-meeting.webp" alt="Equipe da Appreach reunida no escritório" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-            </div>
+            <Reveal variant="scale" delay="0.1s" style={{ marginTop: "52px" }}>
+              <div style={{ ...PLACEHOLDER_BG, width: "100%", aspectRatio: "16 / 9" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/about-meeting.webp" alt="Equipe da Appreach reunida no escritório" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+            </Reveal>
           </div>
         </section>
 
         {/* ── Visão / Missão ── */}
         <section style={{ background: "#ffffff", paddingBottom: "96px" }}>
           <div className="product-container">
+            <Reveal>
             <div className="about-vm-row flex flex-col lg:flex-row" style={{ gap: "64px", alignItems: "stretch" }}>
               <div className="about-vm-media" style={{ ...PLACEHOLDER_BG, flex: 1, minHeight: "420px" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -126,17 +130,18 @@ export default function QuemSomosPage() {
                 <div>
                   <h2 style={{ fontSize: "var(--text-h3)", color: "var(--color-heading)", marginBottom: "12px" }}>Nossa visão</h2>
                   <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "170%", maxWidth: "460px" }}>
-                    Na Appreach, enxergamos um mercado onde todo app — de startups a líderes de categoria — tem acesso a estratégias de crescimento de verdade, sustentadas por dados e não por achismo. Acreditamos que mídia bem investida transforma installs em receita previsível, não em números de vaidade. Nossa visão é ser a parceira de crescimento de referência na América Latina, dando a cada cliente a clareza e a confiança para escalar com eficiência.
+                    Na Appreach, enxergamos um mercado onde todo app, de startups a líderes de categoria, tem acesso a estratégias de crescimento de verdade, sustentadas por dados e não por achismo. Acreditamos que mídia bem investida transforma installs em receita previsível, não em números de vaidade. Nossa visão é ser a parceira de crescimento de referência na América Latina, dando a cada cliente a clareza e a confiança para escalar com eficiência.
                   </p>
                 </div>
                 <div>
                   <h2 style={{ fontSize: "var(--text-h3)", color: "var(--color-heading)", marginBottom: "12px" }}>Nossa missão</h2>
                   <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "170%", maxWidth: "460px" }}>
-                    Nossa missão é transformar a forma como apps crescem, unindo dados, criativos e mídia em uma estratégia 360° — do primeiro install à receita. Combinamos inteligência analítica, segmentação precisa e otimização contínua para atrair os usuários certos e maximizar o retorno de cada real investido. Trabalhamos com transparência total, relatórios sem jargão e parceria próxima em cada etapa da jornada, para que escalar o seu app seja um processo claro, mensurável e sem desperdício.
+                    Nossa missão é transformar a forma como apps crescem, unindo dados, criativos e mídia em uma estratégia 360°, do primeiro install à receita. Combinamos inteligência analítica, segmentação precisa e otimização contínua para atrair os usuários certos e maximizar o retorno de cada real investido. Trabalhamos com transparência total, relatórios sem jargão e parceria próxima em cada etapa da jornada, para que escalar o seu app seja um processo claro, mensurável e sem desperdício.
                   </p>
                 </div>
               </div>
             </div>
+            </Reveal>
           </div>
         </section>
 
@@ -163,6 +168,7 @@ export default function QuemSomosPage() {
                 opacity: 0.45,
               }}
             />
+            <Reveal>
             <div className="about-journey-row flex flex-col lg:flex-row" style={{ position: "relative", zIndex: 1, gap: "48px", alignItems: "flex-start", justifyContent: "space-between" }}>
               {/* Esquerda: título */}
               <div className="about-journey-head" style={{ flex: "0 0 auto", maxWidth: "360px" }}>
@@ -171,7 +177,7 @@ export default function QuemSomosPage() {
                   De onde viemos
                 </h2>
                 <p style={{ color: "rgba(255,255,255,0.60)", fontSize: "16px", lineHeight: "160%" }}>
-                  Cada conquista mostra o quanto evoluímos — e o quanto ainda queremos crescer junto com os apps dos nossos clientes.
+                  Cada conquista mostra o quanto evoluímos e o quanto ainda queremos crescer junto com os apps dos nossos clientes.
                 </p>
               </div>
 
@@ -203,7 +209,7 @@ export default function QuemSomosPage() {
                     </div>
                     <div style={{ paddingTop: "3px" }}>
                       <h3 style={{ color: "#ffffff", fontSize: "20px", fontWeight: 600, letterSpacing: "-0.3px", marginBottom: "6px" }}>
-                        {item.year} — {item.title}
+                        {item.year} · {item.title}
                       </h3>
                       <p style={{ color: "rgba(255,255,255,0.60)", fontSize: "16px", lineHeight: "160%", maxWidth: "440px" }}>
                         {item.desc}
@@ -213,12 +219,14 @@ export default function QuemSomosPage() {
                 ))}
               </div>
             </div>
+            </Reveal>
           </div>
         </section>
 
         {/* ── Equipe ── */}
         <section className="about-team-section" style={{ background: "#fafafa" }}>
           <div className="product-container">
+            <Reveal>
             <div style={{ textAlign: "center", maxWidth: "560px", margin: "0 auto 56px" }}>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <SectionBadge>Time</SectionBadge>
@@ -297,6 +305,7 @@ export default function QuemSomosPage() {
                 </span>
               </a>
             </div>
+            </Reveal>
           </div>
         </section>
 

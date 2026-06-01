@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { INPUT, LABEL } from "@/components/ui/formStyles";
 
 const IconInstagram = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -24,32 +25,17 @@ const IconLinkedin = () => (
   </svg>
 );
 
-const INPUT: React.CSSProperties = {
-  width: "100%",
-  background: "#F7F7F9",
-  border: "1px solid rgba(0,0,0,0.08)",
-  borderRadius: "12px",
-  padding: "13px 16px",
-  fontSize: "15px",
-  color: "#141414",
-  outline: "none",
-  transition: "border-color 0.15s",
-};
-
-const LABEL: React.CSSProperties = {
-  fontSize: "13px",
-  fontWeight: 600,
-  color: "#3D3D4A",
-  marginBottom: "6px",
-  display: "block",
-};
-
 const solutions = [
   { label: "User Acquisition", href: "/useracquisition-app" },
   { label: "Retargeting", href: "/retargeting" },
   { label: "CTV", href: "/ctv-connected-tv" },
   { label: "Apple Search Ads", href: "/apple-search-ads" },
-  { label: "IA & Dados: Reach Lab", href: "/#estrategias" },
+  { label: "ASO", href: "/aso" },
+  { label: "Native Ads", href: "/native-ads" },
+  { label: "IA & Dados: Reach Lab", href: "/reach-lab" },
+  { label: "Push Ads", href: "/app-chat-push" },
+  { label: "Preload", href: "/preload" },
+  { label: "Mídia Programática", href: "/midia-programatica" },
 ];
 
 const company = [
@@ -259,10 +245,10 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
               <span className="text-xs font-semibold uppercase tracking-widest" style={{ letterSpacing: "0.08em", color: "rgba(255,255,255,0.90)" }}>
                 Soluções
               </span>
-              <ul className="flex flex-col gap-3">
+              <ul className="grid grid-cols-2 gap-x-10 gap-y-3">
                 {solutions.map((s) => (
                   <li key={s.href}>
-                    <a href={s.href} className="text-sm transition-colors duration-200" style={{ color: "rgba(255,255,255,0.45)" }}
+                    <a href={s.href} className="text-sm transition-colors duration-200 whitespace-nowrap" style={{ color: "rgba(255,255,255,0.45)" }}
                       onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
                       onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
                     >{s.label}</a>

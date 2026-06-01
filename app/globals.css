@@ -52,6 +52,7 @@
 h1, h2, h3, h4 {
   font-family: var(--font-inter), system-ui, sans-serif;
   font-weight: var(--font-weight-semibold);
+  text-wrap: balance; /* títulos sempre balanceados; largura controla o nº de linhas */
 }
 
 h1 { line-height: 110%; letter-spacing: -0.04em; }
@@ -77,6 +78,15 @@ button, a, [role="button"] {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Transição suave entre páginas (template.tsx re-monta a cada navegação) */
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.page-transition {
+  animation: page-fade-in 0.6s ease-in-out both;
 }
 
 body {
@@ -291,6 +301,14 @@ a:hover .logo-text {
   align-self: flex-start;
 }
 
+/* Strategies grid — flex para centralizar a última linha (lista com nº ímpar de cards) */
+.strategies-card { flex: 0 1 calc((100% - 48px) / 3); }
+
+/* /solucoes — runway inferior para o card de contato do footer (margin-top:-260px) flutuar sem sobrepor o grid (só desktop, onde o card flutua) */
+@media (min-width: 1024px) {
+  .strategies-runway { padding-bottom: 382px !important; }
+}
+
 /* Platforms — carousel always visible, grid hidden by default */
 .platforms-arc-carousel { display: block; }
 .platforms-icon-grid { display: none; }
@@ -302,10 +320,10 @@ a:hover .logo-text {
   }
 }
 
-/* ── Product features — form de contato removido das páginas de serviço, runway extra (-260px) não é mais necessária ── */
+/* ── Product features — runway inferior para o card de contato do footer (margin-top:-260px) flutuar sem sobrepor ── */
 .product-features-section { padding: 96px 0; }
 @media (min-width: 1024px) {
-  .product-features-section { padding-bottom: 96px; } /* runway removida */
+  .product-features-section { padding-bottom: 382px; } /* runway para o footer-card flutuante */
   /* Sticky stacking cards — each card pins below the header with a growing offset so the previous cards' tops peek through */
   .product-feature-card { position: sticky; top: calc(100px + var(--card-index, 0) * 22px); }
   /* About team section — padding inferior */
@@ -337,13 +355,15 @@ a:hover .logo-text {
   .why-grid { grid-template-columns: 1fr 1fr !important; }
   .why-grid > :last-child { grid-column: 1 / -1; }
   .strategies-section { padding: 80px 24px !important; }
-  .strategies-grid { grid-template-columns: 1fr 1fr !important; }
-  .strategies-card { height: auto !important; min-height: 260px !important; }
+  .strategies-card { flex-basis: calc((100% - 24px) / 2) !important; height: auto !important; min-height: 260px !important; }
   .product-feature-card { height: auto !important; }
   .product-feature-card > div { flex: 0 0 auto !important; width: 100% !important; }
   .product-feature-card > div:last-child { min-height: 240px; }
   .product-container { padding-left: 24px !important; padding-right: 24px !important; }
   .about-team-grid { grid-template-columns: 1fr 1fr !important; }
+  /* Carreiras */
+  .careers-areas-grid { grid-template-columns: 1fr 1fr !important; }
+  .careers-form-row { padding: 48px !important; gap: 48px !important; }
   .funnel-section { padding: 80px 24px !important; }
   .funnel-layout { flex-direction: column !important; gap: 48px !important; }
   .funnel-left { width: 100% !important; }
@@ -402,6 +422,12 @@ a:hover .logo-text {
   .about-stats-grid { gap: 24px 20px !important; }
   .about-member-foot { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
   .about-vm-media { min-height: 240px !important; }
+  /* Carreiras */
+  .careers-hero-media { min-height: 260px !important; }
+  .careers-areas-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .careers-form-row { padding: 36px 24px !important; gap: 36px !important; }
+  .careers-form-card { padding: 24px !important; }
+  .careers-form-grid { grid-template-columns: 1fr !important; }
   .why-section { padding: 64px 20px !important; }
   .strategies-section { padding: 64px 20px !important; }
   .funnel-section { padding: 64px 20px !important; }
@@ -425,8 +451,7 @@ a:hover .logo-text {
   .why-card p { font-size: 14px !important; }
 
   /* Strategies */
-  .strategies-grid { grid-template-columns: 1fr !important; }
-  .strategies-card { height: auto !important; min-height: 0 !important; aspect-ratio: 3/4 !important; gap: 20px !important; justify-content: space-between !important; background: #ffffff !important; }
+  .strategies-card { flex-basis: 100% !important; height: auto !important; min-height: 0 !important; aspect-ratio: 3/4 !important; gap: 20px !important; justify-content: space-between !important; background: #ffffff !important; }
   .strategies-card h3 { font-size: 24px !important; }
   .strategies-card p { font-size: 14px !important; }
   /* Service/product feature cards — match home card scale on mobile */

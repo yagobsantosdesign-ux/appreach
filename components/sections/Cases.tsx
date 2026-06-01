@@ -17,7 +17,7 @@ const cases = [
       "Testes contínuos de criativos focados em performance",
       "Segmentação baseada em comportamento e potencial de conversão",
     ],
-    porqueFuncionou: "Combinamos inteligência criativa e análise de dados para atrair usuários com maior potencial de retenção e receita — não apenas volume de installs.",
+    porqueFuncionou: "Combinamos inteligência criativa e análise de dados para atrair usuários com maior potencial de retenção e receita, não apenas volume de installs.",
     metrics: [
       { value: "+222%", label: "installs" },
       { value: "+7%",   label: "conversões" },
@@ -31,13 +31,13 @@ const cases = [
     number: "02",
     category: "Food",
     hookTitle: "Como um app de food aumentou os pedidos em 33% sem elevar o CAC",
-    desafio: "Fazer os usuários migrarem os pedidos para o app — reduzindo dependência da loja física e mantendo o custo por conversão sob controle.",
+    desafio: "Fazer os usuários migrarem os pedidos para o app, reduzindo dependência da loja física e mantendo o custo por conversão sob controle.",
     estrategia: [
       "Campanhas CPI otimizadas para conversão dentro do app",
       "Análise de eventos ao longo do funil de compra",
       "Otimização contínua de inventários e segmentações",
     ],
-    porqueFuncionou: "Usamos dados de comportamento e intenção de compra para alcançar usuários mais propensos a finalizar pedidos no app — reduzindo desperdício de mídia e aumentando a receita.",
+    porqueFuncionou: "Usamos dados de comportamento e intenção de compra para alcançar usuários mais propensos a finalizar pedidos no app, reduzindo desperdício de mídia e aumentando a receita.",
     metrics: [
       { value: "−25%",  label: "custo por conversão" },
       { value: "+33%",  label: "taxa de conversão" },
@@ -51,7 +51,7 @@ const cases = [
     number: "03",
     category: "Eletrônicos",
     hookTitle: "Aquisição inteligente: o crescimento de um app de eletrônicos focado em primeira compra",
-    desafio: "Atrair usuários com real intenção de compra — e não apenas gerar volume de instalações sem conversão.",
+    desafio: "Atrair usuários com real intenção de compra, e não apenas gerar volume de instalações sem conversão.",
     estrategia: [
       "Campanhas CPA otimizadas para eventos de compra",
       "Segmentação baseada em comportamento e intenção de consumo",

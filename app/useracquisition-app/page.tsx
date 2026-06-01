@@ -15,6 +15,7 @@ const features = [
       "Audiences atualizadas em tempo real",
       "Perfil de usuário com alto LTV",
     ],
+    image: { src: "/ua-feature-1.webp", alt: "Painel com métricas de usuários, installs e canais de aquisição" },
   },
   {
     title: "Criativos guiados por dados",
@@ -25,6 +26,7 @@ const features = [
       "Análise de performance por funil",
       "Produção de peças com time especializado",
     ],
+    image: { src: "/ua-feature-2.webp", alt: "Post social com métricas de instalações e retenção" },
   },
   {
     title: "Integração total com MMPs",
@@ -35,6 +37,7 @@ const features = [
       "Tracking completo do funil de conversão",
       "Pipeline de dados automatizado",
     ],
+    image: { src: "/ua-feature-3.webp", alt: "Logos das principais MMPs e plataformas integradas" },
   },
   {
     title: "Otimização por ML em tempo real",
@@ -45,6 +48,7 @@ const features = [
       "Relatórios semanais de performance",
       "Metas calibradas por evento de receita",
     ],
+    image: { src: "/ua-feature-4.webp", alt: "Gráfico de performance em alta com otimização por ML" },
   },
 ];
 
@@ -58,6 +62,7 @@ export default function UAPage() {
           badge="User Acquisition"
           title={<>Mais installs. Menor custo por aquisição.</>}
           subtitle="Campanhas de UA com segmentação de dados de 1ª parte, criativos otimizados e integração nativa com todas as principais MMPs."
+          image={{ src: "/ua-hero.webp", alt: "Profissional analisando resultados de aquisição de usuários no laptop" }}
         />
 
         <ProductFeatures
@@ -68,7 +73,7 @@ export default function UAPage() {
         />
 
       </main>
-      <Footer hideContactForm />
+      <Footer />
     </>
   );
 }

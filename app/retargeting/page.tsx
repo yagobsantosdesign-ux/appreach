@@ -68,7 +68,7 @@ export default function RetargetingPage() {
         />
 
       </main>
-      <Footer hideContactForm />
+      <Footer />
     </>
   );
 }

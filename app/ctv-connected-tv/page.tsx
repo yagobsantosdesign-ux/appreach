@@ -68,7 +68,7 @@ export default function CTVPage() {
         />
 
       </main>
-      <Footer hideContactForm />
+      <Footer />
     </>
   );
 }
