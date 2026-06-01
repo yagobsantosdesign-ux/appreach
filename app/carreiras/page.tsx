@@ -113,7 +113,7 @@ export default function CarreirasPage() {
                     background: "rgba(255,255,255,0.80)",
                     backdropFilter: "blur(20px)",
                     WebkitBackdropFilter: "blur(20px)",
-                    border: "1px solid rgba(255,255,255,0.50)",
+                    border: "1px solid var(--color-border)",
                     borderRadius: "20px",
                     padding: "28px",
                     display: "flex",
