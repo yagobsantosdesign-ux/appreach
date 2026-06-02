@@ -42,7 +42,6 @@ const company = [
   { label: "Sobre nós", href: "/quem-somos" },
   { label: "Cases", href: "/#cases" },
   { label: "Carreiras", href: "/carreiras" },
-  { label: "Blog", href: "/blog" },
 ];
 
 export default function Footer({ hideContactForm = false }: { hideContactForm?: boolean }) {

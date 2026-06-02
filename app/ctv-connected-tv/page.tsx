@@ -15,6 +15,7 @@ const features = [
       "Conteúdo qualificado com brand safety",
       "Alta viewability e completion rate",
     ],
+    image: { src: "/ctv-feature-1.webp", alt: "Smart TV exibindo catálogo de streaming com filmes e séries" },
   },
   {
     title: "Segmentação avançada de audiência",
@@ -25,6 +26,7 @@ const features = [
       "Targeting por app instalado no device",
       "Segmentos customizados por funil",
     ],
+    image: { src: "/ctv-feature-2.webp", alt: "Painel de segmentação de clientes com perfis e desempenho por segmento" },
   },
   {
     title: "Mensuração completa com MMP",
@@ -35,6 +37,7 @@ const features = [
       "Deep link com atribuição precisa",
       "Integração nativa com AppsFlyer e Adjust",
     ],
+    image: { src: "/ctv-feature-3.webp", alt: "Anúncio na TV com QR code para baixar o app e celular ao lado" },
   },
   {
     title: "Atribuição cross-device",
@@ -45,6 +48,7 @@ const features = [
       "Relatórios de incrementalidade",
       "Cohort analysis pós-exposição",
     ],
+    image: { src: "/ctv-feature-4.webp", alt: "Pessoa navegando no app no celular com a TV exibindo o mesmo catálogo ao fundo" },
   },
 ];
 
@@ -58,6 +62,7 @@ export default function CTVPage() {
           badge="CTV: Connected TV"
           title={<>Alcance seu usuário na maior tela da casa.</>}
           subtitle="Campanhas de Connected TV para apps mobile, alcance audiências premium enquanto assistem ao conteúdo favorito."
+          image={{ src: "/ctv-hero.webp", alt: "Família assistindo a streaming na smart TV na sala de estar" }}
         />
 
         <ProductFeatures
