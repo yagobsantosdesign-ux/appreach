@@ -26,19 +26,19 @@ const strategies = [
   {
     title: "Push Ads",
     description: "Alcance o usuário certo, na hora certa, fora do app. Notificações que reativam, convertem e aumentam o LTV.",
-    href: "/app-chat-push",
+    href: "/useracquisition-app#push-ads",
     icon: <img src="/icon-strategy-4.webp" width={28} height={28} alt="" />,
   },
   {
     title: "Preload",
     description: "Seu app pré-instalado em dispositivos novos, garantindo presença desde o primeiro acesso do usuário.",
-    href: "/preload",
+    href: "/useracquisition-app#preload",
     icon: <img src="/icon-strategy-5.webp" width={28} height={28} alt="" />,
   },
   {
     title: "Mídia Programática",
     description: "Compra de mídia em escala com dados de primeira parte para atingir o usuário certo, no momento certo.",
-    href: "/midia-programatica",
+    href: "/useracquisition-app#native-ads",
     icon: <img src="/icon-strategy-6.webp" width={28} height={28} alt="" />,
   },
   {
@@ -50,13 +50,13 @@ const strategies = [
   {
     title: "ASO",
     description: "Otimização contínua nas lojas para melhorar posicionamento, conversão e downloads orgânicos.",
-    href: "/aso",
+    href: "/useracquisition-app#aso",
     icon: <img src="/icon-strategy-8.webp" width={28} height={28} alt="" />,
   },
   {
     title: "Native Ads",
     description: "Publicidade nativa dentro de apps, impactando o usuário em momentos reais de uso.",
-    href: "/native-ads",
+    href: "/useracquisition-app#native-ads",
     icon: <img src="/icon-strategy-9.webp" width={28} height={28} alt="" />,
   },
   {

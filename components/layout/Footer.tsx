@@ -131,11 +131,19 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
                     onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
                 </div>
               </div>
-              <div>
-                <label style={LABEL}>WhatsApp <span style={{ fontWeight: 400, color: "#9A9AA8" }}>(opcional)</span></label>
-                <input name="whatsapp" type="tel" placeholder="+55 (11) 99999-9999" style={INPUT}
-                  onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                  onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
+              <div className="footer-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                <div>
+                  <label style={LABEL}>WhatsApp <span style={{ fontWeight: 400, color: "#9A9AA8" }}>(opcional)</span></label>
+                  <input name="whatsapp" type="tel" placeholder="+55 (11) 99999-9999" style={INPUT}
+                    onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
+                    onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
+                </div>
+                <div>
+                  <label style={LABEL}>Cargo</label>
+                  <input name="cargo" type="text" placeholder="Seu cargo" style={INPUT}
+                    onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
+                    onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
+                </div>
               </div>
               <div>
                 <label style={LABEL}>Seu app</label>
@@ -144,19 +152,18 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
                   onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
               </div>
               <div>
-                <label style={LABEL}>Qual seu principal objetivo hoje?</label>
+                <label style={LABEL}>Qual é o seu cenário?</label>
                 <div style={{ position: "relative" }}>
-                  <select name="objetivo" required defaultValue=""
+                  <select name="cenario" required defaultValue=""
                     style={{ ...INPUT, color: "#9A9AA8", cursor: "pointer", paddingRight: "40px", appearance: "none", WebkitAppearance: "none" }}
                     onChange={e => (e.currentTarget.style.color = e.currentTarget.value ? "#141414" : "#9A9AA8")}
                     onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
                     onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")}
                   >
                     <option value="" disabled>Selecione uma opção</option>
-                    <option value="aumentar-installs" style={{ color: "#141414" }}>Aumentar installs</option>
-                    <option value="melhorar-roas" style={{ color: "#141414" }}>Melhorar ROAS</option>
-                    <option value="reduzir-cac" style={{ color: "#141414" }}>Reduzir CAC</option>
-                    <option value="escalar-receita" style={{ color: "#141414" }}>Escalar receita</option>
+                    <option value="app-em-operacao" style={{ color: "#141414" }}>Tenho um app em operação</option>
+                    <option value="vou-lancar-app" style={{ color: "#141414" }}>Vou lançar um app em breve</option>
+                    <option value="agencia" style={{ color: "#141414" }}>Sou uma agência com clientes que possuem apps</option>
                   </select>
                   <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" fill="none"
                     style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "rgba(0,0,0,0.4)" }}>

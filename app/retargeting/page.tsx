@@ -9,42 +9,46 @@ const features = [
   {
     title: "Segmentação por comportamento real",
     description:
-      "Classifique seus usuários pelo evento exato que realizaram, ou deixaram de realizar, e crie segmentos de reengajamento precisos.",
+      "Identifique exatamente onde cada usuário abandonou a jornada e crie campanhas específicas para incentivar o próximo passo.",
     bullets: [
-      "Classificação RFM por comportamento",
-      "Janelas de inatividade configuráveis",
-      "Segmentos customizados por funil",
+      "Segmentação por comportamento e eventos",
+      "Usuários agrupados por nível de engajamento",
+      "Audiências personalizadas por etapa do funil",
     ],
+    image: { src: "/retargeting-feature-1.webp", alt: "Segmentação de usuários por comportamento em um funil" },
   },
   {
-    title: "Criativos dinâmicos personalizados",
+    title: "Mensagens relevantes para cada usuário",
     description:
-      "Peças com contexto do comportamento do usuário, deep link direto para o ponto de abandono e mensagem adaptada por segmento.",
+      "Exiba criativos personalizados com base no comportamento do usuário e direcione-o diretamente para a ação desejada dentro do app.",
     bullets: [
-      "Dynamic creative por segmento",
-      "Deep link direto ao ponto de abandono",
-      "Personalização por evento e plataforma",
+      "Criativos adaptados por segmento",
+      "Deep links para retomada da jornada",
+      "Personalização por plataforma e comportamento",
     ],
+    image: { src: "/retargeting-feature-2.webp", alt: "Personalização de mensagens roteadas por canal e comportamento" },
   },
   {
     title: "Reengajamento inteligente",
     description:
-      "Frequência e janelas de bid otimizadas por probabilidade de reativação, sem desperdício em usuários já ativos.",
+      "Utilizamos sinais de comportamento para identificar quando um usuário tem maior probabilidade de retornar e converter.",
     bullets: [
-      "Bid por probabilidade de reativação",
-      "Cap de frequência por segmento",
+      "Frequência otimizada por segmento",
       "Exclusão automática de usuários ativos",
+      "Menos desperdício de mídia",
     ],
+    image: { src: "/retargeting-feature-3b.webp", alt: "Usuário no centro com pontos de reengajamento orbitando" },
   },
   {
-    title: "ROI mensurável com incrementalidade",
+    title: "Impacto incremental das campanhas",
     description:
-      "Attribution incremental que separa o esforço real do que seria orgânico, relatórios honestos sem inflacionar resultados.",
+      "Diferencie conversões impulsionadas pelas campanhas daquelas que aconteceriam de forma orgânica para medir o impacto real do retargeting.",
     bullets: [
-      "Holdout groups para controle",
-      "Relatório de incrementalidade real",
-      "LTV por segmento reativado",
+      "Medição de impacto incremental",
+      "Comparação com grupos de controle",
+      "Receita e LTV por segmento reativado",
     ],
+    image: { src: "/retargeting-feature-4.webp", alt: "Gráfico de crescimento incremental com tendência em alta" },
   },
 ];
 
@@ -56,14 +60,15 @@ export default function RetargetingPage() {
 
         <ProductHero
           badge="Retargeting"
-          title={<>Reative usuários. Recupere receita.</>}
-          subtitle="Campanhas de retargeting inteligentes para trazer de volta usuários que instalaram mas não converteram, com ROI mensurável."
+          title={<>Reative usuários. Recupere receita</>}
+          subtitle="Transforme usuários inativos em novas conversões com campanhas de retargeting orientadas por comportamento, personalização e receita."
+          image={{ src: "/retargeting-mockup-e.webp", alt: "Usuários sendo reativados e retornando ao app" }}
         />
 
         <ProductFeatures
           badge="O que entregamos"
-          title="Reengajamento preciso em cada etapa do funil"
-          subtitle="Segmentação comportamental, criativos dinâmicos e atribuição incremental para maximizar a receita dos usuários existentes."
+          title="Recupere usuários em cada etapa da jornada"
+          subtitle="Identifique oportunidades de reengajamento, personalize a comunicação e aumente conversões com campanhas orientadas por comportamento."
           features={features}
         />
 

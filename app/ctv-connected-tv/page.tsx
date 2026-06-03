@@ -7,48 +7,48 @@ import ProductFeatures from "@/components/sections/product/ProductFeatures";
 
 const features = [
   {
-    title: "Inventário premium de streaming",
+    title: "Acesso ao inventário premium",
     description:
-      "Acesso a publishers premium de TV conectada e plataformas de streaming com alta viewability e brand safety garantido.",
+      "Posicione sua marca em plataformas premium com maior atenção do usuário e experiências publicitárias de alta qualidade.",
     bullets: [
-      "Top publishers de streaming e AVOD",
-      "Conteúdo qualificado com brand safety",
-      "Alta viewability e completion rate",
+      "Publishers líderes de streaming e CTV",
+      "Ambientes seguros para a marca",
+      "Alta visibilidade e engajamento dos anúncios",
     ],
-    image: { src: "/ctv-feature-1.webp", alt: "Smart TV exibindo catálogo de streaming com filmes e séries" },
+    image: { src: "/ctv-feature-1b.webp", alt: "Players de vídeo premium com indicador de crescimento" },
   },
   {
-    title: "Segmentação avançada de audiência",
+    title: "Audiências de alta intenção",
     description:
-      "Alcance o perfil exato de quem vai instalar seu app, combinando dados demográficos, interesses e comportamentos.",
+      "Combinamos múltiplos sinais de comportamento para alcançar usuários com maior potencial de conversão.",
     bullets: [
-      "Dados demográficos e por interesse",
-      "Targeting por app instalado no device",
-      "Segmentos customizados por funil",
+      "Dados demográficos e interesses",
+      "Targeting por apps instalados",
+      "Segmentação personalizada por funil",
     ],
-    image: { src: "/ctv-feature-2.webp", alt: "Painel de segmentação de clientes com perfis e desempenho por segmento" },
+    image: { src: "/ctv-feature-2b.webp", alt: "Audiências conectadas a um painel de performance em crescimento" },
   },
   {
-    title: "Mensuração completa com MMP",
+    title: "Conecte exposição à conversão",
     description:
-      "QR code dinâmico, deep link e integração nativa com MMP para rastrear cada conversão originada na TV.",
+      "Transforme visualizações em resultados mensuráveis com tracking completo da jornada, da TV até a instalação ou compra.",
     bullets: [
-      "QR code dinâmico por audiência",
-      "Deep link com atribuição precisa",
-      "Integração nativa com AppsFlyer e Adjust",
+      "QR codes dinâmicos e personalizados",
+      "Deep linking com atribuição avançada",
+      "Integração nativa com as principais MMPs",
     ],
-    image: { src: "/ctv-feature-3.webp", alt: "Anúncio na TV com QR code para baixar o app e celular ao lado" },
+    image: { src: "/ctv-feature-3b.webp", alt: "QR code conectando a exposição na TV aos canais e à conversão" },
   },
   {
     title: "Atribuição cross-device",
     description:
-      "Conectamos a exposição na TV ao install no celular com household graph e relatórios de incrementalidade.",
+      "Conecte a exposição na TV aos resultados gerados no app e tenha uma visão mais completa do impacto da mídia.",
     bullets: [
-      "Household graph para atribuição",
-      "Relatórios de incrementalidade",
-      "Cohort analysis pós-exposição",
+      "Conexão entre exposição na TV e ações no app",
+      "Medição do impacto incremental das campanhas",
+      "Análise do comportamento após a exposição",
     ],
-    image: { src: "/ctv-feature-4.webp", alt: "Pessoa navegando no app no celular com a TV exibindo o mesmo catálogo ao fundo" },
+    image: { src: "/ctv-feature-4b.webp", alt: "Exposição na TV conectada a usuários e dispositivos (atribuição cross-device)" },
   },
 ];
 
@@ -60,9 +60,9 @@ export default function CTVPage() {
 
         <ProductHero
           badge="CTV: Connected TV"
-          title={<>Alcance seu usuário na maior tela da casa.</>}
+          title={<>Alcance seu usuário na maior tela da casa</>}
           subtitle="Campanhas de Connected TV para apps mobile, alcance audiências premium enquanto assistem ao conteúdo favorito."
-          image={{ src: "/ctv-hero.webp", alt: "Família assistindo a streaming na smart TV na sala de estar" }}
+          image={{ src: "/ctv-mockup-b.webp", alt: "Smart TV exibindo player de vídeo com curva de performance" }}
         />
 
         <ProductFeatures

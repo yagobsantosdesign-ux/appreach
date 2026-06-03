@@ -242,7 +242,7 @@ export default function Cases() {
             <SectionBadge className="!mb-0">Cases</SectionBadge>
 
             <h2 style={{ color: "#251d49", fontSize: "48px" }}>
-              Apps que escalaram com a Appreach.
+              Apps que escalaram com a Appreach
             </h2>
 
             <p style={{ fontSize: "16px", color: "#6b6b7b", lineHeight: "165%" }}>

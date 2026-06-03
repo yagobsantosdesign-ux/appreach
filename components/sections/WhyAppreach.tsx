@@ -25,7 +25,7 @@ export default function WhyAppreach() {
           className={`reveal${headerVisible ? " visible" : ""}`}
           style={{ textAlign: "center", marginBottom: "48px" }}
         >
-          <SectionBadge>POR QUÊ A APPREACH</SectionBadge>
+          <SectionBadge>POR QUE A APPREACH</SectionBadge>
           <h2 style={{
             color: "var(--color-heading)",
             fontSize: "48px",
@@ -33,9 +33,9 @@ export default function WhyAppreach() {
             lineHeight: "120%",
             letterSpacing: "-1.4px",
             margin: "12px auto 0",
-            maxWidth: "520px",
+            maxWidth: "560px",
           }}>
-            Fácil de começar.<br />Impossível de parar.
+            Uma extensão do seu time de crescimento
           </h2>
         </div>
 
@@ -86,16 +86,16 @@ export default function WhyAppreach() {
                 maxWidth: "270px",
                 textWrap: "balance",
               } as React.CSSProperties}>
-                Você não precisa ser especialista.
+                Especialistas em crescimento
               </h3>
               <p style={{
                 fontSize: "16px",
                 color: "rgba(255,255,255,0.65)",
                 lineHeight: "160%",
-                maxWidth: "240px",
+                maxWidth: "260px",
                 textWrap: "balance",
               } as React.CSSProperties}>
-                A Appreach cuida de tudo. Você foca no produto, nós cuidamos do crescimento.
+                Um time focado em apps, combinando mídia, dados e otimização para gerar resultados consistentes.
               </p>
             </div>
           </div>
@@ -150,16 +150,16 @@ export default function WhyAppreach() {
                 maxWidth: "300px",
                 textWrap: "balance",
               } as React.CSSProperties}>
-                Primeiros resultados em dias, não meses.
+                Velocidade para escalar
               </h3>
               <p style={{
                 fontSize: "16px",
                 color: "var(--color-muted)",
                 lineHeight: "160%",
-                maxWidth: "295px",
+                maxWidth: "300px",
                 textWrap: "balance",
               } as React.CSSProperties}>
-                Sem longas esperas. Em menos de uma semana, suas campanhas já estão no ar e gerando dados reais.
+                Lançamos campanhas rapidamente para transformar aprendizado em crescimento desde os primeiros dias.
               </p>
             </div>
           </div>
@@ -214,7 +214,7 @@ export default function WhyAppreach() {
                 maxWidth: "220px",
                 textWrap: "balance",
               } as React.CSSProperties}>
-                Dados que você entende.
+                Visibilidade completa
               </h3>
               <p style={{
                 fontSize: "16px",
@@ -223,7 +223,7 @@ export default function WhyAppreach() {
                 maxWidth: "315px",
                 textWrap: "balance",
               } as React.CSSProperties}>
-                Relatórios sem jargão, dashboard em tempo real e check-ins quinzenais. Você sempre no controle.
+                Dados claros, acompanhamento contínuo e total transparência sobre a evolução da sua performance.
               </p>
             </div>
           </div>

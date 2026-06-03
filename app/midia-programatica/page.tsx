@@ -56,8 +56,9 @@ export default function MidiaProgramaticaPage() {
 
         <ProductHero
           badge="Mídia Programática"
-          title={<>Compra de mídia em escala, guiada por dados.</>}
+          title={<>Compra de mídia em escala, guiada por dados</>}
           subtitle="Mídia programática multicanal com dados de 1ª parte para alcançar o usuário certo, no momento certo, com eficiência."
+          placeholderLabel="Painel de mídia programática multicanal (display, vídeo e native)"
         />
 
         <ProductFeatures

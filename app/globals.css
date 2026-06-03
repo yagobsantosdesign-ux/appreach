@@ -43,6 +43,11 @@
   --border-surface: rgba(101,87,234,0.14); /* flat surface border — roxo claro */
 }
 
+/* Design system — no mobile o subtítulo de hero cai para 16px */
+@media (max-width: 767px) {
+  :root { --text-hero-sub: 16px; }
+}
+
 .card {
   border: 1px solid var(--border-surface);
   border-radius: 24px;
@@ -323,7 +328,16 @@ a:hover .logo-text {
 /* ── Product features — runway inferior para o card de contato do footer (margin-top:-260px) flutuar sem sobrepor ── */
 .product-features-section { padding: 96px 0; }
 @media (min-width: 1024px) {
+  /* Altura padrão do hero das páginas de serviço (= maior bloco de texto medido) */
+  .product-hero-row { min-height: 460px; }
   .product-features-section { padding-bottom: 382px; } /* runway para o footer-card flutuante */
+  /* Na UA a última seção é a sanfona — o runway do footer vai para ela, e as features voltam ao padding normal */
+  .ua-page .product-features-section { padding-bottom: 96px; }
+  .ua-strategies-section { padding-bottom: 382px !important; }
+  /* Growth Navigator: última seção recebe o runway do footer flutuante */
+  .gn-last-section { padding-bottom: 382px !important; }
+  /* Quebras do título do GN só no desktop (no mobile o text-wrap:balance cuida) */
+  h1 .gn-title-br { display: inline; }
   /* Sticky stacking cards — each card pins below the header with a growing offset so the previous cards' tops peek through */
   .product-feature-card { position: sticky; top: calc(100px + var(--card-index, 0) * 22px); }
   /* About team section — padding inferior */
@@ -331,6 +345,19 @@ a:hover .logo-text {
 }
 /* Shared section container for service pages — side padding standardized like home (40 → 24 tablet → 20 mobile) */
 .product-container { max-width: 1350px; margin: 0 auto; padding: 0 40px; }
+
+/* Growth Navigator — quebras manuais do título ocultas por padrão (mobile/tablet) */
+.gn-title-br { display: none; }
+
+/* Growth Navigator — bússola flutuando no hero */
+@keyframes gn-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.gn-float { animation: gn-float 5s ease-in-out infinite; will-change: transform; }
+@media (prefers-reduced-motion: reduce) {
+  .gn-float { animation: none; }
+}
 
 /* Quem somos (About) page */
 .about-team-section { padding: 96px 0; }
@@ -346,6 +373,19 @@ a:hover .logo-text {
     height: 200px !important;
     bottom: -250px !important;
     opacity: 0.5 !important;
+  }
+  /* ProductHero: no layout em coluna o flex-basis vira altura — reseta o bloco de texto */
+  .product-hero-text {
+    flex: 0 0 auto !important;
+    max-width: 100% !important;
+  }
+  /* ProductHero: altura mínima padrão no mobile/tablet não se aplica (layout em coluna) */
+  .product-hero-media,
+  .accordion-media {
+    flex: 0 0 auto !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
   }
 }
 

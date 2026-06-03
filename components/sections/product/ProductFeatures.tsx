@@ -2,6 +2,7 @@
 
 import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import { useInView } from "@/hooks/useInView";
 
 interface Feature {
@@ -9,6 +10,8 @@ interface Feature {
   description: string;
   bullets: string[];
   image?: { src: string; alt: string };
+  /** Quando não há imagem definida, descreve o tipo de imagem desejada. */
+  placeholderLabel?: string;
 }
 
 interface ProductFeaturesProps {
@@ -46,7 +49,7 @@ function CheckIcon() {
   );
 }
 
-function ImageSlot({ image }: { image?: { src: string; alt: string } }) {
+function ImageSlot({ image, placeholderLabel }: { image?: { src: string; alt: string }; placeholderLabel?: string }) {
   return (
     <div
       style={{
@@ -77,31 +80,10 @@ function ImageSlot({ image }: { image?: { src: string; alt: string } }) {
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
           />
         ) : (
-          <>
-            <div
-              aria-hidden
-              style={{
-                position: "absolute",
-                inset: 0,
-                backgroundImage:
-                  "radial-gradient(circle, rgba(101,87,234,0.09) 1px, transparent 1px)",
-                backgroundSize: "28px 28px",
-              }}
-            />
-            <span
-              style={{
-                position: "relative",
-                fontSize: "12px",
-                color: "var(--color-primary)",
-                fontFamily: "var(--font-geist-mono)",
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-                opacity: 0.4,
-              }}
-            >
-              placeholder
-            </span>
-          </>
+          <ImagePlaceholder
+            label={placeholderLabel ?? "placeholder"}
+            style={{ width: "100%", height: "100%", background: "transparent" }}
+          />
         )}
       </div>
     </div>
@@ -179,7 +161,6 @@ function FeatureCard({ feature, i }: { feature: Feature; i: number }) {
                   fontSize: "16px",
                   color: "var(--color-body)",
                   lineHeight: "160%",
-                  maxWidth: "340px",
                 }}
               >
                 {bullet}
@@ -190,7 +171,7 @@ function FeatureCard({ feature, i }: { feature: Feature; i: number }) {
       </div>
 
       {/* Lado imagem (ou placeholder enquanto não houver) */}
-      <ImageSlot image={feature.image} />
+      <ImageSlot image={feature.image} placeholderLabel={feature.placeholderLabel} />
     </div>
   );
 }

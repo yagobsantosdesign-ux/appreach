@@ -56,8 +56,10 @@ export default function PreloadPage() {
 
         <ProductHero
           badge="Preload"
-          title={<>Seu app já instalado no aparelho novo.</>}
+          title={<>Seu app já instalado no aparelho novo</>}
           subtitle="Distribuição do seu app pré-instalado em dispositivos novos, garantindo presença desde o primeiro acesso do usuário."
+          image={{ src: "/preload-mockup.webp", alt: "Tela inicial de smartphone Android com o app instalado" }}
+          imagePosition="top"
         />
 
         <ProductFeatures

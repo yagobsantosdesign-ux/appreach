@@ -56,8 +56,9 @@ export default function NativeAdsPage() {
 
         <ProductHero
           badge="Native Ads"
-          title={<>Anúncios que parecem parte do app, não interrupção.</>}
+          title={<>Anúncios que parecem parte do app, não interrupção</>}
           subtitle="Publicidade nativa exibida dentro de apps móveis, impactando o usuário em momentos reais de uso, com mais engajamento e menos atrito."
+          image={{ src: "/native-ads-mockup.webp", alt: "Telas de apps com anúncios nativos integrados" }}
         />
 
         <ProductFeatures

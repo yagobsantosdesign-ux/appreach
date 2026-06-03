@@ -10,18 +10,13 @@ const solutions = [
   { label: "Retargeting", href: "/retargeting" },
   { label: "CTV", href: "/ctv-connected-tv" },
   { label: "Apple Search Ads", href: "/apple-search-ads" },
-  { label: "ASO", href: "/aso" },
-  { label: "Native Ads", href: "/native-ads" },
   { label: "IA & Dados: Reach Lab", href: "/reach-lab" },
-  { label: "Push Ads", href: "/app-chat-push" },
-  { label: "Preload", href: "/preload" },
-  { label: "Mídia Programática", href: "/midia-programatica" },
 ];
 
 const navLinks = [
   { label: "Quem somos", href: "/quem-somos" },
-  { label: "Cases", href: "/#cases" },
-  { label: "Carreiras", href: "/carreiras" },
+  { label: "Growth Navigator", href: "/growth-navigator" },
+  { label: "Junte-se a nós", href: "/carreiras" },
 ];
 
 export default function Header() {
@@ -134,7 +129,7 @@ export default function Header() {
                 whiteSpace: "nowrap",
               }}
             >
-              Começar agora
+              Fale com um especialista
             </a>
             <button
               className="md:hidden p-1.5"
@@ -217,7 +212,7 @@ export default function Header() {
                 size="md"
                 fullWidth
               >
-                Fale com especialista
+                Fale com um especialista
               </Button>
             </div>
           </div>

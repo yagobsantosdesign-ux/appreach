@@ -1,6 +1,6 @@
 ﻿"use client";
 import React, { useRef, useEffect, useState } from "react";
-import { Tv2, UserPlus, MessageCircle, TrendingUp } from "lucide-react";
+import { Tv2, MessageCircle, TrendingUp } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Button from "@/components/ui/Button";
@@ -8,28 +8,21 @@ import Button from "@/components/ui/Button";
 const stages = [
   {
     title: "Alcance",
-    description: "Construa presença antes do install,em TVs, dispositivos novos e inventários premium.",
+    description: "Construa presença antes do install, em TVs conectadas, dispositivos novos e inventários premium.",
     icon: Tv2,
     img: "/funil-alcance.webp",
     imgAlt: "Alcance",
   },
   {
-    title: "Aquisição",
-    description: "Atraia usuários com alto potencial de ativação com segmentação precisa e criativos otimizados.",
-    icon: UserPlus,
-    img: "/funil-aquisicao.webp",
-    imgAlt: "Aquisição",
-  },
-  {
     title: "Engajamento",
-    description: "Ative e retenha usuários com comunicação personalizada dentro e fora do app.",
+    description: "Mantenha seus usuários ativos e retornando ao app com comunicações personalizadas no momento certo.",
     icon: MessageCircle,
     img: "/funil-engajamento.webp",
     imgAlt: "Engajamento",
   },
   {
     title: "Receita",
-    description: "Reengaje quem já instalou e converta intenções em compras, eventos e LTV crescente.",
+    description: "Transforme mais usuários em receita com estratégias focadas em conversão, recorrência e crescimento de LTV.",
     icon: TrendingUp,
     img: "/funil-receita.webp",
     imgAlt: "Receita",
@@ -132,7 +125,7 @@ export default function FunnelGuide() {
             </p>
 
             <Button href="#contato" size="xl" variant="gradient" style={{ alignSelf: "flex-start" }}>
-              Diagnóstico gratuito
+              Falar com um especialista
             </Button>
           </div>
         </div>

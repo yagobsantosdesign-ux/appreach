@@ -97,10 +97,10 @@ export default function StatsBento() {
             className="text-dark mt-3"
             style={{ fontSize: "clamp(28px, 6.5vw, 48px)", letterSpacing: "-0.02em", lineHeight: "120%", textWrap: "balance" }}
           >
-            Resultados que falam por si
+            Crescimento comprovado em números
           </h2>
           <p style={{ fontSize: "17px", color: "var(--color-muted)", lineHeight: 1.65, marginTop: "16px", textWrap: "balance" }}>
-            Crescimento sustentável para apps em todas as verticais.
+            Performance mensurável para apps em diferentes verticais e estágios de crescimento.
           </p>
           <div className="flex justify-center mt-7">
             <a
@@ -133,7 +133,7 @@ export default function StatsBento() {
           {/* Cell 0 — Foto 1 */}
           <div ref={c0Ref as React.RefObject<HTMLDivElement>} className={`stats-photo reveal-scale${c0Visible ? " visible" : ""}`} style={{ ...CARD_MUTED, padding: 0, overflow: "hidden" } as React.CSSProperties}>
             <img
-              src="/stats-photo-1.jpg"
+              src="/stats-photo-1.webp"
               alt=""
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: "220px" }}
               onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none" }}

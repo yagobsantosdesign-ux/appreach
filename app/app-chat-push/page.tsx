@@ -56,8 +56,9 @@ export default function PushAdsPage() {
 
         <ProductHero
           badge="Push Ads"
-          title={<>Reative usuários na hora certa, fora do app.</>}
+          title={<>Reative usuários na hora certa, fora do app</>}
           subtitle="Notificações push e mensagens in-app que trazem o usuário de volta, aumentam a retenção e elevam o LTV do seu app."
+          image={{ src: "/push-ads-mockup.webp", alt: "Notificações push de reengajamento exibidas no app" }}
         />
 
         <ProductFeatures

@@ -56,8 +56,10 @@ export default function ASOPage() {
 
         <ProductHero
           badge="ASO: App Store Optimization"
-          title={<>Mais downloads orgânicos, sem depender só de mídia.</>}
+          title={<>Mais downloads orgânicos, sem depender só de mídia</>}
           subtitle="Otimização estratégica e contínua nas lojas (App Store e Google Play) para melhorar posicionamento, conversão e descoberta do seu app."
+          image={{ src: "/aso-mockup.webp", alt: "Página do app na App Store com avaliações e destaques" }}
+          imagePosition="top"
         />
 
         <ProductFeatures

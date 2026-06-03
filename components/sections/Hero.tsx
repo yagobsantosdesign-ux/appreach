@@ -49,16 +49,6 @@ export default function Hero() {
   const numRef = useRef<HTMLDivElement | null>(null);
   const [patternIdx, setPatternIdx] = useState(0);
 
-  const avatars = [
-    "/iris_neutro.webp",
-    "/mano_neutro.webp",
-    "/livia_neutro.webp",
-    "/neto_neutro.webp",
-    "/henri_neutro.webp",
-    "/ana_neutro.webp",
-    "/alexia_neutro.webp",
-  ];
-
   useEffect(() => {
     const id = setInterval(() => setPatternIdx(i => (i + 1) % barPatterns.length), 2200);
     return () => clearInterval(id);
@@ -119,7 +109,7 @@ export default function Hero() {
         style={{ flex: 1, zIndex: 1, maxWidth: "1350px", width: "100%", margin: "0 auto", padding: "0 40px", gap: "48px" }}
       >
         {/* LEFT */}
-        <div className="flex flex-col justify-between" style={{ flex: 1 }}>
+        <div className="flex flex-col justify-center" style={{ flex: 1 }}>
 
           {/* Headline group */}
           <div className="flex flex-col" style={{ gap: "23px" }}>
@@ -127,14 +117,14 @@ export default function Hero() {
               className="hero-h1 hero-fade-up hero-fade-up-1"
               style={{ fontSize: "60px", color: "var(--color-heading)", letterSpacing: "-0.04em", lineHeight: "110%", maxWidth: "620px", textWrap: "balance" } as React.CSSProperties}
             >
-              Cada fase do seu funil. Uma única equipe.
+              Seu parceiro de crescimento da aquisição à receita
             </h1>
 
             <p
               className="hero-fade-up hero-fade-up-2"
               style={{ fontSize: "18px", color: "#40404f", maxWidth: "485px", lineHeight: "160%" }}
             >
-              Da aquisição à receita, estratégias integradas que cobrem cada etapa do seu app.
+              Estratégias integradas para atrair, engajar e monetizar usuários em cada etapa da jornada do seu app.
             </p>
 
             <div className="flex items-center hero-fade-up hero-fade-up-3" style={{ gap: "12px" }}>
@@ -153,7 +143,7 @@ export default function Hero() {
                   whiteSpace: "nowrap",
                 }}
               >
-                Começar agora
+                Fale com um especialista
               </a>
               <a
                 href="#como-funciona"
@@ -173,35 +163,6 @@ export default function Hero() {
                 Como Funciona
               </a>
             </div>
-          </div>
-
-          {/* Social proof */}
-          <div className="hidden lg:flex flex-col hero-fade-up hero-fade-up-4" style={{ gap: "14px", maxWidth: "335px", paddingTop: "32px" }}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              {avatars.map((src, i) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  key={src}
-                  src={src}
-                  alt=""
-                  aria-hidden="true"
-                  style={{
-                    width: "34px",
-                    height: "34px",
-                    borderRadius: "50%",
-                    border: "1.5px solid white",
-                    marginRight: i < avatars.length - 1 ? "-6px" : "0",
-                    position: "relative",
-                    zIndex: avatars.length - i,
-                    flexShrink: 0,
-                    objectFit: "cover",
-                  }}
-                />
-              ))}
-            </div>
-            <p style={{ fontSize: "18px", color: "#40404f", lineHeight: "160%", maxWidth: "330px" }}>
-              Um time de especialistas em mídia, dados e criação para o seu app.
-            </p>
           </div>
         </div>
 

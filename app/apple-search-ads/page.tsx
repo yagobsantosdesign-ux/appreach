@@ -7,44 +7,48 @@ import ProductFeatures from "@/components/sections/product/ProductFeatures";
 
 const features = [
   {
-    title: "Posição prioritária na busca da App Store",
+    title: "Posição em destaque na busca da App Store",
     description:
-      "Apareça antes dos concorrentes quando alguém busca exatamente o que seu app oferece, na App Store Search, Today Tab e Search Results.",
+      "Apareça nos principais espaços da App Store quando usuários estiverem procurando soluções como a sua.",
     bullets: [
-      "Ads em Search, Today Tab e Product Pages",
+      "Search Results, Search Tab e Today Tab",
       "Custom Product Pages por audiência",
-      "Cobertura em brand e category keywords",
+      "Cobertura de termos de marca e categoria",
     ],
+    image: { src: "/apple-search-ads-feature-1.webp", alt: "Anúncios em destaque nos resultados, aba Buscar e aba Hoje da App Store" },
   },
   {
-    title: "Alta intenção de compra",
+    title: "Usuários prontos para instalar",
     description:
-      "Usuários vindos de Apple Search Ads têm intent declarado, eles estão buscando o app. Isso resulta em menor churn e melhor ROAS que social.",
+      "Capture usuários que já demonstraram intenção ao pesquisar por aplicativos, categorias e keywords relacionadas ao seu produto.",
     bullets: [
-      "Intent declarado na busca",
-      "Menor churn pós-install",
-      "ROAS superior ao de redes sociais",
+      "Intenção declarada de busca",
+      "Melhor retenção pós-instalação",
+      "ROAS superior a canais de descoberta",
     ],
+    image: { src: "/apple-search-ads-feature-2.webp", alt: "Otimização de instalação baseada na intenção de busca" },
   },
   {
-    title: "Otimização contínua de keywords",
+    title: "Estratégia avançada de keywords",
     description:
-      "Gestão ativa de bids, negativos e expansão de cauda longa, com discovery de novas oportunidades a cada ciclo.",
+      "Expandimos a cobertura de termos relevantes e refinamos continuamente as campanhas para capturar mais demanda qualificada.",
     bullets: [
-      "Discovery e expansão de cauda longa",
+      "Discovery e expansão de keywords",
       "Keyword sculpting e negativação",
-      "Reports semanais de performance",
+      "Relatórios recorrentes de performance",
     ],
+    image: { src: "/apple-search-ads-feature-3.webp", alt: "Mapa de expansão de keywords a partir de um termo central" },
   },
   {
-    title: "Integração com MMP e attribution",
+    title: "Mais conversões com Custom Product Pages",
     description:
-      "Setup completo com AppsFlyer, Adjust e outros MMPs para rastrear cada install e cohort com precisão.",
+      "Aumente a eficiência das campanhas conectando cada keyword e audiência à experiência mais relevante dentro da App Store.",
     bullets: [
-      "Integração com AppsFlyer e Adjust",
-      "Pipeline de dados automatizado",
-      "Cohort analysis e LTV pós-install",
+      "Landing pages personalizadas por campanha",
+      "Mensagens adaptadas por intenção de busca",
+      "Otimização contínua da conversão",
     ],
+    image: { src: "/apple-search-ads-feature-4.webp", alt: "Página principal ramificando em Custom Product Pages por audiência" },
   },
 ];
 
@@ -56,14 +60,15 @@ export default function AppleSearchAdsPage() {
 
         <ProductHero
           badge="Apple Search Ads"
-          title={<>Seja o 1º quando alguém busca seu app.</>}
-          subtitle="Campanhas de Apple Search Ads gerenciadas por especialistas, capte usuários com alto intent de install no ecossistema Apple."
+          title={<>Seja o 1º quando alguém busca seu app</>}
+          subtitle="Alcance pessoas que já estão buscando aplicativos como o seu e transforme intenção em instalações de alta qualidade em iOS."
+          image={{ src: "/apple-search-ads-mockup-b.webp", alt: "Resultado de busca com anúncio patrocinado em destaque" }}
         />
 
         <ProductFeatures
           badge="O que entregamos"
-          title="Presença total no ecossistema Apple"
-          subtitle="Da keyword strategy à atribuição, cobrimos cada etapa para maximizar seu crescimento na App Store."
+          title="Presença total em iOS"
+          subtitle="Uma operação especializada em Apple Search Ads para atrair usuários com maior potencial de conversão."
           features={features}
         />
 
