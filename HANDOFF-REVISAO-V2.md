@@ -1,7 +1,7 @@
 # Handoff — Revisão v2 do site Appreach
 
 > Documento de continuidade. Atualizado durante a sessão de implementação da "Revisão v2" + troca de imagens.
-> Projeto: `D:\Projetos Claude\Apreach\appreach-site` (Next.js 16 / Turbopack). Branch: **`revisao-v2-cliente`** (NÃO commitado ainda).
+> Projeto: `D:\Projetos Claude\Apreach\appreach-site` (Next.js 16 / Turbopack). Branch: **`main`**.
 
 ## Contexto
 1. **Fase 1 (concluída):** aplicamos todos os ajustes de texto/layout/menu do PDF do cliente (`Revisão Site Appreach (2).pdf`). Plano salvo em `C:\Users\mayyr\.claude\plans\c-users-mayyr-downloads-revis-o-site-ap-serene-babbage.md`.
@@ -58,13 +58,32 @@
 - **Títulos sem ponto final** (exceto `?`/`!`); pontos internos divisores ficam. Já aplicado em todos os heroes/seções.
 - **Subtítulo de hero = 16px no mobile** (token `--text-hero-sub` redefinido em `@media (max-width:767px)`).
 
-## Limpeza pendente antes do commit
-Vários `.webp` ficaram **órfãos** em `public/` após substituições. Remover os não-referenciados, ex.:
-`ua-hero.webp`, `ua-hero-mockup.webp`, `ua-feature-2.webp`, `ctv-hero.webp`, `ctv-mockup.webp`,
-`retargeting-hero-mockup.webp`, `retargeting-mockup.webp`, `retargeting-mockup-b/c/d.webp`,
-`reach-lab-mockup.webp`, `reach-lab-feature-1.webp`, `reach-lab-feature-4.webp`,
-`apple-search-ads-mockup.webp`, `retargeting-feature-3.webp`.
-(Conferir referências com grep antes de apagar.)
+## Limpeza de órfãos — ✅ CONCLUÍDA (Jun 3, 2026)
+Varredura total feita: auditoria cruzada (refs no código × arquivos em `public/`) apagou **112 arquivos
+não-referenciados** — duplicados raster (`stats-photo-*.jpg`, `avatar-*.jpg`), boilerplate Next
+(`next/vercel/file/globe/window.svg`), versões substituídas (`ua-hero*`, `ctv-mockup/hero`, `ctv-feature-1..4`,
+`retargeting-mockup(-b/c/d)`, `reach-lab-feature-1/4`, etc.) e assets de seções não usadas
+(`team-*`, `*_neutro`, `channel-*`, `widget-*`, `ticker-logo-*`, `icons/*`, …). Pasta `public/icons/` removida (ficou vazia).
+`public/` caiu de **206 → 94** imagens. Auditoria final: 0 refs quebradas, 0 órfãos. `npm run build` ✓ (18/18 páginas).
+Tudo recuperável via git (estava commitado). **Não** foram tocados `aso-mockup.webp` nem `retargeting-mockup-e.webp` (ainda em uso — pendência B).
+
+## Navegação das 5 páginas secundárias + /solucoes (Jun 3, 2026)
+Contexto: o cliente pediu **tirar do menu, NÃO excluir** Native Ads, Preload, Push Ads, ASO e Mídia Programática
+(decisão registrada no plano `...serene-babbage.md`, item 4). As 5 rotas seguem no ar por URL direta; o conteúdo
+"oficial" delas vive na **sanfona da UA** (`/useracquisition-app#native-ads|#preload|#push-ads|#aso`).
+
+Ajustes internos feitos nesta sessão (não pedidos no PDF — reversíveis):
+- **Footer** (`components/layout/Footer.tsx`): a coluna *Soluções* foi reduzida para espelhar o navbar
+  (User Acquisition, Retargeting, CTV, Apple Search Ads, IA & Dados: Reach Lab). As 5 secundárias **saíram do footer**.
+- **Home — card "Ver todas as soluções"**: escondido via flag `SHOW_VIEW_ALL_CARD = false` em
+  `components/sections/Strategies.tsx`. Para reativar, trocar para `true` (JSX e rota intactos). Cliente disse que
+  pode pedir de volta no futuro.
+- **`/solucoes`** (`app/solucoes/page.tsx` → `<Strategies showAll />`): continua existindo e lista as 10 soluções,
+  com as 5 secundárias roteando para a sanfona da UA (não para as páginas standalone). Como o único acesso a ela
+  era o card da home, agora ela está **órfã** (sem link de navegação) até o card voltar.
+
+⚠️ Os **20 placeholders** dos cards de feature das 5 páginas standalone continuam lá (pendência A). Como ninguém
+chega nelas pela navegação agora, virou **baixa prioridade** — só aparecem para quem acessar a URL direta.
 
 ## Comandos úteis
 - Build: `npm run build`

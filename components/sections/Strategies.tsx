@@ -75,6 +75,10 @@ const SOLUCOES_BG =
   "radial-gradient(circle 700px at 47% 57%, rgba(130,100,255,0.15), transparent 62%)," +
   "#fafafa";
 
+// Card "Ver todas as soluções" na home temporariamente escondido (pedido do cliente).
+// Para reativar, basta trocar para `true` — o JSX e a rota /solucoes seguem intactos.
+const SHOW_VIEW_ALL_CARD = false;
+
 export default function Strategies({ showAll = false }: { showAll?: boolean }) {
   const { ref: headerRef, visible: headerVisible } = useInView();
   const s0 = useInView(); const s1 = useInView(); const s2 = useInView();
@@ -188,7 +192,7 @@ export default function Strategies({ showAll = false }: { showAll?: boolean }) {
           })}
 
           {/* 6º card — convite para ver todas as soluções */}
-          {!showAll && (
+          {!showAll && SHOW_VIEW_ALL_CARD && (
             <a
               href="/solucoes"
               ref={inviteRef as unknown as React.RefObject<HTMLAnchorElement>}

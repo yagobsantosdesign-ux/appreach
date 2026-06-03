@@ -25,17 +25,15 @@ const IconLinkedin = () => (
   </svg>
 );
 
+// Espelha o menu do navbar (Revisão v2): as 5 soluções removidas do menu
+// (ASO, Native Ads, Push Ads, Preload, Mídia Programática) também saem do footer.
+// As páginas seguem no ar por URL direta; o conteúdo delas vive na sanfona da UA.
 const solutions = [
   { label: "User Acquisition", href: "/useracquisition-app" },
   { label: "Retargeting", href: "/retargeting" },
   { label: "CTV", href: "/ctv-connected-tv" },
   { label: "Apple Search Ads", href: "/apple-search-ads" },
-  { label: "ASO", href: "/aso" },
-  { label: "Native Ads", href: "/native-ads" },
   { label: "IA & Dados: Reach Lab", href: "/reach-lab" },
-  { label: "Push Ads", href: "/app-chat-push" },
-  { label: "Preload", href: "/preload" },
-  { label: "Mídia Programática", href: "/midia-programatica" },
 ];
 
 const company = [
