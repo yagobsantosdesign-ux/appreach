@@ -159,7 +159,7 @@ export default function StatsBento() {
           {/* Cell 2 — Foto 2 */}
           <div ref={c2Ref as React.RefObject<HTMLDivElement>} className={`stats-photo reveal-scale${c2Visible ? " visible" : ""}`} style={{ ...CARD_MUTED, padding: 0, overflow: "hidden" } as React.CSSProperties}>
             <img
-              src="/stats-photo-2.webp"
+              src="/stats-photo-2b.webp"
               alt=""
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: "220px" }}
               onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none" }}
