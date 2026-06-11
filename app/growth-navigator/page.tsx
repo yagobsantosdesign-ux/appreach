@@ -14,6 +14,12 @@ interface Strategy {
 interface Profile {
   id: string;
   name: string;
+  /** Cor de destaque do perfil (texto/badge/bullets) — legível em 11px sobre branco. */
+  accent: string;
+  /** Versão clara da cor de destaque (fundos de card/chip). */
+  accentLight: string;
+  /** Ícone 3D do perfil (flutua à direita do desafio na seção detalhada). */
+  image: { src: string; alt: string };
   question: string;
   pitch: string;
   challenge: string;
@@ -27,6 +33,9 @@ const profiles: Profile[] = [
   {
     id: "builder",
     name: "The Builder",
+    accent: "#6557EA",
+    accentLight: "#F0EEFF",
+    image: { src: "/gn-builder.webp", alt: "Ícone de funil ramificado representando construção de base de usuários" },
     question: "Como consigo mais usuários?",
     pitch:
       "Você está focado em gerar visibilidade, validar canais e construir uma base sólida para o crescimento do aplicativo.",
@@ -47,6 +56,9 @@ const profiles: Profile[] = [
   {
     id: "scaler",
     name: "The Scaler",
+    accent: "#2E6FD6",
+    accentLight: "#E7EFFB",
+    image: { src: "/gn-scaler.webp", alt: "Ícone de escudo com alvo representando escala com eficiência" },
     question: "Como escalo sem perder eficiência?",
     pitch:
       "Você já encontrou um modelo que funciona e agora precisa aumentar volume mantendo qualidade e retorno.",
@@ -74,6 +86,9 @@ const profiles: Profile[] = [
   {
     id: "optimizer",
     name: "The Optimizer",
+    accent: "#0E8E78",
+    accentLight: "#E0F3EE",
+    image: { src: "/gn-optimizer.webp", alt: "Ícone de ampulheta representando retenção e tempo de uso" },
     question: "Como faço os usuários voltarem?",
     pitch:
       "Seu principal desafio é aumentar retenção, frequência de uso e engajamento da base existente.",
@@ -99,6 +114,9 @@ const profiles: Profile[] = [
   {
     id: "revenue-driver",
     name: "The Revenue Driver",
+    accent: "#C42E86",
+    accentLight: "#FBE7F1",
+    image: { src: "/gn-revenue.webp", alt: "Ícone de moeda com cifrão e seta de crescimento representando receita e LTV" },
     question: "Como gero mais receita com os usuários que já tenho?",
     pitch:
       "Você quer transformar crescimento em resultado financeiro, aumentando conversões, monetização e LTV.",
@@ -142,7 +160,7 @@ function ArrowIcon() {
   );
 }
 
-function CheckBullet({ children }: { children: React.ReactNode }) {
+function CheckBullet({ children, color = "var(--color-primary)" }: { children: React.ReactNode; color?: string }) {
   return (
     <li style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
       <span
@@ -150,7 +168,7 @@ function CheckBullet({ children }: { children: React.ReactNode }) {
           width: "20px",
           height: "20px",
           borderRadius: "50%",
-          background: "var(--color-primary)",
+          background: color,
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
@@ -188,7 +206,8 @@ function ProfileCard({ profile }: { profile: Profile }) {
       onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; }}
       onMouseLeave={(e) => { e.currentTarget.style.transform = ""; }}
     >
-      <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--color-primary)", fontFamily: "var(--font-geist-mono)", letterSpacing: "0.5px", textTransform: "uppercase" }}>
+      <span aria-hidden style={{ width: "30px", height: "3px", borderRadius: "2px", background: profile.accent }} />
+      <span style={{ fontSize: "13px", fontWeight: 600, color: profile.accent, fontFamily: "var(--font-geist-mono)", letterSpacing: "0.5px", textTransform: "uppercase" }}>
         {profile.name}
       </span>
       <p style={{ fontSize: "22px", fontWeight: 600, color: "var(--color-heading)", letterSpacing: "-0.02em", lineHeight: "130%" }}>
@@ -200,7 +219,7 @@ function ProfileCard({ profile }: { profile: Profile }) {
       <a
         href={`#${profile.id}`}
         onClick={scrollToId(profile.id)}
-        style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "var(--color-primary)", fontSize: "15px", fontWeight: 600, textDecoration: "none", marginTop: "4px" }}
+        style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: profile.accent, fontSize: "15px", fontWeight: 600, textDecoration: "none", marginTop: "4px" }}
       >
         Ver estratégia <ArrowIcon />
       </a>
@@ -211,22 +230,34 @@ function ProfileCard({ profile }: { profile: Profile }) {
 function DetailSection({ profile, index, isLast }: { profile: Profile; index: number; isLast?: boolean }) {
   const bg = index % 2 === 0 ? "#ffffff" : "#fafafa";
   return (
-    <section id={profile.id} className={isLast ? "gn-last-section" : undefined} style={{ background: bg, padding: "88px 0", scrollMarginTop: "90px" }}>
+    <section id={profile.id} className={isLast ? "gn-last-section" : undefined} style={{ background: bg, padding: "104px 0", scrollMarginTop: "90px" }}>
       <div className="product-container">
-        {/* Cabeçalho do perfil */}
-        <div style={{ maxWidth: "680px", marginBottom: "40px" }}>
-          <SectionBadge>{profile.name}</SectionBadge>
-          <h2 style={{ fontSize: "clamp(26px, 3.6vw, 38px)", color: "var(--color-heading)", lineHeight: "125%", letterSpacing: "-0.02em", textWrap: "balance" as never }}>
-            {profile.challenge}
-          </h2>
+        {/* Cabeçalho do perfil — texto à esquerda, ícone 3D flutuando à direita */}
+        <div className="gn-detail-header flex flex-col lg:flex-row" style={{ gap: "48px", alignItems: "center", marginBottom: "56px" }}>
+          <div style={{ flex: "1 1 0", minWidth: 0, maxWidth: "620px" }}>
+            <SectionBadge color={profile.accent}>{profile.name}</SectionBadge>
+            <h2 style={{ fontSize: "clamp(26px, 3.6vw, 38px)", color: "var(--color-heading)", lineHeight: "125%", letterSpacing: "-0.02em", textWrap: "balance" as never }}>
+              {profile.challenge}
+            </h2>
+          </div>
+          <div className="gn-detail-media" style={{ flex: "1 1 0", minWidth: 0, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+            {/* Glow radial na cor do perfil */}
+            <span aria-hidden style={{ position: "absolute", width: "420px", height: "420px", maxWidth: "100%", background: `radial-gradient(ellipse, ${profile.accent}26 0%, transparent 66%)`, pointerEvents: "none", zIndex: 0 }} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={profile.image.src}
+              alt={profile.image.alt}
+              style={{ position: "relative", zIndex: 1, width: "100%", maxWidth: "280px", height: "auto", display: "block", filter: `drop-shadow(0 18px 28px ${profile.accent}40)` }}
+            />
+          </div>
         </div>
 
-        <div className="gn-detail-grid flex flex-col lg:flex-row" style={{ gap: "48px", alignItems: "flex-start" }}>
+        <div className="gn-detail-grid flex flex-col lg:flex-row" style={{ gap: "64px", alignItems: "flex-start" }}>
           {/* Coluna esquerda: oportunidades (chips) + o que pode alcançar (card destacado) */}
-          <div style={{ flex: "1 1 0", minWidth: 0, display: "flex", flexDirection: "column", gap: "28px" }}>
+          <div style={{ flex: "1 1 0", minWidth: 0, display: "flex", flexDirection: "column", gap: "36px" }}>
             {profile.opportunities && (
               <div>
-                <h3 style={{ fontSize: "18px", fontWeight: 600, color: "var(--color-heading)", marginBottom: "16px" }}>Oportunidades para seu app</h3>
+                <h3 style={{ fontSize: "18px", fontWeight: 600, color: "var(--color-heading)", marginBottom: "20px" }}>Oportunidades para seu app</h3>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
                   {profile.opportunities.map((o) => (
                     <span
@@ -236,8 +267,8 @@ function DetailSection({ profile, index, isLast }: { profile: Profile; index: nu
                         alignItems: "center",
                         padding: "9px 16px",
                         borderRadius: "999px",
-                        background: "#ffffff",
-                        border: "1px solid var(--color-border)",
+                        background: profile.accentLight,
+                        border: "1px solid transparent",
                         fontSize: "14px",
                         fontWeight: 500,
                         color: "var(--color-heading)",
@@ -249,11 +280,11 @@ function DetailSection({ profile, index, isLast }: { profile: Profile; index: nu
                 </div>
               </div>
             )}
-            <div style={{ background: "var(--color-primary-light)", borderRadius: "16px", padding: "28px 28px 30px" }}>
-              <h3 style={{ fontSize: "18px", fontWeight: 600, color: "var(--color-heading)", marginBottom: "16px" }}>O que você pode alcançar</h3>
+            <div style={{ background: profile.accentLight, borderRadius: "16px", padding: "32px 32px 34px" }}>
+              <h3 style={{ fontSize: "18px", fontWeight: 600, color: "var(--color-heading)", marginBottom: "20px" }}>O que você pode alcançar</h3>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
                 {profile.outcomes.map((o) => (
-                  <CheckBullet key={o}>{o}</CheckBullet>
+                  <CheckBullet key={o} color={profile.accent}>{o}</CheckBullet>
                 ))}
               </ul>
             </div>
@@ -261,8 +292,8 @@ function DetailSection({ profile, index, isLast }: { profile: Profile; index: nu
 
           {/* Coluna direita: estratégias recomendadas */}
           <div style={{ flex: "1 1 0", minWidth: 0 }}>
-            <h3 style={{ fontSize: "18px", fontWeight: 600, color: "var(--color-heading)", marginBottom: "16px" }}>Estratégias recomendadas</h3>
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            <h3 style={{ fontSize: "18px", fontWeight: 600, color: "var(--color-heading)", marginBottom: "20px" }}>Estratégias recomendadas</h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               {profile.strategies.map((s) => (
                 <a
                   key={s.title}
@@ -272,16 +303,16 @@ function DetailSection({ profile, index, isLast }: { profile: Profile; index: nu
                     background: bg === "#ffffff" ? "#fafafa" : "#ffffff",
                     border: "1px solid var(--color-border)",
                     borderRadius: "16px",
-                    padding: "22px 24px",
+                    padding: "24px 28px",
                     textDecoration: "none",
                     transition: "border-color 0.2s ease, transform 0.2s ease",
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(101,87,234,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = profile.accent; e.currentTarget.style.transform = "translateY(-2px)"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--color-border)"; e.currentTarget.style.transform = "none"; }}
                 >
                   <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontSize: "17px", fontWeight: 600, color: "var(--color-heading)", marginBottom: "6px" }}>
                     {s.title}
-                    <span style={{ color: "var(--color-primary)" }}><ArrowIcon /></span>
+                    <span style={{ color: profile.accent }}><ArrowIcon /></span>
                   </span>
                   <p style={{ fontSize: "15px", color: "var(--color-body)", lineHeight: "160%" }}>{s.desc}</p>
                 </a>

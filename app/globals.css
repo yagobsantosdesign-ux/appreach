@@ -359,6 +359,12 @@ a:hover .logo-text {
   .gn-float { animation: none; }
 }
 
+/* Growth Navigator — ícone 3D da seção detalhada: menor e com respiro no mobile/tablet */
+@media (max-width: 1023px) {
+  .gn-detail-media { margin-top: 8px; }
+  .gn-detail-media img { max-width: 200px; }
+}
+
 /* Quem somos (About) page */
 .about-team-section { padding: 96px 0; }
 
