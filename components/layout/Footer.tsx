@@ -38,7 +38,6 @@ const solutions = [
 
 const company = [
   { label: "Sobre nós", href: "/quem-somos" },
-  { label: "Cases", href: "/#cases" },
   { label: "Carreiras", href: "/carreiras" },
 ];
 
@@ -249,7 +248,7 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
               <span className="text-xs font-semibold uppercase tracking-widest" style={{ letterSpacing: "0.08em", color: "rgba(255,255,255,0.90)" }}>
                 Soluções
               </span>
-              <ul className="grid grid-cols-2 gap-x-10 gap-y-3">
+              <ul className="flex flex-col gap-2">
                 {solutions.map((s) => (
                   <li key={s.href}>
                     <a href={s.href} className="text-sm transition-colors duration-200 whitespace-nowrap" style={{ color: "rgba(255,255,255,0.45)" }}
@@ -265,7 +264,7 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
               <span className="text-xs font-semibold uppercase tracking-widest" style={{ letterSpacing: "0.08em", color: "rgba(255,255,255,0.90)" }}>
                 Empresa
               </span>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col gap-2">
                 {company.map((s) => (
                   <li key={s.href}>
                     <a href={s.href} className="text-sm transition-colors duration-200" style={{ color: "rgba(255,255,255,0.45)" }}

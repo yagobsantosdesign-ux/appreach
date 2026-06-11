@@ -48,11 +48,14 @@
 
 ## PENDÊNCIAS (próximos passos)
 1. **Native Ads, Preload, Push Ads, ASO, Mídia Programática** — 4 cards de feature cada (heroes já têm). CTV feature 1–4 já trocados sem rosto. Sanfona da UA: ✅ concluída.
-2. **Trocar imagens com ROSTO** (regra do cliente: sem rostos): hero da **ASO** e hero do **Retargeting** (`retargeting-mockup-e` tem avatares). Confirmar com o cliente se avatares estilizados são aceitáveis.
+2. **Imagens com ROSTO** (regra "sem rostos"):
+   - **Retargeting** (`retargeting-mockup-e`): ✅ **APROVADO manter** — os avatares não são pessoas reais (decisão do cliente/Yago, Jun 11 2026). Não trocar.
+   - **ASO** (`aso-mockup.webp`): pendente — atrelado à decisão de **manter ou excluir a página ASO** (ver item abaixo). Se a página for aposentada, o hero deixa de importar.
 
-## Decisões em aberto (do cliente)
-- **The Scaler** (Growth Navigator): o texto da seção detalhada é rascunho meu — validar.
-- **"Cases" fora do menu**: removido da navegação por seguir o menu do PDF; confirmar.
+## Decisões em aberto (aguardando cliente)
+- **Páginas standalone (Native Ads, Preload, Push Ads, ASO, Mídia Programática):** fora do menu E do footer; conteúdo vive na sanfona da UA. Cliente vai decidir **aposentar as rotas** OU **finalizar as páginas** (preencher os 20 placeholders). A ASO entra aqui (resolve também o hero com rosto). *Status ficou confuso — Yago vai alinhar com o cliente.*
+- **The Scaler** (Growth Navigator): o texto da seção detalhada é **rascunho do Claude** — validar conteúdo com o cliente (lista enviada Jun 11 2026).
+- **"Cases" fora do menu**: NÃO houve exclusão de página (Cases sempre foi seção da home, `#cases`). Só saiu do navbar; seção e link do footer permanecem. Confirmar que tirar do menu era a intenção.
 
 ## Regras de conteúdo já aplicadas
 - **Títulos sem ponto final** (exceto `?`/`!`); pontos internos divisores ficam. Já aplicado em todos os heroes/seções.
