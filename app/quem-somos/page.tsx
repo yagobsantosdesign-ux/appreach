@@ -9,10 +9,10 @@ import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
 
 const stats = [
-  { value: "50+", label: "Apps em crescimento" },
+  { value: "50+", label: "Apps atendidos" },
   { value: "300+", label: "Campanhas lançadas" },
-  { value: "R$500M+", label: "Gerenciados em mídia" },
-  { value: "98%", label: "Aprovação dos clientes" },
+  { value: "R$500M+", label: "Em mídia gerenciada" },
+  { value: "98%", label: "Satisfação dos clientes" },
 ];
 
 const principles = [
@@ -24,17 +24,17 @@ const principles = [
   {
     icon: Compass,
     title: "Uma única visão de crescimento",
-    desc: "Conectamos aquisição, engajamento e receita em uma estratégia integrada.",
+    desc: "Conectamos aquisição, engajamento e receita para construir estratégias mais eficientes e alinhadas aos objetivos do negócio.",
   },
   {
     icon: LineChart,
     title: "Dados que geram ação",
-    desc: "Transformamos informação em otimizações contínuas e oportunidades reais de crescimento.",
+    desc: "Transformamos dados em decisões mais rápidas, otimizações contínuas e oportunidades reais de crescimento.",
   },
   {
     icon: Users,
     title: "Parceria próxima",
-    desc: "Atuamos lado a lado com nossos clientes para construir resultados de longo prazo.",
+    desc: "Crescimento sustentável exige proximidade, transparência e capacidade de evoluir junto com cada cliente.",
   },
 ];
 
@@ -70,7 +70,7 @@ export default function QuemSomosPage() {
                 Seu parceiro de crescimento para apps
               </h1>
               <p style={{ fontSize: "var(--text-hero-sub)", color: "var(--color-body)", lineHeight: "160%", maxWidth: "560px", marginBottom: "28px" }}>
-                Unimos nossa expertise em growth mobile ao conhecimento da sua equipe para conectar aquisição, engajamento e receita em uma estratégia integrada.
+                Transformamos aquisição, engajamento e receita em uma estratégia única para acelerar o crescimento do seu aplicativo.
               </p>
               <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                 <Button href="/#contato" size="xl" variant="gradient">Falar com um especialista</Button>
@@ -139,7 +139,7 @@ export default function QuemSomosPage() {
                     Apps não crescem com mais mídia. Crescem com estratégia, dados e execução consistente
                   </h2>
                   <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "170%", maxWidth: "480px" }}>
-                    Por isso combinamos aquisição, retenção e monetização em uma única operação orientada por resultados. Nosso foco não é gerar métricas de vaidade, mas ajudar nossos clientes a conquistar usuários de maior valor e transformar crescimento em receita.
+                    Por isso conectamos aquisição, retenção e monetização em uma única operação orientada por resultados. Nosso foco não é gerar métricas de vaidade, mas transformar crescimento em resultado de negócio.
                   </p>
                 </div>
               </div>
@@ -156,7 +156,7 @@ export default function QuemSomosPage() {
                   <SectionBadge>Time</SectionBadge>
                 </div>
                 <h2 style={{ fontSize: "48px", color: "var(--color-heading)", lineHeight: "120%", marginBottom: "16px", textWrap: "balance" as never, maxWidth: "480px", marginLeft: "auto", marginRight: "auto" }}>
-                  Como o time trabalha junto
+                  Crescimento sem silos
                 </h2>
                 <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "160%" }}>
                   Acreditamos que o crescimento sustentável de um aplicativo acontece quando diferentes perspectivas trabalham em conjunto.
@@ -227,7 +227,7 @@ export default function QuemSomosPage() {
                 }}
               >
                 <span style={{ fontSize: "var(--text-h3)", fontWeight: 600, color: "#ffffff", lineHeight: "130%", letterSpacing: "-0.02em", textWrap: "balance" as never }}>
-                  Quer fazer parte do time?
+                  Estamos sempre em busca de pessoas que queiram construir o futuro do growth mobile
                 </span>
                 <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "#ffffff", fontSize: "16px", fontWeight: 600, flexShrink: 0 }}>
                   Ver vagas abertas
