@@ -15,9 +15,13 @@ interface ProductHeroProps {
   imagePosition?: string;
   /** Rótulo de placeholder quando ainda não há imagem definida pelo cliente. */
   placeholderLabel?: string;
+  /** Texto customizado do botão CTA primário. Padrão: "Diagnóstico gratuito". */
+  ctaLabel?: string;
+  /** URL customizada do botão CTA primário. */
+  ctaHref?: string;
 }
 
-export default function ProductHero({ badge, title, subtitle, image, imagePosition = "center", placeholderLabel }: ProductHeroProps) {
+export default function ProductHero({ badge, title, subtitle, image, imagePosition = "center", placeholderLabel, ctaLabel = "Diagnóstico gratuito", ctaHref = "https://appreach.vercel.app/growth-navigator" }: ProductHeroProps) {
   const { ref: headRef, visible: headVisible } = useInView<HTMLDivElement>();
   const { ref: mediaRef, visible: mediaVisible } = useInView<HTMLDivElement>();
 
@@ -53,8 +57,8 @@ export default function ProductHero({ badge, title, subtitle, image, imagePositi
               {subtitle}
             </p>
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "28px" }}>
-              <Button href="https://appreach.vercel.app/growth-navigator" size="xl" variant="gradient">
-                Diagnóstico gratuito
+              <Button href={ctaHref} size="xl" variant="gradient">
+                {ctaLabel}
               </Button>
               <Button href="#como-funciona" size="xl" variant="ghost">
                 Como funciona
