@@ -20,7 +20,7 @@ const features = [
   {
     title: "Mensagens relevantes para cada usuário",
     description:
-      "Exiba criativos personalizados com base no comportamento do usuário e direcione-o diretamente para a ação desejada dentro do app.",
+      "Exiba mensagens e criativos personalizados com base no comportamento do usuário e direcione-o diretamente para a ação desejada dentro do app.",
     bullets: [
       "Criativos adaptados por segmento",
       "Deep links para retomada da jornada",
@@ -31,7 +31,7 @@ const features = [
   {
     title: "Reengajamento inteligente",
     description:
-      "Utilizamos sinais de comportamento para identificar quando um usuário tem maior probabilidade de retornar e converter.",
+      "Identifique os melhores momentos para reengajar usuários e aumente as chances de retorno sem desperdiçar investimento com quem já está ativo.",
     bullets: [
       "Frequência otimizada por segmento",
       "Exclusão automática de usuários ativos",
@@ -42,7 +42,7 @@ const features = [
   {
     title: "Impacto incremental das campanhas",
     description:
-      "Diferencie conversões impulsionadas pelas campanhas daquelas que aconteceriam de forma orgânica para medir o impacto real do retargeting.",
+      "Descubra quanto das conversões e da receita foi realmente impulsionado pelas suas campanhas de retargeting.",
     bullets: [
       "Medição de impacto incremental",
       "Comparação com grupos de controle",
@@ -61,14 +61,14 @@ export default function RetargetingPage() {
         <ProductHero
           badge="Retargeting"
           title={<>Reative usuários. Recupere receita</>}
-          subtitle="Transforme usuários inativos em novas conversões com campanhas de retargeting orientadas por comportamento, personalização e receita."
+          subtitle="Traga de volta usuários que já conhecem o seu app e transforme intenção em novas conversões com estratégias de reengajamento orientadas por dados."
           image={{ src: "/retargeting-mockup-e.webp", alt: "Usuários sendo reativados e retornando ao app" }}
         />
 
         <ProductFeatures
           badge="O que entregamos"
           title="Recupere usuários em cada etapa da jornada"
-          subtitle="Identifique oportunidades de reengajamento, personalize a comunicação e aumente conversões com campanhas orientadas por comportamento."
+          subtitle="Identifique oportunidades de reengajamento, personalize a comunicação e aumente conversões com campanhas adaptadas ao comportamento dos usuários."
           features={features}
         />
 
