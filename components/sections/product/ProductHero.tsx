@@ -53,8 +53,8 @@ export default function ProductHero({ badge, title, subtitle, image, imagePositi
               {subtitle}
             </p>
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "28px" }}>
-              <Button href="#contato" size="xl" variant="gradient">
-                Falar com um especialista
+              <Button href="/growth-navigator" size="xl" variant="gradient">
+                Diagnóstico gratuito
               </Button>
               <Button href="#como-funciona" size="xl" variant="ghost">
                 Como funciona

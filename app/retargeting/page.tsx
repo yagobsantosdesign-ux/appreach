@@ -62,7 +62,7 @@ export default function RetargetingPage() {
           badge="Retargeting"
           title={<>Reative usuários. Recupere receita</>}
           subtitle="Traga de volta usuários que já conhecem o seu app e transforme intenção em novas conversões com estratégias de reengajamento orientadas por dados."
-          image={{ src: "/retargeting-mockup-e.webp", alt: "Usuários sendo reativados e retornando ao app" }}
+          image={{ src: "/retargeting-mockup-e.png", alt: "Usuários sendo reativados e retornando ao app" }}
         />
 
         <ProductFeatures
