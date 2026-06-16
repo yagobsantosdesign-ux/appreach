@@ -60,7 +60,7 @@ export default function ReachLabPage() {
 
         <ProductHero
           badge="IA & Dados: Reach Lab"
-          title={<>A inteligência por trás do crescimento.</>}
+          title={<>A inteligência por trás do crescimento</>}
           subtitle="Combinamos dados, IA e expertise em growth mobile para identificar oportunidades, orientar decisões e acelerar resultados para o seu aplicativo."
           image={{ src: "/reach-lab-mockup-b.webp", alt: "Ilustração de dados e crescimento com gráfico em alta" }}
         />

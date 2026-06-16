@@ -60,7 +60,7 @@ export default function CTVPage() {
 
         <ProductHero
           badge="CTV: Connected TV"
-          title={<>Alcance usuários onde a atenção é maior.</>}
+          title={<>Alcance usuários onde a atenção é maior</>}
           subtitle="Leve seu aplicativo para a TV conectada e combine alcance premium com mensuração completa para transformar exposição em crescimento."
           image={{ src: "/ctv-mockup-b.webp", alt: "Smart TV exibindo player de vídeo com curva de performance" }}
         />
