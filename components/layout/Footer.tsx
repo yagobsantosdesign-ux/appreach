@@ -1,7 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { INPUT, LABEL } from "@/components/ui/formStyles";
+
+// ── Integração HubSpot (Forms Submission API) ──
+// Portal ID e Form GUID NÃO são segredos (ficam expostos em qualquer embed do
+// HubSpot), por isso vão como NEXT_PUBLIC. Defina-os em .env.local e na Vercel.
+const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID;
+const HUBSPOT_FORM_GUID = process.env.NEXT_PUBLIC_HUBSPOT_FORM_GUID;
+
+// Mapeia o name= de cada campo do form -> nome interno da propriedade no HubSpot.
+// Ajuste o lado direito para bater com os campos criados no formulário do HubSpot.
+const HUBSPOT_FIELD_MAP: Record<string, string> = {
+  nome: "firstname",
+  email: "email",
+  whatsapp: "phone",
+  cargo: "jobtitle",
+  app: "app_url",     // propriedade custom no HubSpot
+  cenario: "cenario", // propriedade custom no HubSpot
+};
 
 const IconInstagram = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -42,6 +59,48 @@ const company = [
 ];
 
 export default function Footer({ hideContactForm = false }: { hideContactForm?: boolean }) {
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    if (!HUBSPOT_PORTAL_ID || !HUBSPOT_FORM_GUID) {
+      console.error("HubSpot não configurado: defina NEXT_PUBLIC_HUBSPOT_PORTAL_ID e NEXT_PUBLIC_HUBSPOT_FORM_GUID.");
+      setStatus("error");
+      return;
+    }
+
+    const data = new FormData(form);
+    const fields = Object.entries(HUBSPOT_FIELD_MAP)
+      .map(([campo, name]) => ({ name, value: String(data.get(campo) ?? "").trim() }))
+      .filter((f) => f.value);
+
+    setStatus("sending");
+    try {
+      const res = await fetch(
+        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fields,
+            context: {
+              pageUri: typeof window !== "undefined" ? window.location.href : "",
+              pageName: typeof document !== "undefined" ? document.title : "",
+            },
+          }),
+        }
+      );
+      if (!res.ok) throw new Error(await res.text());
+      setStatus("ok");
+      form.reset();
+    } catch (err) {
+      console.error("Falha ao enviar para o HubSpot:", err);
+      setStatus("error");
+    }
+  }
+
   return (
     <footer style={{
       background: "linear-gradient(145deg, #1E1640 0%, #2D1F5E 55%, #1a1438 100%)",
@@ -100,20 +159,19 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
                 </span>
               </div>
               <a
-                href="mailto:fale@appreach.com.br"
+                href="mailto:weareappreach@appreach.app"
                 style={{ color: "rgba(255,255,255,0.60)", fontSize: "14px", textDecoration: "none", transition: "color 0.15s" }}
                 onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
                 onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.60)")}
               >
-                fale@appreach.com.br
+                weareappreach@appreach.app
               </a>
             </div>
           </div>
 
           {/* Right — form */}
           <div className="footer-form-card" style={{ flex: 1, background: "white", borderRadius: "20px", padding: "40px", boxShadow: "0 4px 32px rgba(0,0,0,0.10)" }}>
-            <form name="contato" method="POST" data-netlify="true" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-              <input type="hidden" name="form-name" value="contato" />
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               <div className="footer-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
                 <div>
                   <label style={LABEL}>Nome</label>
@@ -168,17 +226,29 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
                   </svg>
                 </div>
               </div>
-              <button type="submit" style={{
+              <button type="submit" disabled={status === "sending"} style={{
                 width: "100%", background: "linear-gradient(145deg, #9B91FF 0%, #6557EA 100%)",
                 color: "white", border: "none", borderRadius: "12px", padding: "15px 24px",
-                fontSize: "15px", fontWeight: 600, cursor: "pointer", display: "flex",
-                alignItems: "center", justifyContent: "center", gap: "8px", letterSpacing: "-0.2px",
+                fontSize: "15px", fontWeight: 600, cursor: status === "sending" ? "not-allowed" : "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
+                letterSpacing: "-0.2px", opacity: status === "sending" ? 0.7 : 1,
               }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
-                onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                onMouseEnter={e => { if (status !== "sending") e.currentTarget.style.opacity = "0.88"; }}
+                onMouseLeave={e => { if (status !== "sending") e.currentTarget.style.opacity = "1"; }}
               >
-                Quero escalar meu app
+                {status === "sending" ? "Enviando…" : "Quero escalar meu app"}
               </button>
+
+              {status === "ok" && (
+                <p style={{ fontSize: "14px", color: "#1B9C5A", textAlign: "center", margin: 0, fontWeight: 500 }}>
+                  Recebemos seu contato! Retornamos em até 24h. 🎉
+                </p>
+              )}
+              {status === "error" && (
+                <p style={{ fontSize: "14px", color: "#D14343", textAlign: "center", margin: 0, fontWeight: 500 }}>
+                  Algo deu errado ao enviar. Tente de novo ou escreva para weareappreach@appreach.app.
+                </p>
+              )}
             </form>
           </div>
         </div>
@@ -205,13 +275,13 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
             </div>
 
             <a
-              href="mailto:fale@appreach.com.br"
+              href="mailto:weareappreach@appreach.app"
               className="text-sm transition-colors duration-200"
               style={{ color: "rgba(255,255,255,0.45)" }}
               onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
               onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
             >
-              fale@appreach.com.br
+              weareappreach@appreach.app
             </a>
 
             <div className="flex gap-3">

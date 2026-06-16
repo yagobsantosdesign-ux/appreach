@@ -178,12 +178,12 @@ export default function CarreirasPage() {
                     </span>
                   </div>
                   <a
-                    href="mailto:fale@appreach.com.br"
+                    href="mailto:weareappreach@appreach.app"
                     style={{ color: "rgba(255,255,255,0.60)", fontSize: "14px", textDecoration: "none", transition: "color 0.15s" }}
                     onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
                     onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.60)")}
                   >
-                    fale@appreach.com.br
+                    weareappreach@appreach.app
                   </a>
                 </div>
               </div>

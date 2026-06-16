@@ -85,7 +85,7 @@ Header → ProductHero → ProductFeatures → FAQ → Footer
 
 - **Aléxia** — responsável criativo; vai enviar brandbook, ícones, vetores, patterns
 - **Neto** — aprovação final e orçamento
-- **E-mail:** fale@appreach.com.br | **Domínio alvo:** appreach.com.br
+- **E-mail:** weareappreach@appreach.app | **Domínio alvo:** appreach.com.br
 
 ## Estado Atual da Home Page
 
