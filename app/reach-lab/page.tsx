@@ -63,8 +63,6 @@ export default function ReachLabPage() {
           title={<>A inteligência por trás do crescimento.</>}
           subtitle="Combinamos dados, IA e expertise em growth mobile para identificar oportunidades, orientar decisões e acelerar resultados para o seu aplicativo."
           image={{ src: "/reach-lab-mockup-b.webp", alt: "Ilustração de dados e crescimento com gráfico em alta" }}
-          ctaLabel="Descubra o que os seus dados estão tentando mostrar."
-          ctaHref="https://appreach.vercel.app/growth-navigator"
         />
 
         <section style={{ background: "#f5f4ff", padding: "64px 40px" }}>
