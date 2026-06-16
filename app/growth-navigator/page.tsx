@@ -81,7 +81,6 @@ const profiles: Profile[] = [
       "Expansão de canais de crescimento",
       "Crescimento previsível e escalável",
     ],
-    draft: true,
   },
   {
     id: "optimizer",
@@ -319,6 +318,33 @@ function DetailSection({ profile, index, isLast }: { profile: Profile; index: nu
               ))}
             </div>
           </div>
+        </div>
+
+        {/* CTA */}
+        <div style={{ marginTop: "56px", paddingTop: "48px", borderTop: "1px solid var(--color-border)", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "16px" }}>
+          <p style={{ fontSize: "18px", fontWeight: 600, color: "var(--color-heading)", letterSpacing: "-0.01em" }}>
+            Esse é o seu momento?
+          </p>
+          <a
+            href="https://appreach.vercel.app/growth-navigator"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              background: profile.accent,
+              color: "#ffffff",
+              fontSize: "16px",
+              fontWeight: 600,
+              padding: "14px 24px",
+              borderRadius: "12px",
+              textDecoration: "none",
+              transition: "opacity 0.2s",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.88"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
+          >
+            Falar com um especialista <ArrowIcon />
+          </a>
         </div>
       </div>
     </section>
