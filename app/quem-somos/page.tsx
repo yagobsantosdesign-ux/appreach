@@ -211,31 +211,6 @@ export default function QuemSomosPage() {
                 })}
               </div>
 
-              {/* Card CTA — junte-se ao time */}
-              <a
-                href="/carreiras"
-                className="about-join-card flex flex-col lg:flex-row"
-                style={{
-                  background: "linear-gradient(145deg, #9B91FF 0%, #6557EA 100%)",
-                  borderRadius: "20px",
-                  padding: "40px",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "24px",
-                  textDecoration: "none",
-                  boxShadow: "0 8px 40px rgba(101,87,234,0.30)",
-                }}
-              >
-                <span style={{ fontSize: "var(--text-h3)", fontWeight: 600, color: "#ffffff", lineHeight: "130%", letterSpacing: "-0.02em", textWrap: "balance" as never }}>
-                  Estamos sempre em busca de pessoas que queiram construir o futuro do growth mobile
-                </span>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "#ffffff", fontSize: "16px", fontWeight: 600, flexShrink: 0 }}>
-                  Ver vagas abertas
-                  <svg width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden>
-                    <path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-              </a>
             </Reveal>
           </div>
         </section>
