@@ -62,10 +62,10 @@ export default function CarreirasPage() {
                     marginBottom: "20px",
                   }}
                 >
-                  Cresça com quem cresce o marketing de apps
+                  Cresça com quem vive growth mobile
                 </h1>
                 <p style={{ fontSize: "var(--text-hero-sub)", color: "var(--color-body)", lineHeight: "160%", maxWidth: "480px", marginBottom: "28px" }}>
-                  Na Appreach você trabalha com dados de verdade, autonomia e um time que aprende rápido. Não temos uma vaga aberta agora? Tudo bem: nosso banco de talentos está sempre aberto.
+                  Na Appreach você trabalha com dados reais, autonomia e um time que aprende rápido. Nosso banco de talentos está sempre aberto — com ou sem vaga publicada.
                 </p>
                 <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                   <Button href="#banco-talentos" size="xl" variant="gradient">Entrar no banco de talentos</Button>
@@ -96,7 +96,7 @@ export default function CarreirasPage() {
                 <SectionBadge>Áreas sempre abertas</SectionBadge>
               </div>
               <h2 style={{ fontSize: "48px", color: "var(--color-heading)", lineHeight: "120%", marginBottom: "16px", textWrap: "balance" as never, maxWidth: "460px", marginLeft: "auto", marginRight: "auto" }}>
-                Onde você pode crescer com a gente
+                Onde você pode atuar com a gente
               </h2>
               <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "160%" }}>
                 Mesmo sem uma vaga publicada, mantemos as portas abertas em todas as áreas. Encontrou a sua? Entre no banco de talentos e a gente chama quando a vaga certa surgir.
