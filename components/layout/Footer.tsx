@@ -133,10 +133,10 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
                 </span>
               </div>
               <h2 className="" style={{ fontSize: "clamp(24px, 6vw, 40px)", letterSpacing: "-0.02em", lineHeight: "120%", color: "white", textWrap: "balance" as never }}>
-                Pronto para escalar o seu app?
+                Pronto para descobrir sua próxima oportunidade de crescimento?
               </h2>
               <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.70)", lineHeight: 1.65, marginTop: "16px" }}>
-                Conte sobre o seu app e seus objetivos. Nossa equipe vai analisar o seu momento e indicar as estratégias mais indicadas, sem custo e sem compromisso.
+                Compartilhe os desafios do seu app e nossa equipe indicará as estratégias com maior potencial de impacto para o seu momento atual.
               </p>
               <ul style={{ marginTop: "24px", display: "flex", flexDirection: "column", gap: "10px", listStyle: "none", padding: 0 }}>
                 {["Diagnóstico gratuito do seu funil", "Estratégia personalizada por vertical", "Relatórios transparentes com dados reais"].map((item) => (
@@ -270,7 +270,10 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
                 style={{ display: "block", filter: "brightness(0) invert(1)" }}
               />
               <p className="mt-3 leading-relaxed" style={{ fontSize: "14px", color: "rgba(255,255,255,0.45)", maxWidth: "260px" }}>
-                Estratégia 360° para apps que escalam, do primeiro install à receita.
+                Seu parceiro de crescimento para apps.
+              </p>
+              <p className="mt-2 leading-relaxed" style={{ fontSize: "14px", color: "rgba(255,255,255,0.45)", maxWidth: "260px" }}>
+                Unimos expertise em growth mobile ao conhecimento da sua equipe para conectar aquisição, engajamento e receita em uma estratégia integrada.
               </p>
             </div>
 

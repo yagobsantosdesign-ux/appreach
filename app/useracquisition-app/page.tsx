@@ -28,17 +28,17 @@ const features = [
     bullets: [
       "Testes e otimizações contínuas",
       "Análise de performance em cada etapa do funil",
-      "Produção especializada para apps",
+      "Criativos desenvolvidos para growth mobile",
     ],
     image: { src: "/ua-creativos-mockup-b.webp", alt: "Teste A/B de criativos com o vencedor em destaque" },
   },
   {
     title: "Tracking completo da jornada do usuário",
     description:
-      "Integramos seu app às principais MMPs do mercado para que cada instalação, evento e conversão seja medida com precisão desde o primeiro dia.",
+      "Integramos seu app às principais plataformas de mensuração para acompanhar instalações, eventos e conversões com precisão.",
     bullets: [
       "Implementação simplificada",
-      "Tracking completo da jornada do usuário",
+      "Integração com as principais MMPs",
       "Dados automatizados para tomada de decisão",
     ],
     image: { src: "/ua-feature-3.webp", alt: "Logos das principais MMPs e plataformas integradas" },
@@ -46,7 +46,7 @@ const features = [
   {
     title: "Otimização por eventos de conversão",
     description:
-      "Utilizamos automação e análise de dados para direcionar orçamento aos canais, públicos e campanhas com maior potencial de retorno.",
+      "Direcionamos investimentos para os canais, públicos e campanhas com maior potencial de retorno com base em sinais reais de conversão e receita.",
     bullets: [
       "Ajustes contínuos de performance",
       "Acompanhamento recorrente dos resultados",
@@ -187,14 +187,14 @@ export default function UAPage() {
               Mais installs.<br />Menor custo<br />por aquisição
             </>
           }
-          subtitle="Atraia usuários qualificados com campanhas baseadas em dados, criativos de alta performance e integração com as principais plataformas de mensuração do mercado mobile."
+          subtitle="Atraia usuários qualificados com estratégias orientadas por dados, criativos de alta performance e otimização contínua para escalar resultados."
           image={{ src: "/ua-hero-mockup-b.webp", alt: "Ilustração de gráfico de aquisição por fontes de usuários" }}
         />
 
         <ProductFeatures
           badge="O que entregamos"
-          title="Tudo que você precisa para escalar installs"
-          subtitle="Da segmentação ao criativo, cobrimos cada etapa da sua estratégia de aquisição com dados reais."
+          title="Tudo o que você precisa para crescer com eficiência"
+          subtitle="Da segmentação à otimização, conectamos estratégia, dados e execução para atrair usuários com maior potencial de valor."
           features={features}
         />
 
@@ -206,10 +206,10 @@ export default function UAPage() {
                 <SectionBadge>Faz parte da estratégia de UA</SectionBadge>
               </div>
               <h2 style={{ fontSize: "clamp(28px, 5vw, 48px)", color: "var(--color-heading)", maxWidth: "640px", margin: "0 auto 16px", lineHeight: "120%", textWrap: "balance" as never }}>
-                Outras frentes para acelerar sua aquisição
+                Estratégias complementares
               </h2>
               <p style={{ fontSize: "16px", color: "var(--color-body)", lineHeight: "160%", maxWidth: "520px", margin: "0 auto" }}>
-                Canais complementares que ampliam alcance, distribuição e descoberta do seu app.
+                Soluções que ampliam alcance, aumentam descoberta e fortalecem sua estratégia de aquisição.
               </p>
             </div>
             <Accordion items={subProducts} />
