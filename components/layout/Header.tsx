@@ -115,7 +115,7 @@ export default function Header() {
           {/* CTA + mobile toggle */}
           <div className="flex items-center justify-end gap-3">
             <a
-              href="https://appreach.vercel.app/growth-navigator"
+              href="#contato"
               className="hidden md:inline-flex items-center justify-center font-semibold transition-all duration-200 hover:-translate-y-0.5"
               style={{
                 background: "#6557ea",
@@ -129,7 +129,7 @@ export default function Header() {
                 whiteSpace: "nowrap",
               }}
             >
-              Diagnóstico gratuito
+              Fale com um especialista
             </a>
             <button
               className="md:hidden p-1.5"
@@ -206,13 +206,13 @@ export default function Header() {
               ))}
 
               <Button
-                href="https://appreach.vercel.app/growth-navigator"
+                href="#contato"
                 onClick={() => setOpen(false)}
                 variant="gradient"
                 size="md"
                 fullWidth
               >
-                Diagnóstico gratuito
+                Fale com um especialista
               </Button>
             </div>
           </div>

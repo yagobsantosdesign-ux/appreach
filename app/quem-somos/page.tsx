@@ -73,7 +73,7 @@ export default function QuemSomosPage() {
                 Unimos nossa expertise em growth mobile ao conhecimento da sua equipe para conectar aquisição, engajamento e receita em uma estratégia integrada.
               </p>
               <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-                <Button href="https://appreach.vercel.app/growth-navigator" size="xl" variant="gradient">Diagnóstico gratuito</Button>
+                <Button href="/#contato" size="xl" variant="gradient">Falar com um especialista</Button>
                 <Button href="/#estrategias" size="xl" variant="ghost">Ver soluções</Button>
               </div>
             </div>
