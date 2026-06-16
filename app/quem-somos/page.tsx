@@ -69,9 +69,10 @@ export default function QuemSomosPage() {
               >
                 Seu parceiro de crescimento para apps
               </h1>
-              <p style={{ fontSize: "var(--text-hero-sub)", color: "var(--color-body)", lineHeight: "160%", maxWidth: "560px" }}>
+              <p style={{ fontSize: "var(--text-hero-sub)", color: "var(--color-body)", lineHeight: "160%", maxWidth: "560px", marginBottom: "28px" }}>
                 Transformamos aquisição, engajamento e receita em uma estratégia única para acelerar o crescimento do seu aplicativo.
               </p>
+              <Button href="https://appreach.vercel.app/growth-navigator" size="xl" variant="gradient">Diagnóstico gratuito</Button>
             </div>
 
             {/* Imagem destaque */}
@@ -208,6 +209,19 @@ export default function QuemSomosPage() {
               </div>
 
             </Reveal>
+          </div>
+        </section>
+
+        {/* ── Fechamento ── */}
+        <section style={{ background: "#ffffff", padding: "96px 40px" }}>
+          <div style={{ maxWidth: "1350px", margin: "0 auto", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "24px" }}>
+            <h2 style={{ fontSize: "clamp(32px, 5vw, 52px)", color: "var(--color-heading)", letterSpacing: "-0.03em", lineHeight: "115%", maxWidth: "600px", textWrap: "balance" as never }}>
+              Pronto para acelerar o crescimento do seu app?
+            </h2>
+            <p style={{ fontSize: "18px", color: "var(--color-body)", lineHeight: "160%", maxWidth: "480px" }}>
+              Conte sobre o seu app e deixe a Appreach construir a estratégia certa para o seu momento.
+            </p>
+            <Button href="https://appreach.vercel.app/growth-navigator" size="xl" variant="gradient">Diagnóstico gratuito</Button>
           </div>
         </section>
 
