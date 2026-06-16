@@ -69,13 +69,9 @@ export default function QuemSomosPage() {
               >
                 Seu parceiro de crescimento para apps
               </h1>
-              <p style={{ fontSize: "var(--text-hero-sub)", color: "var(--color-body)", lineHeight: "160%", maxWidth: "560px", marginBottom: "28px" }}>
+              <p style={{ fontSize: "var(--text-hero-sub)", color: "var(--color-body)", lineHeight: "160%", maxWidth: "560px" }}>
                 Transformamos aquisição, engajamento e receita em uma estratégia única para acelerar o crescimento do seu aplicativo.
               </p>
-              <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-                <Button href="/#contato" size="xl" variant="gradient">Falar com um especialista</Button>
-                <Button href="/#estrategias" size="xl" variant="ghost">Ver soluções</Button>
-              </div>
             </div>
 
             {/* Imagem destaque */}
