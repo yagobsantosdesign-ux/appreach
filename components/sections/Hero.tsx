@@ -129,7 +129,7 @@ export default function Hero() {
 
             <div className="flex items-center hero-fade-up hero-fade-up-3" style={{ gap: "12px" }}>
               <a
-                href="#contato"
+                href="https://appreach.vercel.app/growth-navigator"
                 className="inline-flex items-center justify-center font-semibold transition-all duration-200 hover:-translate-y-0.5"
                 style={{
                   background: "#6557ea",
@@ -143,7 +143,7 @@ export default function Hero() {
                   whiteSpace: "nowrap",
                 }}
               >
-                Fale com um especialista
+                Diagnóstico gratuito
               </a>
               <a
                 href="#como-funciona"
