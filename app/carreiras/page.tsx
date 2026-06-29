@@ -133,74 +133,41 @@ export default function CarreirasPage() {
           </div>
         </section>
 
-        {/* ── Banco de talentos — formulário ── */}
+        {/* ── Banco de talentos — instrução por e-mail ── */}
         <section id="banco-talentos" style={{ background: "#ffffff", padding: "96px 0", scrollMarginTop: "100px" }}>
           <div className="product-container">
             <Reveal>
             <div
-              className="careers-form-row flex flex-col lg:flex-row"
               style={{
                 background: "linear-gradient(145deg, #9B91FF 0%, #6557EA 100%)",
                 borderRadius: "32px",
                 padding: "64px 72px",
-                gap: "80px",
-                alignItems: "stretch",
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "16px",
                 boxShadow: "0 8px 40px rgba(101,87,234,0.30)",
               }}
             >
-              {/* Left — copy */}
-              <div style={{ flex: "0 0 auto", maxWidth: "380px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                <div>
-                  <div className="inline-flex items-center mb-4" style={{ gap: "8px" }}>
-                    <span style={{ display: "inline-block", width: "20px", height: "1.5px", background: "rgba(255,255,255,0.6)", flexShrink: 0 }} />
-                    <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.85)", letterSpacing: "1px", fontWeight: 600, fontFamily: "var(--font-geist-mono)", textTransform: "uppercase" }}>
-                      Banco de talentos
-                    </span>
-                  </div>
-                  <h2 style={{ fontSize: "clamp(24px, 6vw, 40px)", letterSpacing: "-0.02em", lineHeight: "120%", color: "white", textWrap: "balance" as never }}>
-                    Deixe seu currículo com a gente
-                  </h2>
-                  <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.70)", lineHeight: 1.65, marginTop: "16px" }}>
-                    Envie seu currículo e conte um pouco sobre você e a área em que quer atuar. Guardamos seu perfil e chamamos assim que surgir uma vaga com a sua cara.
-                  </p>
-                </div>
-
-                <div style={{ paddingTop: "28px", borderTop: "1px solid rgba(255,255,255,0.15)" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                      <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
-                    </svg>
-                    <span style={{ color: "rgba(255,255,255,0.9)", fontSize: "14px", fontWeight: 600, letterSpacing: "-0.1px" }}>
-                      Sempre aberto
-                    </span>
-                  </div>
-                  <a
-                    href="mailto:weareappreach@appreach.app"
-                    style={{ color: "rgba(255,255,255,0.60)", fontSize: "14px", textDecoration: "none", transition: "color 0.15s" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.60)")}
-                  >
-                    weareappreach@appreach.app
-                  </a>
-                </div>
+              <div className="inline-flex items-center mb-4" style={{ gap: "8px" }}>
+                <span style={{ display: "inline-block", width: "20px", height: "1.5px", background: "rgba(255,255,255,0.6)", flexShrink: 0 }} />
+                <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.85)", letterSpacing: "1px", fontWeight: 600, fontFamily: "var(--font-geist-mono)", textTransform: "uppercase" }}>
+                  Banco de talentos
+                </span>
               </div>
-
-              {/* Right — instrução por e-mail (sem formulário) */}
-              <div className="careers-form-card" style={{ flex: 1, background: "white", borderRadius: "20px", padding: "40px", boxShadow: "0 4px 32px rgba(0,0,0,0.10)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "flex-start", gap: "20px" }}>
-                <p style={{ fontSize: "18px", fontWeight: 600, color: "var(--color-heading)", lineHeight: "150%" }}>
-                  Envie seu currículo e LinkedIn ou portfólio para:
-                </p>
-                <a
-                  href="mailto:weareappreach@appreach.app"
-                  style={{ fontSize: "22px", fontWeight: 600, color: "var(--color-primary)", textDecoration: "none" }}
-                >
-                  weareappreach@appreach.app
-                </a>
-                <p style={{ fontSize: "15px", color: "var(--color-body)", lineHeight: "160%" }}>
-                  Conte qual área te interessa e um pouco sobre você. Guardamos seu perfil e chamamos assim que surgir uma vaga com a sua cara.
-                </p>
-                <Button href="mailto:weareappreach@appreach.app" size="lg" variant="gradient">Enviar currículo</Button>
-              </div>
+              <h2 style={{ fontSize: "clamp(24px, 6vw, 40px)", letterSpacing: "-0.02em", lineHeight: "120%", color: "white", textWrap: "balance" as never }}>
+                Deixe seu currículo com a gente
+              </h2>
+              <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.70)", lineHeight: 1.65, maxWidth: "480px" }}>
+                Envie seu currículo e conte um pouco sobre você e a área em que quer atuar para:
+              </p>
+              <a
+                href="mailto:weareappreach@appreach.app"
+                style={{ fontSize: "24px", fontWeight: 600, color: "white", textDecoration: "none" }}
+              >
+                weareappreach@appreach.app
+              </a>
             </div>
             </Reveal>
           </div>
