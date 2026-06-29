@@ -326,7 +326,7 @@ function DetailSection({ profile, index, isLast }: { profile: Profile; index: nu
             Esse é o seu momento?
           </p>
           <a
-            href="https://appreach.vercel.app/growth-navigator"
+            href="/growth-navigator"
             style={{
               display: "inline-flex",
               alignItems: "center",

@@ -21,7 +21,7 @@ interface ProductHeroProps {
   ctaHref?: string;
 }
 
-export default function ProductHero({ badge, title, subtitle, image, imagePosition = "center", placeholderLabel, ctaLabel = "Diagnóstico gratuito", ctaHref = "https://appreach.vercel.app/growth-navigator" }: ProductHeroProps) {
+export default function ProductHero({ badge, title, subtitle, image, imagePosition = "center", placeholderLabel, ctaLabel = "Diagnóstico gratuito", ctaHref = "/growth-navigator" }: ProductHeroProps) {
   const { ref: headRef, visible: headVisible } = useInView<HTMLDivElement>();
   const { ref: mediaRef, visible: mediaVisible } = useInView<HTMLDivElement>();
 

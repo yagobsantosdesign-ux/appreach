@@ -124,7 +124,7 @@ export default function FunnelGuide() {
               Cada app está em um momento diferente. Veja qual estratégia faz sentido para o estágio atual do seu crescimento.
             </p>
 
-            <Button href="https://appreach.vercel.app/growth-navigator" size="xl" variant="gradient" style={{ alignSelf: "flex-start" }}>
+            <Button href="/growth-navigator" size="xl" variant="gradient" style={{ alignSelf: "flex-start" }}>
               Diagnóstico gratuito
             </Button>
           </div>

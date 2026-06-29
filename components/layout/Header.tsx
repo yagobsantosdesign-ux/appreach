@@ -115,7 +115,7 @@ export default function Header() {
           {/* CTA + mobile toggle */}
           <div className="flex items-center justify-end gap-3">
             <a
-              href="#contato"
+              href="/#contato"
               className="hidden md:inline-flex items-center justify-center font-semibold transition-all duration-200 hover:-translate-y-0.5"
               style={{
                 background: "#6557ea",
@@ -206,7 +206,7 @@ export default function Header() {
               ))}
 
               <Button
-                href="#contato"
+                href="/#contato"
                 onClick={() => setOpen(false)}
                 variant="gradient"
                 size="md"
