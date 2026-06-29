@@ -231,7 +231,7 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
       <div className="max-w-[1350px] mx-auto">
         <div className="flex items-center justify-center py-6">
           <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.30)" }}>
-            © 2025 Appreach. Todos os direitos reservados.
+            © 2026 Appreach. Todos os direitos reservados.
           </span>
         </div>
       </div>
