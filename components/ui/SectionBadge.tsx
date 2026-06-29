@@ -13,13 +13,6 @@ export default function SectionBadge({ children, className = "", dark = false, c
       className={`inline-flex items-center mb-6 ${className}`}
       style={{ gap: "8px" }}
     >
-      <span style={{
-        display: "inline-block",
-        width: "20px",
-        height: "1.5px",
-        background: dark ? "rgba(255,255,255,0.45)" : accent,
-        flexShrink: 0,
-      }} />
       <span
         style={{
           fontSize: "11px",

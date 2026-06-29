@@ -62,7 +62,6 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
           <div style={{ flex: "0 0 auto", maxWidth: "380px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
             <div>
               <div className="inline-flex items-center mb-4" style={{ gap: "8px" }}>
-                <span style={{ display: "inline-block", width: "20px", height: "1.5px", background: "rgba(255,255,255,0.6)", flexShrink: 0 }} />
                 <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.85)", letterSpacing: "1px", fontWeight: 600, fontFamily: "var(--font-geist-mono)", textTransform: "uppercase" }}>
                   Fale com a gente
                 </span>
