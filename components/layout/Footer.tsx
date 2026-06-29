@@ -229,24 +229,10 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
 
       {/* ── Bottom bar ── */}
       <div className="max-w-[1350px] mx-auto">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6">
+        <div className="flex items-center justify-center py-6">
           <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.30)" }}>
             © 2025 Appreach. Todos os direitos reservados.
           </span>
-          <div className="flex gap-5">
-            {["Política de Privacidade", "Termos de Uso"].map((label) => (
-              <a
-                key={label}
-                href="#"
-                className="transition-colors duration-200"
-                style={{ fontSize: "13px", color: "rgba(255,255,255,0.30)" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.30)")}
-              >
-                {label}
-              </a>
-            ))}
-          </div>
         </div>
       </div>
 
