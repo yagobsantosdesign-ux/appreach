@@ -65,7 +65,7 @@ export default function CarreirasPage() {
                   Na Appreach você trabalha com dados reais, autonomia e um time que aprende rápido. Nosso banco de talentos está sempre aberto — com ou sem vaga publicada.
                 </p>
                 <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-                  <Button href="mailto:weareappreach@appreach.app" size="xl" variant="gradient">Enviar currículo</Button>
+                  <Button href="#banco-talentos" size="xl" variant="gradient">Enviar currículo</Button>
                   <Button href="#areas" size="xl" variant="ghost">Ver áreas</Button>
                 </div>
               </div>
