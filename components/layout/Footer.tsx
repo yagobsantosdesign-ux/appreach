@@ -11,12 +11,6 @@ const IconInstagram = () => (
   </svg>
 );
 
-const IconX = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-  </svg>
-);
-
 const IconLinkedin = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
@@ -136,9 +130,6 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
               <p className="mt-3 leading-relaxed" style={{ fontSize: "14px", color: "rgba(255,255,255,0.45)", maxWidth: "260px" }}>
                 Seu parceiro de crescimento para apps.
               </p>
-              <p className="mt-2 leading-relaxed" style={{ fontSize: "14px", color: "rgba(255,255,255,0.45)", maxWidth: "260px" }}>
-                Unimos expertise em growth mobile ao conhecimento da sua equipe para conectar aquisição, engajamento e receita em uma estratégia integrada.
-              </p>
             </div>
 
             <a
@@ -154,7 +145,6 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
             <div className="flex gap-3">
               {[
                 { icon: <IconInstagram />, href: "#" },
-                { icon: <IconX />, href: "#" },
                 { icon: <IconLinkedin />, href: "#" },
               ].map(({ icon, href }, i) => (
                 <a
