@@ -13,7 +13,7 @@ const PLATFORMS = [
   { name: "Firebase",   img: "/platform-icon-6.webp" },
   { name: "Branch",     img: "/platform-icon-7.webp" },
   { name: "Singular",   img: "/platform-icon-8.webp" },
-  { name: "Platform 9", img: "/platform-icon-9.webp" },
+  { name: "Vungle",      img: "/platform-icon-9.webp" },
 ];
 
 const CX    = 400;
