@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
-import { INPUT, LABEL } from "@/components/ui/formStyles";
 
 // NOTE: textos das áreas são placeholders — ajustar com RH/liderança.
 
@@ -36,8 +35,6 @@ function IconArrow() {
 }
 
 export default function CarreirasPage() {
-  const [area, setArea] = useState("");
-
   return (
     <>
       <Header />
@@ -68,7 +65,7 @@ export default function CarreirasPage() {
                   Na Appreach você trabalha com dados reais, autonomia e um time que aprende rápido. Nosso banco de talentos está sempre aberto — com ou sem vaga publicada.
                 </p>
                 <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-                  <Button href="#banco-talentos" size="xl" variant="gradient">Entrar no banco de talentos</Button>
+                  <Button href="mailto:weareappreach@appreach.app" size="xl" variant="gradient">Enviar currículo</Button>
                   <Button href="#areas" size="xl" variant="ghost">Ver áreas</Button>
                 </div>
               </div>
@@ -107,7 +104,7 @@ export default function CarreirasPage() {
               {areas.map((a) => (
                 <a
                   key={a.name}
-                  href="#banco-talentos"
+                  href="mailto:weareappreach@appreach.app"
                   className="careers-area-card"
                   style={{
                     background: "rgba(255,255,255,0.80)",
@@ -164,7 +161,7 @@ export default function CarreirasPage() {
                     Deixe seu currículo com a gente
                   </h2>
                   <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.70)", lineHeight: 1.65, marginTop: "16px" }}>
-                    Conte um pouco sobre você e a área em que quer atuar. Guardamos seu perfil e chamamos assim que surgir uma vaga com a sua cara.
+                    Envie seu currículo e conte um pouco sobre você e a área em que quer atuar. Guardamos seu perfil e chamamos assim que surgir uma vaga com a sua cara.
                   </p>
                 </div>
 
@@ -188,77 +185,21 @@ export default function CarreirasPage() {
                 </div>
               </div>
 
-              {/* Right — form */}
-              <div className="careers-form-card" style={{ flex: 1, background: "white", borderRadius: "20px", padding: "40px", boxShadow: "0 4px 32px rgba(0,0,0,0.10)" }}>
-                <form name="carreiras" method="POST" data-netlify="true" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                  <input type="hidden" name="form-name" value="carreiras" />
-                  <div className="careers-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-                    <div>
-                      <label style={LABEL}>Nome</label>
-                      <input name="nome" type="text" placeholder="Seu nome" required style={INPUT}
-                        onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                        onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
-                    </div>
-                    <div>
-                      <label style={LABEL}>E-mail</label>
-                      <input name="email" type="email" placeholder="seu@email.com" required style={INPUT}
-                        onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                        onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
-                    </div>
-                  </div>
-                  <div>
-                    <label style={LABEL}>LinkedIn ou portfólio</label>
-                    <input name="linkedin" type="url" placeholder="https://linkedin.com/in/..." required style={INPUT}
-                      onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                      onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
-                  </div>
-                  <div>
-                    <label style={LABEL}>Área de interesse</label>
-                    <div style={{ position: "relative" }}>
-                      <select name="area" required value={area}
-                        style={{ ...INPUT, color: area ? "#141414" : "#9A9AA8", cursor: "pointer", paddingRight: "40px", appearance: "none", WebkitAppearance: "none" }}
-                        onChange={e => setArea(e.target.value)}
-                        onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                        onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")}
-                      >
-                        <option value="" disabled>Selecione uma área</option>
-                        {areas.map((a) => (
-                          <option key={a.name} value={a.name} style={{ color: "#141414" }}>{a.name}</option>
-                        ))}
-                        <option value="Outro" style={{ color: "#141414" }}>Outro</option>
-                      </select>
-                      <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" fill="none"
-                        style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "rgba(0,0,0,0.4)" }}>
-                        <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                    {/* Campo livre — sempre no DOM (para o Netlify detectar), visível só quando "Outro" */}
-                    <div style={{ display: area === "Outro" ? "block" : "none", marginTop: "16px" }}>
-                      <label style={LABEL}>Qual área?</label>
-                      <input name="area_outro" type="text" placeholder="Conte em qual área você quer atuar" required={area === "Outro"} style={INPUT}
-                        onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                        onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
-                    </div>
-                  </div>
-                  <div>
-                    <label style={LABEL}>Mensagem <span style={{ fontWeight: 400, color: "#9A9AA8" }}>(opcional)</span></label>
-                    <textarea name="mensagem" rows={4} placeholder="Conte um pouco sobre você e o que procura"
-                      style={{ ...INPUT, resize: "vertical", minHeight: "104px", fontFamily: "inherit" }}
-                      onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                      onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
-                  </div>
-                  <button type="submit" style={{
-                    width: "100%", background: "linear-gradient(145deg, #9B91FF 0%, #6557EA 100%)",
-                    color: "white", border: "none", borderRadius: "12px", padding: "15px 24px",
-                    fontSize: "15px", fontWeight: 600, cursor: "pointer", display: "flex",
-                    alignItems: "center", justifyContent: "center", gap: "8px", letterSpacing: "-0.2px",
-                  }}
-                    onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
-                    onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-                  >
-                    Entrar no banco de talentos
-                  </button>
-                </form>
+              {/* Right — instrução por e-mail (sem formulário) */}
+              <div className="careers-form-card" style={{ flex: 1, background: "white", borderRadius: "20px", padding: "40px", boxShadow: "0 4px 32px rgba(0,0,0,0.10)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "flex-start", gap: "20px" }}>
+                <p style={{ fontSize: "18px", fontWeight: 600, color: "var(--color-heading)", lineHeight: "150%" }}>
+                  Envie seu currículo e LinkedIn ou portfólio para:
+                </p>
+                <a
+                  href="mailto:weareappreach@appreach.app"
+                  style={{ fontSize: "22px", fontWeight: 600, color: "var(--color-primary)", textDecoration: "none" }}
+                >
+                  weareappreach@appreach.app
+                </a>
+                <p style={{ fontSize: "15px", color: "var(--color-body)", lineHeight: "160%" }}>
+                  Conte qual área te interessa e um pouco sobre você. Guardamos seu perfil e chamamos assim que surgir uma vaga com a sua cara.
+                </p>
+                <Button href="mailto:weareappreach@appreach.app" size="lg" variant="gradient">Enviar currículo</Button>
               </div>
             </div>
             </Reveal>
