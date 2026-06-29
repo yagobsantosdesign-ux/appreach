@@ -1,24 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { INPUT, LABEL } from "@/components/ui/formStyles";
-
-// ── Integração HubSpot (Forms Submission API) ──
-// Portal ID e Form GUID NÃO são segredos (ficam expostos em qualquer embed do
-// HubSpot), por isso vão como NEXT_PUBLIC. Defina-os em .env.local e na Vercel.
-const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID;
-const HUBSPOT_FORM_GUID = process.env.NEXT_PUBLIC_HUBSPOT_FORM_GUID;
-
-// Mapeia o name= de cada campo do form -> nome interno da propriedade no HubSpot.
-// Ajuste o lado direito para bater com os campos criados no formulário do HubSpot.
-const HUBSPOT_FIELD_MAP: Record<string, string> = {
-  nome: "firstname",
-  email: "email",
-  whatsapp: "phone",
-  cargo: "jobtitle",
-  app: "app_url",     // propriedade custom no HubSpot
-  cenario: "cenario", // propriedade custom no HubSpot
-};
+import React from "react";
+import Script from "next/script";
 
 const IconInstagram = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -59,48 +42,6 @@ const company = [
 ];
 
 export default function Footer({ hideContactForm = false }: { hideContactForm?: boolean }) {
-  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-
-    if (!HUBSPOT_PORTAL_ID || !HUBSPOT_FORM_GUID) {
-      console.error("HubSpot não configurado: defina NEXT_PUBLIC_HUBSPOT_PORTAL_ID e NEXT_PUBLIC_HUBSPOT_FORM_GUID.");
-      setStatus("error");
-      return;
-    }
-
-    const data = new FormData(form);
-    const fields = Object.entries(HUBSPOT_FIELD_MAP)
-      .map(([campo, name]) => ({ name, value: String(data.get(campo) ?? "").trim() }))
-      .filter((f) => f.value);
-
-    setStatus("sending");
-    try {
-      const res = await fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            fields,
-            context: {
-              pageUri: typeof window !== "undefined" ? window.location.href : "",
-              pageName: typeof document !== "undefined" ? document.title : "",
-            },
-          }),
-        }
-      );
-      if (!res.ok) throw new Error(await res.text());
-      setStatus("ok");
-      form.reset();
-    } catch (err) {
-      console.error("Falha ao enviar para o HubSpot:", err);
-      setStatus("error");
-    }
-  }
-
   return (
     <footer style={{
       background: "linear-gradient(145deg, #1E1640 0%, #2D1F5E 55%, #1a1438 100%)",
@@ -169,87 +110,10 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
             </div>
           </div>
 
-          {/* Right — form */}
-          <div className="footer-form-card" style={{ flex: 1, background: "white", borderRadius: "20px", padding: "40px", boxShadow: "0 4px 32px rgba(0,0,0,0.10)" }}>
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-              <div className="footer-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-                <div>
-                  <label style={LABEL}>Nome</label>
-                  <input name="nome" type="text" placeholder="Seu nome" required style={INPUT}
-                    onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                    onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
-                </div>
-                <div>
-                  <label style={LABEL}>E-mail profissional</label>
-                  <input name="email" type="email" placeholder="seu@email.com" required style={INPUT}
-                    onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                    onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
-                </div>
-              </div>
-              <div className="footer-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-                <div>
-                  <label style={LABEL}>WhatsApp <span style={{ fontWeight: 400, color: "#9A9AA8" }}>(opcional)</span></label>
-                  <input name="whatsapp" type="tel" placeholder="+55 (11) 99999-9999" style={INPUT}
-                    onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                    onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
-                </div>
-                <div>
-                  <label style={LABEL}>Cargo</label>
-                  <input name="cargo" type="text" placeholder="Seu cargo" style={INPUT}
-                    onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                    onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
-                </div>
-              </div>
-              <div>
-                <label style={LABEL}>Seu app</label>
-                <input name="app" type="text" placeholder="Nome ou link do app" required style={INPUT}
-                  onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                  onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")} />
-              </div>
-              <div>
-                <label style={LABEL}>Qual é o seu cenário?</label>
-                <div style={{ position: "relative" }}>
-                  <select name="cenario" required defaultValue=""
-                    style={{ ...INPUT, color: "#9A9AA8", cursor: "pointer", paddingRight: "40px", appearance: "none", WebkitAppearance: "none" }}
-                    onChange={e => (e.currentTarget.style.color = e.currentTarget.value ? "#141414" : "#9A9AA8")}
-                    onFocus={e => (e.currentTarget.style.borderColor = "#6557EA")}
-                    onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")}
-                  >
-                    <option value="" disabled>Selecione uma opção</option>
-                    <option value="app-em-operacao" style={{ color: "#141414" }}>Tenho um app em operação</option>
-                    <option value="vou-lancar-app" style={{ color: "#141414" }}>Vou lançar um app em breve</option>
-                    <option value="agencia" style={{ color: "#141414" }}>Sou uma agência com clientes que possuem apps</option>
-                  </select>
-                  <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" fill="none"
-                    style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "rgba(0,0,0,0.4)" }}>
-                    <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-              </div>
-              <button type="submit" disabled={status === "sending"} style={{
-                width: "100%", background: "linear-gradient(145deg, #9B91FF 0%, #6557EA 100%)",
-                color: "white", border: "none", borderRadius: "12px", padding: "15px 24px",
-                fontSize: "15px", fontWeight: 600, cursor: status === "sending" ? "not-allowed" : "pointer",
-                display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
-                letterSpacing: "-0.2px", opacity: status === "sending" ? 0.7 : 1,
-              }}
-                onMouseEnter={e => { if (status !== "sending") e.currentTarget.style.opacity = "0.88"; }}
-                onMouseLeave={e => { if (status !== "sending") e.currentTarget.style.opacity = "1"; }}
-              >
-                {status === "sending" ? "Enviando…" : "Quero escalar meu app"}
-              </button>
-
-              {status === "ok" && (
-                <p style={{ fontSize: "14px", color: "#1B9C5A", textAlign: "center", margin: 0, fontWeight: 500 }}>
-                  Recebemos seu contato! Retornamos em até 24h. 🎉
-                </p>
-              )}
-              {status === "error" && (
-                <p style={{ fontSize: "14px", color: "#D14343", textAlign: "center", margin: 0, fontWeight: 500 }}>
-                  Algo deu errado ao enviar. Tente de novo ou escreva para weareappreach@appreach.app.
-                </p>
-              )}
-            </form>
+          {/* Right — form (HubSpot embed) */}
+          <div className="footer-form-card" style={{ flex: 1, minHeight: "520px", background: "white", borderRadius: "20px", padding: "40px", boxShadow: "0 4px 32px rgba(0,0,0,0.10)" }}>
+            <Script src="https://js.hsforms.net/forms/embed/45738321.js" strategy="lazyOnload" defer />
+            <div className="hs-form-frame" data-region="na1" data-form-id="76144fb8-11d1-4d56-8a89-d73cf05683f7" data-portal-id="45738321"></div>
           </div>
         </div>
       </div>

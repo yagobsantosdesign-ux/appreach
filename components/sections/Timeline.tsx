@@ -17,7 +17,7 @@ const steps = [
     number: "02",
     tag: "Estratégia",
     title: "Planejamento Estratégico",
-    description: "Definimos as estratégias certas para cada etapa,sem desperdício de verba e com foco em resultado.",
+    description: "Definimos as estratégias certas para cada etapa, sem desperdício de verba e com foco em resultado.",
     image: "/processo-02.webp",
   },
   {

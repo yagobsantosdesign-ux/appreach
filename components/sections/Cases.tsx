@@ -246,7 +246,7 @@ export default function Cases() {
             </h2>
 
             <p style={{ fontSize: "16px", color: "#6b6b7b", lineHeight: "165%" }}>
-              De startups a grandes marcas,veja como transformamos investimento em mídia em crescimento mensurável.
+              De startups a grandes marcas, veja como transformamos investimento em mídia em crescimento mensurável.
             </p>
 
             <Button href="#contato" size="xl" variant="gradient" style={{ alignSelf: "flex-start" }}>
