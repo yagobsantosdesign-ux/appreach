@@ -16,7 +16,7 @@ const areas = [
   { name: "Dados & Analytics", desc: "Mensuração, dashboards e inteligência para guiar cada decisão de campanha." },
   { name: "Tecnologia & Produto", desc: "Ferramentas internas, integrações e automações que escalam a operação." },
   { name: "Growth & Estratégia", desc: "Visão full-funnel, novos produtos e crescimento dos apps dos clientes." },
-  { name: "Operações & Pessoas", desc: "A engrenagem que mantém o time afiado, organizado e crescendo junto." },
+  { name: "Pessoas & Cultura", desc: "O time que mantém a Appreach organizada, afiada e crescendo junto." },
 ];
 
 const PLACEHOLDER_BG: React.CSSProperties = {
