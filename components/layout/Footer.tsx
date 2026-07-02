@@ -143,8 +143,8 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
 
             <div className="flex gap-3">
               {[
-                { icon: <IconInstagram />, href: "#" },
-                { icon: <IconLinkedin />, href: "#" },
+                { icon: <IconInstagram />, href: "https://www.instagram.com/appreach.app/" },
+                { icon: <IconLinkedin />, href: "https://www.linkedin.com/company/appreach/" },
               ].map(({ icon, href }, i) => (
                 <a
                   key={i}
