@@ -156,10 +156,10 @@ export default function CarreirasPage() {
                 </span>
               </div>
               <h2 style={{ fontSize: "clamp(24px, 6vw, 40px)", letterSpacing: "-0.02em", lineHeight: "120%", color: "white", textWrap: "balance" as never }}>
-                Deixe seu currículo com a gente
+                Quer fazer parte da Appreach?
               </h2>
               <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.70)", lineHeight: 1.65, maxWidth: "480px" }}>
-                Envie seu currículo e conte um pouco sobre você e a área em que quer atuar para:
+                Manda seu currículo e conta um pouco sobre você e onde quer atuar:
               </p>
               <a
                 href="mailto:weareappreach@appreach.app"
