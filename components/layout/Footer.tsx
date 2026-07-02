@@ -205,28 +205,6 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
         </div>
       </div>
 
-      {/* ── Logo watermark — faixa própria ── */}
-      <div style={{
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
-        overflow: "hidden",
-        padding: "32px 0",
-      }}>
-        <div className="max-w-[1350px] mx-auto">
-          <img
-            src="/logo-appreach.svg"
-            alt=""
-            aria-hidden
-            style={{
-              width: "340px",
-              height: "auto",
-              display: "block",
-              filter: "brightness(0) invert(1)",
-              opacity: 0.08,
-            }}
-          />
-        </div>
-      </div>
-
       {/* ── Bottom bar ── */}
       <div className="max-w-[1350px] mx-auto">
         <div className="flex items-center justify-center py-6">
