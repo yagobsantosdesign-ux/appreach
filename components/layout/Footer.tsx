@@ -217,7 +217,7 @@ export default function Footer({ hideContactForm = false }: { hideContactForm?: 
             alt=""
             aria-hidden
             style={{
-              width: "100%",
+              width: "340px",
               height: "auto",
               display: "block",
               filter: "brightness(0) invert(1)",
